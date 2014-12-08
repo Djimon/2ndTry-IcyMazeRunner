@@ -10,6 +10,10 @@ namespace IcyMazeRunner
 {
     class Program
     {
+
+        //Attribute hier:
+
+        static Player Runner;
         static void Main(string[] args)
         {
             RenderWindow Window = new RenderWindow(new VideoMode(1280, 720), "IcyMazeRunner");
@@ -25,7 +29,8 @@ namespace IcyMazeRunner
         }
 
        static void Initialize(){
-           // Spieler, Map, 
+           Runner = new Player();
+           // Map
            // später: Gegner, Fallen(Geschosse), Anzeige (Timer/Stoppuhr), HP-Balken
 
        }
@@ -33,7 +38,8 @@ namespace IcyMazeRunner
 
        static void update()
        {
-           // Bewegungsmethode des Spielers, Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
+           Runner.move();
+           //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
            // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
        }
 
