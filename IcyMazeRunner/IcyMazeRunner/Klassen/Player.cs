@@ -28,5 +28,10 @@ namespace IcyMazeRunner
         public void move(){
             // moveUp, moveDown, moveRight, moveLeft
         }
+
+        public void draw(RenderWindow Window)
+        {
+            Window.Draw(playerSprite);
+        }
     }
 }
