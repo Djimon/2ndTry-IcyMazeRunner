@@ -12,7 +12,7 @@ namespace IcyMazeRunner
     {
         static void Main(string[] args)
         {
-            RenderWindow Window = new RenderWindow(new VideoMode(800, 600), "IcyMazeRunner");
+            RenderWindow Window = new RenderWindow(new VideoMode(1280, 720), "IcyMazeRunner");
 
             Initialize();
 
