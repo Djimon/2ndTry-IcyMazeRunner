@@ -17,7 +17,7 @@ namespace IcyMazeRunner
 
         public Player()
         {
-            playerTexture = new Texture("/Texturen/Player/Platzhalter.png"); //richtige Bild einfügen in Ordner und Pfad
+            playerTexture = new Texture("Texturen/Player/Platzhalter.png"); //richtige Bild einfügen in Ordner und Pfad
             playerSprite = new Sprite(playerTexture);
             playerSprite.Scale = new Vector2f (1f, 1f); //Skalierung anpassen
 
@@ -26,12 +26,22 @@ namespace IcyMazeRunner
         }
 
         public void move(){
-            // moveUp, moveDown, moveRight, moveLeft
-        }
+            //if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.A)) {
+            //    // moveLeft
+            //}
+            //if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.D)) {
+            //    // moveRight
+            //}
+            //if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.W)) {
+            //    // moveUp
+            //}
+            //if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.S)) {
+            //    // moveDown
+            }
 
-        public void draw(RenderWindow Window)
+        public void draw(RenderWindow win)
         {
-            Window.Draw(playerSprite);
+            win.Draw(playerSprite);
         }
     }
 }

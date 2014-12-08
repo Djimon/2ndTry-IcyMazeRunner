@@ -17,24 +17,25 @@ namespace IcyMazeRunner
 
         static void Main(string[] args)
         {
-            RenderWindow Window = new RenderWindow(new VideoMode(1280, 720), "IcyMazeRunner");
+            RenderWindow win = new RenderWindow(new VideoMode(1280, 720), "IcyMazeRunner");
+
+            
+            win.Closed += Windowclosed;
 
             Initialize();
 
-            while (Window.IsOpen())
+            while (win.IsOpen())
             {
+                win.DispatchEvents();
                 update();
-                draw(Window);
-
+                draw(win);
             }
-            
         }
 
        static void Initialize(){
            Runner = new Player();
            // Map (45-50 Blöcke untereinander + eventuell einige durchsichtige Blöcke, um einen Hintergrund drum herum darzustellen.
            // später: Gegner, Fallen(Geschosse), Anzeige (Timer/Stoppuhr), HP-Balken
-
        }
 
 
@@ -50,12 +51,11 @@ namespace IcyMazeRunner
            ((RenderWindow)sender).Close();
        }
 
-       static void draw(RenderWindow Window)
+       static void draw(RenderWindow win)
        {
-           Window.Clear();
-           Runner.draw(Window);
-           Window.Display();
-
+           win.Clear();
+           Runner.draw(win);
+           win.Display();
        }
     }
 }
