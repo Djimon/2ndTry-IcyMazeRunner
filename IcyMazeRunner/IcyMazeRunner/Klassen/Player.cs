@@ -27,7 +27,7 @@ namespace IcyMazeRunner
 
         public void move(){
             //if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.A)) {
-            //    // moveLeft
+            //    // moveLeft playerPosition.X=player.Position.X-
             //}
             //if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.D)) {
             //    // moveRight
