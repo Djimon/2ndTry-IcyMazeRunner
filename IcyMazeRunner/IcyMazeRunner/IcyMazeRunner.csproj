@@ -87,9 +87,18 @@
     <Content Include="Texturen\Map\way-clean.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\down1.png" />
+    <Content Include="Texturen\Player\down2.png" />
+    <Content Include="Texturen\Player\downidle.png" />
+    <Content Include="Texturen\Player\left1.png" />
+    <Content Include="Texturen\Player\left2.png" />
+    <Content Include="Texturen\Player\leftidle.png" />
     <Content Include="Texturen\Player\Platzhalter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\right1.png" />
+    <Content Include="Texturen\Player\right2.png" />
+    <Content Include="Texturen\Player\rightidle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
