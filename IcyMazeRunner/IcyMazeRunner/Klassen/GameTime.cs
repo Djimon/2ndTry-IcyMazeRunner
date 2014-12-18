@@ -16,7 +16,7 @@ namespace IcyMazeRunner.Klassen
 
         public GameTime()
         {
-            Watch = new Stopwatch;
+            Watch = new Stopwatch();
             TotalTime = TimeSpan.FromSeconds(0);
             ElapsedTime = TimeSpan.FromSeconds(0);
         }
