@@ -11,8 +11,8 @@ namespace IcyMazeRunner.Klassen
     {
 
         Stopwatch Watch;
-        TimeSpan TotalTime;
-        TimeSpan ElapsedTime;
+        public TimeSpan TotalTime;
+        public TimeSpan ElapsedTime;
 
         public GameTime()
         {

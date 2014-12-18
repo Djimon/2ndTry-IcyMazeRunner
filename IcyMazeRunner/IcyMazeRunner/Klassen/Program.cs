@@ -13,6 +13,7 @@ namespace IcyMazeRunner
     {
 
         //Attribute hier:
+        // Map-Klasse erstellen, walkable als Methode
 
         static Player Runner;
 
@@ -21,6 +22,7 @@ namespace IcyMazeRunner
             RenderWindow win = new RenderWindow(new VideoMode(1280, 720), "IcyMazeRunner");
 
             GameTime time = new GameTime();
+            Map map = new Map();
             
             win.Closed += Windowclosed;
 
@@ -30,8 +32,9 @@ namespace IcyMazeRunner
             while (win.IsOpen())
             {
                 win.DispatchEvents();
-                update();
-                draw(win);
+                time.update();
+                update(map, time);
+                draw(win, time);
             }
 
             time.stop();
@@ -44,9 +47,10 @@ namespace IcyMazeRunner
        }
 
 
-       static void update()
+       static void update(Map map, GameTime time)
        {
-           Runner.move();
+           Runner.move(map, time);
+           
            //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
            // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
        }
@@ -56,7 +60,7 @@ namespace IcyMazeRunner
            ((RenderWindow)sender).Close();
        }
 
-       static void draw(RenderWindow win)
+       static void draw(RenderWindow win, GameTime time)
        {
            win.Clear();
            Runner.draw(win);
