@@ -17,7 +17,7 @@ namespace IcyMazeRunner
 
         public Player()
         {
-            playerTexture = new Texture("Texturen/Player/Platzhalter.png"); //richtige Bild einfügen in Ordner und Pfad
+            playerTexture = new Texture("Texturen/Player/downidle.png"); //Startbild. Spieler startet nach unten.
             playerSprite = new Sprite(playerTexture);
             playerSprite.Scale = new Vector2f (1f, 1f); //Skalierung anpassen
 
