@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klassen\GameTime.cs" />
     <Compile Include="Klassen\Map.cs" />
     <Compile Include="Klassen\Player.cs" />
     <Compile Include="Klassen\Program.cs" />

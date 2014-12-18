@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using IcyMazeRunner.Klassen;
+using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,12 @@ namespace IcyMazeRunner
         {
             RenderWindow win = new RenderWindow(new VideoMode(1280, 720), "IcyMazeRunner");
 
+            GameTime time = new GameTime();
             
             win.Closed += Windowclosed;
 
             Initialize();
+            time.start();
 
             while (win.IsOpen())
             {
@@ -30,6 +33,8 @@ namespace IcyMazeRunner
                 update();
                 draw(win);
             }
+
+            time.stop();
         }
 
        static void Initialize(){
