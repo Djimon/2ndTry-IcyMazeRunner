@@ -45,22 +45,28 @@ namespace IcyMazeRunner
                    
         }
 
-        public void move(Map map,GameTime time){
+        public void move(Map map, GameTime time)
+        {
             float runningSpeed = 0.1f * time.ElapsedTime.Milliseconds;
 
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.A)) {
-                playerPosition = new Vector2f(playerPosition.X-runningSpeed, playerPosition.Y);
+            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.A))
+            {
+                playerPosition = new Vector2f(playerPosition.X - runningSpeed, playerPosition.Y);
             }
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.D)) {
-                playerPosition = new Vector2f(playerPosition.X+runningSpeed, playerPosition.Y);
+            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.D))
+            {
+                playerPosition = new Vector2f(playerPosition.X + runningSpeed, playerPosition.Y);
             }
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.W)) {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y-runningSpeed);
+            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.W))
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
             }
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.S)) {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y-runningSpeed);
+            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.S))
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
             }
 
+        }
         public void draw(RenderWindow win)
         {
             win.Draw(playerSprite[0]); // Element anpassen
