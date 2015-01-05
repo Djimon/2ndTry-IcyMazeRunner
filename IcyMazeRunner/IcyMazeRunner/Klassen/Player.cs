@@ -25,9 +25,9 @@ namespace IcyMazeRunner
             playerTexture[0] = new Texture("Texturen/Player/downidle.png");
             playerTexture[1] = new Texture("Texturen/Player/down1.png");
             playerTexture[2] = new Texture("Texturen/Player/down2.png");
-            playerTexture[3] = new Texture("Texturen/Player/upidle.png");
-            playerTexture[4] = new Texture("Texturen/Player/up1.png");
-            playerTexture[5] = new Texture("Texturen/Player/up2.png");
+            //playerTexture[3] = new Texture("Texturen/Player/upidle.png");
+            //playerTexture[4] = new Texture("Texturen/Player/up1.png");
+            //playerTexture[5] = new Texture("Texturen/Player/up2.png");
             playerTexture[6] = new Texture("Texturen/Player/leftidle.png");
             playerTexture[7] = new Texture("Texturen/Player/left1.png");
             playerTexture[8] = new Texture("Texturen/Player/left2.png");
@@ -45,21 +45,27 @@ namespace IcyMazeRunner
                    
         }
 
-        public void move(Map map,GameTime time){
+        public void move(Map map, GameTime time)
+        {
             float runningSpeed = 0.1f * time.ElapsedTime.Milliseconds;
 
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.A)) {
-                playerPosition = new Vector2f(playerPosition.X-runningSpeed, playerPosition.Y);
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A)) //map.walkable() && 
+            {
+                playerPosition = new Vector2f(playerPosition.X - runningSpeed, playerPosition.Y);
             }
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.D)) {
-                playerPosition = new Vector2f(playerPosition.X+runningSpeed, playerPosition.Y);
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D)) //map.walkable() && 
+            {
+                playerPosition = new Vector2f(playerPosition.X + runningSpeed, playerPosition.Y);
             }
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.W)) {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y-runningSpeed);
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W)) //map.walkable() && 
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
             }
-            if(map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.S)) {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y-runningSpeed);
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S)) //map.walkable() && 
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
             }
+        }
 
         public void draw(RenderWindow win)
         {
