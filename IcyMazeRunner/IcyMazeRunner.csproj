@@ -33,13 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="sfmlnet-audio-2">
-      <HintPath>..\..\..\Studium\Spieleentwicklung\SFML.Net-2.1-32bits\SFML.Net-2.1\lib\sfmlnet-audio-2.dll</HintPath>
+      <HintPath>..\..\..\SFML.Net-2.1-32bits\SFML.Net-2.1\lib\sfmlnet-audio-2.dll</HintPath>
     </Reference>
     <Reference Include="sfmlnet-graphics-2">
-      <HintPath>..\..\..\Studium\Spieleentwicklung\SFML.Net-2.1-32bits\SFML.Net-2.1\lib\sfmlnet-graphics-2.dll</HintPath>
+      <HintPath>..\..\..\SFML.Net-2.1-32bits\SFML.Net-2.1\lib\sfmlnet-graphics-2.dll</HintPath>
     </Reference>
     <Reference Include="sfmlnet-window-2">
-      <HintPath>..\..\..\Studium\Spieleentwicklung\SFML.Net-2.1-32bits\SFML.Net-2.1\lib\sfmlnet-window-2.dll</HintPath>
+      <HintPath>..\..\..\SFML.Net-2.1-32bits\SFML.Net-2.1\lib\sfmlnet-window-2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,8 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klassen\AbstractGame.cs" />
+    <Compile Include="Klassen\Blocks.cs" />
+    <Compile Include="Klassen\Controls.cs" />
+    <Compile Include="Klassen\Credits.cs" />
+    <Compile Include="Klassen\GameObject.cs" />
     <Compile Include="Klassen\GameStates.cs" />
     <Compile Include="Klassen\GameTime.cs" />
+    <Compile Include="Klassen\InGame.cs" />
+    <Compile Include="Klassen\MainMenu.cs" />
     <Compile Include="Klassen\Map.cs" />
     <Compile Include="Klassen\Player.cs" />
     <Compile Include="Klassen\Program.cs" />
