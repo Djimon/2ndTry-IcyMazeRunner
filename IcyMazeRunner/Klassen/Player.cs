@@ -17,57 +17,95 @@ namespace IcyMazeRunner
         Texture down1 = new Texture("Texturen/Player/down1.png");
         Texture down2 = new Texture("Texturen/Player/down2.png");
         Texture down3 = new Texture("Texturen/Player/downidle.png");
-        Texture up1 = new Texture("Texturen/Player/up1.png");
-        Texture up2 = new Texture("Texturen/Player/up2.png");
-        Texture up3 = new Texture("Texturen/Player/upidle.png");
+        //  Texture up1 = new Texture("Texturen/Player/up1.png");
+        // Texture up2 = new Texture("Texturen/Player/up2.png");
+        // Texture up3 = new Texture("Texturen/Player/upidle.png");
         Texture right1 = new Texture("Texturen/Player/right1.png");
         Texture right2 = new Texture("Texturen/Player/right2.png");
         Texture right3 = new Texture("Texturen/Player/rightidle.png");
         Texture left1 = new Texture("Texturen/Player/left1.png");
         Texture left2 = new Texture("Texturen/Player/left2.png");
         Texture left3 = new Texture("Texturen/Player/leftidle.png");
+        bool isPressed = false;
+        int rememberidle = 0;
+
 
         public Player()
         {
-           
+
             playerPosition = new Vector2f(0, 0); //Wert anpassen
             playerSprite = new Sprite(down3);
-            
+
+            playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
+            playerSprite.Position = playerPosition;
 
 
-           
-            
-                playerSprite = new Sprite(playerTexture); 
-                playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
-                playerSprite.Position = playerPosition; 
-            
-            
-                   
+
         }
 
         public void move(Map map, GameTime time)
         {
+            // letzten Tastendruck(int) merken, um, wenn WASD nicht mehr gedrückt sind(bool isPressed), die richtige idle-Textur zu laden
+            // up-Animation einfügen
             float runningSpeed = 0.1f * time.ElapsedTime.Milliseconds;
+            isPressed = false;
 
-            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.A))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A)) //map.walkable() &&
             {
                 playerPosition = new Vector2f(playerPosition.X - runningSpeed, playerPosition.Y);
-                
+               if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture=left1;
+               else this.playerSprite.Texture = left2;
+                isPressed=true;
+                rememberidle=0;
             }
-            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.D))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D))// map.walkable() &&
             {
                 playerPosition = new Vector2f(playerPosition.X + runningSpeed, playerPosition.Y);
+                if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = right1;
+                else this.playerSprite.Texture = right2;
+                isPressed=true;
+                rememberidle=1;
             }
-            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.W))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W))//map.walkable() &&
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
+                //if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = up1;
+                //else this.playerSprite.Texture = up2;
+                isPressed=true;
+                rememberidle=2;
             }
-            if (map.walkable() && Keyboard.IsKeyPressed(Keyboard.Key.S))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S)) //map.walkable() &&
             {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + runningSpeed);
+                if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = down1;
+                else this.playerSprite.Texture = down2;
+                isPressed=true;
+                rememberidle=3;
             }
 
+            if (isPressed == false)
+            {
+                switch (rememberidle)
+                {
+                    case 0: this.playerSprite.Texture = left3;
+                        break;
+                    case 1: this.playerSprite.Texture = right3;
+                        break;
+                    case 2: this.playerSprite.Texture = down3;//up3;
+                        break;
+                    case 3: this.playerSprite.Texture = down3;
+                        break;
+                    default: this.playerSprite.Texture = down3;
+                        break;
+                }
+            }
+
+            
+            playerSprite.Position = playerPosition;
+
         }
+
+
         public void draw(RenderWindow win)
         {
             win.Draw(playerSprite); // Element anpassen
