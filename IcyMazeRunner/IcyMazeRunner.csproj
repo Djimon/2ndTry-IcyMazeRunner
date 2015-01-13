@@ -150,9 +150,6 @@
     <Content Include="Texturen\Menü+Anzeigen\quit_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\snap0080.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Texturen\Menü+Anzeigen\start.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

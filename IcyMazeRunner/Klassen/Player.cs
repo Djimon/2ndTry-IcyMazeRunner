@@ -40,16 +40,8 @@ namespace IcyMazeRunner
 
             playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
             playerSprite.Position = playerPosition;
-
-
-
-
-           
-            
-                playerSprite = new Sprite(playerSprite); 
-                playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
-                playerSprite.Position = playerPosition; 
-            
+            playerSprite = new Sprite(playerSprite); 
+              
             
                    
 
@@ -65,7 +57,7 @@ namespace IcyMazeRunner
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A)) //map.walkable() &&
 
-            if (/*map.walkable() &&*/ Keyboard.IsKeyPressed(Keyboard.Key.A))
+           
 
             {
                 playerPosition = new Vector2f(playerPosition.X - runningSpeed, playerPosition.Y);
@@ -77,7 +69,7 @@ namespace IcyMazeRunner
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.D))// map.walkable() &&
 
-            if (/*map.walkable() &&*/ Keyboard.IsKeyPressed(Keyboard.Key.D))
+           
 
             {
                 playerPosition = new Vector2f(playerPosition.X + runningSpeed, playerPosition.Y);
@@ -89,7 +81,7 @@ namespace IcyMazeRunner
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.W))//map.walkable() &&
 
-            if (/*map.walkable() &&*/ Keyboard.IsKeyPressed(Keyboard.Key.W))
+          
 
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
@@ -101,7 +93,7 @@ namespace IcyMazeRunner
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.S)) //map.walkable() &&
 
-            if (/*map.walkable() &&*/ Keyboard.IsKeyPressed(Keyboard.Key.S))
+            
 
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + runningSpeed);
