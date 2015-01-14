@@ -21,6 +21,7 @@ namespace IcyMazeRunner
         static Sprite Bg; //Background
         static Texture BGTex;
         static int level;
+        static View view;
 
 /* ~~~~~~~~~~~ MAIN - SPIELSTART ~~~~~~~~~~~~*/
         static void Main(string[] args)
@@ -52,7 +53,8 @@ namespace IcyMazeRunner
            Runner = new Player();
            Bg = new Sprite(BGTex);
            Bg.Position = new Vector2f(0, 0);
-           level = 0;           
+           level = 0;
+           view = new View(new FloatRect(0, 0, 1280, 720));
            // Map (45-50 Blöcke untereinander + eventuell einige durchsichtige Blöcke, um einen Hintergrund drum herum darzustellen.
            // später: Gegner, Fallen(Geschosse), Anzeige (Timer/Stoppuhr), HP-Balken
 
@@ -80,6 +82,8 @@ namespace IcyMazeRunner
        static void update(Map map, GameTime time)
        {
            Runner.move(map, time);
+           updateView(Runner.getplayerSprite().Position);
+
            
            //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
            // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
@@ -94,9 +98,20 @@ namespace IcyMazeRunner
 
 
  /* ~~~~~~~~~~~ MALEN  ~~~~~~~~~~~~*/
+
+
+       static void updateView(Vector2f Runner)
+       {
+            view.Move(new Vector2f(Runner.X , Runner.Y) - view.Center);
+           if (view.Center.X < 640)
+               return ;
+       }
+
+
        static void draw(RenderWindow win, GameTime time)
        {
            win.Clear();
+           win.SetView(view);
            map.draw(win);
            Runner.draw(win);
            

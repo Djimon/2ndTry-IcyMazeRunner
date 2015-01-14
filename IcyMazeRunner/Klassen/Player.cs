@@ -31,7 +31,16 @@ namespace IcyMazeRunner
         bool isPressed = false;
         int rememberidle = 0;
 
+        public Sprite getplayerSprite()
+        {
+            return this.playerSprite; 
+        }
 
+        public void setSpritePos(Vector2f pos)
+        {
+            playerSprite.Position = pos;
+        }
+        
         public Player()
         {
 
@@ -46,6 +55,8 @@ namespace IcyMazeRunner
                    
 
         }
+
+        
 
         public void move(Map map, GameTime time)
         {
