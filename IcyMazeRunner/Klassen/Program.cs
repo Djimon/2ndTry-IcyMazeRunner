@@ -97,9 +97,11 @@ namespace IcyMazeRunner
        static void draw(RenderWindow win, GameTime time)
        {
            win.Clear();
-           Runner.draw(win);
-           win.Display();
            map.draw(win);
+           Runner.draw(win);
+           
+           win.Display();
+           
 
        }
     }

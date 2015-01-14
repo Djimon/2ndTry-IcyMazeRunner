@@ -35,7 +35,7 @@ namespace IcyMazeRunner
         public Player()
         {
 
-            playerPosition = new Vector2f(0, 0); //Wert anpassen
+            playerPosition = new Vector2f(190, 0); //Wert anpassen
             playerSprite = new Sprite(down3);
 
             playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
@@ -51,7 +51,7 @@ namespace IcyMazeRunner
         {
             // letzten Tastendruck(int) merken, um, wenn WASD nicht mehr gedrückt sind(bool isPressed), die richtige idle-Textur zu laden
             // up-Animation einfügen
-            float runningSpeed = 0.1f * time.ElapsedTime.Milliseconds;
+            float runningSpeed = 5.0f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
 
