@@ -82,7 +82,7 @@ namespace IcyMazeRunner
         {
             // letzten Tastendruck(int) merken, um, wenn WASD nicht mehr gedrückt sind(bool isPressed), die richtige idle-Textur zu laden
             // up-Animation einfügen
-            float runningSpeed = 5.0f * time.ElapsedTime.Milliseconds;
+            float runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
 

@@ -51,10 +51,11 @@ namespace IcyMazeRunner
        static void Initialize(){
            
            Runner = new Player();
-           Bg = new Sprite(BGTex);
+                      Bg = new Sprite(BGTex);
            Bg.Position = new Vector2f(0, 0);
            level = 0;
            view = new View(new FloatRect(0, 0, 1280, 720));
+           
 
            // Map (45-50 Blöcke untereinander + eventuell einige durchsichtige Blöcke, um einen Hintergrund drum herum darzustellen.
            // später: Gegner, Fallen(Geschosse), Anzeige (Timer/Stoppuhr), HP-Balken
