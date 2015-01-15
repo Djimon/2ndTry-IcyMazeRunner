@@ -17,7 +17,7 @@ namespace IcyMazeRunner
         // Map-Klasse erstellen, walkable als Methode
 
         static Player Runner;
-        static Map map = new Map(new Bitmap("Texturen/Map/Map_tutorial.bmp")) ;
+        static Map map;
         static Sprite Bg; //Background
         static Texture BGTex;
         static int level;
@@ -50,15 +50,13 @@ namespace IcyMazeRunner
  /* ~~~~~~~~~~~ SPIEL - INITIALISIERUNG ~~~~~~~~~~~~*/
        static void Initialize(){
            
+           map = new Map(new Bitmap("Texturen/Map/Map_2.bmp")) ;
            Runner = new Player();
-                      Bg = new Sprite(BGTex);
+           Bg = new Sprite(BGTex);
            Bg.Position = new Vector2f(0, 0);
            level = 0;
            view = new View(new FloatRect(0, 0, 1280, 720));
-<<<<<<< HEAD
-           
-=======
->>>>>>> e12c63f7db91c88220b25122a6b90e4ae0ec9391
+
 
            // Map (45-50 Blöcke untereinander + eventuell einige durchsichtige Blöcke, um einen Hintergrund drum herum darzustellen.
            // später: Gegner, Fallen(Geschosse), Anzeige (Timer/Stoppuhr), HP-Balken
@@ -92,13 +90,9 @@ namespace IcyMazeRunner
 
            view.Move(new Vector2f((Runner.getXPosition()+(Runner.getWidth()/2)), (Runner.getYPosition()+(Runner.getHeigth()/2)))-view.Center);
 
-           updateView(Runner.getplayerSprite().Position);
+           //updateView(Runner.getplayerSprite().Position);
 
-<<<<<<< HEAD
 
-=======
-           
->>>>>>> e12c63f7db91c88220b25122a6b90e4ae0ec9391
            
            //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
            // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
@@ -115,12 +109,12 @@ namespace IcyMazeRunner
  /* ~~~~~~~~~~~ MALEN  ~~~~~~~~~~~~*/
 
 
-       static void updateView(Vector2f Runner)
-       {
-            view.Move(new Vector2f(Runner.X , Runner.Y) - view.Center);
-           if (view.Center.X < 640)
-               return ;
-       }
+       //static void updateView(Vector2f Runner)
+       //{
+       //     view.Move(new Vector2f(Runner.X , Runner.Y) - view.Center);
+       //    if (view.Center.X < 640)
+       //        return ;
+       //}
 
 
        static void draw(RenderWindow win, GameTime time)
@@ -128,13 +122,7 @@ namespace IcyMazeRunner
            win.Clear();
 
            win.Draw(Bg);
-<<<<<<< HEAD
            win.SetView(view);
-=======
-
-           win.SetView(view);
-
->>>>>>> e12c63f7db91c88220b25122a6b90e4ae0ec9391
            map.draw(win);
            Runner.draw(win);
            

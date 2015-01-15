@@ -14,20 +14,20 @@ namespace IcyMazeRunner
 
         Vector2f playerPosition;
         Sprite playerSprite {get;set;}
+
         Texture down1 = new Texture("Texturen/Player/down1.png");
         Texture down2 = new Texture("Texturen/Player/down2.png");
         Texture down3 = new Texture("Texturen/Player/downidle.png");
-
-        //  Texture up1 = new Texture("Texturen/Player/up1.png");
-        // Texture up2 = new Texture("Texturen/Player/up2.png");
-        // Texture up3 = new Texture("Texturen/Player/upidle.png");
-
+        Texture up1 = new Texture("Texturen/Player/up1.png");
+        Texture up2 = new Texture("Texturen/Player/up2.png");
+        Texture up3 = new Texture("Texturen/Player/upidle.png");
         Texture right1 = new Texture("Texturen/Player/right1.png");
         Texture right2 = new Texture("Texturen/Player/right2.png");
         Texture right3 = new Texture("Texturen/Player/rightidle.png");
         Texture left1 = new Texture("Texturen/Player/left1.png");
         Texture left2 = new Texture("Texturen/Player/left2.png");
         Texture left3 = new Texture("Texturen/Player/leftidle.png");
+
         bool isPressed = false;
         int rememberidle = 0;
 
@@ -116,8 +116,8 @@ namespace IcyMazeRunner
 
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
-                //if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = up1;
-                //else this.playerSprite.Texture = up2;
+                if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = up1;
+                else this.playerSprite.Texture = up2;
                 isPressed=true;
                 rememberidle=2;
             }
@@ -142,7 +142,7 @@ namespace IcyMazeRunner
                         break;
                     case 1: this.playerSprite.Texture = right3;
                         break;
-                    case 2: this.playerSprite.Texture = down3;//up3;
+                    case 2: this.playerSprite.Texture = up3;
                         break;
                     case 3: this.playerSprite.Texture = down3;
                         break;
