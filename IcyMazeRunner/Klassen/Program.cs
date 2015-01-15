@@ -17,7 +17,7 @@ namespace IcyMazeRunner
         // Map-Klasse erstellen, walkable als Methode
 
         static Player Runner;
-        static Map map = new Map(new Bitmap("Texturen/Map/Map_2.bmp")) ;
+        static Map map = new Map(new Bitmap("Texturen/Map/Map_tutorial.bmp")) ;
         static Sprite Bg; //Background
         static Texture BGTex;
         static int level;
@@ -69,7 +69,7 @@ namespace IcyMazeRunner
            switch (level)
            {
                case 0:
-                   map = new Map(new Bitmap("Texturen/Map_2.bmp"));
+                   map = new Map(new Bitmap("Texturen/Map_tutorial.bmp"));
                    //hier Falen und Hindernisse laden???
                    // ziel?
                    break;
