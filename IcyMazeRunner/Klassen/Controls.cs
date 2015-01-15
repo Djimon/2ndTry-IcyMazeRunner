@@ -8,5 +8,6 @@ namespace IcyMazeRunner.Klassen
 {
     class Controls
     {
+        //"Texturen/Menü+Anzeige/controllscreen.png"
     }
 }

@@ -50,11 +50,11 @@ namespace IcyMazeRunner
  /* ~~~~~~~~~~~ SPIEL - INITIALISIERUNG ~~~~~~~~~~~~*/
        static void Initialize(){
            
-           map = new Map(new Bitmap("Texturen/Map/Map_2.bmp")) ;
+           map = new Map(new Bitmap("Texturen/Map/Map_2.bmp")) ; //nur diese map wird geladen, die aus dem loadContent nicht...
            Runner = new Player();
            Bg = new Sprite(BGTex);
            Bg.Position = new Vector2f(0, 0);
-           level = 0;
+           level = 1;
            view = new View(new FloatRect(0, 0, 1280, 720));
 
 
@@ -75,6 +75,10 @@ namespace IcyMazeRunner
                  //  map = new Map(new Bitmap("Texturen/Map_2.bmp"));
                    //hier Falen und Hindernisse laden???
                    // ziel?
+                   break;
+
+               case 1:
+                   map = new Map(new Bitmap("Texturen/Map_2.bmp"));
                    break;
            }
                   

@@ -8,5 +8,6 @@ namespace IcyMazeRunner.Klassen
 {
     class Credits
     {
+        //"Texturen/Menü+Anzeige/creditscreen.png"
     }
 }

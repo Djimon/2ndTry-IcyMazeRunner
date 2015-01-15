@@ -8,5 +8,6 @@ namespace IcyMazeRunner.Klassen
 {
     class MainMenu
     {
+        //"Texturen/Menü+Anzeige/Titel.png"
     }
 }
