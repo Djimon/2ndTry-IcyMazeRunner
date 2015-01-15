@@ -13,7 +13,7 @@ namespace IcyMazeRunner
     {
 
         Vector2f playerPosition;
-        Sprite playerSprite;
+        Sprite playerSprite {get;set;}
         Texture down1 = new Texture("Texturen/Player/down1.png");
         Texture down2 = new Texture("Texturen/Player/down2.png");
         Texture down3 = new Texture("Texturen/Player/downidle.png");
@@ -45,6 +45,26 @@ namespace IcyMazeRunner
             
                    
 
+        }
+
+        public float getXPosition()
+        {
+            return playerSprite.Position.X;
+        }
+
+        public float getYPosition()
+        {
+            return playerSprite.Position.Y;
+        }
+
+        public float getWidth()
+        {
+            return playerSprite.Texture.Size.X;
+        }
+
+        public float getHeigth()
+        {
+            return playerSprite.Texture.Size.Y;
         }
 
         public void move(Map map, GameTime time)
@@ -130,5 +150,7 @@ namespace IcyMazeRunner
         {
             win.Draw(playerSprite); // Element anpassen
         }
+
+        public float getH { get; set; }
     }
 }
