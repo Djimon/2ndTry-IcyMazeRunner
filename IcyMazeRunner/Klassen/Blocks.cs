@@ -43,29 +43,31 @@ namespace IcyMazeRunner.Klassen
                         this.walkable = false;
                         break;
                     }
-                case 2: //Start
+                case 2: //leer
                     {
                         this.blockSprite = new Sprite();
                         this.blockSprite.Position = position;
                         this.walkable = false;
-                        //insert hier spawn für Player
+                       
                         break;
                     }
-                //case 3: //Ziel
-                //    { 
-                //        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
-                //        this.blockSprite.Position = position;
-                //        this.walkable = true;
-                //        //insert hier Ziel: -> Gamestat/Level = +1
-                //        break;
-                //    }
-                // case 4: //leerbild
-                //     {
-                //        this.blockSprite = new Sprite(new Texture("Texturen/Map/null.png"));
-                //        this.blockSprite.Position = position;
-                //        this.walkable =false;
-                //        break;
-                //    }
+                case 3: //start
+                    {
+                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                        this.blockSprite.Position = position;
+                        this.walkable = true;
+                        //insert hier spawn für Player
+                        // playerposition = blocksprite.position
+                        break;
+                    }
+                case 4: //Ziel
+                    {
+                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                        this.blockSprite.Position = position;
+                        this.walkable = false;
+                        break;
+                        //insert hier Ziel: -> Gamestat/Level = +1
+                    }
 
 
 

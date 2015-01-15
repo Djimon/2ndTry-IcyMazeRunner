@@ -89,6 +89,7 @@ namespace IcyMazeRunner
            Runner.move(map, time);
 
            view.Move(new Vector2f((Runner.getXPosition()+(Runner.getWidth()/2)), (Runner.getYPosition()+(Runner.getHeigth()/2)))-view.Center);
+           
 
            //updateView(Runner.getplayerSprite().Position);
 

@@ -44,7 +44,7 @@ namespace IcyMazeRunner
         public Player()
         {
 
-            playerPosition = new Vector2f(190, 0); //Wert anpassen
+            playerPosition = new Vector2f(2263, 3336); //manuell gesetzt für Map_2   für Map_tutorial (190,0)
             playerSprite = new Sprite(down3);
 
             playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
@@ -153,6 +153,7 @@ namespace IcyMazeRunner
 
             
             playerSprite.Position = playerPosition;
+            
 
         }
 
