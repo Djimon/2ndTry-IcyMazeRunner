@@ -56,7 +56,7 @@ namespace IcyMazeRunner
 
         }
 
-<<<<<<< HEAD
+
         public float getXPosition()
         {
             return playerSprite.Position.X;
@@ -76,9 +76,7 @@ namespace IcyMazeRunner
         {
             return playerSprite.Texture.Size.Y;
         }
-=======
-        
->>>>>>> 2c1e8813f184e3af04c7b60d390846cc1e5fc84d
+
 
         public void move(Map map, GameTime time)
         {
