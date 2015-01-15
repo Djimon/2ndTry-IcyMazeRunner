@@ -70,6 +70,7 @@ namespace IcyMazeRunner
            {
                case 0:
                    map = new Map(new Bitmap("Texturen/Map_tutorial.bmp"));
+                 //  map = new Map(new Bitmap("Texturen/Map_2.bmp"));
                    //hier Falen und Hindernisse laden???
                    // ziel?
                    break;
