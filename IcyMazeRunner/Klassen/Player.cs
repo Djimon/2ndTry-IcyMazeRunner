@@ -31,11 +31,20 @@ namespace IcyMazeRunner
         bool isPressed = false;
         int rememberidle = 0;
 
+        public Sprite getplayerSprite()
+        {
+            return this.playerSprite; 
+        }
 
+        public void setSpritePos(Vector2f pos)
+        {
+            playerSprite.Position = pos;
+        }
+        
         public Player()
         {
 
-            playerPosition = new Vector2f(0, 0); //Wert anpassen
+            playerPosition = new Vector2f(190, 0); //Wert anpassen
             playerSprite = new Sprite(down3);
 
             playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
@@ -47,6 +56,7 @@ namespace IcyMazeRunner
 
         }
 
+<<<<<<< HEAD
         public float getXPosition()
         {
             return playerSprite.Position.X;
@@ -66,12 +76,15 @@ namespace IcyMazeRunner
         {
             return playerSprite.Texture.Size.Y;
         }
+=======
+        
+>>>>>>> 2c1e8813f184e3af04c7b60d390846cc1e5fc84d
 
         public void move(Map map, GameTime time)
         {
             // letzten Tastendruck(int) merken, um, wenn WASD nicht mehr gedrückt sind(bool isPressed), die richtige idle-Textur zu laden
             // up-Animation einfügen
-            float runningSpeed = 0.1f * time.ElapsedTime.Milliseconds;
+            float runningSpeed = 5.0f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
 
