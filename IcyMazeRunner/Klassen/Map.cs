@@ -53,9 +53,12 @@ namespace IcyMazeRunner.Klassen
                     if (mask.GetPixel(row, col).Name == black)
                         map[row, col] = new Blocks(1, new Vector2f(row*90, col*90), blockTex);
 
-                    if (mask.GetPixel(row, col).Name == red)
+                    if (mask.GetPixel(row, col).Name == green)
                         map[row, col] = new Blocks(2, new Vector2f(row*90, col*90), blockTex);
-
+                    if (mask.GetPixel(row, col).Name == blue)
+                        map[row, col] = new Blocks(3, new Vector2f(row*90, col*90), blockTex);
+                    if (mask.GetPixel(row, col).Name == red)
+                        map[row, col] = new Blocks(4, new Vector2f(row*90, col*90), blockTex);
 
 
                 }
