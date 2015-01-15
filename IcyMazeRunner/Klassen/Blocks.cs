@@ -43,21 +43,38 @@ namespace IcyMazeRunner.Klassen
                         this.walkable = false;
                         break;
                     }
-                case 2: //BG
+                case 2: //Start
                     {
                         this.blockSprite = new Sprite();
                         this.blockSprite.Position = position;
                         this.walkable = false;
+                        //insert hier spawn für Player
                         break;
                     }
-                //     case 3: // ab hier verschiedene Mauertypen/ wegtypen
+                //case 3: //Ziel
+                //    { 
+                //        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                //        this.blockSprite.Position = position;
+                //        this.walkable = true;
+                //        //insert hier Ziel: -> Gamestat/Level = +1
+                //        break;
+                //    }
+                // case 4: //leerbild
+                //     {
+                //        this.blockSprite = new Sprite(new Texture("Texturen/Map/null.png"));
+                //        this.blockSprite.Position = position;
+                //        this.walkable =false;
+                //        break;
+                //    }
 
-            }
+
+
+               }
         }
 
         public void draw(RenderWindow win)
         {
-            win.Draw(this.blockSprite);
+           win.Draw(this.blockSprite);
         }
 
 

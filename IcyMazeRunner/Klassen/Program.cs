@@ -17,7 +17,7 @@ namespace IcyMazeRunner
         // Map-Klasse erstellen, walkable als Methode
 
         static Player Runner;
-        static Map map = new Map(new Bitmap("Texturen/Map/Map_tutorial.bmp"));
+        static Map map = new Map(new Bitmap("Texturen/Map/Map_tutorial.bmp")) ;
         static Sprite Bg; //Background
         static Texture BGTex;
         static int level;
@@ -55,7 +55,10 @@ namespace IcyMazeRunner
            Bg.Position = new Vector2f(0, 0);
            level = 0;
            view = new View(new FloatRect(0, 0, 1280, 720));
+<<<<<<< HEAD
            
+=======
+>>>>>>> e12c63f7db91c88220b25122a6b90e4ae0ec9391
 
            // Map (45-50 Blöcke untereinander + eventuell einige durchsichtige Blöcke, um einen Hintergrund drum herum darzustellen.
            // später: Gegner, Fallen(Geschosse), Anzeige (Timer/Stoppuhr), HP-Balken
@@ -71,6 +74,7 @@ namespace IcyMazeRunner
            {
                case 0:
                    map = new Map(new Bitmap("Texturen/Map_tutorial.bmp"));
+                 //  map = new Map(new Bitmap("Texturen/Map_2.bmp"));
                    //hier Falen und Hindernisse laden???
                    // ziel?
                    break;
@@ -90,7 +94,11 @@ namespace IcyMazeRunner
 
            updateView(Runner.getplayerSprite().Position);
 
+<<<<<<< HEAD
 
+=======
+           
+>>>>>>> e12c63f7db91c88220b25122a6b90e4ae0ec9391
            
            //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
            // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
@@ -120,7 +128,13 @@ namespace IcyMazeRunner
            win.Clear();
 
            win.Draw(Bg);
+<<<<<<< HEAD
            win.SetView(view);
+=======
+
+           win.SetView(view);
+
+>>>>>>> e12c63f7db91c88220b25122a6b90e4ae0ec9391
            map.draw(win);
            Runner.draw(win);
            
