@@ -8,34 +8,41 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class Credits : GameStates
+    class gameWon : GameStates
     {
-        Texture creditsTex;
-        Sprite credits;
-        
+
+        Texture WonTex;
+        Sprite Won;
+        Sprite backGround;
+        Texture backTex;
+
         public void initialize()
         {
-            credits = new Sprite(creditsTex);
-            credits.Position = new Vector2f(0, 0);
+            Won = new Sprite(WonTex);
+            Won.Position = new Vector2f(0, 0);
+
         }
 
         public void loadContent()
         {
-            creditsTex = new Texture("Texturen/Menü+Anzeigen/creditscreen.png");
+            backTex = new Texture("Textures/Map/BG.jpg");
+            backGround = new Sprite(backTex);
+            backGround.Position = new Vector2f(0, 0);
+            WonTex = new Texture("Textures/Menü+Anzeigen/GameWon.png");
         }
-
         public EGameStates update(GameTime time)
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 return EGameStates.mainMenu;
             }
-            return EGameStates.credits;
+            return EGameStates.gameWon;
         }
 
         public void draw(RenderWindow win)
         {
-            win.Draw(credits);
+            win.Draw(backGround);
+           
         }
     }
 }

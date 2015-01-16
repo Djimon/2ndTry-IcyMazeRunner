@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace IcyMazeRunner.Klassen
 {
     class GameStates
     {
-        enum EGameState
+        public enum EGameStates
         {
             none,
             mainMenu,
@@ -19,7 +20,16 @@ namespace IcyMazeRunner.Klassen
 
         }
 
-        static EGameState gameState;
+        interface GameState
+        {
+            void initialize();
+
+            void loadContent();
+
+            EGameStates update(GameTime time);
+
+            void draw(RenderWindow win);
+        }
 
 
     }

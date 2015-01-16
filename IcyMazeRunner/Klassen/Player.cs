@@ -13,6 +13,7 @@ namespace IcyMazeRunner
     {
 
         Vector2f playerPosition;
+        Map absmap;
         Sprite playerSprite {get;set;}
 
         Texture down1 = new Texture("Texturen/Player/down1.png");
@@ -41,18 +42,18 @@ namespace IcyMazeRunner
             playerSprite.Position = pos;
         }
 
-        public Player() //Vector2f // Position wird beim Initialisieren mitgegeben, später wird mit neuem Level eine neue Position festgelegt
+        public Player(Vector2f Pos, Map map) 
         {
-
-            playerPosition = new Vector2f(190, 0); //Map_tutorial (190,0)
-           // playerPosition = new Vector2f(2263, 3336); // Map_2 (2263, 3336)
+        /*wird mit neuem Level eine neue Position festgelegt*/
+            playerPosition = Pos; 
+           
             playerSprite = new Sprite(down3);
 
-            playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen
+            playerSprite.Scale = new Vector2f(1f, 1f); 
             playerSprite.Position = playerPosition;
-            playerSprite = new Sprite(playerSprite); 
-              
-            
+            playerSprite = new Sprite(playerSprite);
+
+            absmap = map;
                    
 
         }
@@ -78,11 +79,16 @@ namespace IcyMazeRunner
             return playerSprite.Texture.Size.Y;
         }
 
+        public void update(GameTime time)
+        {
+
+            move(this.absmap, time);
+        }
+
 
         public void move(Map map, GameTime time)
         {
-            // letzten Tastendruck(int) merken, um, wenn WASD nicht mehr gedrückt sind(bool isPressed), die richtige idle-Textur zu laden
-            // up-Animation einfügen
+            
             float runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
