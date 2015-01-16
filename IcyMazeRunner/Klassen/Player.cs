@@ -40,11 +40,12 @@ namespace IcyMazeRunner
         {
             playerSprite.Position = pos;
         }
-        
-        public Player()
+
+        public Player() //Vector2f // Position wird beim Initialisieren mitgegeben, später wird mit neuem Level eine neue Position festgelegt
         {
 
-            playerPosition = new Vector2f(2263, 3336); //manuell gesetzt für Map_2   für Map_tutorial (190,0)
+            playerPosition = new Vector2f(190, 0); //Map_tutorial (190,0)
+           // playerPosition = new Vector2f(2263, 3336); // Map_2 (2263, 3336)
             playerSprite = new Sprite(down3);
 
             playerSprite.Scale = new Vector2f(1f, 1f); //Skalierung anpassen

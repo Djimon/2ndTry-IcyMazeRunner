@@ -50,7 +50,7 @@ namespace IcyMazeRunner
  /* ~~~~~~~~~~~ SPIEL - INITIALISIERUNG ~~~~~~~~~~~~*/
        static void Initialize(){
            
-           map = new Map(new Bitmap("Texturen/Map/Map_2.bmp")) ; //nur diese map wird geladen, die aus dem loadContent nicht...
+           map = new Map(new Bitmap("Texturen/Map/Map_tutorial.bmp")) ; //nur diese map wird geladen, die aus dem loadContent nicht...
            Runner = new Player();
            Bg = new Sprite(BGTex);
            Bg.Position = new Vector2f(0, 0);
@@ -78,7 +78,7 @@ namespace IcyMazeRunner
                    break;
 
                case 1:
-                   map = new Map(new Bitmap("Texturen/Map_2.bmp"));
+                   map = new Map(new Bitmap("Texturen/Map_tutorial.bmp"));
                    break;
            }
                   
