@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class GameTime
+    public class GameTime
     {
 
         Stopwatch Watch;

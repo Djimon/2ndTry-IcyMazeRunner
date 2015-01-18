@@ -16,8 +16,8 @@ namespace IcyMazeRunner.Klassen
             public static uint windowSizeX = 1280;
             public static uint windowSizeY = 720;
 
-            IcyMazeRunner.Klassen.GameStates.EGameStates currentGameState = IcyMazeRunner.Klassen.GameStates.EGameStates.mainMenu;
-            IcyMazeRunner.Klassen.GameStates.EGameStates prevGameState;
+            EGameStates currentGameState = EGameStates.mainMenu;
+            EGameStates prevGameState;
 
             GameStates gameState;
 
@@ -53,22 +53,22 @@ namespace IcyMazeRunner.Klassen
 
                 switch (currentGameState)
                 {
-                    case IcyMazeRunner.Klassen.GameStates.EGameStates.none:
+                    case EGameStates.none:
                        // Windowclosed(); //Argumentendifferenz
                         break;
-                    case IcyMazeRunner.Klassen.GameStates.EGameStates.mainMenu:
+                    case EGameStates.mainMenu:
                         gameState = new MainMenu();
                         break;
-                    case IcyMazeRunner.Klassen.GameStates.EGameStates.inGame:
+                    case EGameStates.inGame:
                         gameState = new InGame();
                         break;
-                    case IcyMazeRunner.Klassen.GameStates.EGameStates.credits:
+                    case EGameStates.credits:
                         gameState = new Credits();
                         break;
-                    case IcyMazeRunner.Klassen.GameStates.EGameStates.gameWon:
+                    case EGameStates.gameWon:
                         gameState = new gameWon();
                         break;
-                    case IcyMazeRunner.Klassen.GameStates.EGameStates.controls:
+                    case EGameStates.controls:
                         gameState = new Controls();
                         break;
                 }

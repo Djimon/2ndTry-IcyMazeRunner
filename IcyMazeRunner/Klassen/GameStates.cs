@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class GameStates
-    {
+    
         public enum EGameStates
         {
             none,
@@ -20,7 +19,7 @@ namespace IcyMazeRunner.Klassen
 
         }
 
-        interface GameState
+        interface GameStates
         {
             void initialize();
 
@@ -32,5 +31,5 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-    }
+    
 }
