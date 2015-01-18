@@ -88,57 +88,45 @@ namespace IcyMazeRunner
 
         public void move(Map map, GameTime time)
         {
-            
+
             float runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A)) //map.walkable() &&
-
-           
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())) 
             {
                 playerPosition = new Vector2f(playerPosition.X - runningSpeed, playerPosition.Y);
-               if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture=left1;
-               else this.playerSprite.Texture = left2;
-                isPressed=true;
-                rememberidle=0;
+                if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = left1;
+                else this.playerSprite.Texture = left2;
+                isPressed = true;
+                rememberidle = 0;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D))// map.walkable() &&
-
-           
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition()))  
             {
                 playerPosition = new Vector2f(playerPosition.X + runningSpeed, playerPosition.Y);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = right1;
                 else this.playerSprite.Texture = right2;
-                isPressed=true;
-                rememberidle=1;
+                isPressed = true;
+                rememberidle = 1;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W))//map.walkable() &&
-
-          
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition()))
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = up1;
                 else this.playerSprite.Texture = up2;
-                isPressed=true;
-                rememberidle=2;
+                isPressed = true;
+                rememberidle = 2;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S)) //map.walkable() &&
-
-            
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())) 
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + runningSpeed);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = down1;
                 else this.playerSprite.Texture = down2;
-                isPressed=true;
-                rememberidle=3;
+                isPressed = true;
+                rememberidle = 3;
             }
 
             if (isPressed == false)
@@ -158,9 +146,9 @@ namespace IcyMazeRunner
                 }
             }
 
-            
+
             playerSprite.Position = playerPosition;
-            
+
 
         }
 

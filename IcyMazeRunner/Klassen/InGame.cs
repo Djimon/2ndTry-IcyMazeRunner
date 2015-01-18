@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IcyMazeRunner.Klassen;
+using SFML.Audio;
 
 namespace IcyMazeRunner.Klassen
 {
@@ -24,13 +25,14 @@ namespace IcyMazeRunner.Klassen
 
         Texture backGroundTex;
         Sprite backGround;
-
+        Music atmo;
 
         /* ~~~~ Initialisierung des Spiels ~~~~ */
         public void initialize()
         {
             level = 0;
 
+            atmo = new Music("Texturen/music+sound/atmo_music.mp3");
             time = new GameTime();
             time.start();
             view = new View(new FloatRect(0, 0, 1280, 720));
@@ -42,7 +44,8 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Inhalte laden ~~~~ */
         public void loadContent(){
             backGroundTex = new Texture("Texturen/Map/BG.jpg");
-
+            atmo.Play();
+            atmo.Loop = true;
             //Map_tutorial (190,0)
            // Map_2 (2263, 3336)
 
