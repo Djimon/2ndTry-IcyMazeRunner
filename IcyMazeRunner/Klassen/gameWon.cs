@@ -18,20 +18,23 @@ namespace IcyMazeRunner.Klassen
 
         public void initialize()
         {
-            Won = new Sprite(WonTex);
+            Won = new Sprite(new Texture("Textures/Menü+Anzeigen/GameWon.png"));
             Won.Position = new Vector2f(0, 0);
+            
 
         }
 
         public void loadContent()
         {
+            
             //backTex = new Texture("Textures/Map/BG.jpg");
             //backGround = new Sprite(backTex);
             //backGround.Position = new Vector2f(0, 0);
-            WonTex = new Texture("Textures/Menü+Anzeigen/GameWon.png");
+           
         }
         public EGameStates update(GameTime time)
         {
+            
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 return EGameStates.mainMenu;

@@ -121,7 +121,7 @@ namespace IcyMazeRunner.Klassen
                 Exit.Texture = ExitSelected;
             }
 
-
+            backGround.Texture = backGroundTex;
             
 
             if (x == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Space))

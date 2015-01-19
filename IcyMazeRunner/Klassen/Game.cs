@@ -13,7 +13,7 @@ namespace IcyMazeRunner.Klassen
     class Game : AbstractGame
     {
 
-            public static uint windowSizeX = 1280;
+            public static uint windowSizeX = 1062;
             public static uint windowSizeY = 720;
 
             EGameStates currentGameState = EGameStates.mainMenu;

@@ -23,29 +23,30 @@ namespace IcyMazeRunner.Klassen
 
         Player Runner;
 
-        //Texture backGroundTex;
-        //Sprite backGround;
-        //Music atmo;
+        Texture backGroundTex;
+        Sprite backGround;
+        Music atmo;
 
         /* ~~~~ Initialisierung des Spiels ~~~~ */
         public void initialize()
         {
             level = 0;
 
-           // atmo = new Music("Texturen/music+sound/atmo_music.mp3");
+            //atmo = new Music("Texturen/music+sound/atmo_music.mp3");
             time = new GameTime();
             time.start();
             view = new View(new FloatRect(0, 0, 1280, 720));
 
-           // backGround = new Sprite(backGroundTex);
-            //backGround.Position = new Vector2f(0, 0);
+            backGround = new Sprite(new Texture("Texturen/Map/background.png"));
+            backGround.Position = new Vector2f(0, 0);
+          
         }
 
         /* ~~~~ Inhalte laden ~~~~ */
         public void loadContent(){
-            //backGroundTex = new Texture("Texturen/Map/BG.jpg");
-           // atmo.Play();
-           // atmo.Loop = true;
+            // backGroundTex = new Texture("Texturen/Map/background.png");
+            //atmo.Play();
+            //atmo.Loop = true;
             //Map_tutorial (190,0)
            // Map_2 (2263, 3336)
 
@@ -56,6 +57,17 @@ namespace IcyMazeRunner.Klassen
                     Runner = new Player(new Vector2f(190, 0), map);
 
                     break;
+
+                case 1:
+                    map = new Map(new Bitmap("Texturen/Map_1.bmp"));
+                    Runner = new Player(new Vector2f(0, 0), map);
+                    break;
+                    
+                case 2:
+                    map = new Map(new Bitmap("Texturen/Map_2.bmp"));
+                    Runner = new Player(new Vector2f(2263,3336), map);
+                    break;
+
             }
 
           
@@ -63,10 +75,7 @@ namespace IcyMazeRunner.Klassen
             //         ziel?
            
 
-            //        case 1:
-            //            map = new Map(new Bitmap("Texturen/Map_tutorial.bmp"));
-            //            break;
-            //    }
+            //     
 
 
             
@@ -87,7 +96,7 @@ namespace IcyMazeRunner.Klassen
             //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
-            //backGround.Position = new Vector2f(view.Center.X - 640, view.Center.Y - 360);
+            backGround.Position = new Vector2f(view.Center.X - 640, view.Center.Y - 360);
             view.Move(new Vector2f((Runner.getXPosition() + (Runner.getWidth() / 2)), (Runner.getYPosition() + (Runner.getHeigth() / 2))) - view.Center);
 
 
@@ -96,7 +105,7 @@ namespace IcyMazeRunner.Klassen
 
         public void draw(RenderWindow win)
         {
-            //win.Draw(backGround);
+            win.Draw(backGround);
             win.SetView(view);
             map.draw(win);
             Runner.draw(win);

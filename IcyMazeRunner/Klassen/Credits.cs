@@ -26,9 +26,17 @@ namespace IcyMazeRunner.Klassen
 
         public EGameStates update(GameTime time)
         {
+            credits.Texture = creditsTex;
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
+                return EGameStates.credits;
+                // isPressed = true;
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            {
                 return EGameStates.mainMenu;
+                // isPressed = true;
             }
             return EGameStates.credits;
         }

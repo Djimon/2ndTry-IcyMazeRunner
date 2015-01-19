@@ -12,6 +12,7 @@ namespace IcyMazeRunner.Klassen
     {
         Texture controlsTex;
         Sprite controls;
+       // bool isPressed = false;
 
         public void initialize()
         {
@@ -26,11 +27,21 @@ namespace IcyMazeRunner.Klassen
 
         public EGameStates update(GameTime time)
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            controls.Texture = controlsTex;
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space)) 
+            {
+                return EGameStates.controls;
+               // isPressed = true;
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape) ) 
             {
                 return EGameStates.mainMenu;
+               // isPressed = true;
             }
             return EGameStates.controls;
+            
+            
         }
 
         public void draw(RenderWindow win)
