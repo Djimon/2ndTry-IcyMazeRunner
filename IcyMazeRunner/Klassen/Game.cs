@@ -54,7 +54,7 @@ namespace IcyMazeRunner.Klassen
                 switch (currentGameState)
                 {
                     case EGameStates.none:
-                       // Windowclosed(); //Argumentendifferenz
+                         win.Close(); //Argumentendifferenz
                         break;
                     case EGameStates.mainMenu:
                         gameState = new MainMenu();
@@ -72,6 +72,14 @@ namespace IcyMazeRunner.Klassen
                         gameState = new Controls();
                         break;
                 }
+
+                gameState.initialize();
+
+                gameState.loadContent();
+
+                prevGameState = currentGameState;
         }
+
+        
     }
 }

@@ -30,7 +30,7 @@ namespace IcyMazeRunner.Klassen
             {
                 case 0: //alphaweg
                     {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                        this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
                         this.blockSprite.Position = position;
                         this.walkable = true;
                         break;
@@ -38,7 +38,7 @@ namespace IcyMazeRunner.Klassen
 
                 case 1: //alphamauer
                     {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
+                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
                         this.blockSprite.Position = position;
                         this.walkable = false;
                         break;

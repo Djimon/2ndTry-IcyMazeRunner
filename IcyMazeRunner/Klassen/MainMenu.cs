@@ -127,11 +127,11 @@ namespace IcyMazeRunner.Klassen
             if (x == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
                 return EGameStates.inGame;
             if (x == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
-                return EGameStates.credits;
-            if (x == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
-                return EGameStates.none;
-            if (x == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
                 return EGameStates.controls;
+            if (x == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
+                return EGameStates.credits;
+            if (x == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
+                return EGameStates.none;
 
             return EGameStates.mainMenu;
         }
