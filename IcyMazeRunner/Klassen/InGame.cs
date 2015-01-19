@@ -80,6 +80,9 @@ namespace IcyMazeRunner.Klassen
             //if-Abfrage gewonnen
             //if-Abfrage-Level
 
+            if (Keyboard.IsKeyPressed(Keyboard.Key.O))
+                return EGameStates.gameWon;
+
             Runner.update(time);
             //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision

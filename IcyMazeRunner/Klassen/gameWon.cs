@@ -13,8 +13,8 @@ namespace IcyMazeRunner.Klassen
 
         Texture WonTex;
         Sprite Won;
-        Sprite backGround;
-        Texture backTex;
+        //Sprite backGround;
+        //Texture backTex;
 
         public void initialize()
         {
@@ -25,9 +25,9 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            backTex = new Texture("Textures/Map/BG.jpg");
-            backGround = new Sprite(backTex);
-            backGround.Position = new Vector2f(0, 0);
+            //backTex = new Texture("Textures/Map/BG.jpg");
+            //backGround = new Sprite(backTex);
+            //backGround.Position = new Vector2f(0, 0);
             WonTex = new Texture("Textures/Menü+Anzeigen/GameWon.png");
         }
         public EGameStates update(GameTime time)
@@ -41,8 +41,8 @@ namespace IcyMazeRunner.Klassen
 
         public void draw(RenderWindow win)
         {
-            win.Draw(backGround);
-           
+            //win.Draw(backGround);
+            win.Draw(Won);
         }
     }
 }

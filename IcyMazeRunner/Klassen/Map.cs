@@ -71,11 +71,11 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-        public bool iswalkable(int i, int j)
-        {
-            if (map[i, j].getWalkable()) return true;
-            else return false;
-        }
+        //public bool iswalkable(int i, int j)
+        //{
+        //    if (map[i, j].getWalkable()) return true;
+        //    else return false;
+        //}
 
 
         public void draw(RenderWindow win)

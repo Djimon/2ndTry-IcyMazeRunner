@@ -93,7 +93,7 @@ namespace IcyMazeRunner
             isPressed = false;
 
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())) 
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) /*&& map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())*/) 
             {
                 playerPosition = new Vector2f(playerPosition.X - runningSpeed, playerPosition.Y);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = left1;
@@ -102,7 +102,7 @@ namespace IcyMazeRunner
                 rememberidle = 0;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition()))  
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D) /*&& map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())*/)  
             {
                 playerPosition = new Vector2f(playerPosition.X + runningSpeed, playerPosition.Y);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = right1;
@@ -111,7 +111,7 @@ namespace IcyMazeRunner
                 rememberidle = 1;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition()))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W) /*&& map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())*/)
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - runningSpeed);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = up1;
@@ -120,7 +120,7 @@ namespace IcyMazeRunner
                 rememberidle = 2;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())) 
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S) /*&& map.iswalkable((int)(this.getXPosition()), (int)this.getYPosition())*/) 
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + runningSpeed);
                 if (time.TotalTime.Milliseconds % 500 < 250) this.playerSprite.Texture = down1;
