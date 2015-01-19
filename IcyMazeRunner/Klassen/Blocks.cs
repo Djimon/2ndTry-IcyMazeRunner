@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class Blocks
+    class Blocks :GameStates
     {
         bool walkable;
         Sprite blockSprite;
-
+        EGameStates gameState;
 
         public Texture getTexture()
         {
@@ -65,6 +65,7 @@ namespace IcyMazeRunner.Klassen
                         this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
                         this.blockSprite.Position = position;
                         this.walkable = false;
+                        gameState = EGameStates.inGame;
                         break;
                         //insert hier Ziel: -> Gamestat/Level = +1
                     }

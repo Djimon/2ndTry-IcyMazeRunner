@@ -22,7 +22,7 @@ namespace IcyMazeRunner.Klassen
 
         Blocks[,] map;
         Texture blockTex;
-        
+        bool walkable;
         
 
 
@@ -48,19 +48,34 @@ namespace IcyMazeRunner.Klassen
                     blockTex = new Texture("Texturen/Map/way-clean.png");
 
                     if (mask.GetPixel(row, col).Name == white)
-                        map[row, col] = new Blocks(0, new Vector2f(row*90, col*90), blockTex);
+                    {
+                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = true;
+                    }
 
                     if (mask.GetPixel(row, col).Name == black)
-                        map[row, col] = new Blocks(1, new Vector2f(row*90, col*90), blockTex);
+                    {
+                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = false;
+                    }
 
                     if (mask.GetPixel(row, col).Name == red)
-                        map[row, col] = new Blocks(2, new Vector2f(row*90, col*90), blockTex);
+                    {
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = false;
+                    }
 
                     if (mask.GetPixel(row, col).Name == green)
+                    {
                         map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = true;
+                    }
 
                     if (mask.GetPixel(row, col).Name == blue)
+                    {
                         map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = true;
+                    }
 
 
                 }
@@ -71,11 +86,10 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-        //public bool iswalkable(int i, int j)
-        //{
-        //    if (map[i, j].getWalkable()) return true;
-        //    else return false;
-        //}
+        public bool iswalkable(int i, int j)
+        {
+            return this.walkable;
+        }
 
 
         public void draw(RenderWindow win)

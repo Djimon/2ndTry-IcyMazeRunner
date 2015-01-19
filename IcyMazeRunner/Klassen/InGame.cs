@@ -26,11 +26,11 @@ namespace IcyMazeRunner.Klassen
         Texture backGroundTex;
         Sprite backGround;
         Music atmo;
-
+        
         /* ~~~~ Initialisierung des Spiels ~~~~ */
         public void initialize()
         {
-            level = 0;
+           
 
             //atmo = new Music("Texturen/music+sound/atmo_music.mp3");
             time = new GameTime();
@@ -50,6 +50,7 @@ namespace IcyMazeRunner.Klassen
             //Map_tutorial (190,0)
            // Map_2 (2263, 3336)
 
+            level = 1;
             switch (level)
             {
                 case 0:
