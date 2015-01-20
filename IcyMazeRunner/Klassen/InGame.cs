@@ -39,6 +39,7 @@ namespace IcyMazeRunner.Klassen
 
             backGround = new Sprite(new Texture("Texturen/Map/background.png"));
             backGround.Position = new Vector2f(0, 0);
+            level = 0;
           
         }
 
@@ -50,7 +51,7 @@ namespace IcyMazeRunner.Klassen
             //Map_tutorial (190,0)
            // Map_2 (2263, 3336)
 
-            level = 1;
+            
             switch (level)
             {
                 case 0:
