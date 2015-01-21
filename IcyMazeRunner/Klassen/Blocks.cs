@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class Blocks :GameStates
+    class Blocks 
     {
         bool walkable;
         Sprite blockSprite;
