@@ -23,7 +23,7 @@ namespace IcyMazeRunner.Klassen
 
         Player Runner;
 
-        Texture backGroundTex;
+        //Texture backGroundTex;
         Sprite backGround;
         Music atmo;
         
