@@ -10,7 +10,7 @@ namespace IcyMazeRunner.Klassen
 {
     class Blocks 
     {
-        bool walkable;
+        bool walkable= true;
         Sprite blockSprite;
         EGameStates gameState;
 
