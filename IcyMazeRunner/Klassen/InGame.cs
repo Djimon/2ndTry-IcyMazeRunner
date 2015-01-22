@@ -56,7 +56,7 @@ namespace IcyMazeRunner.Klassen
             {
                 case 0:
                     map = new Map(new Bitmap("Texturen/Map/Map_tutorial.bmp"));
-                    Runner = new Player(new Vector2f(190, 0), map);
+                    Runner = new Player(new Vector2f(280, 100), map);
 
                     break;
 
