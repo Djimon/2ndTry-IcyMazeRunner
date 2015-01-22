@@ -23,6 +23,7 @@ namespace IcyMazeRunner.Klassen
         Blocks[,] map;
         Texture blockTex;
         bool walkable;
+        int blocksize=90;
         
 
 
@@ -86,9 +87,27 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-        public bool iswalkable(int i, int j)
+        public bool iswalkable(Sprite sprite, Vector2f vector)
         {
-            return this.walkable;
+            bool walkable = true;
+            Vector2f newPosition = new Vector2f(sprite.Position.X + vector.X, sprite.Position.Y + vector.Y);
+
+
+            if (!(map[(int)(newPosition.X / blocksize), (int)(newPosition.Y / blocksize)].getWalkable()/*links oben*/
+              && map[(int)(newPosition.X / blocksize), (int)((newPosition.Y + sprite.Texture.Size.Y) / blocksize)].getWalkable()/*links unten*/
+                && map[(int)newPosition.X / blocksize, (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / blocksize)].getWalkable()/*links mitte*/
+                && map[(int)((newPosition.X + sprite.Texture.Size.X) / blocksize), (int)(newPosition.Y / blocksize)].getWalkable()/*rechts oben*/
+                && map[(int)((newPosition.X + sprite.Texture.Size.X) / blocksize), (int)((newPosition.Y + sprite.Texture.Size.Y) / blocksize)].getWalkable()/*rechts unten*/
+                && map[(int)((newPosition.X + sprite.Texture.Size.X) / blocksize), (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / blocksize)].getWalkable()/*rechts mitte*/
+                && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / blocksize), (int)(newPosition.Y) / blocksize].getWalkable()/*oben mitte*/
+                && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / blocksize), (int)(newPosition.Y + sprite.Texture.Size.Y) / blocksize].getWalkable()/*unten mitte*/
+                ))
+                walkable = false;
+
+            Console.WriteLine(walkable);
+
+           return walkable;
+           
         }
 
 
