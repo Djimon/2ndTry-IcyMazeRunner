@@ -53,7 +53,7 @@ namespace IcyMazeRunner.Klassen
                     }
                 case 3: //start
                     {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                        this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
                         this.blockSprite.Position = position;
                         this.walkable = true;
                         //insert hier spawn für Player
