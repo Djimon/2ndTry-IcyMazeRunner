@@ -140,6 +140,9 @@
     <Content Include="Texturen\Menü+Anzeigen\GameWon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Menü+Anzeigen\GameWon1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Menü+Anzeigen\quit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

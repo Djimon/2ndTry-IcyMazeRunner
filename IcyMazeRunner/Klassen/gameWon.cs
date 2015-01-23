@@ -18,7 +18,7 @@ namespace IcyMazeRunner.Klassen
 
         public void initialize()
         {
-            Won = new Sprite(new Texture("Textures/Menü+Anzeigen/GameWon.png"));
+            Won = new Sprite(new Texture("Textures/Menü+Anzeigen/GameWon1.png"));
             Won.Position = new Vector2f(0, 0);
             
 
