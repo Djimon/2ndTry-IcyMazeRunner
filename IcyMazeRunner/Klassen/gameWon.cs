@@ -35,7 +35,7 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime time)
         {
             
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
                 return EGameStates.mainMenu;
             }
