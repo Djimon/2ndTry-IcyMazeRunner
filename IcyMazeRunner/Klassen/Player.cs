@@ -14,6 +14,7 @@ namespace IcyMazeRunner
 
         Vector2f playerPosition;
         Map absmap;
+        GameTime moveTime;
         Sprite playerSprite {get;set;}
 
         Texture down1 = new Texture("Texturen/Player/down1.png");
@@ -59,7 +60,8 @@ namespace IcyMazeRunner
 
             absmap = map;
                    
-
+            moveTime = new GameTime();
+            moveTime.Watch.Start();
         }
 
 
@@ -181,7 +183,11 @@ namespace IcyMazeRunner
 float runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
-if (time.TotalTime.Seconds % 20 < 0.5) movechangerstate= random.Next(23);
+            if (moveTime.Watch.ElapsedMilliseconds >= 20000)
+            {
+                movechangerstate = random.Next(23);
+                moveTime.Watch.Restart();
+            }
 
 switch (movechangerstate) 
 {

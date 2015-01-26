@@ -17,6 +17,7 @@ namespace IcyMazeRunner.Klassen
     {
         public RenderWindow win;
         GameTime gameTime;
+        
 
         public AbstractGame(uint width, uint height, String title)
         {
