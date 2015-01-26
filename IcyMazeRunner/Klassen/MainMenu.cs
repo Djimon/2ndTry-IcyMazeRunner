@@ -124,13 +124,13 @@ namespace IcyMazeRunner.Klassen
             backGround.Texture = backGroundTex;
             
 
-            if (x == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (x == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.inGame;
-            if (x == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (x == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.controls;
-            if (x == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (x == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.credits;
-            if (x == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Space))
+            if (x == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.none;
 
             return EGameStates.mainMenu;
