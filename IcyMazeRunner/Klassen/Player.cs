@@ -98,10 +98,10 @@ namespace IcyMazeRunner
             float runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.F2))
             is_controlchange = true;
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.L))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.F1))
             is_controlchange = false;
 
             if (is_controlchange)
