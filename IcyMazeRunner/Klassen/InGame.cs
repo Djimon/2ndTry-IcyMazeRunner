@@ -15,7 +15,7 @@ namespace IcyMazeRunner.Klassen
     {
         /* ~~~~~~~~ VARIABLEN UND KONSTANTEN ~~~~~~~~*/
 
-        int level;
+        int level = 0;
         GameTime time = new GameTime();
 
         Map map;
@@ -25,6 +25,7 @@ namespace IcyMazeRunner.Klassen
 
         //Texture backGroundTex;
         Sprite backGround;
+        //Sprite Fog_of_War;
         Music atmo;
         
         /* ~~~~ Initialisierung des Spiels ~~~~ */
@@ -39,7 +40,10 @@ namespace IcyMazeRunner.Klassen
 
             backGround = new Sprite(new Texture("Texturen/Map/background.png"));
             backGround.Position = new Vector2f(0, 0);
-            level = 0;
+
+            //Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
+            //Fog_of_War.Position = new Vector2f(0, 0);
+            
           
         }
 
@@ -88,8 +92,14 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
             time.update();
-            //if-Abfrage gewonnen
-            //if-Abfrage-Level
+            if (level == 15) return EGameStates.gameWon;
+            if (level > 0)
+            {
+                level++;
+                Program.game.handleGameState();
+                return EGameStates.inGame;
+            }
+            
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
                 return EGameStates.gameWon;
@@ -99,6 +109,7 @@ namespace IcyMazeRunner.Klassen
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
             backGround.Position = new Vector2f(view.Center.X - 640, view.Center.Y - 360);
+            //Fog_of_War.Position = new Vector2f(view.Center.X - 640, view.Center.Y - 360);
             view.Move(new Vector2f((Runner.getXPosition() + (Runner.getWidth() / 2)), (Runner.getYPosition() + (Runner.getHeigth() / 2))) - view.Center);
 
 
@@ -111,6 +122,7 @@ namespace IcyMazeRunner.Klassen
             win.SetView(view);
             map.draw(win);
             Runner.draw(win);
+            //win.Draw(Fog_of_War);
         }
         
     }

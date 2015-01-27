@@ -12,12 +12,12 @@ namespace IcyMazeRunner
 {
     class Program
     {
-
+        public static Game game;
         /* ~~~~ Einstiegspunkt ~~~~ */
         /* ~~~~ MAIN - Spielstart ~~~~ */
         static void Main(string[] args)
         {
-            Game game = new Game();
+            game = new Game();
             game.run();
         }
 

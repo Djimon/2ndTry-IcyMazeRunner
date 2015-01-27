@@ -47,7 +47,7 @@ namespace IcyMazeRunner.Klassen
            
 
 
-            void handleGameState()
+            public void handleGameState()
             {
 
 
