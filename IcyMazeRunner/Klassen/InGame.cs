@@ -25,7 +25,7 @@ namespace IcyMazeRunner.Klassen
 
         //Texture backGroundTex;
         Sprite backGround;
-        //Sprite Fog_of_War;
+        Sprite Fog_of_War;
         Music atmo;
         
         /* ~~~~ Initialisierung des Spiels ~~~~ */
@@ -36,13 +36,13 @@ namespace IcyMazeRunner.Klassen
             //atmo = new Music("Texturen/music+sound/atmo_music.mp3");
             time = new GameTime();
             time.start();
-            view = new View(new FloatRect(0, 0, 1280, 720));
+            view = new View(new FloatRect(0, 0, 1062, 720));
 
             backGround = new Sprite(new Texture("Texturen/Map/background.png"));
             backGround.Position = new Vector2f(0, 0);
 
-            //Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
-            //Fog_of_War.Position = new Vector2f(0, 0);
+            Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
+            Fog_of_War.Position = new Vector2f(0, 0);
             
           
         }
@@ -108,8 +108,8 @@ namespace IcyMazeRunner.Klassen
             //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
-            backGround.Position = new Vector2f(view.Center.X - 640, view.Center.Y - 360);
-            //Fog_of_War.Position = new Vector2f(view.Center.X - 640, view.Center.Y - 360);
+            backGround.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);
+            Fog_of_War.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);
             view.Move(new Vector2f((Runner.getXPosition() + (Runner.getWidth() / 2)), (Runner.getYPosition() + (Runner.getHeigth() / 2))) - view.Center);
 
 
@@ -122,7 +122,7 @@ namespace IcyMazeRunner.Klassen
             win.SetView(view);
             map.draw(win);
             Runner.draw(win);
-            //win.Draw(Fog_of_War);
+            win.Draw(Fog_of_War);
         }
         
     }
