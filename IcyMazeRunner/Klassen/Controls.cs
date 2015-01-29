@@ -33,14 +33,12 @@ namespace IcyMazeRunner.Klassen
 
             // Steuerung der Themes
 
-            controls.Texture = controlsTex;
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Num5))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Numpad5))
             {
                 Game.is_Summer = true;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Num3))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Numpad3))
             {
                 Game.is_Summer = false;
             }
@@ -55,6 +53,8 @@ namespace IcyMazeRunner.Klassen
                 }
                 else controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
             }
+
+            controls.Texture = controlsTex;
             
             // Bool-Werte werden abgeglichen
             prevSeason = Game.is_Summer;
