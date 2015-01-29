@@ -3,6 +3,7 @@
 To-Do:
 
 	- int level static oder nicht static?
+	- Abdunklungstextur etwas vergrößern(und Position nicht ganz bei 0,0, sondern etwas im Negativbereich), bei Richtungsswechsel sind an den Rändern wieder die die Oberflächen zu sehen.
 	- Sommer-Thema:
 		- Texturen erstellen und implementieren
 		- Änderung als Option bei Control anzeigen
