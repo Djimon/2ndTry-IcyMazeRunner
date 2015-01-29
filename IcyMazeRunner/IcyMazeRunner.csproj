@@ -159,7 +159,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\GameWon1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\quit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

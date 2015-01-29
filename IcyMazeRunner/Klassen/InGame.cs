@@ -102,10 +102,13 @@ namespace IcyMazeRunner.Klassen
                 Program.game.handleGameState();
                 return EGameStates.inGame;
             }
-            
+
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
+            {
+                
                 return EGameStates.gameWon;
+            }
 
             Runner.update(time);
             // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
