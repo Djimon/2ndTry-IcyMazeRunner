@@ -93,18 +93,23 @@ namespace IcyMazeRunner.Klassen
 
 
             time.update();
-            if (level == 15) return EGameStates.gameWon;
-            if (level > 0)
+
+            if (level != level) // Kollision mit Treppe= true
             {
                 level++;
                 Program.game.handleGameState();
                 return EGameStates.inGame;
             }
 
+            if (level == 15)
+            {
+                view = new View(new FloatRect(0, 0, 1062, 720));
+                return EGameStates.gameWon;
+            }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
             {
-                
+                view=new View(new FloatRect(0, 0, 1062, 720));
                 return EGameStates.gameWon;
             }
 

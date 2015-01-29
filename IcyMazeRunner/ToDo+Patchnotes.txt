@@ -1,0 +1,46 @@
+﻿Version 1.002
+
+To-Do:
+
+	- int level static oder nicht static?
+	- Sommer-Thema:
+		- Texturen erstellen und implementieren
+		- Änderung als Option bei Control anzeigen
+	- Fallen:
+		- Falle als Abstrakte Klasse anlegen
+		- move, Kollision, Schaden als Methoden
+		- verschiedene Typen von Fallen als Unterklassen anlegen (Pfeile, Dornen im Boden, Feuer und Ähnliches)
+		- ObjectHandler
+		- Lebensanzeige + Variable mit Leben des Spielers einführen
+		- GameOverState hinzufügen
+		- Button zum Auslösen der Fallen
+		- Texturen für Objekte, Leben, Auslöser (relativ unauffällig, aber zu erkennen) etc.
+	 - Gegner:
+		- Abstrakte Gegnerklasse
+		- move, Kollision, Schaden(, Verteidigung), Leben als Methoden/Variablen
+		- verschiedene Typen von Gegnern (verschieden starke/schnelle/verteidigende Gegner, manche in Gruppen mit schwacheren Werten etc., eventuell Fernkämpfer)
+		- EnemyHandler
+		- Lebensbalken über den Gegnern
+		- Auslösen der KI der Gegner, dass sie erst auf einen zurennen, wenn man sie sieht.
+		- Texturen (jede Menge) für verschiedene Gegner, Animationen, Schläge, Tod etc.
+	- Bewegliche Mauern:
+		- Klasse Moveable_Wall
+		- Move-Methode, Status/Positions-Abspeicherung, Auslöser-Methode (Kollision) für Bewegen der Mauern
+		- Klasse Button zum Auslösen der Bewegung
+		- Texturen für die Bewegung der Mauern(Mauern in Standposition die gleichen wie normale Mauern?) und für den Auslöser?(entweder gleiche Textur wie Boden oder minimal anders, also unauffällig)
+	- Spielmenü zum Wechseln in die Steuerungsübersicht/Hauptmenü
+	- Ideen für die Zukunft:
+		- seltene besonders schwere Gegner droppen Gegenstände wie Heiltrank, Geschwindigkeitsbuff, zeitliche Unsterblichkeit, zeitlichen Schutzschild
+		  oder Ähnliches, die man in einem Inventar mit sich führen kann und dann benutzen kann.
+		- HighScore mit der schnellsten Zeit?
+
+Versionsänderungen:
+
+	Version 1.002 (Kilian):
+			- ToDo-Liste und Patchnotes wurden angelegt.
+			- Die Fokusierung des Fensters auf den Spieler verursachte Probleme bei dem Wechsel in andere Spielzustände wie Gewonnen oder 
+			  menü. Dies wurde nun behoben.
+
+	Version 1.001(Chris):
+			- Das Ziel hat nun eine Treppentextur.
+			- Hintergrundmusik wurde implementiert.
