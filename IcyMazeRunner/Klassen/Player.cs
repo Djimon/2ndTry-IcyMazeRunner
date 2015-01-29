@@ -16,7 +16,7 @@ namespace IcyMazeRunner
         Map absmap;
         GameTime moveTime;
         Sprite playerSprite {get;set;}
-
+        EGameStates gamestate;
 
         Texture down1;
         Texture down2;
@@ -207,7 +207,10 @@ namespace IcyMazeRunner
             win.Draw(playerSprite); // Element anpassen
         }
 
-        public float getH { get; set; }
+        public float getH { get; set; }   
+
+
+
 
 
         // LAAAAANNNNNGGGEEEE Methode für die 24 möglichen Zuweisungen der Tastatur im Hardmode bis zum Ende der Klasse

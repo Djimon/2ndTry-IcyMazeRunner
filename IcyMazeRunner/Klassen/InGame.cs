@@ -25,6 +25,21 @@ namespace IcyMazeRunner.Klassen
 
         Sprite backGround;
         Sprite Fog_of_War;
+
+
+
+
+
+
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+        Sprite ziel;  // hier map/ blocktype=4 (blue= ziel) ??
+
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+
+
         
         
         /* ~~~~ Initialisierung des Spiels ~~~~ */
@@ -40,7 +55,7 @@ namespace IcyMazeRunner.Klassen
             backGround.Position = new Vector2f(0, 0);
 
             Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
-            Fog_of_War.Position = new Vector2f(0, 0);
+            Fog_of_War.Position = new Vector2f(-5, -5);
             
           
         }
@@ -122,9 +137,43 @@ namespace IcyMazeRunner.Klassen
             view.Move(new Vector2f((Runner.getXPosition() + (Runner.getWidth() / 2)), (Runner.getYPosition() + (Runner.getHeigth() / 2))) - view.Center);
 
 
+
+
+            /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
+
+            //if (collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
+            //{
+            //    Console.Write("Collision!!1elf");
+            //    view = new View(new FloatRect(0, 0, 1062, 720));
+            //    return EGameStates.gameWon;
+            //}
+
+
             return EGameStates.inGame;
         }
 
+        public static bool collision(Vector2f sprite1, float high1, float width1, Vector2f sprite2, float high2, float width2)
+        {
+            Vector2f Mobj1 = new Vector2f(sprite1.X + width1 / 2, sprite1.Y + high1 / 2);
+            Vector2f Mobj2 = new Vector2f(sprite2.X + width2 / 2, sprite2.Y + high2 / 2);
+
+            float wmid1 = width1 / 2;
+            float wmid2 = width2 / 2;
+
+            float hmid1 = high1 / 2;
+            float hmid2 = high2 / 2;
+
+            float betrag_x = Math.Abs(Mobj1.X - Mobj2.X);
+            float betrag_y = Math.Abs(Mobj1.Y - Mobj2.Y);
+
+            if (betrag_x < wmid1 + wmid2 && betrag_y < hmid1 + hmid2)
+                return true;
+
+            else
+                return false;
+        }
+
+      
         public void draw(RenderWindow win)
         {
             win.Draw(backGround);

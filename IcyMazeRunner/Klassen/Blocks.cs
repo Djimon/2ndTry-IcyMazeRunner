@@ -11,7 +11,7 @@ namespace IcyMazeRunner.Klassen
     class Blocks 
     {
         bool walkable= true;
-        Sprite blockSprite;
+        Sprite blockSprite {get;set;}
         EGameStates gameState;
 
         public Texture getTexture()
@@ -76,6 +76,7 @@ namespace IcyMazeRunner.Klassen
                             this.walkable = false;
                             gameState = EGameStates.inGame;
                             break;
+                            // -> gameobject ziel initialisieren??
                             //insert hier Ziel: -> Gamestat/Level = +1
                         }
                 }
