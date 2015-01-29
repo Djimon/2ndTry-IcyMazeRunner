@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IcyMazeRunner.Klassen;
+using SFML.Audio;
 
 namespace IcyMazeRunner.Klassen
 {
@@ -17,6 +18,7 @@ namespace IcyMazeRunner.Klassen
     {
         public RenderWindow win;
         GameTime gameTime;
+        Music atmo;
         
 
         public AbstractGame(uint width, uint height, String title)
@@ -33,6 +35,10 @@ namespace IcyMazeRunner.Klassen
         public void run()
         {
             gameTime.start();
+            atmo = new Music("Texturen/sound/atmo_music.ogg");
+            atmo.Play();
+            atmo.Volume = 100;
+            atmo.Loop = true;
 
             while (win.IsOpen())
             {

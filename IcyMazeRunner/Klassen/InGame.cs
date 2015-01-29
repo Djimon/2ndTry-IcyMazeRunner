@@ -25,14 +25,13 @@ namespace IcyMazeRunner.Klassen
 
         Sprite backGround;
         Sprite Fog_of_War;
-        Music atmo;
+        
         
         /* ~~~~ Initialisierung des Spiels ~~~~ */
         public void initialize()
         {
            
 
-            //atmo = new Music("Texturen/music+sound/atmo_music.mp3");
             time = new GameTime();
             time.start();
             view = new View(new FloatRect(0, 0, 1062, 720));
@@ -48,8 +47,7 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Inhalte laden ~~~~ */
         public void loadContent(){
-            //atmo.Play();
-            //atmo.Loop = true;
+          
             /*
             Map-Positionen:
             Map_tutorial (190,0)

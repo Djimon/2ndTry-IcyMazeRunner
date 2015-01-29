@@ -71,7 +71,7 @@ namespace IcyMazeRunner.Klassen
                         }
                     case 4: //Ziel
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/exit.png"));
                             this.blockSprite.Position = position;
                             this.walkable = false;
                             gameState = EGameStates.inGame;
