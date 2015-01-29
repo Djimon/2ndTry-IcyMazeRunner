@@ -93,6 +93,8 @@ namespace IcyMazeRunner.Klassen
             Vector2f newPosition = new Vector2f(sprite.Position.X + vector.X, sprite.Position.Y + vector.Y);
 
 
+            // Verschlankung der if-Abfrage
+
             if (!(map[(int)(newPosition.X / blocksize), (int)(newPosition.Y / blocksize)].getWalkable()/*links oben*/
               && map[(int)(newPosition.X / blocksize), (int)((newPosition.Y + sprite.Texture.Size.Y) / blocksize)].getWalkable()/*links unten*/
                 && map[(int)newPosition.X / blocksize, (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / blocksize)].getWalkable()/*links mitte*/

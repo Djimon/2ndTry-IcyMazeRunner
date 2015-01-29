@@ -110,7 +110,13 @@
     <Content Include="Texturen\Map\null.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Map\wall-clean-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Map\wall-clean.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Map\way-clean-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\way-clean.png">
@@ -120,6 +126,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\way-vert.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\controllscreen-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\controllscreen.png">
@@ -134,6 +143,9 @@
     <Content Include="Texturen\Menü+Anzeigen\credits.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Menü+Anzeigen\creditscreen-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Menü+Anzeigen\creditscreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -142,6 +154,9 @@
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\GameWon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\GameWon1-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\GameWon1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -158,23 +173,44 @@
     <Content Include="Texturen\Menü+Anzeigen\start_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Menü+Anzeigen\Titel-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Menü+Anzeigen\Titel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Player\down1-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\down1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\down2-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Player\down2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Player\downidle-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\downidle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\left1-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Player\left1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\left2-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Player\left2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Player\leftidle-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\leftidle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -182,19 +218,37 @@
     <Content Include="Texturen\Player\Platzhalter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\right1-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Player\right1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Player\right2-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\right2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\rightidle-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Player\rightidle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Player\up1-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\up1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Player\up2-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Player\up2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Player\upidle-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\upidle.png">

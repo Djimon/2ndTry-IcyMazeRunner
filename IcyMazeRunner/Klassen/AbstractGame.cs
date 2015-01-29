@@ -21,7 +21,7 @@ namespace IcyMazeRunner.Klassen
 
         public AbstractGame(uint width, uint height, String title)
         {
-
+            // Fensterkontrolle
 
             win = new RenderWindow(new VideoMode(width, height), title);
 

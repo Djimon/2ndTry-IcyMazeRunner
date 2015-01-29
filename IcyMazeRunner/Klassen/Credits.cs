@@ -12,7 +12,7 @@ namespace IcyMazeRunner.Klassen
     {
         Texture creditsTex;
         Sprite credits;
-        bool isPressed = false;
+
         
         public void initialize()
         {
@@ -22,23 +22,26 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            creditsTex = new Texture("Texturen/Menü+Anzeigen/creditscreen.png");
+            if (!Game.is_Summer)
+                creditsTex = new Texture("Texturen/Menü+Anzeigen/creditscreen.png");
+            else
+                creditsTex = new Texture("Texturen/Menü+Anzeigen/creditscreen-summer-PLATZHALTER.png");
         }
 
         public EGameStates update(GameTime time)
         {
-            isPressed = false;
             credits.Texture = creditsTex;
+
+            // Update der Gamestates
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 return EGameStates.credits;
-                isPressed = true;
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 return EGameStates.mainMenu;
-                isPressed = true;
             }
             return EGameStates.credits;
         }

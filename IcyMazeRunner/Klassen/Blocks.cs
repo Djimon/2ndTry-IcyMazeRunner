@@ -26,53 +26,114 @@ namespace IcyMazeRunner.Klassen
 
         public Blocks(int blockType, Vector2f position, Texture blockTex)
         {
-            switch (blockType)
+
+
+            // Auswahl der Textur nach Thema
+
+            if (!Game.is_Summer)
             {
-                case 0: //alphaweg
-                    {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
-                        this.blockSprite.Position = position;
-                        this.walkable = true;
-                        break;
-                    }
 
-                case 1: //alphamauer
-                    {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
-                        this.blockSprite.Position = position;
-                        this.walkable = false;
-                        break;
-                    }
-                case 2: //leer
-                    {
-                        this.blockSprite = new Sprite();
-                        this.blockSprite.Position = position;
-                        this.walkable = false;
-                       
-                        break;
-                    }
-                case 3: //start
-                    {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
-                        this.blockSprite.Position = position;
-                        this.walkable = true;
-                        //insert hier spawn für Player
-                        // playerposition = blocksprite.position
-                        break;
-                    }
-                case 4: //Ziel
-                    {
-                        this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
-                        this.blockSprite.Position = position;
-                        this.walkable = false;
-                        gameState = EGameStates.inGame;
-                        break;
-                        //insert hier Ziel: -> Gamestat/Level = +1
-                    }
+                // Winterthema
+
+                switch (blockType)
+                {
+                    case 0: //alphaweg
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = true;
+                            break;
+                        }
+
+                    case 1: //alphamauer
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+                            break;
+                        }
+                    case 2: //leer
+                        {
+                            this.blockSprite = new Sprite();
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+
+                            break;
+                        }
+                    case 3: //start
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = true;
+                            //insert hier spawn für Player
+                            // playerposition = blocksprite.position
+                            break;
+                        }
+                    case 4: //Ziel
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+                            gameState = EGameStates.inGame;
+                            break;
+                            //insert hier Ziel: -> Gamestat/Level = +1
+                        }
+                }
+            }
+            else 
+            {
+
+                // Sommerthema
+
+                switch (blockType)
+                {
+                    case 0: //alphaweg
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean-summer-PLATZHALTER.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = true;
+                            break;
+                        }
+
+                    case 1: //alphamauer
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean-summer-PLATZHALTER.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+                            break;
+                        }
+                    case 2: //leer
+                        {
+                            this.blockSprite = new Sprite();
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+
+                            break;
+                        }
+                    case 3: //start
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean-summer-PLATZHALTER.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = true;
+                            //insert hier spawn für Player
+                            // playerposition = blocksprite.position
+                            break;
+                        }
+                    case 4: //Ziel
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean-summer-PLATZHALTER.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+                            gameState = EGameStates.inGame;
+                            break;
+                            //insert hier Ziel: -> Gamestat/Level = +1
+                        }
+                }
+            }
 
 
 
-               }
+               
         }
 
         public void draw(RenderWindow win)

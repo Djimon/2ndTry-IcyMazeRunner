@@ -11,14 +11,18 @@ namespace IcyMazeRunner.Klassen
     class gameWon : GameStates
     {
 
-        Texture WonTex;
         Sprite Won;
-        //Sprite backGround;
-        //Texture backTex;
+
 
         public void initialize()
         {
-            Won = new Sprite(new Texture("Textures/Menü+Anzeigen/GameWon1.png"));
+
+            // Auswahl der Textur nach Thema
+
+            if (!Game.is_Summer)
+                Won = new Sprite(new Texture("Textures/Menü+Anzeigen/GameWon1.png"));
+            else
+                Won = new Sprite(new Texture("Textures/Menü+Anzeigen/GameWon1-summer-PLATZHALTER.png"));
             Won.Position = new Vector2f(0, 0);
             
 
@@ -26,10 +30,6 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            
-            //backTex = new Texture("Textures/Map/BG.jpg");
-            //backGround = new Sprite(backTex);
-            //backGround.Position = new Vector2f(0, 0);
            
         }
         public EGameStates update(GameTime time)

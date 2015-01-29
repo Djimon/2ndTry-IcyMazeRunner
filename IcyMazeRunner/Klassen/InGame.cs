@@ -23,7 +23,6 @@ namespace IcyMazeRunner.Klassen
 
         Player Runner;
 
-        //Texture backGroundTex;
         Sprite backGround;
         Sprite Fog_of_War;
         Music atmo;
@@ -37,7 +36,7 @@ namespace IcyMazeRunner.Klassen
             time = new GameTime();
             time.start();
             view = new View(new FloatRect(0, 0, 1062, 720));
-
+            
             backGround = new Sprite(new Texture("Texturen/Map/background.png"));
             backGround.Position = new Vector2f(0, 0);
 
@@ -49,13 +48,18 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Inhalte laden ~~~~ */
         public void loadContent(){
-            // backGroundTex = new Texture("Texturen/Map/background.png");
             //atmo.Play();
             //atmo.Loop = true;
-            //Map_tutorial (190,0)
-           // Map_2 (2263, 3336)
+            /*
+            Map-Positionen:
+            Map_tutorial (190,0)
+            Map_2 (2263, 3336)
+             */
 
-            
+
+
+            // Levelzuweisung
+
             switch (level)
             {
                 case 0:
@@ -81,9 +85,6 @@ namespace IcyMazeRunner.Klassen
             //         ziel?
            
 
-            //     
-
-
             
         }
 
@@ -91,6 +92,8 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Update ~~~~ */
         public EGameStates update(GameTime gametime)
         {
+
+
             time.update();
             if (level == 15) return EGameStates.gameWon;
             if (level > 0)
@@ -105,7 +108,7 @@ namespace IcyMazeRunner.Klassen
                 return EGameStates.gameWon;
 
             Runner.update(time);
-            //Sichtkreis, bewegliche Mauern (if-Abfrage), Kollision mit Schalter
+            // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
             backGround.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);

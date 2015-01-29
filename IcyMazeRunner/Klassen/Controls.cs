@@ -12,7 +12,7 @@ namespace IcyMazeRunner.Klassen
     {
         Texture controlsTex;
         Sprite controls;
-        bool isPressed = false;
+        bool prevSeason=false;
 
         public void initialize()
         {
@@ -22,22 +22,53 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
+            if (!Game.is_Summer)
+                controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
+            else
+                controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen-summer-PLATZHALTER.png");
         }
 
         public EGameStates update(GameTime time)
         {
+
+            // Steuerung der Themes
+
             controls.Texture = controlsTex;
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Num5))
+            {
+                Game.is_Summer = true;
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Num3))
+            {
+                Game.is_Summer = false;
+            }
+
+            // Textur wird nur zugewiesen, wenn sich der Bool-Wert ändert
+
+            if (prevSeason != Game.is_Summer)
+            {
+                if (Game.is_Summer)
+                {
+                    controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen-summer-PLATZHALTER.png");
+                }
+                else controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
+            }
+            
+            // Bool-Werte werden abgeglichen
+            prevSeason = Game.is_Summer;
+
+            // Steuerungselement
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space)) 
             {
                 return EGameStates.controls;
-               isPressed = true;
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape) ) 
             {
                 return EGameStates.mainMenu;
-               isPressed = true;
             }
             return EGameStates.controls;
             

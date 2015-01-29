@@ -60,22 +60,36 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Laden des Inhalts ~~~~ */
         public void loadContent()
         {
-            CreditsNotSelected = new Texture("Texturen/Menü+Anzeigen/credits.png");
-            CreditsSelected = new Texture("Texturen/Menü+Anzeigen/credits_s.png");
-            ExitNotSelected = new Texture("Texturen/Menü+Anzeigen/quit.png");
-            ExitSelected = new Texture("Texturen/Menü+Anzeigen/quit_s.png");
-            StartNotSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
-            StartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
-            ControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
-            ControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
 
-            backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel.png");
+            // Menüauswahltexturen sind für beide Themen die Gleiche
+                        
+                CreditsNotSelected = new Texture("Texturen/Menü+Anzeigen/credits.png");
+                CreditsSelected = new Texture("Texturen/Menü+Anzeigen/credits_s.png");
+                ExitNotSelected = new Texture("Texturen/Menü+Anzeigen/quit.png");
+                ExitSelected = new Texture("Texturen/Menü+Anzeigen/quit_s.png");
+                StartNotSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
+                StartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
+                ControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
+                ControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
+
+            // Auswahl der Textur nach Thema
+
+            if (!Game.is_Summer)
+            {
+                backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel.png");
+            }
+            else
+            {
+                backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel-summer-PLATZHALTER.png");
+            }
         }
 
 
         /* ~~~~ Update der GameStates bei Änderung der Auswahl ~~~~ */
         public EGameStates update(GameTime time)
         {
+
+            // Menüsteuerung
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
             {
@@ -88,8 +102,10 @@ namespace IcyMazeRunner.Klassen
                 isPressed = true;
             }
 
-            if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up))
+            if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up) )
                 isPressed = false;
+
+            // Menüzustände
 
             if (x == 0)
             {
@@ -123,6 +139,7 @@ namespace IcyMazeRunner.Klassen
 
             backGround.Texture = backGroundTex;
             
+            // Update der Gamestates
 
             if (x == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.inGame;
