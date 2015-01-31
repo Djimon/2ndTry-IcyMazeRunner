@@ -16,6 +16,7 @@ namespace IcyMazeRunner.Klassen
             controls,
             inGame,
             gameWon,
+            gameOver,            
 
         }
 

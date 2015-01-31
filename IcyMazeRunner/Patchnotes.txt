@@ -1,7 +1,9 @@
-Version 1.003
+Version 1.004
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 
+Version 1.004 (Kilian):
+	- Gamestate GameOver implementiert
 
 Version 1.003 (Chris):
 	- Implementierung collision (InGame)
@@ -30,9 +32,9 @@ Version 1.001(Chris):
 
 
 Wichtiges/Fixes:
-	- int level static oder nicht static? (was würde das 	jeweils ändern?)	
-	- GameOver Gamestate
-
+	- int level static oder nicht static? (was würde das jeweils ändern? - statuc würde es aus jeder Klasse heraus zugreifbar machen, so wie z.B. Game als Objekt static ist, 
+	  und man dadurch in jeder Klasse auf den bool is_Summer zugreifen kann. Im Moment dürfte es egal sein, ob es static ist, später könnte man es vllt als static brauchen.)	
+	
 Features:
 	- Fallen:
 		- Falle als Abstrakte Klasse anlegen

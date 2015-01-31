@@ -57,6 +57,7 @@
     <Compile Include="Klassen\Credits.cs" />
     <Compile Include="Klassen\Game.cs" />
     <Compile Include="Klassen\GameObject.cs" />
+    <Compile Include="Klassen\GameOver.cs" />
     <Compile Include="Klassen\GameStates.cs" />
     <Compile Include="Klassen\GameTime.cs" />
     <Compile Include="Klassen\gameWon.cs" />
@@ -92,6 +93,7 @@
     <Content Include="openal32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Patchnotes.txt" />
     <Content Include="Texturen\Map\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -157,6 +159,12 @@
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\credits_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\GameOver-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\GameOver-summer-PLATZHALTER.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\GameWon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
