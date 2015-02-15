@@ -28,10 +28,11 @@ namespace IcyMazeRunner.Klassen
 
 
         public static String white = "ffffffff"; //walkable Hauptweg
-        public static String black = "ff000000"; //alphamauer
+        public static String black = "ff000000"; //mauervert
         public static String red = "ffff0000"; // Hintergrund
         public static String green = "ff00ff00"; //später mehr mauerteile
         public static String blue = "ff0000ff"; //später mehr Wegtypen
+        public static String grey = "ff414141"; //mauer hor
         //public static String 
         //public static String
         //public static String
@@ -56,9 +57,19 @@ namespace IcyMazeRunner.Klassen
 
                     if (mask.GetPixel(row, col).Name == black)
                     {
+                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = false;
+                    }
+
+
+                    //mauertest
+                    if (mask.GetPixel(row, col).Name == grey)
+                    {
                         map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), blockTex);
                         walkable = false;
                     }
+
+
 
                     if (mask.GetPixel(row, col).Name == red)
                     {

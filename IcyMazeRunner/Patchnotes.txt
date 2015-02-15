@@ -1,6 +1,8 @@
-Version 1.004
+Version 1.004a
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
+version 1.004a (Chris):
+	- kleiner Vorschlag für schönere Optik der Mauerteile
 
 Version 1.004 (Kilian):
 	- Gamestate GameOver implementiert

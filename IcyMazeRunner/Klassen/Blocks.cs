@@ -47,7 +47,7 @@ namespace IcyMazeRunner.Klassen
 
                     case 1: //alphamauer
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-clean.png"));
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-vert.png"));
                             this.blockSprite.Position = position;
                             this.walkable = false;
                             break;
@@ -79,6 +79,14 @@ namespace IcyMazeRunner.Klassen
                             // -> gameobject ziel initialisieren??
                             //insert hier Ziel: -> Gamestat/Level = +1
                         }
+                    case 5: //horimauer
+                        {
+                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-hor.png"));
+                            this.blockSprite.Position = position;
+                            this.walkable = false;
+                            break;
+                        }
+
                 }
             }
             else 
