@@ -32,17 +32,39 @@ Version 1.001(Chris):
 
 
 Wichtiges/Fixes:
-	- int level static oder nicht static? (was würde das jeweils ändern? - statuc würde es aus jeder Klasse heraus zugreifbar machen, so wie z.B. Game als Objekt static ist, 
+	- int level static oder nicht static? (was würde das jeweils ändern? - static würde es aus jeder Klasse heraus zugreifbar machen, so wie z.B. Game als Objekt static ist, 
 	  und man dadurch in jeder Klasse auf den bool is_Summer zugreifen kann. Im Moment dürfte es egal sein, ob es static ist, später könnte man es vllt als static brauchen.)	
-	
+	- Player.update() anpassen, sodass bei Spielerleben == 0 GameOver-GameState returned wird
+
+Diskussionsthemen:
+	- Sommerthema manuell wechselbar oder soll es mit Eis anfangen und später, je weiter er nach unten gelangt, wärmer werden und schließlich Wüste? Storytechnisch wäre es
+	  gut, wenn das geklärt ist. Manuell wechselbar könnte man mit gleicher Geschichte erklären, bloß in einer anderen Umgebung.
+	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
+	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten läuft es so ab: Leben=0--> Deathwatch startet und 
+	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich überschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]
+
 Features:
 	- Fallen:
-		- Falle als Abstrakte Klasse anlegen
-		- move, Kollision, Schaden als Methoden
-		- verschiedene Typen von Fallen als Unterklassen anlegen (Pfeile, Dornen im Boden, Feuer und Ähnliches)
+		- Falle als Abstrakte Klasse anlegen (fertig)
+		- move, Kollision, Schaden als Methoden (fertig)
+		- verschiedene Typen von Fallen als Unterklassen anlegen (Pfeile, Dornen im Boden, Feuer und Ähnliches) (teilweise fertig):
+			- Arrowtrap: Pfeile fliegen in Richtung des Auslösers/Spielers (sofort tödlich)
+			- Thorntrap: Dornen ragen aus dem Boden, bleiben an ihrer Position, machen einmal Schaden (nicht tödlich)
+			- rollende Baumstämme: ähnlich den Pfeilen, jedoch maximale Reichweite inbegriffen (Pfeile fliegen bis zur nächsten Wand) (nicht 
+			- Flammenwerfer, der den Durchgang für eine bestimmte Zeit blockiert, ähnlich wie die Dornen 
+			  (eventuell einer von ihnen direkt tödlich, der andere erst nach mehrmaligen Drüberlaufen bzw. mehreren Sekunden innerhalb des
+			   Schadensbereiches. Also Geduldsfrage. Problem entsteht, wenn man von Gegnern dabei verfolgt wird und entweder durchlaufen muss
+			   oder sich den Gegnern stellen muss)
+			- Schlingfalle: Spieler kann sich nicht bewegen, aber verteidigen/angreifen (macht erst mit Gegnern Sinn)
+			- Stolperfalle: wie Schlingfalle, aber Spieler ist betäubt--> kann sich nicht verteidigen oder blocken.
+			- Falle löst Überflutung eines Teilgebietes aus, um Gang wieder passierbar zu machen,
+			  muss man einen sichtbaren Hebel bedienen, der das Wasser in einem Abfluss Feld für Feld aus dem Gang abfließen lässt.
+			  Ist der Abfluss jedoch zu lange offen, ohne das Wasser abfließt, kommen Schlangen oder andere
+			  Kreaturen aus dem Abfluss und können den Spieler attackieren...
+
 		- ObjectHandler
 		- Lebensanzeige + Variable mit Leben des Spielers einführen
-		- Button zum Auslösen der Fallen
+		- Button zum Auslösen der Fallen (teilweise fertig)
 	 - Gegner:
 		- Abstrakte Gegnerklasse
 		- move, Kollision, Schaden(, Verteidigung), Leben  als Methoden/Variablen
@@ -54,6 +76,7 @@ Features:
 		- Klasse Moveable_Wall
 		- Move-Methode, Status/Positions-Abspeicherung, Auslöser-Methode (Kollision) für Bewegen der Mauern
 		- Klasse Button zum Auslösen der Bewegung
+	- Inventar
 		
 Texturen:
 	- Sommer-Thema:
@@ -64,6 +87,7 @@ Texturen:
 	- Texturen für die Bewegung der Mauern(Mauern in Standposition die gleichen wie normale Mauern?) und für den Auslöser?(entweder gleiche Textur wie Boden oder minimal anders, also unauffällig)
 	- Spielmenü zum Wechseln in die Steuerungsübersicht/Hauptmenü
 	- (Allgemein Menü/Startmenü Re-Disgn? Ideen vorhanden )
+	- Sterbeanimation (in alle 4 Richtungen)
 
 
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -73,4 +97,36 @@ Texturen:
 	- seltene besonders schwere Gegner droppen Gegenstände 	wie Heiltrank, Geschwindigkeitsbuff, zeitliche 	Unsterblichkeit, zeitlichen Schutzschild
 	oder Ähnliches, die man in einem Inventar mit sich führen kann und dann benutzen kann.
 	- HighScore mit der schnellsten Zeit?
-	- Rätzel: a la Steine verschieben, Schalter(Klänge) in 	richtiger Reihenfolge, Kombinatorische Knobeleien (minigames)
+	- Rätsel: a la Steine verschieben, Schalter(Klänge) in 	richtiger Reihenfolge, Kombinatorische Knobeleien (minigames)
+	- InGame-Menü mit 2. Controlmenü, Möglichkeit zum Hauptmenü zurückzukehren und Abbrechen - Spiel ist in der Zeit pausiert (if-Abfrage in der Update, wenn eines der Fenster offen ist, wird nicht geupdated)
+	- Txt-Datei, die die Handlung erklärt oder später mit kleinem Intro-Video (Zeichnungen, mit UNtertiteln unterlegt, in die hinein oder hinausgezoomt wird bzw. die Sicht geht entlang des Bildes)
+	- Speicherstände (welche Informationen müssen gespeichert werden? Position, Objecthandler, Level u.Ä.)
+	- Gegner: 	
+			Gegnertypen:
+			- normale Nahkämpfer: etwas langsamer als Spieler, mittlere Gesundheit/Angriffs- und Verteidigungswerte
+			- schnelle Nahkämpfer: schneller als Spieler, niedrige Gesundheit, mittlerer Angriff, schwache Verteidigung
+			- zahlreiche Nahkämpfer: treten nicht einzeln, sondern in Gruppen auf, gleiche Geschwindigkeit wie Spieler, sehr niedrige Gesundheit und schwache Verteidigung, schwacher Angriff der in
+				Kombination, d.h. Anzahl der Gegner aber gefährlich werden kann
+			- Fernkämpfer: leicht schneller als Spieler, verbraucht aber Zeit mit stehenbleiben, um zu schießen, ansonsten mittlere Werte
+			- Fernkämpfer auf kurzer Distanz: ähnlich wie Fernkämpfer, kann aber nicht soweit schießen, hat aber größeren Schaden und etwas bessere Verteidigung
+			- Nahkämpfer mit hoher Verteidigung: wie normale Nahkämpfer, Verteidigung aber erhöht und etwas langsamer
+			- Bossgegner: hohe Verteidigung, gleich schnell wie Spieler, leicht erhöhte Angriffswerte, größeres Leben als andere Gegner, (müssen eventuell angegriffen werden, damit sie angreifen)
+			einiges später erst: - Buffgegner, die Gegner der Spielers in seiner Nähe buffen kann, d.h. healen/Schaden erhöhen/schneller machen
+			
+			ordentliche KI für Gegner, beispielsweise in folgender Situation (P-Spieler, E Gegner):
+
+
+
+			    |
+			    | E
+			    |
+			P   |
+
+			Sodass der Gegner nicht nach unten rennt oder nach links (also sich schlicht in X oder Y-Richtung auf Spieler zubewegt),
+			sondern er erst nach oben geht, und sich dann nach links und unten (also in X- und Y-Richtung auf den Spieler zubewegt)
+			bewegt, also Umgebung wahrnimmt bzw. im Wissen der Umgebung handelt
+
+
+	- Menüupdate
+	- schwarzer Bildschirm (Gift)
+	- Löcher im Boden
