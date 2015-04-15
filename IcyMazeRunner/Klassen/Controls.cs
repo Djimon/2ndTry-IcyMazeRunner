@@ -12,7 +12,7 @@ namespace IcyMazeRunner.Klassen
     {
         Texture controlsTex;
         Sprite controls;
-        bool prevSeason=false;
+        
 
         public void initialize()
         {
@@ -22,42 +22,17 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            if (!Game.is_Summer)
+            
                 controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
-            else
-                controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen-summer-PLATZHALTER.png");
+            
         }
 
         public EGameStates update(GameTime time)
         {
 
-            // Steuerung der Themes
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Numpad5))
-            {
-                Game.is_Summer = true;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Numpad3))
-            {
-                Game.is_Summer = false;
-            }
-
-            // Textur wird nur zugewiesen, wenn sich der Bool-Wert ändert
-
-            if (prevSeason != Game.is_Summer)
-            {
-                if (Game.is_Summer)
-                {
-                    controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen-summer-PLATZHALTER.png");
-                }
-                else controlsTex = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
-            }
-
+          
             controls.Texture = controlsTex;
             
-            // Bool-Werte werden abgeglichen
-            prevSeason = Game.is_Summer;
 
             // Steuerungselement
 

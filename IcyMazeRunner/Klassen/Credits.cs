@@ -22,10 +22,9 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            if (!Game.is_Summer)
+            
                 creditsTex = new Texture("Texturen/Menü+Anzeigen/creditscreen.png");
-            else
-                creditsTex = new Texture("Texturen/Menü+Anzeigen/creditscreen-summer-PLATZHALTER.png");
+            
         }
 
         public EGameStates update(GameTime time)

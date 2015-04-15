@@ -72,16 +72,9 @@ namespace IcyMazeRunner.Klassen
                 ControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
                 ControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
 
-            // Auswahl der Textur nach Thema
-
-            if (!Game.is_Summer)
-            {
+          
                 backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel.png");
-            }
-            else
-            {
-                backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel-summer-PLATZHALTER.png");
-            }
+            
         }
 
 

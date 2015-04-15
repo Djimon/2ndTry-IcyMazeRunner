@@ -53,8 +53,7 @@ namespace IcyMazeRunner
         /*wird mit neuem Level eine neue Position festgelegt*/
             playerPosition = Pos; 
 
-            if (!Game.is_Summer)
-            {
+            
                 down1 = new Texture("Texturen/Player/down1.png");
                 down2 = new Texture("Texturen/Player/down2.png");
                 down3 = new Texture("Texturen/Player/downidle.png");
@@ -67,22 +66,7 @@ namespace IcyMazeRunner
                 left1 = new Texture("Texturen/Player/left1.png");
                 left2 = new Texture("Texturen/Player/left2.png");
                 left3 = new Texture("Texturen/Player/leftidle.png");
-            }
-            else
-            {
-                down1 = new Texture("Texturen/Player/down1-summer-PLATZHALTER.png");
-                down2 = new Texture("Texturen/Player/down2-summer-PLATZHALTER.png");
-                down3 = new Texture("Texturen/Player/downidle-summer-PLATZHALTER.png");
-                up1 = new Texture("Texturen/Player/up1-summer-PLATZHALTER.png");
-                up2 = new Texture("Texturen/Player/up2-summer-PLATZHALTER.png");
-                up3 = new Texture("Texturen/Player/upidle-summer-PLATZHALTER.png");
-                right1 = new Texture("Texturen/Player/right1-summer-PLATZHALTER.png");
-                right2 = new Texture("Texturen/Player/right2-summer-PLATZHALTER.png");
-                right3 = new Texture("Texturen/Player/rightidle-summer-PLATZHALTER.png");
-                left1 = new Texture("Texturen/Player/left1-summer-PLATZHALTER.png");
-                left2 = new Texture("Texturen/Player/left2-summer-PLATZHALTER.png");
-                left3 = new Texture("Texturen/Player/leftidle-summer-PLATZHALTER.png");
-            }
+           
            
             playerSprite = new Sprite(down3);
 

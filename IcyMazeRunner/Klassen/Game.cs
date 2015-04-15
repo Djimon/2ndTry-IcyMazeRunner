@@ -13,7 +13,7 @@ namespace IcyMazeRunner.Klassen
     class Game : AbstractGame
     {
 
-        public static bool is_Summer = false;
+      
 
             public static uint windowSizeX = 1062; // auf 1280 zurückanpassen (ebenso die Screens des MainMenus, ControlScreen, Creditscreen
             public static uint windowSizeY = 720;

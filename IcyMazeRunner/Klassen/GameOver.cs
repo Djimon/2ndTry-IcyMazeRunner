@@ -22,10 +22,9 @@ namespace IcyMazeRunner.Klassen
 
         public void loadContent()
         {
-            if (!Game.is_Summer)
+            
                 gameOverTex = new Texture("Texturen/Menü+Anzeigen/GameOver-PLATZHALTER.png");
-            else
-                gameOverTex = new Texture("Texturen/Menü+Anzeigen/GameOver-summer-PLATZHALTER.png");
+            
         }
 
         public EGameStates update(GameTime time)
