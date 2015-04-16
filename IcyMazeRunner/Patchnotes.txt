@@ -32,6 +32,12 @@ Version 1.1.001(Chris):
 
 
 같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같
+
+Zeitplan:
+
+https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spielkomponenten--funktionen--strukturen-und-%C3%84nderungen
+
+같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같같
 				erledigte To-DO's:
 
 
