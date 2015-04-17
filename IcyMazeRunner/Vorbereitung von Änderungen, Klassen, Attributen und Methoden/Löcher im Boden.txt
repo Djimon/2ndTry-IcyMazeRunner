@@ -1,28 +1,45 @@
 ﻿neuer Block: Textur, Sprite, walkable
 Map-Datei: if-Abfrage hinzufügen
-GameOver Gamestate aktualisieren
+GameOver Gamestate aktualisieren (switch-case: bei 1 wird Fallanimation ausgelöst, bei anderen Werten)
 Map: getBlocksize
+Attribut: TypeOfDeath
+Methoden: Set und Get TypeOfDeath
+
 
 Player Update/Player Move:
 if (get_Gap_Collision)
 {
 Leben=0;
+setTypeOfDeath(1);
 }
 
 Player get_Gap_Collision():
 // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
- if (absmap.mask.GetPixel(((getXPosition()+(getWidth()/2))/getBlocksize)+1, ((getYPosition()+(getHeigth ())//getBlocksize)+1).Name == Blockfarbe)
+if (absmap.mask.GetPixel(((getXPosition()+(getWidth()/2))/getBlocksize)+1, ((getYPosition()+(getHeigth ())//getBlocksize)+1).Name == Blockfarbe)
 )
 {
-return true;
+	return true;
 }
 else
 {
-return false;
+	return false;
 }
 
 InGame Update:
 if(Player-Health == 0)
 {
+
+// Stoppuhr starten, damit Animation durchlaufen kann.
+DeathAnimation();
+
+// Wenn Stoppuhr bestimmte Zeit überschreitet(, also Animation abgeschlossen ist), dann
 return Gamestate.GameOver;
+}
+
+public DeathAnimation()
+{
+
+// switch-case mit getTypeOfDeath
+//--> jeweilige Animation ausführen
+
 }
