@@ -52,10 +52,11 @@ Wichtiges/Fixes:
 	- int level static oder nicht static? (was würde das jeweils ändern? - static würde es aus jeder Klasse heraus zugreifbar machen, so wie z.B. Game als Objekt static ist, 
 	  und man dadurch in jeder Klasse auf den bool is_Summer zugreifen kann. Im Moment dürfte es egal sein, ob es static ist, später könnte man es vllt als static brauchen.)	
 	- Player.update() anpassen, sodass bei Spielerleben == 0 GameOver-GameState returned wird
+	- Textur vom Fog of War leicht vergrößern (außen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth
+	- Map-Klasse: if-Abfragen in switch-case umwandeln --> weniger Rechenaufwand?
+	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
 
 Diskussionsthemen:
-	- Sommerthema manuell wechselbar oder soll es mit Eis anfangen und später, je weiter er nach unten gelangt, wärmer werden und schließlich Wüste? Storytechnisch wäre es
-	  gut, wenn das geklärt ist. Manuell wechselbar könnte man mit gleicher Geschichte erklären, bloß in einer anderen Umgebung.
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
 	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten läuft es so ab: Leben=0--> Deathwatch startet und 
 	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich überschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]

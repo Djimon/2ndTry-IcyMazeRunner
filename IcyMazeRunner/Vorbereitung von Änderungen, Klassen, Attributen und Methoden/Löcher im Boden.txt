@@ -1,0 +1,28 @@
+﻿neuer Block: Textur, Sprite, walkable
+Map-Datei: if-Abfrage hinzufügen
+GameOver Gamestate aktualisieren
+Map: getBlocksize
+
+Player Update/Player Move:
+if (get_Gap_Collision)
+{
+Leben=0;
+}
+
+Player get_Gap_Collision():
+// Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
+ if (absmap.mask.GetPixel(((getXPosition()+(getWidth()/2))/getBlocksize)+1, ((getYPosition()+(getHeigth ())//getBlocksize)+1).Name == Blockfarbe)
+)
+{
+return true;
+}
+else
+{
+return false;
+}
+
+InGame Update:
+if(Player-Health == 0)
+{
+return Gamestate.GameOver;
+}
