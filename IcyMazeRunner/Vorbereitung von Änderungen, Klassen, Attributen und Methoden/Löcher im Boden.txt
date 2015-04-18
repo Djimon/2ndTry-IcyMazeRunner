@@ -1,9 +1,9 @@
 ﻿neuer Block: Textur, Sprite, walkable
 Map-Datei: if-Abfrage hinzufügen
 GameOver Gamestate aktualisieren (switch-case: bei 1 wird Fallanimation ausgelöst, bei anderen Werten)
-Map: getBlocksize
-Attribut: TypeOfDeath
-Methoden: Set und Get TypeOfDeath
+Map: getBlocksize erledigt
+Attribut: TypeOfDeath erledigt
+Methoden: Set und Get TypeOfDeath erledigt
 Platzhalter einbauen
 Fall-Ton
 Fall-Schrei

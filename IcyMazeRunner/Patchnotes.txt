@@ -7,6 +7,12 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
+Version 1.2.B002 (Kilian):
+	- Getter und Setter für Blocksize
+	- neues Integer für Todesstatus und Todesart
+	- Getter und Setter für dieses Integer
+	- Integer initialisiert
+
 Version 1.2.B001 (Kilian):
 	- Sommerthema aus den Einstellungen entfernt
 
@@ -55,6 +61,7 @@ Wichtiges/Fixes:
 	- Textur vom Fog of War leicht vergrößern (außen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth
 	- Map-Klasse: if-Abfragen in switch-case umwandeln --> weniger Rechenaufwand?
 	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
+	- GameState nächstes Level
 
 Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 

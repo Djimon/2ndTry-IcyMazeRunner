@@ -22,8 +22,8 @@ namespace IcyMazeRunner.Klassen
 
         Blocks[,] map;
         Texture blockTex;
-        bool walkable;
-        int blocksize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
+        private bool walkable;
+        private int blocksize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
         
 
 
@@ -95,6 +95,16 @@ namespace IcyMazeRunner.Klassen
             }
 
 
+        }
+
+        public int getBlocksize()
+        {
+            return blocksize;
+        }
+
+        public void getBlocksize(int size)
+        {
+            blocksize=size;
         }
 
 

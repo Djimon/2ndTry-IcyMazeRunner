@@ -26,7 +26,13 @@ namespace IcyMazeRunner.Klassen
         Sprite backGround;
         Sprite Fog_of_War;
 
-
+        private int typeOfDeath;
+        /*
+         * 0 = alive
+         * 1 = Death by falling
+         * 2 = instant Death by trap
+         * 3 = Death by damage
+        */
 
 
 
@@ -38,8 +44,20 @@ namespace IcyMazeRunner.Klassen
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
+        /*~~~~~~~~~~~~~    Getter and Setter    ~~~~~~~~~~~~~~~*/
+
+        public int getTypeOfDeath()
+        {
+            return typeOfDeath;
+        }
+
+        public void setTypeOfDeath(int data)
+        {
+            typeOfDeath = data;
+        }
 
 
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         
         
         /* ~~~~ Initialisierung des Spiels ~~~~ */
@@ -56,6 +74,8 @@ namespace IcyMazeRunner.Klassen
 
             Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
             Fog_of_War.Position = new Vector2f(-5, -5);
+
+            setTypeOfDeath(0);
             
           
         }
