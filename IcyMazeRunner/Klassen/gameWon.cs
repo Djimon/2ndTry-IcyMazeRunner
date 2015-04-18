@@ -19,10 +19,8 @@ namespace IcyMazeRunner.Klassen
 
             // Auswahl der Textur nach Thema
 
-            if (!Game.is_Summer)
                 Won = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon1.png"));
-            else
-                Won = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon1-summer-PLATZHALTER.png"));
+            
             Won.Position = new Vector2f(0,0);
             // Bildposition fixen
             

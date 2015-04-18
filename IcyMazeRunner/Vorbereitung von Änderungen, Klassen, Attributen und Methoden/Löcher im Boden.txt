@@ -4,6 +4,9 @@ GameOver Gamestate aktualisieren (switch-case: bei 1 wird Fallanimation ausgelö
 Map: getBlocksize
 Attribut: TypeOfDeath
 Methoden: Set und Get TypeOfDeath
+Platzhalter einbauen
+Fall-Ton
+Fall-Schrei
 
 
 Player Update/Player Move:
