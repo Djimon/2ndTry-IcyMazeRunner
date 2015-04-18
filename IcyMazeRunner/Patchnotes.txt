@@ -7,6 +7,10 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
+Version 1.2.B003 (Kilian):
+	- InGameMenu begonnen(Platzhaltertexturen und Sprites erstellt)
+	- Platzhaltertexturen für Fallanimation geladen
+
 Version 1.2.B002 (Kilian):
 	- Getter und Setter für Blocksize
 	- neues Integer für Todesstatus und Todesart
