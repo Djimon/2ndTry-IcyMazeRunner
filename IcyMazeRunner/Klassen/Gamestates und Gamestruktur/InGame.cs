@@ -128,7 +128,7 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
 
-            if (get_Gap_Collision(Runner))
+            if (get_Gap_Collision(Runner, map))
             {
                 Runner.setPlayerHealth(0);
                 setTypeOfDeath(1);
@@ -213,10 +213,10 @@ namespace IcyMazeRunner.Klassen
                 return false;
         }
 
-        public bool get_Gap_Collision(Player player)
+        public bool get_Gap_Collision(Player player, Map map)
         {
             // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-            if (map.GetPixel(((player.getXPosition() + (player.getWidth() / 2)) / getBlocksize) + 1, ((player.getYPosition() + (player.getHeigth()).getBlocksize) + 1).Name.equals(orange)))
+            if (map.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1).Name.equals("orange")))
             {
                 return true;
             }
