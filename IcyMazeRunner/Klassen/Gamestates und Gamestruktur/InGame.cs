@@ -33,6 +33,7 @@ namespace IcyMazeRunner.Klassen
          * 2 = instant Death by trap
          * 3 = Death by damage
         */
+        public bool isDeathAnimationOver;
 
 
 
@@ -76,6 +77,7 @@ namespace IcyMazeRunner.Klassen
             Fog_of_War.Position = new Vector2f(-5, -5);
 
             setTypeOfDeath(0);
+            isDeathAnimationOver=false;
             
           
         }
@@ -126,8 +128,26 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
 
+            if (get_Gap_Collision(Runner))
+            {
+                Runner.setPlayerHealth(0);
+                setTypeOfDeath(1);
+            }
 
             time.update();
+
+            if (Runner.getPlayerHealth() == 0)
+            {
+                
+                Runner.DeathAnimation(getTypeOfDeath());
+
+
+                if (Runner.DeathWatch.Watch.ElapsedMilliseconds > 4000)
+                {
+                    level--;
+                    return EGameStates.gameOver;
+                }
+            }
 
             if (level != level) // Kollision mit Treppe= true
             {
@@ -191,6 +211,19 @@ namespace IcyMazeRunner.Klassen
 
             else
                 return false;
+        }
+
+        public bool get_Gap_Collision(Player player)
+        {
+            // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
+            if (map.GetPixel(((player.getXPosition() + (player.getWidth() / 2)) / getBlocksize) + 1, ((player.getYPosition() + (player.getHeigth()).getBlocksize) + 1).Name.equals(orange)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
       

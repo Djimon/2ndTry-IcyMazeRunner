@@ -19,6 +19,7 @@ namespace IcyMazeRunner.Klassen
         // Texturpfad: "Texturen/Map/wall-clean.png"
         // weiß "ffffff" = weg 
         // Texturpfad: "Texturen/Map/way-clean.png"
+        // orange "FF8000" = Loch im Boden (255 Rot, 128 Grün, 0 Blau)
 
         Blocks[,] map;
         Texture blockTex;
@@ -33,6 +34,7 @@ namespace IcyMazeRunner.Klassen
         public static String green = "ff00ff00"; //später mehr mauerteile
         public static String blue = "ff0000ff"; //später mehr Wegtypen
         public static String grey = "ff414141"; //mauer hor
+        public static String orange = "ffff8000"; // Loch im Boden
         //public static String 
         //public static String
         //public static String
@@ -86,6 +88,12 @@ namespace IcyMazeRunner.Klassen
                     if (mask.GetPixel(row, col).Name == blue)
                     {
                         map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), blockTex);
+                        walkable = true;
+                    }
+
+                    if (mask.GetPixel(row, col).Name == orange)
+                    {
+                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), blockTex);
                         walkable = true;
                     }
 

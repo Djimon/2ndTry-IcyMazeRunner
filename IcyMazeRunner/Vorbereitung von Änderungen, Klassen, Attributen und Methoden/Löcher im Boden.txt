@@ -1,48 +1,49 @@
-﻿neuer Block: Textur, Sprite, walkable
-Map-Datei: if-Abfrage hinzufügen
-GameOver Gamestate aktualisieren (switch-case: bei 1 wird Fallanimation ausgelöst, bei anderen Werten)
+﻿neuer Block: Textur, Sprite, walkable erledigt
+Map-Datei: if-Abfrage hinzufügen erledigt
+GameOver Gamestate aktualisieren 
 Map: getBlocksize erledigt
 Attribut: TypeOfDeath erledigt
 Methoden: Set und Get TypeOfDeath erledigt
-Platzhalter einbauen (teilweise erledigt)
+Platzhalter einbauen erledigt
 Fall-Ton
-Fall-Schrei
+Fall-Schrei --> https://www.freesound.org/people/smcameron/sounds/50776/ ??
 
 
-Player Update/Player Move:
-if (get_Gap_Collision)
-{
-Leben=0;
-setTypeOfDeath(1);
-}
 
-Player get_Gap_Collision():
-// Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-if (absmap.mask.GetPixel(((getXPosition()+(getWidth()/2))/getBlocksize)+1, ((getYPosition()+(getHeigth ())//getBlocksize)+1).Name == Blockfarbe)
-)
-{
-	return true;
-}
-else
-{
-	return false;
-}
+									Player Update/Player Move: eingefügt
+									if (get_Gap_Collision)
+									{
+									Leben=0;
+									setTypeOfDeath(1);
+									}
 
-InGame Update:
-if(Player-Health == 0)
-{
+Noch fixen							Player get_Gap_Collision(): eingefügt
+									// Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
+									if (absmap.mask.GetPixel(((getXPosition()+(getWidth()/2))/getBlocksize)+1, ((getYPosition()+(getHeigth ())//getBlocksize)+1).Name == Blockfarbe)
+									)									
+									{
+										return true;
+									}
+									else
+									{
+										return false;
+									}
 
-// Stoppuhr starten, damit Animation durchlaufen kann.
-DeathAnimation();
+									InGame Update: eingefügt
+									if(Player-Health == 0)
+									{
 
-// Wenn Stoppuhr bestimmte Zeit überschreitet(, also Animation abgeschlossen ist), dann
-return Gamestate.GameOver;
-}
+									// Stoppuhr starten, damit Animation durchlaufen kann.
+									DeathAnimation(getTypeOfDeath);
 
-public DeathAnimation()
-{
-
-// switch-case mit getTypeOfDeath
-//--> jeweilige Animation ausführen
-
-}
+									// Wenn Stoppuhr bestimmte Zeit überschreitet(, also Animation abgeschlossen ist), dann
+									return Gamestate.GameOver;
+									}
+									
+									public DeathAnimation(int typeOfDeath) eingefügt
+									{
+									
+									// switch-case mit getTypeOfDeath
+									//--> jeweilige Animation ausführen
+									
+									}

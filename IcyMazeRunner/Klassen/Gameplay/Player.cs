@@ -38,6 +38,26 @@ namespace IcyMazeRunner
         int movechangerstate = 0;
         Random random = new Random();
 
+        public GameTime DeathWatch;
+        bool DeathWatchIsOn;
+
+        Texture Fall1a;
+        Texture Fall1b;
+        Texture Fall2a;
+        Texture Fall2b;
+        Texture Fall3a;
+        Texture Fall3b;
+        Texture Fall4a;
+        Texture Fall4b;
+
+        /************ Player attributes ***********/
+
+        int healthPoints;
+        float runningSpeed;
+        // int basicDamage
+        // int basicDefence
+        
+
         public Sprite getplayerSprite()
         {
             return this.playerSprite; 
@@ -51,8 +71,9 @@ namespace IcyMazeRunner
         public Player(Vector2f Pos, Map map) 
         {
         /*wird mit neuem Level eine neue Position festgelegt*/
-            playerPosition = Pos; 
+            playerPosition = Pos;
 
+            healthPoints = 100;
             
                 down1 = new Texture("Texturen/Player/down1.png");
                 down2 = new Texture("Texturen/Player/down2.png");
@@ -66,6 +87,15 @@ namespace IcyMazeRunner
                 left1 = new Texture("Texturen/Player/left1.png");
                 left2 = new Texture("Texturen/Player/left2.png");
                 left3 = new Texture("Texturen/Player/leftidle.png");
+
+                Fall1a = new Texture("Texturen/Player/Fallanimation/fall1a Platzhalter.png");
+                Fall1b = new Texture("Texturen/Player/Fallanimation/fall1b Platzhalter.png");
+                Fall2a = new Texture("Texturen/Player/Fallanimation/fall2a Platzhalter.png");
+                Fall2b = new Texture("Texturen/Player/Fallanimation/fall2b Platzhalter.png");
+                Fall3a = new Texture("Texturen/Player/Fallanimation/fall3a Platzhalter.png");
+                Fall3b = new Texture("Texturen/Player/Fallanimation/fall3b Platzhalter.png");
+                Fall4a = new Texture("Texturen/Player/Fallanimation/fall4a Platzhalter.png");
+                Fall4b = new Texture("Texturen/Player/Fallanimation/fall4b Platzhalter.png");
            
            
             playerSprite = new Sprite(down3);
@@ -78,6 +108,9 @@ namespace IcyMazeRunner
                    
             moveTime = new GameTime();
             moveTime.Watch.Start();
+
+            DeathWatch = new GameTime();
+            DeathWatchIsOn = false;
         }
 
 
@@ -101,6 +134,16 @@ namespace IcyMazeRunner
             return playerSprite.Texture.Size.Y;
         }
 
+        public int getPlayerHealth()
+        {
+            return healthPoints;
+        }
+
+        public void setPlayerHealth(int data)
+        {
+            healthPoints = data;
+        }
+
         public void update(GameTime time)
         {
 
@@ -111,7 +154,7 @@ namespace IcyMazeRunner
         public void move(Map map, GameTime time)
         {
 
-            float runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
+            runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
             isPressed = false;
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.F2))
@@ -183,6 +226,73 @@ namespace IcyMazeRunner
         playerSprite.Position = playerPosition;
 
 
+        }
+
+        public void DeathAnimation(int typeOfDeath)
+        {
+            if (!DeathWatchIsOn)
+            {
+                DeathWatch.Watch.Start();
+            }
+
+            switch (typeOfDeath)
+            { 
+                case 0:
+                    {
+                        /* Nichts, da am Leben */
+                        break;
+                    }
+
+                case 1:
+                    {
+                        /* Fallanimation*/
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 0 && DeathWatch.Watch.ElapsedMilliseconds < 500)
+                        {
+                            playerSprite.Texture = Fall1a;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 500 && DeathWatch.Watch.ElapsedMilliseconds < 1000)
+                        {
+                            playerSprite.Texture = Fall1b;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 1000 && DeathWatch.Watch.ElapsedMilliseconds < 1500)
+                        {
+                            playerSprite.Texture = Fall2a;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 1500 && DeathWatch.Watch.ElapsedMilliseconds < 2000)
+                        {
+                            playerSprite.Texture = Fall2b;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 2000 && DeathWatch.Watch.ElapsedMilliseconds < 2500)
+                        {
+                            playerSprite.Texture = Fall3a;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 2500 && DeathWatch.Watch.ElapsedMilliseconds < 3000)
+                        {
+                            playerSprite.Texture = Fall3b;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 3000 && DeathWatch.Watch.ElapsedMilliseconds < 3500)
+                        {
+                            playerSprite.Texture = Fall4a;
+                        }
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 3500 && DeathWatch.Watch.ElapsedMilliseconds < 4000)
+                        {
+                            playerSprite.Texture = Fall4b;
+                        }
+                        break;
+                    }
+
+                case 2:
+                    {
+                        break;
+                    }
+
+                case 3:
+                    {
+                        break;
+                    }
+            
+            
+            }
         }
 
 

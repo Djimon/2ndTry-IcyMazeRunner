@@ -24,6 +24,8 @@ namespace IcyMazeRunner.Klassen
             GameStates gameState;
 
 
+
+
             public Game()
                 : base(windowSizeX, windowSizeY, "IcyMazeRunner")
             {
@@ -46,6 +48,8 @@ namespace IcyMazeRunner.Klassen
         {
             gameState.draw(win);
         }
+
+
            
 
 

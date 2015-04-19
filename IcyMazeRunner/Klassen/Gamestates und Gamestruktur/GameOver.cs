@@ -10,6 +10,9 @@ namespace IcyMazeRunner.Klassen
 {
     class GameOver : GameStates
     {
+
+        //GameOver durch Fallen
+
         Texture gameOverTex;
         Sprite gameOver;
 
