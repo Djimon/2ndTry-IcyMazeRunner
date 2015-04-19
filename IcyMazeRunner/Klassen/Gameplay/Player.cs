@@ -49,6 +49,7 @@ namespace IcyMazeRunner
         Texture Fall3b;
         Texture Fall4a;
         Texture Fall4b;
+        int fallAnimationCounter = 0;
 
         /************ Player attributes ***********/
 
@@ -235,6 +236,8 @@ namespace IcyMazeRunner
                 DeathWatch.Watch.Start();
             }
 
+            fallAnimationCounter++;
+
             switch (typeOfDeath)
             { 
                 case 0:
@@ -246,38 +249,54 @@ namespace IcyMazeRunner
                 case 1:
                     {
                         /* Fallanimation*/
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 0 && DeathWatch.Watch.ElapsedMilliseconds < 500)
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 0 && DeathWatch.Watch.ElapsedMilliseconds < 1000)
                         {
-                            playerSprite.Texture = Fall1a;
+                            if (fallAnimationCounter%2==0)
+                            {
+                                playerSprite.Texture = Fall1a;
+                            }
+                            else
+                            {
+                                playerSprite.Texture = Fall1b;
+                            }
                         }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 500 && DeathWatch.Watch.ElapsedMilliseconds < 1000)
+
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 1000 && DeathWatch.Watch.ElapsedMilliseconds < 2000)
                         {
-                            playerSprite.Texture = Fall1b;
+                            if (fallAnimationCounter % 2 == 0)
+                            {
+                                playerSprite.Texture = Fall2a;
+                            }
+                            else
+                            {
+                                playerSprite.Texture = Fall2b;
+                            }
                         }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 1000 && DeathWatch.Watch.ElapsedMilliseconds < 1500)
+
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 2000 && DeathWatch.Watch.ElapsedMilliseconds < 3000)
                         {
-                            playerSprite.Texture = Fall2a;
+                            if (fallAnimationCounter % 2 == 0)
+                            {
+                                playerSprite.Texture = Fall3a;
+                            }
+                            else
+                            {
+                                playerSprite.Texture = Fall3b;
+                            }
                         }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 1500 && DeathWatch.Watch.ElapsedMilliseconds < 2000)
+
+                        if (DeathWatch.Watch.ElapsedMilliseconds > 3000 && DeathWatch.Watch.ElapsedMilliseconds < 4000)
                         {
-                            playerSprite.Texture = Fall2b;
+                            if (fallAnimationCounter % 2 == 0)
+                            {
+                                playerSprite.Texture = Fall4a;
+                            }
+                            else
+                            {
+                                playerSprite.Texture = Fall4b;
+                            }
                         }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 2000 && DeathWatch.Watch.ElapsedMilliseconds < 2500)
-                        {
-                            playerSprite.Texture = Fall3a;
-                        }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 2500 && DeathWatch.Watch.ElapsedMilliseconds < 3000)
-                        {
-                            playerSprite.Texture = Fall3b;
-                        }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 3000 && DeathWatch.Watch.ElapsedMilliseconds < 3500)
-                        {
-                            playerSprite.Texture = Fall4a;
-                        }
-                        if (DeathWatch.Watch.ElapsedMilliseconds > 3500 && DeathWatch.Watch.ElapsedMilliseconds < 4000)
-                        {
-                            playerSprite.Texture = Fall4b;
-                        }
+
                         break;
                     }
 

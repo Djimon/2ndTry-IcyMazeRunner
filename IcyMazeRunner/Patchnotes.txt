@@ -1,4 +1,4 @@
-Version 1.2.B004
+Version 1.2.B004b
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,9 @@ Version 1.2.B004
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.2.B004b (Kilian):
+	- Fallanimation gefixed (Textur änderte sich nur alle 500 Millisekunden statt bei jedem Durchlauf)
 
 Version 1.2.B004 (Kilian):
 	- Loch-im-Boden-Block erstellt
