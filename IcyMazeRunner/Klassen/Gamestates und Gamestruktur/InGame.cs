@@ -20,6 +20,7 @@ namespace IcyMazeRunner.Klassen
 
         Map map;
         View view;
+        Bitmap mapOfBits;
 
         Player Runner;
 
@@ -35,6 +36,10 @@ namespace IcyMazeRunner.Klassen
         */
         public bool isDeathAnimationOver;
 
+
+        /*~~~~~~~~~~~~~~~~~~~Gap Collision~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+        public static String orange = "ffff8000"; // Loch im Boden
 
 
 
@@ -91,25 +96,28 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
-
+            mapOfBits = new Bitmap("Texturen/Map/Map_1.bmp");
 
             // Levelzuweisung
 
             switch (level)
             {
                 case 0:
-                    map = new Map(new Bitmap("Texturen/Map/Map_1.bmp"));
+                    //mapOfBits = new Bitmap("Texturen/Map/Map_1.bmp");
+                    map = new Map(mapOfBits);
                     Runner = new Player(new Vector2f(910, 100), map);
 
                     break;
 
                 case 1:
-                    map = new Map(new Bitmap("Texturen/Map_1.bmp"));
+                    mapOfBits = new Bitmap("Texturen/Map_1.bmp");
+                    map = new Map(mapOfBits);
                     Runner = new Player(new Vector2f(0, 0), map);
                     break;
                     
                 case 2:
-                    map = new Map(new Bitmap("Texturen/Map_2.bmp"));
+                    mapOfBits = new Bitmap("Texturen/Map_2.bmp");
+                    map = new Map(mapOfBits);
                     Runner = new Player(new Vector2f(2263,3336), map);
                     break;
 
@@ -216,7 +224,7 @@ namespace IcyMazeRunner.Klassen
         public bool get_Gap_Collision(Player player, Map map)
         {
             // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-            if (map.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1).Name.equals("orange")))
+            if (mapOfBits.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1)).Name == orange)
             {
                 return true;
             }

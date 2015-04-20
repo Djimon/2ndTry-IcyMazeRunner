@@ -1,4 +1,4 @@
-Version 1.2.B004c
+Version 1.2.B004d
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,9 @@ Version 1.2.B004c
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.2.B004c (Kilian):
+	- Kollision mit Loch im Boden gefixed
 
 Version 1.2.B004c (Kilian):
 	- Teilkorrektur an Kollision mit Loch im Boden
@@ -68,6 +71,7 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 
 
 	- Abdunklungstextur etwas vergrößern(und Position nicht ganz bei 0,0, sondern etwas im Negativbereich), bei Richtungsswechsel sind an den Rändern wieder die die Oberflächen zu sehen.
+		- Kollision mit Loch fixen
 
 
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -83,7 +87,6 @@ Wichtiges/Fixes:
 	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
 	- GameState nächstes Level
 	- Platzhalter für InGameMenü und Fallanimation und die Löcher im Boden ersetzen
-	- Kollision mit Loch fixen
 
 Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
