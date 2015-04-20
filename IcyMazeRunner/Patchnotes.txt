@@ -7,6 +7,9 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
+Version 1.2.B005 (Kilian):
+	- Map-Bitmap Tutorial mit horizontalen Walltexturen überarbeiten
+
 Version 1.2.B004e (Kilian):
 	- level ist jetzt static
 	- Patchnotes durchgearbeitet
@@ -77,6 +80,7 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 	- Abdunklungstextur etwas vergrößern(und Position nicht ganz bei 0,0, sondern etwas im Negativbereich), bei Richtungsswechsel sind an den Rändern wieder die die Oberflächen zu sehen.
 	- Kollision mit Loch fixen
 	- Player.update() anpassen, sodass bei Spielerleben == 0 GameOver-GameState returned wird
+	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
 
 
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -86,15 +90,17 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 Wichtiges/Fixes:
  
 	- Textur vom Fog of War leicht vergrößern (außen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth
-	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
 	- GameState nächstes Level
 	- Platzhalter für InGameMenü und Fallanimation und die Löcher im Boden ersetzen
+	- levelabhängige Attribute (Position, Map) besser strukturieren, anzeigen und Übersicht erstellen(Tabelle?)
+	- Map 2 horizontale Wallstrukturen einbauen
 
 Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
 	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten läuft es so ab: Leben=0--> Deathwatch startet und 
 	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich überschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]
 	- Patchnotes-Zusammenfassung von Menü aus zugreifbar? Scrollbare Dialogbox
+	- Bitmap horizontale Mauer abstimmen: alle horizontalen Mauern, unterste Mauer nicht? 
 
 Features:
 	- Fallen:
