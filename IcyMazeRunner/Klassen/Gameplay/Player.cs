@@ -115,6 +115,9 @@ namespace IcyMazeRunner
         }
 
 
+        /* ~~~~~~~~~~~~~~~~~~ Getter und Setter ~~~~~~~~~~~~~~*/
+
+
         public float getXPosition()
         {
             return playerSprite.Position.X;
@@ -144,6 +147,9 @@ namespace IcyMazeRunner
         {
             healthPoints = data;
         }
+
+
+        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
         public void update(GameTime time)
         {

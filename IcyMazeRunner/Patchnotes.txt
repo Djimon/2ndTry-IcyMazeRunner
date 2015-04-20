@@ -1,4 +1,4 @@
-Version 1.2.B004d
+Version 1.2.B004e
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,10 @@ Version 1.2.B004d
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.2.B004e (Kilian):
+	- level ist jetzt static
+	- Patchnotes durchgearbeitet
 
 Version 1.2.B004d (Kilian):
 	- Kollision mit Loch im Boden gefixed
@@ -71,7 +75,8 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 
 
 	- Abdunklungstextur etwas vergrößern(und Position nicht ganz bei 0,0, sondern etwas im Negativbereich), bei Richtungsswechsel sind an den Rändern wieder die die Oberflächen zu sehen.
-		- Kollision mit Loch fixen
+	- Kollision mit Loch fixen
+	- Player.update() anpassen, sodass bei Spielerleben == 0 GameOver-GameState returned wird
 
 
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -79,11 +84,8 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 
 
 Wichtiges/Fixes:
-	- int level static oder nicht static? (was würde das jeweils ändern? - static würde es aus jeder Klasse heraus zugreifbar machen, so wie z.B. Game als Objekt static ist, 
-	  und man dadurch in jeder Klasse auf den bool is_Summer zugreifen kann. Im Moment dürfte es egal sein, ob es static ist, später könnte man es vllt als static brauchen.)	
-	- Player.update() anpassen, sodass bei Spielerleben == 0 GameOver-GameState returned wird
+ 
 	- Textur vom Fog of War leicht vergrößern (außen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth
-	- Map-Klasse: if-Abfragen in switch-case umwandeln --> weniger Rechenaufwand?
 	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
 	- GameState nächstes Level
 	- Platzhalter für InGameMenü und Fallanimation und die Löcher im Boden ersetzen
@@ -92,6 +94,7 @@ Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
 	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten läuft es so ab: Leben=0--> Deathwatch startet und 
 	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich überschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]
+	- Patchnotes-Zusammenfassung von Menü aus zugreifbar? Scrollbare Dialogbox
 
 Features:
 	- Fallen:
@@ -129,9 +132,6 @@ Features:
 	- Inventar
 		
 Texturen:
-	- Sommer-Thema:
-		- Texturen erstellen und implementieren
-		- Änderung als Option bei Control anzeigen
 	- Texturen für Objekte, Leben, Auslöser (relativ unauffällig, aber zu erkennen) etc.
  	- Texturen (jede Menge) für verschiedene Gegner, Animationen, Schläge, Tod etc.
 	- Texturen für die Bewegung der Mauern(Mauern in Standposition die gleichen wie normale Mauern?) und für den Auslöser?(entweder gleiche Textur wie Boden oder minimal anders, also unauffällig)

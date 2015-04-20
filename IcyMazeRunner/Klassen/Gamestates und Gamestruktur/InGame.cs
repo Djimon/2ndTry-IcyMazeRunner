@@ -15,7 +15,7 @@ namespace IcyMazeRunner.Klassen
     {
         /* ~~~~~~~~ VARIABLEN UND KONSTANTEN ~~~~~~~~*/
 
-        int level = 0;
+        static int level = 0;
         GameTime time = new GameTime();
 
         Map map;
@@ -103,7 +103,9 @@ namespace IcyMazeRunner.Klassen
             switch (level)
             {
                 case 0:
-                    //mapOfBits = new Bitmap("Texturen/Map/Map_1.bmp");
+                    /* Redundant
+                     mapOfBits = new Bitmap("Texturen/Map/Map_1.bmp");
+                     */
                     map = new Map(mapOfBits);
                     Runner = new Player(new Vector2f(910, 100), map);
 
