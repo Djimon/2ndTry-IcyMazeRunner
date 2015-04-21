@@ -185,11 +185,26 @@
     <Content Include="Texturen\Menü+Anzeigen\GameWon1-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GameWon1.png">
+    <Content Include="GameWon1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Continue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\controls.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Gamemenu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Hauptmenü Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Mainmenu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\MenuBG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Menü Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -208,6 +223,9 @@
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Steuerung Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\worldmap.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Übersicht.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -15,17 +15,24 @@ namespace IcyMazeRunner.Klassen.Menüs
         Texture MenuHeaderTexture;
 
 
-        Texture ContinueSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel fortsetzen Platzhalter.png");
-        Texture GoMainMenuSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Hauptmenü Platzhalter.png");
-        Texture ControlsSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Steuerung Platzhalter.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Texture SaveGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
-        Texture LoadGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel laden Platzhalter.png"); // für später
+        Texture ContinueSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Continue.png");
+        Texture GoMainMenuSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Mainmenu.png");
+        Texture ControlsSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/controls.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
 
-        Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel fortsetzen Platzhalter.png");
-        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Hauptmenü Platzhalter.png");
-        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Steuerung Platzhalter.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
-        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel laden Platzhalter.png"); // für später
+        // Ich nutze die Loadtexture vor erst mal als Map-Texture: via Map sind vergangene Level auswählbar/ erneut spielbar? 
+        //-> GameState: Map(Übersichtskarte) (auch aus dem MainMenü anwählbar?)
+        // Ansonsten gäbs halt später noch nen extra MapSprite
+        Texture LoadGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/worldmap.png"); 
+
+
+        Texture SaveGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
+        
+
+        Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
+        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png");
+        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png"); // für später
+        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png"); // für später
 
 
 
@@ -48,8 +55,8 @@ namespace IcyMazeRunner.Klassen.Menüs
 
             // Construct sprites and textures
 
-            MenuBackgroundTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Menüfenster Platzhalter.png");
-            MenuHeaderTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Menü Platzhalter.png");
+            MenuBackgroundTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/MenuBG.png");
+            MenuHeaderTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
 
 
             MenuBackgroundSprite = new Sprite(MenuBackgroundTexture);
@@ -57,9 +64,10 @@ namespace IcyMazeRunner.Klassen.Menüs
             ContinueSprite = new Sprite(ContinueSelectedTexture);
             GoMainMenuSprite = new Sprite(GoMainMenuNotSelectedTexture);
             ControlsSprite = new Sprite(ControlsNotSelectedTexture);
+            LoadGameSprite = new Sprite(LoadGameNotSelectedTexture);
             /*
             SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
-            LoadGameSprite = new Sprite(LoadGameNotSelectedTexture);
+            
             */
 
             MenuBackgroundSprite.Position = new Vector2f(351f, 120f); // auf 460 anpassen, wenn Auflösung korrigiert
@@ -77,12 +85,14 @@ namespace IcyMazeRunner.Klassen.Menüs
             ControlsSprite.Position = new Vector2f(380f, 357f); // auf 489 anpassen, wenn Auflösung korrigiert
             ControlsSprite.Scale = new Vector2f(1f, 1f);
 
+            //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
+            LoadGameSprite.Position = new Vector2f(380f, 519f); // auf 489 anpassen, wenn Auflösung korrigiert
+            LoadGameSprite.Scale = new Vector2f(1f, 1f);
             /* für später
             SaveGameSprite.Position = new Vector2f(380f, 442f); // auf 489 anpassen, wenn Auflösung korrigiert
             SaveGameSprite.Scale = new Vector2f(1f, 1f);
 
-            LoadGameSprite.Position = new Vector2f(380f, 519f); // auf 489 anpassen, wenn Auflösung korrigiert
-            LoadGameSprite.Scale = new Vector2f(1f, 1f);
+           
             */
         }
 
@@ -111,12 +121,13 @@ namespace IcyMazeRunner.Klassen.Menüs
                 ContinueSprite.Texture = ContinueSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
                 ControlsSprite.Texture = ControlsNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
                 /*
             
             für später
             
                 SaveGameSprite.Texture = SaveGameNotSelectedTexture;
-                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                
                 */
             }
 
@@ -125,12 +136,13 @@ namespace IcyMazeRunner.Klassen.Menüs
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
                 ControlsSprite.Texture = ControlsNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
                 /*
             
             für später
             
                 SaveGameSprite.Texture = SaveGameNotSelectedTexture;
-                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                
                 */
             }
             if (select == 2)
@@ -138,28 +150,32 @@ namespace IcyMazeRunner.Klassen.Menüs
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
                 ControlsSprite.Texture = ControlsSelectedTexture;
-            /*
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                /*
             
             für später
             
                 SaveGameSprite.Texture = SaveGameNotSelectedTexture;
-                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                
             */
             }
 
-            /*
             
-            für später
+            
+           
             
             if (select == 3)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
                 ControlsSprite.Texture = ControlsNotSelectedTexture;
-                SaveGameSprite.Texture = SaveGameSelectedTexture;
                 LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+             //   SaveGameSprite.Texture = SaveGameSelectedTexture;
+              
             }
-
+            
+            /* für später
+             
             if (select == 4)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
@@ -181,6 +197,9 @@ namespace IcyMazeRunner.Klassen.Menüs
                 return EGameStates.mainMenu;
             if (select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.controls;
+            if (select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))  //Platzhalter Map auswahl
+                return EGameStates.mainMenu;
+
             /*
             
             Außerdem je 1 neues Fenster zum Laden/Speichern öffnen 
@@ -201,13 +220,13 @@ namespace IcyMazeRunner.Klassen.Menüs
             window.Draw(ContinueSprite);
             window.Draw(GoMainMenuSprite);
             window.Draw(ControlsSprite);
-
+            window.Draw(LoadGameSprite);
             /*
 
             für später
 
             window.Draw(SaveGameSelectedTexture);
-            window.Draw(LoadGameSprite
+            
             */
         }
     }
