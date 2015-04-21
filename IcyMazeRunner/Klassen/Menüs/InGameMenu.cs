@@ -13,11 +13,21 @@ namespace IcyMazeRunner.Klassen.Menüs
 
         Texture MenuBackgroundTexture;
         Texture MenuHeaderTexture;
-        Texture ContinueTexture;
-        Texture GoMainMenuTexture;
-        Texture ControlsTexture; // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Texture SaveGameTexture; // für später
-        Texture LoadGameTexture; // für später
+
+
+        Texture ContinueSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel fortsetzen Platzhalter.png");
+        Texture GoMainMenuSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Hauptmenü Platzhalter.png");
+        Texture ControlsSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Steuerung Platzhalter.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture SaveGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
+        Texture LoadGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel laden Platzhalter.png"); // für später
+
+        Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel fortsetzen Platzhalter.png");
+        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Hauptmenü Platzhalter.png");
+        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Steuerung Platzhalter.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
+        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel laden Platzhalter.png"); // für später
+
+
 
         Sprite MenuBackgroundSprite;
         Sprite MenuHeaderSprite;
@@ -40,20 +50,16 @@ namespace IcyMazeRunner.Klassen.Menüs
 
             MenuBackgroundTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Menüfenster Platzhalter.png");
             MenuHeaderTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Menü Platzhalter.png");
-            ContinueTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel fortsetzen Platzhalter.png");
-            GoMainMenuTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Hauptmenü Platzhalter.png");
-            ControlsTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Steuerung Platzhalter.png");
-            SaveGameTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png");
-            LoadGameTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel laden Platzhalter.png");
+
 
             MenuBackgroundSprite = new Sprite(MenuBackgroundTexture);
             MenuHeaderSprite = new Sprite(MenuHeaderTexture);
-            ContinueSprite  = new Sprite(ContinueTexture);
-            GoMainMenuSprite = new Sprite(GoMainMenuTexture);
-            ControlsSprite = new Sprite(ControlsTexture);
+            ContinueSprite = new Sprite(ContinueSelectedTexture);
+            GoMainMenuSprite = new Sprite(GoMainMenuNotSelectedTexture);
+            ControlsSprite = new Sprite(ControlsNotSelectedTexture);
             /*
-            SaveGameSprite = new Sprite(SaveGameTexture);
-            LoadGameSprite = new Sprite(LoadGameTexture);
+            SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
+            LoadGameSprite = new Sprite(LoadGameNotSelectedTexture);
             */
 
             MenuBackgroundSprite.Position = new Vector2f(351f, 120f); // auf 460 anpassen, wenn Auflösung korrigiert
@@ -80,9 +86,129 @@ namespace IcyMazeRunner.Klassen.Menüs
             */
         }
 
-        public void update(){
+        public EGameStates update(GameTime time)
+        {
+            // Menüsteuerung
 
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
+            {
+                select = (select + 1) % 3; // mit Laden und Speichern auf 5 erhöhen
+                isPressed = true;
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !isPressed)
+            {
+                select = (select - 1) % 3; // mit Laden und Speichern auf 5 erhöhen
+                isPressed = true;
+            }
+
+            if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up))
+                isPressed = false;
+
+            // Menüzustände
+
+            if (select == 0)
+            {
+                ContinueSprite.Texture = ContinueSelectedTexture;
+                GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
+                ControlsSprite.Texture = ControlsNotSelectedTexture;
+                /*
+            
+            für später
+            
+                SaveGameSprite.Texture = SaveGameNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                */
+            }
+
+            if (select == 1)
+            {
+                ContinueSprite.Texture = ContinueNotSelectedTexture;
+                GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
+                ControlsSprite.Texture = ControlsNotSelectedTexture;
+                /*
+            
+            für später
+            
+                SaveGameSprite.Texture = SaveGameNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                */
+            }
+            if (select == 2)
+            {
+                ContinueSprite.Texture = ContinueNotSelectedTexture;
+                GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
+                ControlsSprite.Texture = ControlsSelectedTexture;
+            /*
+            
+            für später
+            
+                SaveGameSprite.Texture = SaveGameNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+            */
+            }
+
+            /*
+            
+            für später
+            
+            if (select == 3)
+            {
+                ContinueSprite.Texture = ContinueNotSelectedTexture;
+                GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
+                ControlsSprite.Texture = ControlsNotSelectedTexture;
+                SaveGameSprite.Texture = SaveGameSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+            }
+
+            if (select == 4)
+            {
+                ContinueSprite.Texture = ContinueNotSelectedTexture;
+                GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
+                ControlsSprite.Texture = ControlsNotSelectedTexture;
+                SaveGameSprite.Texture = SaveGameNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameSelectedTexture;
+            }
+            */
+
+            MenuBackgroundSprite.Texture = MenuBackgroundTexture;
+            MenuHeaderSprite.Texture = MenuHeaderTexture;
+
+            // Update der Gamestates
+
+            if (select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                return EGameStates.inGame;
+            if (select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                return EGameStates.mainMenu;
+            if (select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                return EGameStates.controls;
+            /*
+            
+            Außerdem je 1 neues Fenster zum Laden/Speichern öffnen 
+            
+            if (select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                return EGameStates.inGame;
+            if (select == 4 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                return EGameStates.inGame;
+            */
+
+            return EGameStates.inGame;
         }
 
+        public void draw(RenderWindow window)
+        {
+            window.Draw(MenuBackgroundSprite);
+            window.Draw(MenuHeaderSprite);
+            window.Draw(ContinueSprite);
+            window.Draw(GoMainMenuSprite);
+            window.Draw(ControlsSprite);
+
+            /*
+
+            für später
+
+            window.Draw(SaveGameSelectedTexture);
+            window.Draw(LoadGameSprite
+            */
+        }
     }
 }
