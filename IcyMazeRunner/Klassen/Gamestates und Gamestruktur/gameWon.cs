@@ -19,7 +19,7 @@ namespace IcyMazeRunner.Klassen
 
             // Auswahl der Textur nach Thema
 
-                Won = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon1.png"));
+                Won = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));
             
             Won.Position = new Vector2f(0,0);
             // Bildposition fixen
