@@ -245,7 +245,7 @@ namespace IcyMazeRunner.Klassen
             win.SetView(view);
             map.draw(win);
             Runner.draw(win);
-         //   win.Draw(Fog_of_War);
+            win.Draw(Fog_of_War);
         }
         
     }

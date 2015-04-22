@@ -1,4 +1,4 @@
-Version 1.2.B006
+Version 1.2.B007
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,8 @@ Version 1.2.B006
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+Version 1.2.B007 (Chris):
+	- InGame Menu überarbeitet, Grafiken hinzugefügt
 
 Version 1.2.B006 (Kilian):
 	- InGame Menu bearbeitet, so gut wie fertig
