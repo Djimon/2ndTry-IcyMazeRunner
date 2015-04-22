@@ -69,6 +69,17 @@ namespace IcyMazeRunner
             playerSprite.Position = pos;
         }
 
+        public bool getIsPressed()
+        {
+            return isPressed;
+        }
+
+        public void setIsPressed(bool value)
+        {
+            isPressed = value;
+        }
+
+
         public Player(Vector2f Pos, Map map) 
         {
         /*wird mit neuem Level eine neue Position festgelegt*/

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IcyMazeRunner.Klassen;
 using SFML.Audio;
+using IcyMazeRunner.Klassen.Menüs;
 
 namespace IcyMazeRunner.Klassen
 {
@@ -26,6 +27,8 @@ namespace IcyMazeRunner.Klassen
 
         Sprite backGround;
         Sprite Fog_of_War;
+
+        InGameMenu menu;
 
         private int typeOfDeath;
         /*
@@ -140,6 +143,17 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
 
+            if (!Runner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            {
+                menu = new InGameMenu();
+                Runner.setIsPressed(true);
+            }
+
+            if (menu != null && menu.getCloseMenu())
+            {
+                menu = null;
+            }
+
             if (get_Gap_Collision(Runner, map))
             {
                 Runner.setPlayerHealth(0);
@@ -246,6 +260,10 @@ namespace IcyMazeRunner.Klassen
             map.draw(win);
             Runner.draw(win);
             win.Draw(Fog_of_War);
+            if (menu != null)
+            {
+                menu.draw(win);
+            }
         }
         
     }

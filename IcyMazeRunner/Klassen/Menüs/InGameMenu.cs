@@ -29,10 +29,10 @@ namespace IcyMazeRunner.Klassen.Menüs
         
 
         Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
-        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png");
-        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png"); // für später
-        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.png"); // für später
+        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.");
+        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png."); // für später
+        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png."); // für später
 
 
 
@@ -46,12 +46,24 @@ namespace IcyMazeRunner.Klassen.Menüs
 
         int select; // which component of Menu is selected
         bool isPressed;
+        bool closeMenu;
+
+        public void setCloseMenu(bool value)
+        {
+            closeMenu = value;
+        }
+
+        public bool getCloseMenu()
+        {
+            return closeMenu;
+        }
 
         public InGameMenu()
         {
             // Initialize menu attributes
             select = 0;
             isPressed = false;
+            closeMenu = false;
 
             // Construct sprites and textures
 
@@ -69,7 +81,32 @@ namespace IcyMazeRunner.Klassen.Menüs
             SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
             
             */
+            float scaleX = 118/147;
+            float scaleY = 4/5;
 
+            MenuBackgroundSprite.Position = new Vector2f(0f, 0f); // auf 460 anpassen, wenn Auflösung korrigiert
+            MenuBackgroundSprite.Scale = new Vector2f(scaleX, scaleY);
+
+            MenuHeaderSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            MenuHeaderSprite.Scale = new Vector2f(scaleX, scaleY);
+
+            ContinueSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            ContinueSprite.Scale = new Vector2f(scaleX, scaleY);
+
+            GoMainMenuSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            GoMainMenuSprite.Scale = new Vector2f(scaleX, scaleY);
+
+            ControlsSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            ControlsSprite.Scale = new Vector2f(scaleX, scaleY);
+
+            //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
+            LoadGameSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            LoadGameSprite.Scale = new Vector2f(scaleX, scaleY);
+
+            /*
+            
+            alte Positionen
+            
             MenuBackgroundSprite.Position = new Vector2f(351f, 120f); // auf 460 anpassen, wenn Auflösung korrigiert
             MenuBackgroundSprite.Scale = new Vector2f(1f, 1f);
 
@@ -88,6 +125,8 @@ namespace IcyMazeRunner.Klassen.Menüs
             //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
             LoadGameSprite.Position = new Vector2f(380f, 519f); // auf 489 anpassen, wenn Auflösung korrigiert
             LoadGameSprite.Scale = new Vector2f(1f, 1f);
+            
+            */
             /* für später
             SaveGameSprite.Position = new Vector2f(380f, 442f); // auf 489 anpassen, wenn Auflösung korrigiert
             SaveGameSprite.Scale = new Vector2f(1f, 1f);
@@ -192,8 +231,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             // Update der Gamestates
 
             if (select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
-                // Fenster schließen, return inGame; ist redundant, da gleicher Aufruf am Ende aller if-Abfragen
-                return EGameStates.inGame;
+                setCloseMenu(true);
             if (select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.mainMenu;
             if (select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
@@ -218,11 +256,11 @@ namespace IcyMazeRunner.Klassen.Menüs
         {
             window.Draw(MenuBackgroundSprite);
             window.Draw(MenuHeaderSprite);
+            /*
             window.Draw(ContinueSprite);
             window.Draw(GoMainMenuSprite);
             window.Draw(ControlsSprite);
             window.Draw(LoadGameSprite);
-            /*
 
             für später
 
