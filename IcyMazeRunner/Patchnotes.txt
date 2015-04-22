@@ -103,8 +103,8 @@ Diskussionsthemen:
 	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten läuft es so ab: Leben=0--> Deathwatch startet und 
 	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich überschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]
 	- Patchnotes-Zusammenfassung von Menü aus zugreifbar? Scrollbare Dialogbox
-	- Bitmap horizontale Mauer abstimmen: alle horizontalen Mauern, unterste Mauer nicht? 
 	- Item, das die Teile der Map abspeichert, durch die man gelaufen ist und sich am Ende des Levels selbst zerstört. Map muss in jedem Level gefunden werden?
+	- Fallanimation für alle 4 Richtungen?
 
 Features:
 	- Fallen:

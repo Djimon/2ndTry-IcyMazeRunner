@@ -176,6 +176,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             // Update der Gamestates
 
             if (select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                // Fenster schließen, return inGame; ist redundant, da gleicher Aufruf am Ende aller if-Abfragen
                 return EGameStates.inGame;
             if (select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.mainMenu;
