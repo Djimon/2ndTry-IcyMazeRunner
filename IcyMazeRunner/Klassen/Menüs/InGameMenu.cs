@@ -28,11 +28,11 @@ namespace IcyMazeRunner.Klassen.Menüs
         Texture SaveGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
         
 
-        Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
-        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png.");
-        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png."); // für später
-        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png."); // für später
+        Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png");
+        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png.");
+        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
+        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
 
 
 
@@ -61,7 +61,7 @@ namespace IcyMazeRunner.Klassen.Menüs
         public InGameMenu()
         {
             // Initialize menu attributes
-            select = 0;
+            select = 2;
             isPressed = false;
             closeMenu = false;
 
@@ -81,26 +81,28 @@ namespace IcyMazeRunner.Klassen.Menüs
             SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
             
             */
-            float scaleX = 118/147;
-            float scaleY = 4/5;
+            float scaleX = 0.9f;
+            float scaleY = 0.9f;
+            float xCoord = -315;
+            float yCoord = -250;
 
-            MenuBackgroundSprite.Position = new Vector2f(0f, 0f); // auf 460 anpassen, wenn Auflösung korrigiert
+            MenuBackgroundSprite.Position = new Vector2f(xCoord, yCoord); // auf 460 anpassen, wenn Auflösung korrigiert
             MenuBackgroundSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            MenuHeaderSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            MenuHeaderSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
             MenuHeaderSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            ContinueSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            ContinueSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
             ContinueSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            GoMainMenuSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            GoMainMenuSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
             GoMainMenuSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            ControlsSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            ControlsSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
             ControlsSprite.Scale = new Vector2f(scaleX, scaleY);
 
             //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
-            LoadGameSprite.Position = new Vector2f(0f, 0f); // auf 489 anpassen, wenn Auflösung korrigiert
+            LoadGameSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
             LoadGameSprite.Scale = new Vector2f(scaleX, scaleY);
 
             /*
@@ -141,12 +143,12 @@ namespace IcyMazeRunner.Klassen.Menüs
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
             {
-                select = (select + 1) % 3; // mit Laden und Speichern auf 5 erhöhen
+                select = (select + 1) % 4; // mit Laden und Speichern auf 5 erhöhen
                 isPressed = true;
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !isPressed)
             {
-                select = (select - 1) % 3; // mit Laden und Speichern auf 5 erhöhen
+                select = (select - 1) % 4; // mit Laden und Speichern auf 5 erhöhen
                 isPressed = true;
             }
 
@@ -212,6 +214,9 @@ namespace IcyMazeRunner.Klassen.Menüs
              //   SaveGameSprite.Texture = SaveGameSelectedTexture;
               
             }
+
+
+            Console.WriteLine(select); //Debug-Info -> kein output bei tastendruck?
             
             /* für später
              
@@ -256,12 +261,11 @@ namespace IcyMazeRunner.Klassen.Menüs
         {
             window.Draw(MenuBackgroundSprite);
             window.Draw(MenuHeaderSprite);
-            /*
             window.Draw(ContinueSprite);
             window.Draw(GoMainMenuSprite);
             window.Draw(ControlsSprite);
             window.Draw(LoadGameSprite);
-
+            /*
             für später
 
             window.Draw(SaveGameSelectedTexture);
