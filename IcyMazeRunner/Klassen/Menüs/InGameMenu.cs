@@ -162,7 +162,11 @@ namespace IcyMazeRunner.Klassen.Menüs
                 */
             }
 
+<<<<<<< HEAD
             if (select == 1 && select == -1)
+=======
+            if (select == 1 || select == -3)
+>>>>>>> d81db094aef203c58054b9c94120c1173d90ce3a
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
@@ -176,7 +180,11 @@ namespace IcyMazeRunner.Klassen.Menüs
                 
                 */
             }
+<<<<<<< HEAD
             if (select == 2 && select == -2)
+=======
+            if (select == 2 || select == -2)
+>>>>>>> d81db094aef203c58054b9c94120c1173d90ce3a
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
@@ -191,11 +199,19 @@ namespace IcyMazeRunner.Klassen.Menüs
             */
             }
 
+<<<<<<< HEAD
             
             
            
             
             if (select == 3 && select == -3)
+=======
+
+
+
+
+            if (select == 3 || select == -1)
+>>>>>>> d81db094aef203c58054b9c94120c1173d90ce3a
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;

@@ -15,6 +15,9 @@ Version 1.2.B011 (Chris):
 	- IngameMenu skalliert
 
 
+Version 1.2.B009c (Kilian):
+	- ingamemenu select gefixed
+
 Version 1.2.B009b (Kilian):
 	- Ingamemenü wird aktualisiert
 
