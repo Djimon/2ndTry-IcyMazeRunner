@@ -18,6 +18,9 @@ namespace IcyMazeRunner.Klassen
             public static uint windowSizeX = 1062; // auf 1280 zurückanpassen (ebenso die Screens des MainMenus, ControlScreen, Creditscreen
             public static uint windowSizeY = 720;
 
+        //  GlobalVariables.windowSizeX.SetX(1062);
+        //  GlobalVariables.windowSizeY.SetY(720);
+
             EGameStates currentGameState = EGameStates.mainMenu;
             EGameStates prevGameState;
 

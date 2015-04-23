@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IcyMazeRunner.Klassen;
 
 namespace IcyMazeRunner.Klassen.Menüs
 {
@@ -12,6 +13,9 @@ namespace IcyMazeRunner.Klassen.Menüs
     {
 
         View MenuView;
+        int test;
+
+        
 
         Texture MenuBackgroundTexture;
         Texture MenuHeaderTexture;
@@ -37,7 +41,7 @@ namespace IcyMazeRunner.Klassen.Menüs
         Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
 
 
-        Sprite ViewPosition;
+       
         Sprite MenuBackgroundSprite;
         Sprite MenuHeaderSprite;
         Sprite ContinueSprite;
@@ -71,6 +75,7 @@ namespace IcyMazeRunner.Klassen.Menüs
 
             MenuBackgroundTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/MenuBG.png");
             MenuHeaderTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
+        
 
 
             MenuBackgroundSprite = new Sprite(MenuBackgroundTexture);
@@ -83,57 +88,39 @@ namespace IcyMazeRunner.Klassen.Menüs
             SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
             
              */
+
+            MenuBackgroundSprite.Texture = MenuBackgroundTexture;
+            MenuHeaderSprite.Texture = MenuHeaderTexture;
+
+
             float scaleX = 0.9f;
             float scaleY = 0.9f;
-            float xCoord = Runner.getXPosition()-595;  // globale fensgtergrößen-vaiable?;
-            float yCoord = Runner.getYPosition() - 360;  // globale fensgtergrößen-vaiable?;
+            float xCoord = Runner.getXPosition()-595;  
+            float yCoord = Runner.getYPosition() - 360; 
+
            
-            MenuBackgroundSprite.Position = new Vector2f(xCoord, yCoord); // auf 460 anpassen, wenn Auflösung korrigiert
+            MenuBackgroundSprite.Position = new Vector2f(xCoord, yCoord); 
             MenuBackgroundSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            MenuHeaderSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
+            MenuHeaderSprite.Position = new Vector2f(xCoord, yCoord); 
             MenuHeaderSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            ContinueSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
+            ContinueSprite.Position = new Vector2f(xCoord, yCoord); 
             ContinueSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            GoMainMenuSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
+            GoMainMenuSprite.Position = new Vector2f(xCoord, yCoord); 
             GoMainMenuSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            ControlsSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
+            ControlsSprite.Position = new Vector2f(xCoord, yCoord);
             ControlsSprite.Scale = new Vector2f(scaleX, scaleY);
 
             //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
-            LoadGameSprite.Position = new Vector2f(xCoord, yCoord); // auf 489 anpassen, wenn Auflösung korrigiert
+            LoadGameSprite.Position = new Vector2f(xCoord, yCoord); 
             LoadGameSprite.Scale = new Vector2f(scaleX, scaleY);
 
-            /*
-            
-            alte Positionen
-            
-            MenuBackgroundSprite.Position = new Vector2f(351f, 120f); // auf 460 anpassen, wenn Auflösung korrigiert
-            MenuBackgroundSprite.Scale = new Vector2f(1f, 1f);
-
-            MenuHeaderSprite.Position = new Vector2f(380f, 134f); // auf 489 anpassen, wenn Auflösung korrigiert
-            MenuHeaderSprite.Scale = new Vector2f(1f, 1f);
-
-            ContinueSprite.Position = new Vector2f(380f, 211f); // auf 489 anpassen, wenn Auflösung korrigiert
-            ContinueSprite.Scale = new Vector2f(1f, 1f);
-
-            GoMainMenuSprite.Position = new Vector2f(380f, 288f); // auf 489 anpassen, wenn Auflösung korrigiert
-            GoMainMenuSprite.Scale = new Vector2f(1f, 1f);
-
-            ControlsSprite.Position = new Vector2f(380f, 357f); // auf 489 anpassen, wenn Auflösung korrigiert
-            ControlsSprite.Scale = new Vector2f(1f, 1f);
-
-            //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
-            LoadGameSprite.Position = new Vector2f(380f, 519f); // auf 489 anpassen, wenn Auflösung korrigiert
-            LoadGameSprite.Scale = new Vector2f(1f, 1f);
-            
-            */
             /* für später
-            SaveGameSprite.Position = new Vector2f(380f, 442f); // auf 489 anpassen, wenn Auflösung korrigiert
-            SaveGameSprite.Scale = new Vector2f(1f, 1f);
+            SaveGameSprite.Position = new Vector2f(xCoord, yCoord); 
+            SaveGameSprite.Scale = new Vector2f(scaleX, scaleY);
 
            
             */
@@ -175,7 +162,7 @@ namespace IcyMazeRunner.Klassen.Menüs
                 */
             }
 
-            if (select == 1)
+            if (select == 1 && select == -1)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
@@ -189,7 +176,7 @@ namespace IcyMazeRunner.Klassen.Menüs
                 
                 */
             }
-            if (select == 2)
+            if (select == 2 && select == -2)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
@@ -208,7 +195,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             
            
             
-            if (select == 3)
+            if (select == 3 && select == -3)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
@@ -233,8 +220,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             }
             */
 
-            MenuBackgroundSprite.Texture = MenuBackgroundTexture;
-            MenuHeaderSprite.Texture = MenuHeaderTexture;
+          
 
             // Update der Gamestates
 
