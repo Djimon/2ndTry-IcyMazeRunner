@@ -149,6 +149,11 @@ namespace IcyMazeRunner.Klassen
                 Runner.setIsPressed(true);
             }
 
+            if (menu != null)
+            {
+                menu.update();
+            }
+
             if (menu != null && menu.getCloseMenu())
             {
                 menu = null;
