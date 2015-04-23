@@ -172,7 +172,7 @@ namespace IcyMazeRunner.Klassen.Menüs
                 */
             }
 
-            if (select == 1)
+            if (select == 1 || select == -3)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
@@ -186,7 +186,7 @@ namespace IcyMazeRunner.Klassen.Menüs
                 
                 */
             }
-            if (select == 2)
+            if (select == 2 || select == -2)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
@@ -201,11 +201,11 @@ namespace IcyMazeRunner.Klassen.Menüs
             */
             }
 
-            
-            
-           
-            
-            if (select == 3)
+
+
+
+
+            if (select == 3 || select == -1)
             {
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
