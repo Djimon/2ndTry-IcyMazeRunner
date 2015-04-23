@@ -37,7 +37,7 @@ namespace IcyMazeRunner.Klassen.Menüs
         Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
 
 
-
+        Sprite ViewPosition;
         Sprite MenuBackgroundSprite;
         Sprite MenuHeaderSprite;
         Sprite ContinueSprite;
@@ -60,7 +60,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             return closeMenu;
         }
 
-        public InGameMenu()
+        public InGameMenu(Player Runner)
         {
             // Initialize menu attributes
             select = 2;
@@ -85,11 +85,9 @@ namespace IcyMazeRunner.Klassen.Menüs
              */
             float scaleX = 0.9f;
             float scaleY = 0.9f;
-            float xCoord = 0;  // -315;
-            float yCoord = 0;   //-250;  
-
-            MenuView = new View(new FloatRect(0, 0, 1062, 720));
-
+            float xCoord = Runner.getXPosition()-595;  // globale fensgtergrößen-vaiable?;
+            float yCoord = Runner.getYPosition() - 360;  // globale fensgtergrößen-vaiable?;
+           
             MenuBackgroundSprite.Position = new Vector2f(xCoord, yCoord); // auf 460 anpassen, wenn Auflösung korrigiert
             MenuBackgroundSprite.Scale = new Vector2f(scaleX, scaleY);
 
@@ -144,6 +142,7 @@ namespace IcyMazeRunner.Klassen.Menüs
         public EGameStates update()
         {
             // Menüsteuerung
+            
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
             {

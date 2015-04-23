@@ -76,8 +76,9 @@ namespace IcyMazeRunner.Klassen
 
             time = new GameTime();
             time.start();
-            view = new View(new FloatRect(0, 0, 1058, 718));  // 1% kleiner, als Original, um Side-glitches zu verhindern
-            
+            // globale fensgtergrößen-vaiable?;
+            view = new View(new FloatRect(0, 0, 1058, 718));  // 1% kleiner, als Original, um Side-glitches zu verhindern 
+
             backGround = new Sprite(new Texture("Texturen/Map/background.png"));
             backGround.Position = new Vector2f(0, 0);
 
@@ -146,7 +147,7 @@ namespace IcyMazeRunner.Klassen
 
             if (!Runner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
-                menu = new InGameMenu();
+                menu = new InGameMenu(Runner);
                 Runner.setIsPressed(true);
             }
 
@@ -190,13 +191,13 @@ namespace IcyMazeRunner.Klassen
 
             if (level == 15)
             {
-                view = new View(new FloatRect(0, 0, 1062, 720));
+                view = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
                 return EGameStates.gameWon;
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
             {
-                view=new View(new FloatRect(0, 0, 1062, 720));
+                view = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
                 return EGameStates.gameWon;
             }
 
@@ -204,8 +205,8 @@ namespace IcyMazeRunner.Klassen
             // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
-            backGround.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);
-            Fog_of_War.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);
+            backGround.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+            Fog_of_War.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
             view.Move(new Vector2f((Runner.getXPosition() + (Runner.getWidth() / 2)), (Runner.getYPosition() + (Runner.getHeigth() / 2))) - view.Center);
 
 
