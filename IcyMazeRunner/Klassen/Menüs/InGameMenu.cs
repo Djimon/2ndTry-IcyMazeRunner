@@ -11,6 +11,8 @@ namespace IcyMazeRunner.Klassen.Menüs
     class InGameMenu
     {
 
+        View MenuView;
+
         Texture MenuBackgroundTexture;
         Texture MenuHeaderTexture;
 
@@ -80,11 +82,13 @@ namespace IcyMazeRunner.Klassen.Menüs
             /*
             SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
             
-            */
+             */
             float scaleX = 0.9f;
             float scaleY = 0.9f;
-            float xCoord = -315;
-            float yCoord = -250;
+            float xCoord = 0;  // -315;
+            float yCoord = 0;   //-250;  
+
+            MenuView = new View(new FloatRect(0, 0, 1062, 720));
 
             MenuBackgroundSprite.Position = new Vector2f(xCoord, yCoord); // auf 460 anpassen, wenn Auflösung korrigiert
             MenuBackgroundSprite.Scale = new Vector2f(scaleX, scaleY);
