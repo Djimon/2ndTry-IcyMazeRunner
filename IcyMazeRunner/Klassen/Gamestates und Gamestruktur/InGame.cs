@@ -76,13 +76,14 @@ namespace IcyMazeRunner.Klassen
 
             time = new GameTime();
             time.start();
-            view = new View(new FloatRect(0, 0, 1062, 720));
+            view = new View(new FloatRect(0, 0, 1058, 718));  // 1% kleiner, als Original, um Side-glitches zu verhindern
             
             backGround = new Sprite(new Texture("Texturen/Map/background.png"));
             backGround.Position = new Vector2f(0, 0);
 
             Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
-            Fog_of_War.Position = new Vector2f(-5, -5);
+            Fog_of_War.Position = new Vector2f(-1,-1);
+           
 
             setTypeOfDeath(0);
             isDeathAnimationOver=false;
