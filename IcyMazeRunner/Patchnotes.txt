@@ -6,8 +6,14 @@ Version 1.2.B010
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+<<<<<<< HEAD
 Version 1.2.B011 (Chris):
 	- Fog-of-war glitch entfernt
+=======
+
+Version 1.2.B009b (Kilian):
+	- Ingamemenü wird aktualisiert
+>>>>>>> 7bd68a4eabdd362aeb69907cbf1e8dc892961ec3
 
 Version 1.2.B009 (Chris):
 	- Menügrafik skalliert

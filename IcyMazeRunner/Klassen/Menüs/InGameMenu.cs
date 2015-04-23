@@ -141,7 +141,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             */
         }
 
-        public EGameStates update(GameTime time)
+        public EGameStates update()
         {
             // Menüsteuerung
 
@@ -214,7 +214,7 @@ namespace IcyMazeRunner.Klassen.Menüs
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
                 ControlsSprite.Texture = ControlsNotSelectedTexture;
-                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                LoadGameSprite.Texture = LoadGameSelectedTexture;
              //   SaveGameSprite.Texture = SaveGameSelectedTexture;
               
             }
@@ -229,8 +229,8 @@ namespace IcyMazeRunner.Klassen.Menüs
                 ContinueSprite.Texture = ContinueNotSelectedTexture;
                 GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
                 ControlsSprite.Texture = ControlsNotSelectedTexture;
-                SaveGameSprite.Texture = SaveGameNotSelectedTexture;
-                LoadGameSprite.Texture = LoadGameSelectedTexture;
+                SaveGameSprite.Texture = SaveGameSelectedTexture;
+                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
             }
             */
 
