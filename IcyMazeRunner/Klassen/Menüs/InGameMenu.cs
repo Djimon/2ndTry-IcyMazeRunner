@@ -241,11 +241,11 @@ namespace IcyMazeRunner.Klassen.Menüs
 
             if (select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 setCloseMenu(true);
-            if (select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if ((select == 1 || select == -3) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.mainMenu;
-            if (select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if ((select == 2 || select == -2) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.controls;
-            if (select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))  //Platzhalter Map auswahl
+            if ((select == 3 || select == -1) && Keyboard.IsKeyPressed(Keyboard.Key.Return))  //Platzhalter Map auswahl
                 return EGameStates.mainMenu;
 
             /*

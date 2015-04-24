@@ -1,85 +1,110 @@
-Version 1.2.A012
-°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-				Versionsänderungen:
+ï»¿Version 1.2.B013
+Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°
+				VersionsÃ¤nderungen:
 /*
 1.y  = Update y
 y.B00x = Beta Build 00x
-y.00x  = komplett lauffähige Version 00x
+y.00x  = komplett lauffÃ¤hige Version 00x
 */
 
+Version 1.2.B013 (Kilian):
+	- Map_Level2 eingefÃ¼gt
+	- InGame-MenÃ¼ausfÃ¼hrung gefixed (InGameMenu.update() hat zwar EGameStates returnt, aber das Ergebnis des Methodenaufrufs wurde nicht in
+	  InGame returnt, wo die eigentliche Aktualisierung der GameStates stattfindet)
+	- neue Klasse: NextLevel erstellt
+	- neue Textdatei: Ãœbersicht fehlender Texturen/Animationen
+	- externe Tabelle in den Ordnern zum Speichern levelabhÃ¤ngiger Variablen in einer Ãœbersicht erstellt
+
 Version 1.2.A012 (Chris):
-	- GlobalVariables (für Fenstergröße) initialisiert
+	- GlobalVariables (fÃ¼r FenstergrÃ¶ÃŸe) initialisiert
+
 
 Version 1.2.B011 (Chris):
 	- Fog-of-war glitch entfernt
-	- IngameMenu skalliert
+	- IngameMenu skaliert
 
 
 Version 1.2.B009c (Kilian):
 	- ingamemenu select gefixed
 
+
 Version 1.2.B009b (Kilian):
-	- Ingamemenü wird aktualisiert
+	- IngamemenÃ¼ wird aktualisiert
+
 
 Version 1.2.B009 (Chris):
-	- Menügrafik skalliert
-	- für variable "select" ein Console-output hinzugefügt, für Menü-Tests
+	- MenÃ¼grafik skalliert
+	- fÃ¼r variable "select" ein Console-output hinzugefÃ¼gt, fÃ¼r MenÃ¼-Tests
+
 
 Version 1.2.B008 (Kilian):
-	- Aufruf des IngameMenüs in Ingame eingefügt
-	- Schließen des Menüs möglich
+	- Aufruf des IngameMenÃ¼s in Ingame eingefÃ¼gt
+	- SchlieÃŸen des MenÃ¼s mÃ¶glich
 
 
 Version 1.2.B007 (Chris):
-	- InGame Menu überarbeitet, Grafiken hinzugefügt
+	- InGame Menu Ã¼berarbeitet, Grafiken hinzugefÃ¼gt
+
 
 Version 1.2.B006 (Kilian):
 	- InGame Menu bearbeitet, so gut wie fertig
 
+
 Version 1.2.B005 (Kilian):
-	- Map-Bitmap Tutorial mit horizontalen Walltexturen überarbeiten
+	- Map-Bitmap Tutorial mit horizontalen Walltexturen Ã¼berarbeiten
+
 
 Version 1.2.B004e (Kilian):
 	- level ist jetzt static
 	- Patchnotes durchgearbeitet
 
+
 Version 1.2.B004d (Kilian):
 	- Kollision mit Loch im Boden gefixed
+
 
 Version 1.2.B004c (Kilian):
 	- Teilkorrektur an Kollision mit Loch im Boden
 
+
 Version 1.2.B004b (Kilian):
-	- Fallanimation gefixed (Textur änderte sich nur alle 500 Millisekunden statt bei jedem Durchlauf)
+	- Fallanimation gefixed (Textur Ã¤nderte sich nur alle 500 Millisekunden statt bei jedem Durchlauf)
+
 
 Version 1.2.B004 (Kilian):
 	- Loch-im-Boden-Block erstellt
-	- Loch-im-Boden in Map hinzugefügt
-	- HP für Spieler erstellt
+	- Loch-im-Boden in Map hinzugefÃ¼gt
+	- HP fÃ¼r Spieler erstellt
 	- Kollision mit Loch erstellt, noch Fehlermeldung vorhanden
-	- Fallanimation (Platzhalter) eingefügt
-	- Level wird anschließend um 1 gesenkt
-	- GameOver eingefügt
+	- Fallanimation (Platzhalter) eingefÃ¼gt
+	- Level wird anschlieÃŸend um 1 gesenkt
+	- GameOver eingefÃ¼gt
 	- ToDos aktualisiert
+
 
 Version 1.2.B003 (Kilian):
 	- InGameMenu begonnen(Platzhaltertexturen und Sprites erstellt)
-	- Platzhaltertexturen für Fallanimation geladen
+	- Platzhaltertexturen fÃ¼r Fallanimation geladen
+
 
 Version 1.2.B002 (Kilian):
-	- Getter und Setter für Blocksize
-	- neues Integer für Todesstatus und Todesart
-	- Getter und Setter für dieses Integer
+	- Getter und Setter fÃ¼r Blocksize
+	- neues Integer fÃ¼r Todesstatus und Todesart
+	- Getter und Setter fÃ¼r dieses Integer
 	- Integer initialisiert
+
 
 Version 1.2.B001 (Kilian):
 	- Sommerthema aus den Einstellungen entfernt
 
+
 Version 1.1.004a (Chris):
-	- kleiner Vorschlag für schönere Optik der Mauerteile
+	- kleiner Vorschlag fÃ¼r schÃ¶nere Optik der Mauerteile
+
 
 Version 1.1.004 (Kilian):
 	- Gamestate GameOver implementiert
+
 
 Version 1.1.003 (Chris):
 	- Implementierung collision (InGame)
@@ -87,119 +112,125 @@ Version 1.1.003 (Chris):
 	- Fog_of_War.png gefixed und versetzt
 	- Formatierung der Patchnotes
 
+
 Version 1.1.002 (Kilian):
 	- ToDo-Liste und Patchnotes wurden angelegt.
-	- Die Fokusierung des Fensters auf den Spieler 	verursachte Probleme bei dem Wechsel in andere 	Spielzustände wie Gewonnen oder Menü. Dies wurde nun behoben.
+	- Die Fokusierung des Fensters auf den Spieler 	verursachte Probleme bei dem Wechsel in andere 	SpielzustÃ¤nde wie Gewonnen oder MenÃ¼. Dies wurde nun behoben.
+
 
 Version 1.1.001(Chris):
 	- Das Ziel hat nun eine Treppentextur.
 	- Hintergrundmusik wurde implementiert.
 
 
-°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°
 
 Zeitplan:
 
 https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spielkomponenten--funktionen--strukturen-und-%C3%84nderungen
 
-°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°
 				erledigte To-DO's:
 
 
-	- Abdunklungstextur etwas vergrößern(und Position nicht ganz bei 0,0, sondern etwas im Negativbereich), bei Richtungsswechsel sind an den Rändern wieder die die Oberflächen zu sehen.
+	- Abdunklungstextur etwas vergrÃ¶ÃŸern(und Position nicht ganz bei 0,0, sondern etwas im Negativbereich), bei Richtungsswechsel sind an den RÃ¤ndern wieder die die OberflÃ¤chen zu sehen.
 	- Kollision mit Loch fixen
 	- Player.update() anpassen, sodass bei Spielerleben == 0 GameOver-GameState returned wird
-	- Map-Bitmaps mit horizontalen Walltexturen überarbeiten
+	- Map-Bitmaps mit horizontalen Walltexturen Ã¼berarbeiten
+	- LÃ¶cher im Boden
+	- Textur vom Fog of War leicht vergrÃ¶ÃŸern (auÃŸen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth
 
 
-°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°
 					To-Do:
 
 
 Wichtiges/Fixes:
  
-	- Textur vom Fog of War leicht vergrößern (außen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth
-	- GameState nächstes Level
-	- Platzhalter für InGameMenü und Fallanimation und die Löcher im Boden ersetzen
-	- levelabhängige Attribute (Position, Map) besser strukturieren, anzeigen und Übersicht erstellen(Tabelle?)
-	- Map 2 horizontale Wallstrukturen einbauen
+	- GameState nÃ¤chstes Level
+	- Platzhalter fÃ¼r InGameMenÃ¼ und Fallanimation und die LÃ¶cher im Boden ersetzen
+	- levelabhÃ¤ngige Attribute (Position, Map) besser strukturieren, anzeigen und Ãœbersicht erstellen(Tabelle?)
+	- neue Maps
+	- Anpassung der Seitenaufrufe vom InGameMenÃ¼ aus
+	- NextLevel-Screen erstellen und EinfÃ¼gen
+	- Textdatei fÃ¼r einheitliche Bezeichnung wiederholender Dateien (Mapnamen, Animationen u.Ã„.)
 
 Diskussionsthemen:
-	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
-	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten läuft es so ab: Leben=0--> Deathwatch startet und 
-	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich überschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]
-	- Patchnotes-Zusammenfassung von Menü aus zugreifbar? Scrollbare Dialogbox
-	- Item, das die Teile der Map abspeichert, durch die man gelaufen ist und sich am Ende des Levels selbst zerstört. Map muss in jedem Level gefunden werden?
-	- Fallanimation für alle 4 Richtungen?
+	- Soll es mÃ¶glich sein, dass man, wÃ¤hrend die Sterbeanimation noch lÃ¤uft (5 Sekunden oder so), sein Leben wieder auf Ã¼ber 0 erhÃ¶hen kann (mit Heiltrank o.Ã„.) 
+	  und damit den Tod noch abwenden kann? GameTime DeathWatch wird dann gestoppt und resetted. (ansonsten lÃ¤uft es so ab: Leben=0--> Deathwatch startet und 
+	  Sterbeanimation beginnt, Sterbeanimation endet zeitgleich Ã¼berschreitet Deathwatch eine bestimmte Zeit und dann wird GameOver-GameState returned) [--> rewind?]
+	- Patchnotes-Zusammenfassung von MenÃ¼ aus zugreifbar? Scrollbare Dialogbox
+	- Item, das die Teile der Map abspeichert, durch die man gelaufen ist und sich am Ende des Levels selbst zerstÃ¶rt. Map muss in jedem Level gefunden werden?
+	- Fallanimation fÃ¼r alle 4 Richtungen?
 
 Features:
 	- Fallen:
 		- Falle als Abstrakte Klasse anlegen (fertig)
 		- move, Kollision, Schaden als Methoden (fertig)
-		- verschiedene Typen von Fallen als Unterklassen anlegen (Pfeile, Dornen im Boden, Feuer und Ähnliches) (teilweise fertig):
-			- Arrowtrap: Pfeile fliegen in Richtung des Auslösers/Spielers (sofort tödlich)
-			- Thorntrap: Dornen ragen aus dem Boden, bleiben an ihrer Position, machen einmal Schaden (nicht tödlich)
-			- rollende Baumstämme: ähnlich den Pfeilen, jedoch maximale Reichweite inbegriffen (Pfeile fliegen bis zur nächsten Wand) (nicht 
-			- Flammenwerfer, der den Durchgang für eine bestimmte Zeit blockiert, ähnlich wie die Dornen 
-			  (eventuell einer von ihnen direkt tödlich, der andere erst nach mehrmaligen Drüberlaufen bzw. mehreren Sekunden innerhalb des
+		- verschiedene Typen von Fallen als Unterklassen anlegen (Pfeile, Dornen im Boden, Feuer und Ã„hnliches) (teilweise fertig):
+			- Arrowtrap: Pfeile fliegen in Richtung des AuslÃ¶sers/Spielers (sofort tÃ¶dlich)
+			- Thorntrap: Dornen ragen aus dem Boden, bleiben an ihrer Position, machen einmal Schaden (nicht tÃ¶dlich)
+			- rollende BaumstÃ¤mme: Ã¤hnlich den Pfeilen, jedoch maximale Reichweite inbegriffen (Pfeile fliegen bis zur nÃ¤chsten Wand) (nicht 
+			- Flammenwerfer, der den Durchgang fÃ¼r eine bestimmte Zeit blockiert, Ã¤hnlich wie die Dornen 
+			  (eventuell einer von ihnen direkt tÃ¶dlich, der andere erst nach mehrmaligen DrÃ¼berlaufen bzw. mehreren Sekunden innerhalb des
 			   Schadensbereiches. Also Geduldsfrage. Problem entsteht, wenn man von Gegnern dabei verfolgt wird und entweder durchlaufen muss
 			   oder sich den Gegnern stellen muss)
 			- Schlingfalle: Spieler kann sich nicht bewegen, aber verteidigen/angreifen (macht erst mit Gegnern Sinn)
-			- Stolperfalle: wie Schlingfalle, aber Spieler ist betäubt--> kann sich nicht verteidigen oder blocken.
-			- Falle löst Überflutung eines Teilgebietes aus, um Gang wieder passierbar zu machen,
-			  muss man einen sichtbaren Hebel bedienen, der das Wasser in einem Abfluss Feld für Feld aus dem Gang abfließen lässt.
-			  Ist der Abfluss jedoch zu lange offen, ohne das Wasser abfließt, kommen Schlangen oder andere
-			  Kreaturen aus dem Abfluss und können den Spieler attackieren...
+			- Stolperfalle: wie Schlingfalle, aber Spieler ist betÃ¤ubt--> kann sich nicht verteidigen oder blocken.
+			- Falle lÃ¶st Ãœberflutung eines Teilgebietes aus, um Gang wieder passierbar zu machen,
+			  muss man einen sichtbaren Hebel bedienen, der das Wasser in einem Abfluss Feld fÃ¼r Feld aus dem Gang abflieÃŸen lÃ¤sst.
+			  Ist der Abfluss jedoch zu lange offen, ohne das Wasser abflieÃŸt, kommen Schlangen oder andere
+			  Kreaturen aus dem Abfluss und kÃ¶nnen den Spieler attackieren...
 
 		- ObjectHandler
-		- Lebensanzeige + Variable mit Leben des Spielers einführen
-		- Button zum Auslösen der Fallen (teilweise fertig)
+		- Lebensanzeige + Variable mit Leben des Spielers einfÃ¼hren
+		- Button zum AuslÃ¶sen der Fallen (teilweise fertig)
 	 - Gegner:
 		- Abstrakte Gegnerklasse
 		- move, Kollision, Schaden(, Verteidigung), Leben  als Methoden/Variablen
-		- verschiedene Typen von Gegnern (verschieden starke/schnelle/verteidigende Gegner, manche in Gruppen mit schwacheren Werten etc., eventuell Fernkämpfer)
+		- verschiedene Typen von Gegnern (verschieden starke/schnelle/verteidigende Gegner, manche in Gruppen mit schwacheren Werten etc., eventuell FernkÃ¤mpfer)
 		- EnemyHandler
-		- Lebensbalken über den Gegnern
-		- Auslösen der KI der Gegner, dass sie erst auf einen zurennen, wenn man sie sieht.
+		- Lebensbalken Ã¼ber den Gegnern
+		- AuslÃ¶sen der KI der Gegner, dass sie erst auf einen zurennen, wenn man sie sieht.
 	- Bewegliche Mauern:
 		- Klasse Moveable_Wall
-		- Move-Methode, Status/Positions-Abspeicherung, Auslöser-Methode (Kollision) für Bewegen der Mauern
-		- Klasse Button zum Auslösen der Bewegung
+		- Move-Methode, Status/Positions-Abspeicherung, AuslÃ¶ser-Methode (Kollision) fÃ¼r Bewegen der Mauern
+		- Klasse Button zum AuslÃ¶sen der Bewegung
 	- Inventar
 		
 Texturen:
-	- Texturen für Objekte, Leben, Auslöser (relativ unauffällig, aber zu erkennen) etc.
- 	- Texturen (jede Menge) für verschiedene Gegner, Animationen, Schläge, Tod etc.
-	- Texturen für die Bewegung der Mauern(Mauern in Standposition die gleichen wie normale Mauern?) und für den Auslöser?(entweder gleiche Textur wie Boden oder minimal anders, also unauffällig)
-	- Spielmenü zum Wechseln in die Steuerungsübersicht/Hauptmenü
-	- (Allgemein Menü/Startmenü Re-Disgn? Ideen vorhanden )
+	- Texturen fÃ¼r Objekte, Leben, AuslÃ¶ser (relativ unauffÃ¤llig, aber zu erkennen) etc.
+ 	- Texturen (jede Menge) fÃ¼r verschiedene Gegner, Animationen, SchlÃ¤ge, Tod etc.
+	- Texturen fÃ¼r die Bewegung der Mauern(Mauern in Standposition die gleichen wie normale Mauern?) und fÃ¼r den AuslÃ¶ser?(entweder gleiche Textur wie Boden oder minimal anders, also unauffÃ¤llig)
+	- SpielmenÃ¼ zum Wechseln in die SteuerungsÃ¼bersicht/HauptmenÃ¼
+	- (Allgemein MenÃ¼/StartmenÃ¼ Re-Disgn? Ideen vorhanden )
 	- Sterbeanimation (in alle 4 Richtungen)
 
 
-°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°
 				geplanter Content
 
 
-	- seltene besonders schwere Gegner droppen Gegenstände 	wie Heiltrank, Geschwindigkeitsbuff, zeitliche 	Unsterblichkeit, zeitlichen Schutzschild
-	oder Ähnliches, die man in einem Inventar mit sich führen kann und dann benutzen kann.
+	- seltene besonders schwere Gegner droppen GegenstÃ¤nde 	wie Heiltrank, Geschwindigkeitsbuff, zeitliche 	Unsterblichkeit, zeitlichen Schutzschild
+	oder Ã„hnliches, die man in einem Inventar mit sich fÃ¼hren kann und dann benutzen kann.
 	- HighScore mit der schnellsten Zeit?
-	- Rätsel: a la Steine verschieben, Schalter(Klänge) in 	richtiger Reihenfolge, Kombinatorische Knobeleien (minigames)
-	- InGame-Menü mit 2. Controlmenü, Möglichkeit zum Hauptmenü zurückzukehren und Abbrechen - Spiel ist in der Zeit pausiert (if-Abfrage in der Update, wenn eines der Fenster offen ist, wird nicht geupdated)
-	- Txt-Datei, die die Handlung erklärt oder später mit kleinem Intro-Video (Zeichnungen, mit UNtertiteln unterlegt, in die hinein oder hinausgezoomt wird bzw. die Sicht geht entlang des Bildes)
-	- Speicherstände (welche Informationen müssen gespeichert werden? Position, Objecthandler, Level u.Ä.)
+	- RÃ¤tsel: a la Steine verschieben, Schalter(KlÃ¤nge) in 	richtiger Reihenfolge, Kombinatorische Knobeleien (minigames)
+	- InGame-MenÃ¼ mit 2. ControlmenÃ¼, MÃ¶glichkeit zum HauptmenÃ¼ zurÃ¼ckzukehren und Abbrechen - Spiel ist in der Zeit pausiert (if-Abfrage in der Update, wenn eines der Fenster offen ist, wird nicht geupdated)
+	- Txt-Datei, die die Handlung erklÃ¤rt oder spÃ¤ter mit kleinem Intro-Video (Zeichnungen, mit UNtertiteln unterlegt, in die hinein oder hinausgezoomt wird bzw. die Sicht geht entlang des Bildes)
+	- SpeicherstÃ¤nde (welche Informationen mÃ¼ssen gespeichert werden? Position, Objecthandler, Level u.Ã„.)
 	- Gegner: 	
 			Gegnertypen:
-			- normale Nahkämpfer: etwas langsamer als Spieler, mittlere Gesundheit/Angriffs- und Verteidigungswerte
-			- schnelle Nahkämpfer: schneller als Spieler, niedrige Gesundheit, mittlerer Angriff, schwache Verteidigung
-			- zahlreiche Nahkämpfer: treten nicht einzeln, sondern in Gruppen auf, gleiche Geschwindigkeit wie Spieler, sehr niedrige Gesundheit und schwache Verteidigung, schwacher Angriff der in
-				Kombination, d.h. Anzahl der Gegner aber gefährlich werden kann
-			- Fernkämpfer: leicht schneller als Spieler, verbraucht aber Zeit mit stehenbleiben, um zu schießen, ansonsten mittlere Werte
-			- Fernkämpfer auf kurzer Distanz: ähnlich wie Fernkämpfer, kann aber nicht soweit schießen, hat aber größeren Schaden und etwas bessere Verteidigung
-			- Nahkämpfer mit hoher Verteidigung: wie normale Nahkämpfer, Verteidigung aber erhöht und etwas langsamer
-			- Bossgegner: hohe Verteidigung, gleich schnell wie Spieler, leicht erhöhte Angriffswerte, größeres Leben als andere Gegner, (müssen eventuell angegriffen werden, damit sie angreifen)
-			einiges später erst: - Buffgegner, die Gegner der Spielers in seiner Nähe buffen kann, d.h. healen/Schaden erhöhen/schneller machen
+			- normale NahkÃ¤mpfer: etwas langsamer als Spieler, mittlere Gesundheit/Angriffs- und Verteidigungswerte
+			- schnelle NahkÃ¤mpfer: schneller als Spieler, niedrige Gesundheit, mittlerer Angriff, schwache Verteidigung
+			- zahlreiche NahkÃ¤mpfer: treten nicht einzeln, sondern in Gruppen auf, gleiche Geschwindigkeit wie Spieler, sehr niedrige Gesundheit und schwache Verteidigung, schwacher Angriff der in
+				Kombination, d.h. Anzahl der Gegner aber gefÃ¤hrlich werden kann
+			- FernkÃ¤mpfer: leicht schneller als Spieler, verbraucht aber Zeit mit stehenbleiben, um zu schieÃŸen, ansonsten mittlere Werte
+			- FernkÃ¤mpfer auf kurzer Distanz: Ã¤hnlich wie FernkÃ¤mpfer, kann aber nicht soweit schieÃŸen, hat aber grÃ¶ÃŸeren Schaden und etwas bessere Verteidigung
+			- NahkÃ¤mpfer mit hoher Verteidigung: wie normale NahkÃ¤mpfer, Verteidigung aber erhÃ¶ht und etwas langsamer
+			- Bossgegner: hohe Verteidigung, gleich schnell wie Spieler, leicht erhÃ¶hte Angriffswerte, grÃ¶ÃŸeres Leben als andere Gegner, (mÃ¼ssen eventuell angegriffen werden, damit sie angreifen)
+			einiges spÃ¤ter erst: - Buffgegner, die Gegner der Spielers in seiner NÃ¤he buffen kann, d.h. healen/Schaden erhÃ¶hen/schneller machen
 			
-			ordentliche KI für Gegner, beispielsweise in folgender Situation (P-Spieler, E Gegner):
+			ordentliche KI fÃ¼r Gegner, beispielsweise in folgender Situation (P-Spieler, E Gegner):
 
 
 
@@ -213,6 +244,6 @@ Texturen:
 			bewegt, also Umgebung wahrnimmt bzw. im Wissen der Umgebung handelt
 
 
-	- Menüupdate
+	- MenÃ¼update
 	- schwarzer Bildschirm (Gift)
-	- Löcher im Boden
+

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\NextLevel.cs" />
     <Compile Include="Klassen\GlobalVariables.cs" />
     <Compile Include="Klassen\Menüs\Controls.cs" />
     <Compile Include="Klassen\Menüs\Credits.cs" />
@@ -96,6 +97,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Patchnotes.txt" />
+    <Content Include="Texturen\Fehlende Texturen und Animationen.txt" />
     <Content Include="Texturen\Map\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -109,9 +111,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\Map_1.bmp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Texturen\Map\Map_2.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\Map_test.bmp">

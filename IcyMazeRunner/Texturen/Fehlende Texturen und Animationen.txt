@@ -1,0 +1,10 @@
+﻿Texturen:
+- Screen Next Level
+- Loch im Boden
+- (Hauptmenü Redesign)
+
+
+
+Animationen:
+- Fallanimation (4 Richtungen, je 8 Texturen)
+- Sterbeanimation (4 Richtungen, je mind. 8 Texturen)

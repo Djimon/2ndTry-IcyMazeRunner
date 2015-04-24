@@ -125,7 +125,7 @@ namespace IcyMazeRunner.Klassen
                     break;
                     
                 case 2:
-                    mapOfBits = new Bitmap("Texturen/Map_2.bmp");
+                   // mapOfBits = new Bitmap("Texturen/Map_2.bmp"); alt
                     map = new Map(mapOfBits);
                     Runner = new Player(new Vector2f(2263,3336), map);
                     break;
@@ -153,7 +153,7 @@ namespace IcyMazeRunner.Klassen
 
             if (menu != null)
             {
-                menu.update();
+                return menu.update();
             }
 
             if (menu != null && menu.getCloseMenu())
@@ -185,8 +185,8 @@ namespace IcyMazeRunner.Klassen
             if (level != level) // Kollision mit Treppe= true
             {
                 level++;
-                Program.game.handleGameState();
-                return EGameStates.inGame;
+                Program.game.handleGameState(); //wieso?
+                return EGameStates.NextLevel;
             }
 
             if (level == 15)
