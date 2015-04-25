@@ -9,17 +9,23 @@ using System.Threading.Tasks;
 namespace IcyMazeRunner.Klassen
 {
     class Credits : GameStates
+
+        /* ~~~~ Screen anlegen ~~~~*/
     {
         Texture creditsTex;
         Sprite credits;
 
-        
+
+
+        /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
             credits = new Sprite(creditsTex);
             credits.Position = new Vector2f(0, 0);
         }
 
+
+        /* ~~~~ Screen laden ~~~~*/
         public void loadContent()
         {
             
@@ -27,6 +33,8 @@ namespace IcyMazeRunner.Klassen
             
         }
 
+
+        /* ~~~~ Screen aktualisieren ~~~~*/
         public EGameStates update(GameTime time)
         {
             credits.Texture = creditsTex;
@@ -44,6 +52,8 @@ namespace IcyMazeRunner.Klassen
             }
             return EGameStates.credits;
         }
+
+        /* ~~~~ Draw ~~~~ */
 
         public void draw(RenderWindow win)
         {

@@ -10,16 +10,20 @@ namespace IcyMazeRunner.Klassen
 {
     class Controls : GameStates
     {
+
+        /* ~~~~ Screen anlegen ~~~~*/
         Texture controlsTex;
         Sprite controls;
-        
 
+
+        /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
             controls = new Sprite(controlsTex);
             controls.Position = new Vector2f(0, 0);
         }
 
+        /* ~~~~ Screen laden ~~~~*/
         public void loadContent()
         {
             
@@ -27,19 +31,16 @@ namespace IcyMazeRunner.Klassen
             
         }
 
+
+        /* ~~~~ Screen aktualisieren ~~~~*/
         public EGameStates update(GameTime time)
         {
 
           
             controls.Texture = controlsTex;
-            
 
-            // Steuerungselement
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Space)) 
-            {
-                return EGameStates.controls;
-            }
+            // Update der Gamestates
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape) ) 
             {
@@ -50,6 +51,7 @@ namespace IcyMazeRunner.Klassen
             
         }
 
+        /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
             win.Draw(controls);

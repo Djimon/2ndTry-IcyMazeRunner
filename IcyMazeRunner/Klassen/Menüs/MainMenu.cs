@@ -11,6 +11,8 @@ namespace IcyMazeRunner.Klassen
     class MainMenu : GameStates
     {
 
+        /* ~~~~ Variablen für Menüsteuerung ~~~~*/
+
         int x;
         bool isPressed;
 
@@ -18,17 +20,24 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Texturen anlegen ~~~~*/
         Texture CreditsNotSelected;
         Texture CreditsSelected;
+
         Texture ExitNotSelected;
         Texture ExitSelected;
+
         Texture StartNotSelected;
         Texture StartSelected;
+
         Texture ControlsNotSelected;
         Texture ControlsSelected;
+
+        /* ~~~~ Sprites anlegen ~~~~*/
 
         Sprite Start;
         Sprite Credits;
         Sprite Exit;
         Sprite Controls;
+
+        /* ~~~~ Hintergrund anlegen ~~~~*/
 
         Texture backGroundTex;
         Sprite backGround;
@@ -39,30 +48,32 @@ namespace IcyMazeRunner.Klassen
         {
             x = 0;
             isPressed = false;
+
             Start = new Sprite(StartNotSelected);
             Start.Scale = new Vector2f(1f, 1f);
             Start.Position = new Vector2f(0, 0);
+
             Credits = new Sprite(CreditsNotSelected);
             Credits.Position = new Vector2f(0, 0);
             Credits.Scale = new Vector2f(1f, 1f);
+
             Exit = new Sprite(ExitNotSelected);
             Exit.Position = new Vector2f(0, 0);
             Exit.Scale = new Vector2f(1f, 1f);
+
             Controls = new Sprite(ControlsNotSelected);
             Controls.Position = new Vector2f(0, 0);
             Controls.Scale = new Vector2f(1f, 1f);
 
             backGround = new Sprite(backGroundTex);
             backGround.Position = new Vector2f(0, 0);
+            backGround.Scale = new Vector2f(1f, 1f);
         }
 
 
         /* ~~~~ Laden des Inhalts ~~~~ */
         public void loadContent()
-        {
-
-            // Menüauswahltexturen sind für beide Themen die Gleiche
-                        
+        {                        
                 CreditsNotSelected = new Texture("Texturen/Menü+Anzeigen/credits.png");
                 CreditsSelected = new Texture("Texturen/Menü+Anzeigen/credits_s.png");
                 ExitNotSelected = new Texture("Texturen/Menü+Anzeigen/quit.png");
@@ -71,7 +82,6 @@ namespace IcyMazeRunner.Klassen
                 StartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
                 ControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
                 ControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
-
           
                 backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel.png");
             
@@ -100,34 +110,44 @@ namespace IcyMazeRunner.Klassen
 
             // Menüzustände
 
-            if (x == 0)
-            {
-                Start.Texture = StartSelected;
-                Controls.Texture = ControlsNotSelected;
-                Credits.Texture = CreditsNotSelected;
-                Exit.Texture = ExitNotSelected;
-            }
 
-            if (x == 1)
+            switch (x)
             {
-                Start.Texture = StartNotSelected;
-                Controls.Texture = ControlsSelected;
-                Credits.Texture = CreditsNotSelected;
-                Exit.Texture = ExitNotSelected;
-            }
-            if (x == 2)
-            {
-                Start.Texture = StartNotSelected;
-                Controls.Texture = ControlsNotSelected;
-                Credits.Texture = CreditsSelected;
-                Exit.Texture = ExitNotSelected;
-            }                
-            if (x == 3)
-            {
-                Start.Texture = StartNotSelected;
-                Controls.Texture = ControlsNotSelected;
-                Credits.Texture = CreditsNotSelected;
-                Exit.Texture = ExitSelected;
+                case 0:
+                    {
+                        Start.Texture = StartSelected;
+                        Controls.Texture = ControlsNotSelected;
+                        Credits.Texture = CreditsNotSelected;
+                        Exit.Texture = ExitNotSelected;
+                        break;
+                    }
+
+                case 1:
+                    {
+                        Start.Texture = StartNotSelected;
+                        Controls.Texture = ControlsSelected;
+                        Credits.Texture = CreditsNotSelected;
+                        Exit.Texture = ExitNotSelected;
+                        break;
+                    }
+
+                case 2:
+                    {
+                        Start.Texture = StartNotSelected;
+                        Controls.Texture = ControlsNotSelected;
+                        Credits.Texture = CreditsSelected;
+                        Exit.Texture = ExitNotSelected;
+                        break;
+                    }
+
+                case 3:
+                    {
+                        Start.Texture = StartNotSelected;
+                        Controls.Texture = ControlsNotSelected;
+                        Credits.Texture = CreditsNotSelected;
+                        Exit.Texture = ExitSelected;
+                        break;
+                    }
             }
 
             backGround.Texture = backGroundTex;
