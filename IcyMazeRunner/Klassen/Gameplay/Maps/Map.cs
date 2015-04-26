@@ -23,7 +23,7 @@ namespace IcyMazeRunner.Klassen
         // orange "FF8000" = Loch im Boden (255 Rot, 128 Grün, 0 Blau)
 
         Blocks[,] map;
-        Texture blockTex;
+        Texture txBlock;
 
         /* ~~~~ Draw ~~~~ */
         private bool walkable;
@@ -55,17 +55,17 @@ namespace IcyMazeRunner.Klassen
             {
                 for (int col = 0; col < map.GetLength(1); col++)
                 {
-                    blockTex = new Texture("Texturen/Map/way-clean.png");
+                    txBlock = new Texture("Texturen/Map/way-clean.png");
 
                     if (mask.GetPixel(row, col).Name == white)
                     {
-                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == black)
                     {
-                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = false;
                     }
 
@@ -73,7 +73,7 @@ namespace IcyMazeRunner.Klassen
                     //mauertest
                     if (mask.GetPixel(row, col).Name == grey)
                     {
-                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = false;
                     }
 
@@ -81,25 +81,25 @@ namespace IcyMazeRunner.Klassen
 
                     if (mask.GetPixel(row, col).Name == red)
                     {
-                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = false;
                     }
 
                     if (mask.GetPixel(row, col).Name == green)
                     {
-                        map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == blue)
                     {
-                        map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == orange)
                     {
-                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), blockTex);
+                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
                         walkable = true;
                     }
 

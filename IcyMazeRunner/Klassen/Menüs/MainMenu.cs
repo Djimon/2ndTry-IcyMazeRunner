@@ -18,29 +18,29 @@ namespace IcyMazeRunner.Klassen
 
 
         /* ~~~~ Texturen anlegen ~~~~*/
-        Texture CreditsNotSelected;
-        Texture CreditsSelected;
+        Texture txCreditsNotSelected;
+        Texture txCreditsSelected;
 
-        Texture ExitNotSelected;
-        Texture ExitSelected;
+        Texture txExitNotSelected;
+        Texture txExitSelected;
 
-        Texture StartNotSelected;
-        Texture StartSelected;
+        Texture txStartNotSelected;
+        Texture txStartSelected;
 
-        Texture ControlsNotSelected;
-        Texture ControlsSelected;
+        Texture txControlsNotSelected;
+        Texture txControlsSelected;
 
         /* ~~~~ Sprites anlegen ~~~~*/
 
-        Sprite Start;
-        Sprite Credits;
-        Sprite Exit;
-        Sprite Controls;
+        Sprite spStart;
+        Sprite spCredits;
+        Sprite spExit;
+        Sprite spControls;
 
         /* ~~~~ Hintergrund anlegen ~~~~*/
 
-        Texture backGroundTex;
-        Sprite backGround;
+        Texture txBackGround;
+        Sprite spBackGround;
 
 
         /* ~~~~ Initialisierung und Positionsfestlegung ~~~~ */
@@ -49,41 +49,41 @@ namespace IcyMazeRunner.Klassen
             x = 0;
             isPressed = false;
 
-            Start = new Sprite(StartNotSelected);
-            Start.Scale = new Vector2f(1f, 1f);
-            Start.Position = new Vector2f(0, 0);
+            spStart = new Sprite(txStartNotSelected);
+            spStart.Scale = new Vector2f(1f, 1f);
+            spStart.Position = new Vector2f(0, 0);
 
-            Credits = new Sprite(CreditsNotSelected);
-            Credits.Position = new Vector2f(0, 0);
-            Credits.Scale = new Vector2f(1f, 1f);
+            spCredits = new Sprite(txCreditsNotSelected);
+            spCredits.Position = new Vector2f(0, 0);
+            spCredits.Scale = new Vector2f(1f, 1f);
 
-            Exit = new Sprite(ExitNotSelected);
-            Exit.Position = new Vector2f(0, 0);
-            Exit.Scale = new Vector2f(1f, 1f);
+            spExit = new Sprite(txExitNotSelected);
+            spExit.Position = new Vector2f(0, 0);
+            spExit.Scale = new Vector2f(1f, 1f);
 
-            Controls = new Sprite(ControlsNotSelected);
-            Controls.Position = new Vector2f(0, 0);
-            Controls.Scale = new Vector2f(1f, 1f);
+            spControls = new Sprite(txControlsNotSelected);
+            spControls.Position = new Vector2f(0, 0);
+            spControls.Scale = new Vector2f(1f, 1f);
 
-            backGround = new Sprite(backGroundTex);
-            backGround.Position = new Vector2f(0, 0);
-            backGround.Scale = new Vector2f(1f, 1f);
+            spBackGround = new Sprite(txBackGround);
+            spBackGround.Position = new Vector2f(0, 0);
+            spBackGround.Scale = new Vector2f(1f, 1f);
         }
 
 
         /* ~~~~ Laden des Inhalts ~~~~ */
         public void loadContent()
         {                        
-                CreditsNotSelected = new Texture("Texturen/Menü+Anzeigen/credits.png");
-                CreditsSelected = new Texture("Texturen/Menü+Anzeigen/credits_s.png");
-                ExitNotSelected = new Texture("Texturen/Menü+Anzeigen/quit.png");
-                ExitSelected = new Texture("Texturen/Menü+Anzeigen/quit_s.png");
-                StartNotSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
-                StartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
-                ControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
-                ControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
+                txCreditsNotSelected = new Texture("Texturen/Menü+Anzeigen/credits.png");
+                txCreditsSelected = new Texture("Texturen/Menü+Anzeigen/credits_s.png");
+                txExitNotSelected = new Texture("Texturen/Menü+Anzeigen/quit.png");
+                txExitSelected = new Texture("Texturen/Menü+Anzeigen/quit_s.png");
+                txStartNotSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
+                txStartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
+                txControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
+                txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
           
-                backGroundTex = new Texture("Texturen/Menü+Anzeigen/Titel.png");
+                txBackGround = new Texture("Texturen/Menü+Anzeigen/Titel.png");
             
         }
 
@@ -115,42 +115,42 @@ namespace IcyMazeRunner.Klassen
             {
                 case 0:
                     {
-                        Start.Texture = StartSelected;
-                        Controls.Texture = ControlsNotSelected;
-                        Credits.Texture = CreditsNotSelected;
-                        Exit.Texture = ExitNotSelected;
+                        spStart.Texture = txStartSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spCredits.Texture = txCreditsNotSelected;
+                        spExit.Texture = txExitNotSelected;
                         break;
                     }
 
                 case 1:
                     {
-                        Start.Texture = StartNotSelected;
-                        Controls.Texture = ControlsSelected;
-                        Credits.Texture = CreditsNotSelected;
-                        Exit.Texture = ExitNotSelected;
+                        spStart.Texture = txStartNotSelected;
+                        spControls.Texture = txControlsSelected;
+                        spCredits.Texture = txCreditsNotSelected;
+                        spExit.Texture = txExitNotSelected;
                         break;
                     }
 
                 case 2:
                     {
-                        Start.Texture = StartNotSelected;
-                        Controls.Texture = ControlsNotSelected;
-                        Credits.Texture = CreditsSelected;
-                        Exit.Texture = ExitNotSelected;
+                        spStart.Texture = txStartNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spCredits.Texture = txCreditsSelected;
+                        spExit.Texture = txExitNotSelected;
                         break;
                     }
 
                 case 3:
                     {
-                        Start.Texture = StartNotSelected;
-                        Controls.Texture = ControlsNotSelected;
-                        Credits.Texture = CreditsNotSelected;
-                        Exit.Texture = ExitSelected;
+                        spStart.Texture = txStartNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spCredits.Texture = txCreditsNotSelected;
+                        spExit.Texture = txExitSelected;
                         break;
                     }
             }
 
-            backGround.Texture = backGroundTex;
+            spBackGround.Texture = txBackGround;
             
             // Update der Gamestates
 
@@ -170,11 +170,11 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow window)
         {
-            window.Draw(backGround);
-            window.Draw(Start);
-            window.Draw(Credits);
-            window.Draw(Exit);
-            window.Draw(Controls);
+            window.Draw(spBackGround);
+            window.Draw(spStart);
+            window.Draw(spCredits);
+            window.Draw(spExit);
+            window.Draw(spControls);
         }
         
     }

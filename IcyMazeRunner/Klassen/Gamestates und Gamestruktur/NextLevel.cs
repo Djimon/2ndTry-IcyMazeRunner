@@ -11,15 +11,15 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
     class NextLevel : GameStates
     {
         /* ~~~~ Screen anlegen ~~~~*/
-        Texture NextLevelScreenTexture;
-        Sprite NextLevelScreen;
+        Texture txNextLevelScreen;
+        Sprite spNextLevelScreen;
 
 
         /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
-            NextLevelScreen = new Sprite(NextLevelScreenTexture);
-            NextLevelScreen.Position = new Vector2f(0, 0);
+            spNextLevelScreen = new Sprite(txNextLevelScreen);
+            spNextLevelScreen.Position = new Vector2f(0, 0);
         }
 
 
@@ -27,7 +27,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         public void loadContent()
         {
             // passende Textur einfügen
-            NextLevelScreenTexture = new Texture("Texturen/Menü+Anzeigen/GameWon.png");           
+            txNextLevelScreen = new Texture("Texturen/Menü+Anzeigen/GameWon.png");           
         }
 
 
@@ -46,7 +46,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
-            win.Draw(NextLevelScreen);
+            win.Draw(spNextLevelScreen);
         }
     }
 }

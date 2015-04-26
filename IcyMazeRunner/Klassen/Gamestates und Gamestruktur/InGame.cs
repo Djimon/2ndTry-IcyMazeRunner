@@ -17,16 +17,16 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~~~~~ VARIABLEN UND KONSTANTEN ~~~~~~~~*/
 
         static int level = 0;
-        GameTime time = new GameTime();
+        GameTime gtIngame = new GameTime();
 
-        Map map;
-        View view;
-        Bitmap mapOfBits;
+        Map mMap;
+        View vIngame;
+        Bitmap bmMap;
 
-        Player Runner;
+        Player pRunner;
 
-        Sprite backGround;
-        Sprite Fog_of_War;
+        Sprite spBackGround;
+        Sprite spFogOfWar;
 
         InGameMenu menu;
 
@@ -48,7 +48,7 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        Sprite ziel;  // hier map/ blocktype=4 (blue= ziel) ??
+        Sprite spZiel;  // hier map/ blocktype=4 (blue= ziel) ??
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -74,16 +74,16 @@ namespace IcyMazeRunner.Klassen
         {
            
 
-            time = new GameTime();
-            time.start();
+            gtIngame = new GameTime();
+            gtIngame.start();
             // globale fensgtergrößen-vaiable?;
-            view = new View(new FloatRect(0, 0, 1058, 718));  // 1% kleiner, als Original, um Side-glitches zu verhindern 
+            vIngame = new View(new FloatRect(0, 0, 1058, 718));  // 1% kleiner, als Original, um Side-glitches zu verhindern 
 
-            backGround = new Sprite(new Texture("Texturen/Map/background.png"));
-            backGround.Position = new Vector2f(0, 0);
+            spBackGround = new Sprite(new Texture("Texturen/Map/background.png"));
+            spBackGround.Position = new Vector2f(0, 0);
 
-            Fog_of_War = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
-            Fog_of_War.Position = new Vector2f(-1,-1);
+            spFogOfWar = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
+            spFogOfWar.Position = new Vector2f(-1,-1);
            
 
             setTypeOfDeath(0);
@@ -101,7 +101,7 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
-            mapOfBits = new Bitmap("Texturen/Map/Map_tutorial.bmp");
+            bmMap = new Bitmap("Texturen/Map/Map_tutorial.bmp");
             // mapOfBits = new Bitmap("Texturen/Map_1.bmp");
 
             // Levelzuweisung
@@ -113,21 +113,21 @@ namespace IcyMazeRunner.Klassen
                      mapOfBits = new Bitmap("Texturen/Map/Map_tutorial.bmp");
                      mapOfBits = new Bitmap("Texturen/Map_1.bmp");
                      */
-                    map = new Map(mapOfBits); 
-                    Runner = new Player(new Vector2f(281,91), map); // 190, 100 bei Map_1 gespeichert gewesen
+                    mMap = new Map(bmMap); 
+                    pRunner = new Player(new Vector2f(281,91), mMap); // 190, 100 bei Map_1 gespeichert gewesen
 
                     break;
 
                 case 1:
-                    mapOfBits = new Bitmap("Texturen/Map_1.bmp");
-                    map = new Map(mapOfBits);
-                    Runner = new Player(new Vector2f(0, 0), map);
+                    bmMap = new Bitmap("Texturen/Map_1.bmp");
+                    mMap = new Map(bmMap);
+                    pRunner = new Player(new Vector2f(0, 0), mMap);
                     break;
                     
                 case 2:
                    // mapOfBits = new Bitmap("Texturen/Map_2.bmp"); alt
-                    map = new Map(mapOfBits);
-                    Runner = new Player(new Vector2f(2263,3336), map);
+                    mMap = new Map(bmMap);
+                    pRunner = new Player(new Vector2f(2263,3336), mMap);
                     break;
 
             }
@@ -145,14 +145,16 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
 
-            if (!Runner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
-                menu = new InGameMenu(Runner);
-                Runner.setIsPressed(true);
+                menu = new InGameMenu(pRunner);
+                menu.loadContent();
+                pRunner.setIsPressed(true);
             }
 
             if (menu != null)
             {
+                
                 return menu.update();
             }
 
@@ -161,21 +163,21 @@ namespace IcyMazeRunner.Klassen
                 menu = null;
             }
 
-            if (get_Gap_Collision(Runner, map))
+            if (get_Gap_Collision(pRunner, mMap))
             {
-                Runner.setPlayerHealth(0);
+                pRunner.setPlayerHealth(0);
                 setTypeOfDeath(1);
             }
 
-            time.update();
+            gtIngame.update();
 
-            if (Runner.getPlayerHealth() == 0)
+            if (pRunner.getPlayerHealth() == 0)
             {
                 
-                Runner.DeathAnimation(getTypeOfDeath());
+                pRunner.DeathAnimation(getTypeOfDeath());
 
 
-                if (Runner.DeathWatch.Watch.ElapsedMilliseconds > 4000)
+                if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
                 {
                     level--;
                     return EGameStates.gameOver;
@@ -191,23 +193,23 @@ namespace IcyMazeRunner.Klassen
 
             if (level == 15)
             {
-                view = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
                 return EGameStates.gameWon;
             }
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
             {
-                view = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
                 return EGameStates.gameWon;
             }
 
-            Runner.update(time);
+            pRunner.update(gtIngame);
             // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
             // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
-            backGround.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
-            Fog_of_War.Position = new Vector2f(view.Center.X - 531, view.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
-            view.Move(new Vector2f((Runner.getXPosition() + (Runner.getWidth() / 2)), (Runner.getYPosition() + (Runner.getHeigth() / 2))) - view.Center);
+            spBackGround.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+            spFogOfWar.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+            vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
 
 
 
@@ -249,7 +251,7 @@ namespace IcyMazeRunner.Klassen
         public bool get_Gap_Collision(Player player, Map map)
         {
             // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-            if (mapOfBits.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1)).Name == orange)
+            if (bmMap.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1)).Name == orange)
             {
                 return true;
             }
@@ -262,11 +264,11 @@ namespace IcyMazeRunner.Klassen
       
         public void draw(RenderWindow win)
         {
-            win.Draw(backGround);
-            win.SetView(view);
-            map.draw(win);
-            Runner.draw(win);
-            win.Draw(Fog_of_War);
+            win.Draw(spBackGround);
+            win.SetView(vIngame);
+            mMap.draw(win);
+            pRunner.draw(win);
+            win.Draw(spFogOfWar);
             if (menu != null)
             {
                 menu.draw(win);

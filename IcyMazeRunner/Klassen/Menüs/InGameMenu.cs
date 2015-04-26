@@ -12,45 +12,45 @@ namespace IcyMazeRunner.Klassen.Menüs
     class InGameMenu
     {
         /* unnötige Variablen?? */
-        View MenuView;
+        View vMenuView;
         int test;
 
 
         /* ~~~~ Menühintergrundtexturen anlegen ~~~~ */
-        Texture MenuBackgroundTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/MenuBG.png");
-        Texture MenuHeaderTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
+        Texture txMenuBackground = new Texture("Texturen/Menü+Anzeigen/InGame Menü/MenuBG.png");
+        Texture txMenuHeader = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
 
         /* ~~~~ Auswahltexturen anlegen ~~~~ */
 
-        Texture ContinueSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Continue.png");
-        Texture GoMainMenuSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Mainmenu.png");
-        Texture ControlsSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/controls.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture txContinueSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Continue.png");
+        Texture txGoMainMenuSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Mainmenu.png");
+        Texture txControlsSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/controls.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
 
         // Ich nutze die Loadtexture vor erst mal als Map-Texture: via Map sind vergangene Level auswählbar/ erneut spielbar? 
         //-> GameState: Map(Übersichtskarte) (auch aus dem MainMenü anwählbar?)
         // Ansonsten gäbs halt später noch nen extra MapSprite --> extra machen; weitere Variable benötigt, die speichert, zu welchem Level 
         // man maximal springen kann, sonst wird int level einfach überschrieben und man kommt nicht mehr einfach zu dem Level, wo man war
 
-        Texture LoadGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/worldmap.png"); 
-        Texture SaveGameSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
+        Texture txLoadGameSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/worldmap.png"); 
+        Texture txSaveGameSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
 
         /* ~~~~ Deselect-Texturen anlegen ~~~~ */
         
 
-        Texture ContinueNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png");
-        Texture GoMainMenuNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png.");
-        Texture ControlsNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Texture SaveGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
-        Texture LoadGameNotSelectedTexture = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
+        Texture txContinueNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png");
+        Texture txGoMainMenuNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png.");
+        Texture txControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture txSaveGameNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
+        Texture txLoadGameNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
 
         /* ~~~~ Sprites anlegen ~~~~ */     
-        Sprite MenuBackgroundSprite;
-        Sprite MenuHeaderSprite;
-        Sprite ContinueSprite;
-        Sprite GoMainMenuSprite;
-        Sprite ControlsSprite; // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Sprite spMenuBackground;
+        Sprite spMenuHeader;
+        Sprite spContinue;
+        Sprite spGoMainMenu;
+        Sprite spControls; // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
         Sprite SaveGameSprite; // für später
-        Sprite LoadGameSprite; // für später
+        Sprite spLoadGame; // für später
 
         /* ~~~~ Variablen für Menüsteuerung ~~~~*/
         int select;
@@ -69,6 +69,12 @@ namespace IcyMazeRunner.Klassen.Menüs
             return closeMenu;
         }
 
+        public void loadContent()
+        {
+            // Hintergrund laden
+
+
+        }
 
         /* ~~~~ Konstruktor ~~~~*/
         public InGameMenu(Player Runner)
@@ -78,16 +84,13 @@ namespace IcyMazeRunner.Klassen.Menüs
             isPressed = false;
             closeMenu = false;
 
-            // Hintergrund laden
-            MenuBackgroundSprite = new Sprite(MenuBackgroundTexture);
-            MenuHeaderSprite = new Sprite(MenuHeaderTexture);
-
-            // 
-            ContinueSprite = new Sprite(ContinueSelectedTexture);
-            GoMainMenuSprite = new Sprite(GoMainMenuNotSelectedTexture);
-            ControlsSprite = new Sprite(ControlsNotSelectedTexture);
-            LoadGameSprite = new Sprite(LoadGameNotSelectedTexture);
-            // SaveGameSprite = new Sprite(SaveGameNotSelectedTexture);
+            spMenuBackground = new Sprite(txMenuBackground);
+            spMenuHeader = new Sprite(txMenuHeader);
+            spContinue = new Sprite(txContinueSelected);
+            spGoMainMenu = new Sprite(txGoMainMenuNotSelected);
+            spControls = new Sprite(txControlsNotSelected);
+            spLoadGame = new Sprite(txLoadGameNotSelected);
+            SaveGameSprite = new Sprite(txSaveGameNotSelected);
 
 
             float scaleX = 0.9f;
@@ -96,24 +99,24 @@ namespace IcyMazeRunner.Klassen.Menüs
             float yCoord = Runner.getYPosition() - 360; 
 
            // Position und Skalierung der einzelnen Texturen und Sprites
-            MenuBackgroundSprite.Position = new Vector2f(xCoord, yCoord); 
-            MenuBackgroundSprite.Scale = new Vector2f(scaleX, scaleY);
+            spMenuBackground.Position = new Vector2f(xCoord, yCoord); 
+            spMenuBackground.Scale = new Vector2f(scaleX, scaleY);
 
-            MenuHeaderSprite.Position = new Vector2f(xCoord, yCoord); 
-            MenuHeaderSprite.Scale = new Vector2f(scaleX, scaleY);
+            spMenuHeader.Position = new Vector2f(xCoord, yCoord); 
+            spMenuHeader.Scale = new Vector2f(scaleX, scaleY);
 
-            ContinueSprite.Position = new Vector2f(xCoord, yCoord); 
-            ContinueSprite.Scale = new Vector2f(scaleX, scaleY);
+            spContinue.Position = new Vector2f(xCoord, yCoord); 
+            spContinue.Scale = new Vector2f(scaleX, scaleY);
 
-            GoMainMenuSprite.Position = new Vector2f(xCoord, yCoord); 
-            GoMainMenuSprite.Scale = new Vector2f(scaleX, scaleY);
+            spGoMainMenu.Position = new Vector2f(xCoord, yCoord); 
+            spGoMainMenu.Scale = new Vector2f(scaleX, scaleY);
 
-            ControlsSprite.Position = new Vector2f(xCoord, yCoord);
-            ControlsSprite.Scale = new Vector2f(scaleX, scaleY);
+            spControls.Position = new Vector2f(xCoord, yCoord);
+            spControls.Scale = new Vector2f(scaleX, scaleY);
 
             //Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
-            LoadGameSprite.Position = new Vector2f(xCoord, yCoord); 
-            LoadGameSprite.Scale = new Vector2f(scaleX, scaleY);
+            spLoadGame.Position = new Vector2f(xCoord, yCoord); 
+            spLoadGame.Scale = new Vector2f(scaleX, scaleY);
 
             /* für später
             SaveGameSprite.Position = new Vector2f(xCoord, yCoord); 
@@ -144,66 +147,66 @@ namespace IcyMazeRunner.Klassen.Menüs
             // negative cases anpassen, wenn Menü erweitert wird
             switch (select)
             {
-                case 0:
+                case 0: //continue
                     {
-                        ContinueSprite.Texture = ContinueSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
-                        ControlsSprite.Texture = ControlsNotSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                        spContinue.Texture = txContinueSelected;
+                        spGoMainMenu.Texture = txGoMainMenuNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spLoadGame.Texture = txLoadGameNotSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
-                case 1:
+                case 1: //main menü
                     {
-                        ContinueSprite.Texture = ContinueNotSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
-                        ControlsSprite.Texture = ControlsNotSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                        spContinue.Texture = txContinueNotSelected;
+                        spGoMainMenu.Texture = txGoMainMenuSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spLoadGame.Texture = txLoadGameNotSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
-                case -3:
+                case -3: 
                     {
-                        ContinueSprite.Texture = ContinueNotSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuSelectedTexture;
-                        ControlsSprite.Texture = ControlsNotSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                        spContinue.Texture = txContinueNotSelected;
+                        spGoMainMenu.Texture = txGoMainMenuSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spLoadGame.Texture = txLoadGameNotSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
-                case 2:
+                case 2: //controls
                     {
-                        ContinueSprite.Texture = ContinueNotSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
-                        ControlsSprite.Texture = ControlsSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                        spContinue.Texture = txContinueNotSelected;
+                        spGoMainMenu.Texture = txGoMainMenuNotSelected;
+                        spControls.Texture = txControlsSelected;
+                        spLoadGame.Texture = txLoadGameNotSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case -2:
                     {
-                        ContinueSprite.Texture = ContinueNotSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
-                        ControlsSprite.Texture = ControlsSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameNotSelectedTexture;
+                        spContinue.Texture = txContinueNotSelected;
+                        spGoMainMenu.Texture = txGoMainMenuNotSelected;
+                        spControls.Texture = txControlsSelected;
+                        spLoadGame.Texture = txLoadGameNotSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
-                case 3:
+                case 3: //Map (load)
                     {
-                        ContinueSprite.Texture = ContinueNotSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
-                        ControlsSprite.Texture = ControlsNotSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameSelectedTexture;
+                        spContinue.Texture = txContinueNotSelected;
+                        spGoMainMenu.Texture = txGoMainMenuNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spLoadGame.Texture = txLoadGameSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case -1:
                     {
-                        ContinueSprite.Texture = ContinueNotSelectedTexture;
-                        GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
-                        ControlsSprite.Texture = ControlsNotSelectedTexture;
-                        LoadGameSprite.Texture = LoadGameSelectedTexture;
+                        spContinue.Texture = txContinueNotSelected;
+                        spGoMainMenu.Texture = txGoMainMenuNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spLoadGame.Texture = txLoadGameSelected;
                         // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
@@ -256,48 +259,52 @@ namespace IcyMazeRunner.Klassen.Menüs
 
         public void draw(RenderWindow window)
         {
-            window.Draw(MenuBackgroundSprite);
-            window.Draw(MenuHeaderSprite);
+            window.Draw(spMenuBackground);
+            window.Draw(spMenuHeader);
+            window.Draw(spContinue);
+            window.Draw(spLoadGame);
+            window.Draw(spControls);
+            window.Draw(spGoMainMenu);
 
-            switch (select)
-            {
-                case 0:
-                    {
-                        window.Draw(ContinueSprite);
-                        break;
-                    }
+            //switch (select)
+            //{
+            //    case 0:
+            //        {
+            //            window.Draw(spContinue);
+            //            break;
+            //        }
 
-                case 1:
-                    {
-                        window.Draw(GoMainMenuSprite);
-                        break;
-                    }
-                case -3:
-                    {
-                        window.Draw(GoMainMenuSprite);
-                        break;
-                    }
-                case 2:
-                    {
-                        window.Draw(ControlsSprite); 
-                        break;
-                    }
-                case -2:
-                    {
-                        window.Draw(ControlsSprite);
-                        break;
-                    }
-                case 3:
-                    {
-                        window.Draw(LoadGameSprite);
-                        break;
-                    }
-                case -1:
-                    {
-                        window.Draw(LoadGameSprite);
-                        break;
-                    }
-            }
+            //    case 1:
+            //        {
+            //            window.Draw(spGoMainMenu);
+            //            break;
+            //        }
+            //    case -3:
+            //        {
+            //            window.Draw(spGoMainMenu);
+            //            break;
+            //        }
+            //    case 2:
+            //        {
+            //            window.Draw(spControls); 
+            //            break;
+            //        }
+            //    case -2:
+            //        {
+            //            window.Draw(spControls);
+            //            break;
+            //        }
+            //    case 3:
+            //        {
+            //            window.Draw(spLoadGame);
+            //            break;
+            //        }
+            //    case -1:
+            //        {
+            //            window.Draw(spLoadGame);
+            //            break;
+            //        }
+            //}
             
             
             

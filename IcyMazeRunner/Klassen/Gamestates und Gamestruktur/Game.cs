@@ -30,7 +30,7 @@ namespace IcyMazeRunner.Klassen
 
 
             public Game()
-                : base(windowSizeX, windowSizeY, "IcyMazeRunner")
+                : base(windowSizeX, windowSizeY, "MazeRunner")
             {
             }
 

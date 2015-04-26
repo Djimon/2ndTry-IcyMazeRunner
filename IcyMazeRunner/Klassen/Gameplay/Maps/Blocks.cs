@@ -15,7 +15,7 @@ namespace IcyMazeRunner.Klassen
 
 
         /* ~~~~ Blocksprite anlegen ~~~~ */
-        Sprite blockSprite {get;set;}
+        Sprite spBlock {get;set;}
         EGameStates gameState; 
         // Kollision ähnlich Loch im Boden --> Kollision mit Farbe --> setzt bool für Level beendet auf true --> player.update()returnt
         // nextLevel an Ingame --> InGame.update(); returnt nextLevel und dann wird Gamestate geändert
@@ -24,7 +24,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Getter ~~~~ */
         public Texture getTexture()
         {
-            return this.blockSprite.Texture;
+            return this.spBlock.Texture;
         }
 
         public bool getWalkable()
@@ -34,7 +34,7 @@ namespace IcyMazeRunner.Klassen
 
 
         /* ~~~~ Konstruktor ~~~~ */
-        public Blocks(int blockType, Vector2f position, Texture blockTex)
+        public Blocks(int blockType, Vector2f position, Texture txBlock)
         {
 
 
@@ -43,31 +43,31 @@ namespace IcyMazeRunner.Klassen
                 {
                     case 0: //alphaweg
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
+                            this.spBlock.Position = position;
                             this.walkable = true;
                             break;
                         }
 
                     case 1: //alphamauer
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-vert.png"));
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/wall-vert.png"));
+                            this.spBlock.Position = position;
                             this.walkable = false;
                             break;
                         }
                     case 2: //leer
                         {
-                            this.blockSprite = new Sprite();
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite();
+                            this.spBlock.Position = position;
                             this.walkable = false;
 
                             break;
                         }
                     case 3: //start
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
+                            this.spBlock.Position = position;
                             this.walkable = true;
                             //insert hier spawn für Player
                             // playerposition = blocksprite.position
@@ -75,8 +75,8 @@ namespace IcyMazeRunner.Klassen
                         }
                     case 4: //Ziel
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/exit.png"));
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/exit.png"));
+                            this.spBlock.Position = position;
                             this.walkable = false;
                             gameState = EGameStates.inGame;
                             break;
@@ -86,16 +86,16 @@ namespace IcyMazeRunner.Klassen
                         }
                     case 5: //horimauer
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/wall-hor.png"));
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/wall-hor.png"));
+                            this.spBlock.Position = position;
                             this.walkable = false;
                             break;
                         }
 
                     case 6: //Loch im Boden
                         {
-                            this.blockSprite = new Sprite(new Texture("Texturen/Map/way-hole Platzhalter.png"));
-                            this.blockSprite.Position = position;
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/way-hole Platzhalter.png"));
+                            this.spBlock.Position = position;
                             this.walkable = true;
                             break;
                         }
@@ -110,7 +110,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
-           win.Draw(this.blockSprite);
+           win.Draw(this.spBlock);
         }
 
 

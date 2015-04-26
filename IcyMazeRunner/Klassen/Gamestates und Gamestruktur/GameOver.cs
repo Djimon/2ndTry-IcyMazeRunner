@@ -13,26 +13,26 @@ namespace IcyMazeRunner.Klassen
 
         //GameOver durch Fallen
 
-        Texture gameOverTex;
-        Sprite gameOver;
+        Texture txGameOver;
+        Sprite spGameOver;
 
 
         public void initialize()
         {
-            gameOver = new Sprite(gameOverTex);
-            gameOver.Position = new Vector2f(0, 0);
+            spGameOver = new Sprite(txGameOver);
+            spGameOver.Position = new Vector2f(0, 0);
         }
 
         public void loadContent()
         {
             
-                gameOverTex = new Texture("Texturen/Menü+Anzeigen/GameOver-PLATZHALTER.png");
+                txGameOver = new Texture("Texturen/Menü+Anzeigen/GameOver-PLATZHALTER.png");
             
         }
 
         public EGameStates update(GameTime time)
         {
-            gameOver.Texture = gameOverTex;
+            spGameOver.Texture = txGameOver;
 
             // Update der Gamestates
 
@@ -50,7 +50,7 @@ namespace IcyMazeRunner.Klassen
 
         public void draw(RenderWindow win)
         {
-            win.Draw(gameOver);
+            win.Draw(spGameOver);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace IcyMazeRunner.Klassen
     class gameWon : GameStates
     {
 
-        Sprite Won;
+        Sprite spWon;
 
 
         public void initialize()
@@ -19,9 +19,9 @@ namespace IcyMazeRunner.Klassen
 
             // Auswahl der Textur nach Thema
 
-                Won = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));
+                spWon = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));
             
-            Won.Position = new Vector2f(0,0);
+            spWon.Position = new Vector2f(0,0);
             // Bildposition fixen
             
 
@@ -44,7 +44,7 @@ namespace IcyMazeRunner.Klassen
         public void draw(RenderWindow win)
         {
             //win.Draw(backGround);
-            win.Draw(Won);
+            win.Draw(spWon);
         }
     }
 }
