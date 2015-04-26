@@ -13,7 +13,7 @@ namespace IcyMazeRunner.Klassen
 
         Vector2f position;
         Sprite sprite;
-        float scale;
+        float F_scale;
 
         public void draw(RenderWindow win)
         {

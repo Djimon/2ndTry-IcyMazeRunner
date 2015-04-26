@@ -82,11 +82,11 @@ namespace IcyMazeRunner.Klassen
                         break;
                 }
 
-                gameState.initialize();
+                gameState.initialize(); //startwerte
 
-                gameState.loadContent();
+                gameState.loadContent(); //grafiken/sounds laden
 
-                prevGameState = currentGameState;
+                prevGameState = currentGameState; 
         }
 
         
