@@ -11,6 +11,7 @@ namespace IcyMazeRunner.Klassen
 {
     class Map
     {
+        // werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
         // insert Map-Code here...es folgt eine User-friendly Zuarbeit zum einfachen Copy&Pasten :))
         // Texturpfad: "Texturen/Map/Map_tutorial.png"
         // Rot "ff0000" = leer (Hintergrund/Platzhalter, Landschaft, Atomexplosion) 
@@ -23,11 +24,14 @@ namespace IcyMazeRunner.Klassen
 
         Blocks[,] map;
         Texture blockTex;
+
+        /* ~~~~ Draw ~~~~ */
         private bool walkable;
+        /* ~~~~ Blockgröße, um sie zentral ändern zu können ~~~~ */
         private int blocksize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
+
         
-
-
+        /* ~~~~ Strings, um Bitmapfarbe einem Blocktyp zuzuordnen ~~~~ */
         public static String white = "ffffffff"; //walkable Hauptweg
         public static String black = "ff000000"; //mauervert
         public static String red = "ffff0000"; // Hintergrund
@@ -41,6 +45,8 @@ namespace IcyMazeRunner.Klassen
         //public static String
         //public static String
 
+
+        /* ~~~~ Erstellen der Map mithilfe der Bitmap ~~~~ */
         public Map(Bitmap mask)
         {
             map = new Blocks[mask.Width, mask.Height];
@@ -105,25 +111,32 @@ namespace IcyMazeRunner.Klassen
 
         }
 
+
+        /* ~~~~ Getter ~~~~ */
         public int getBlocksize()
         {
             return blocksize;
         }
 
-        public void getBlocksize(int size)
+
+        // wird Setter benötigt?
+        public void setBlocksize(int size)
         {
             blocksize=size;
         }
 
 
+        /* ~~~~ Kontrolle, wo Spieler laufen kann ~~~~ */
         public bool iswalkable(Sprite sprite, Vector2f vector)
         {
+            // walkable wird auf Standardbool gesetzt
             bool walkable = true;
+            // zu vergleichende Position, also wo Spieler im nächsten Schritt stehen würde
             Vector2f newPosition = new Vector2f(sprite.Position.X + vector.X, sprite.Position.Y + vector.Y);
 
 
-            // Verschlankung der if-Abfrage
-
+            // Verschlankung der if-Abfrage?
+            // eigentliche Kollisionsabfrage, wenn Kollision, dann kann man dort nicht laufen, falsch wird zurückgegeben
             if (!(map[(int)(newPosition.X / blocksize), (int)(newPosition.Y / blocksize)].getWalkable()/*links oben*/
               && map[(int)(newPosition.X / blocksize), (int)((newPosition.Y + sprite.Texture.Size.Y) / blocksize)].getWalkable()/*links unten*/
                 && map[(int)newPosition.X / blocksize, (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / blocksize)].getWalkable()/*links mitte*/
@@ -135,6 +148,7 @@ namespace IcyMazeRunner.Klassen
                 ))
                 walkable = false;
 
+            //Kontrollangabe
             Console.WriteLine(walkable);
 
            return walkable;
@@ -142,6 +156,7 @@ namespace IcyMazeRunner.Klassen
         }
 
 
+        /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
 

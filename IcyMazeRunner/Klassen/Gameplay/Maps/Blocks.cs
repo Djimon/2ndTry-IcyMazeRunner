@@ -10,10 +10,18 @@ namespace IcyMazeRunner.Klassen
 {
     class Blocks 
     {
+        /* ~~~~ Kollisionsboolean ~~~~ */
         bool walkable= true;
-        Sprite blockSprite {get;set;}
-        EGameStates gameState;
 
+
+        /* ~~~~ Blocksprite anlegen ~~~~ */
+        Sprite blockSprite {get;set;}
+        EGameStates gameState; 
+        // Kollision ähnlich Loch im Boden --> Kollision mit Farbe --> setzt bool für Level beendet auf true --> player.update()returnt
+        // nextLevel an Ingame --> InGame.update(); returnt nextLevel und dann wird Gamestate geändert
+
+
+        /* ~~~~ Getter ~~~~ */
         public Texture getTexture()
         {
             return this.blockSprite.Texture;
@@ -24,12 +32,13 @@ namespace IcyMazeRunner.Klassen
             return this.walkable;
         }
 
+
+        /* ~~~~ Konstruktor ~~~~ */
         public Blocks(int blockType, Vector2f position, Texture blockTex)
         {
 
 
-            
-
+            /* ~~~~ Auswahl der Textur, je nachdem, welches int blockType die Map von der Bitmap mitgibt ~~~~ */
                 switch (blockType)
                 {
                     case 0: //alphaweg
@@ -73,6 +82,7 @@ namespace IcyMazeRunner.Klassen
                             break;
                             // -> gameobject ziel initialisieren??
                             //insert hier Ziel: -> Gamestat/Level = +1
+                            //Antwort: siehe oben
                         }
                     case 5: //horimauer
                         {
@@ -96,6 +106,8 @@ namespace IcyMazeRunner.Klassen
                
         }
 
+
+        /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
            win.Draw(this.blockSprite);

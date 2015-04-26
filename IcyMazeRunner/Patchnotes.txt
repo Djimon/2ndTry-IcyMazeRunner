@@ -1,4 +1,4 @@
-﻿Version 1.2.B014
+﻿Version 1.2.B015
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -7,11 +7,16 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
+Version 1.2.B015 (Kilian):
+	- folgende Klassen auskommentiert: Map.cs, Blocks.cs, Player.cs
+
+
 Version 1.2.B014 (Kilian):
 	- MainMenu Code überarbeitet, if-Abfragen verschlankt, höhere Übersichtlichkeit des Codes
 	- InGameMenu if-Abfragen für select durch switch-case ersetzt (leichte Verringerung des Rechneraufwandes)
 	- Controls.cs unnötige if-Abfrage entfernt
 	- folgende Klassen auskommentiert: credits.cs, controls.cs, MainMenu.cs, InGameMenu.cs, NextLevel.cs, Program.cs (nichts geändert)
+
 
 Version 1.2.B013 (Kilian):
 	- Map_Level2 eingefügt
@@ -20,6 +25,7 @@ Version 1.2.B013 (Kilian):
 	- neue Klasse: NextLevel erstellt
 	- neue Textdatei: Übersicht fehlender Texturen/Animationen
 	- externe Tabelle in den Ordnern zum Speichern levelabhängiger Variablen in einer Übersicht erstellt
+
 
 Version 1.2.A012 (Chris):
 	- GlobalVariables (für Fenstergröße) initialisiert
@@ -146,6 +152,8 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 	- Löcher im Boden
 	- Textur vom Fog of War leicht vergrößern (außen, nicht der Kreis). Bei Richtungswechsel sieht man meist am Rand wieder das Labyrinth 
 	- GameState nächstes Level
+	- Platzhalter für InGameMenü ersetzen 
+	- levelabhängige Attribute (Position, Map) besser strukturieren, anzeigen und Übersicht erstellen
 
 
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -154,12 +162,12 @@ https://github.com/Djimon/2ndTry-IcyMazeRunner/wiki/Zeitplan-f%C3%BCr-neue-Spiel
 
 Wichtiges/Fixes:
 
-	- Platzhalter für InGameMenü und Fallanimation und die Löcher im Boden ersetzen
-	- levelabhängige Attribute (Position, Map) besser strukturieren, anzeigen und Übersicht erstellen(Tabelle?)
+	- Platzhalter für Fallanimation und die Löcher im Boden ersetzen
 	- neue Maps
 	- Anpassung der Seitenaufrufe vom InGameMenü aus (Screens sind verschoben)
 	- NextLevel-Screen erstellen und Einfügen
 	- Textdatei für einheitliche Bezeichnung wiederholender Dateien (Mapnamen, Animationen u.Ä.)
+	- Fragen klären: Map.cs(2-4), Blocks.cs(1), InGameMenu.cs(3), Player.cs(2 [Getter&Setter])
 
 Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
