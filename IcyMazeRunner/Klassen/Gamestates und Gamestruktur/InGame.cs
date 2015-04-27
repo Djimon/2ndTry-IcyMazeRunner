@@ -145,11 +145,16 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
 
+/* Ingame menü: If (ingamemenü is open) ingameMenu.update
+ *              else ingame.update 
+ * */
+
             if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 menu = new InGameMenu(pRunner);
                 menu.loadContent();
                 pRunner.setIsPressed(true);
+                
             }
 
             if (menu != null)
