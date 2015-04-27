@@ -175,6 +175,8 @@ Wichtiges/Fixes:
 	- NextLevel-Screen erstellen und Einfügen
 	- Textdatei für einheitliche Bezeichnung wiederholender Dateien (Mapnamen, Animationen u.Ä.)
 	- Fragen klären: Map.cs(2-4), Blocks.cs(1), InGameMenu.cs(3), Player.cs(2 [Getter&Setter])
+	- Ingame-Menu
+	- vorhandenen Trap-Klassen-Code importieren
 
 Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
