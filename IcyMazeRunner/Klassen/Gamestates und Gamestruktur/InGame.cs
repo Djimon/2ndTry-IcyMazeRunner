@@ -29,6 +29,7 @@ namespace IcyMazeRunner.Klassen
         Sprite spFogOfWar;
 
         InGameMenu menu;
+        bool B_isMenuOpen = false;
 
         private int I_typeOfDeath;
         /*
@@ -145,90 +146,93 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime gametime)
         {
 
-/* Ingame menü: If (ingamemenü is open) ingameMenu.update
- *              else ingame.update 
- * */
 
-            if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
-            {
-                menu = new InGameMenu(pRunner);
-                menu.loadContent();
-                pRunner.setIsPressed(true);
-                
-            }
-
-            if (menu != null)
-            {
-                
+            if (B_isMenuOpen)
                 return menu.update();
-            }
-
-            if (menu != null && menu.getCloseMenu())
+            else
             {
-                menu = null;
-            }
 
-            if (get_Gap_Collision(pRunner, mMap))
-            {
-                pRunner.setPlayerHealth(0);
-                setTypeOfDeath(1);
-            }
-
-            gtIngame.update();
-
-            if (pRunner.getPlayerHealth() == 0)
-            {
-                
-                pRunner.DeathAnimation(getTypeOfDeath());
-
-
-                if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
+                if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
                 {
-                    I_level--;
-                    return EGameStates.gameOver;
+                    menu = new InGameMenu(pRunner);
+                    B_isMenuOpen = true;
+                    pRunner.setIsPressed(true);
+
                 }
+
+                //if (menu != null)
+                //{
+
+                //    return menu.update();
+                //}
+
+                if (menu != null && menu.getCloseMenu())
+                {
+                    B_isMenuOpen = false;
+                    menu = null;
+                }
+
+                if (get_Gap_Collision(pRunner, mMap))
+                {
+                    pRunner.setPlayerHealth(0);
+                    setTypeOfDeath(1);
+                }
+
+                gtIngame.update();
+
+                if (pRunner.getPlayerHealth() == 0)
+                {
+
+                    pRunner.DeathAnimation(getTypeOfDeath());
+
+
+                    if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
+                    {
+                        I_level--;
+                        return EGameStates.gameOver;
+                    }
+                }
+
+                if (I_level != I_level) // Kollision mit Treppe= true
+                {
+                    I_level++;
+                    Program.game.handleGameState(); //wieso?
+                    return EGameStates.NextLevel;
+                }
+
+                if (I_level == 15)
+                {
+                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                    return EGameStates.gameWon;
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.O))
+                {
+                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                    return EGameStates.gameWon;
+                }
+
+                pRunner.update(gtIngame);
+                // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
+                // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
+
+                spBackGround.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+                spFogOfWar.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+                vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
+
+
+
+
+                /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
+
+                //if (collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
+                //{
+                //    Console.Write("Collision!!1elf");
+                //    view = new View(new FloatRect(0, 0, 1062, 720));
+                //    return EGameStates.gameWon;
+                //}
+
             }
-
-            if (I_level != I_level) // Kollision mit Treppe= true
-            {
-                I_level++;
-                Program.game.handleGameState(); //wieso?
-                return EGameStates.NextLevel;
-            }
-
-            if (I_level == 15)
-            {
-                vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
-                return EGameStates.gameWon;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.O))
-            {
-                vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
-                return EGameStates.gameWon;
-            }
-
-            pRunner.update(gtIngame);
-            // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
-            // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
-
-            spBackGround.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
-            spFogOfWar.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
-            vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
-
-
-
-
-            /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
-
-            //if (collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
-            //{
-            //    Console.Write("Collision!!1elf");
-            //    view = new View(new FloatRect(0, 0, 1062, 720));
-            //    return EGameStates.gameWon;
-            //}
-
-
             return EGameStates.inGame;
         }
 

@@ -9,7 +9,7 @@ using IcyMazeRunner.Klassen;
 
 namespace IcyMazeRunner.Klassen.Menüs
 {
-    class InGameMenu
+    class InGameMenu 
     {
         /* unnötige Variablen?? */
         View vMenuView;
@@ -69,12 +69,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             return closeMenu;
         }
 
-        public void loadContent()
-        {
-            // Hintergrund laden
-
-
-        }
+  
 
         /* ~~~~ Konstruktor ~~~~*/
         public InGameMenu(Player Runner)
@@ -124,10 +119,14 @@ namespace IcyMazeRunner.Klassen.Menüs
             */
         }
 
+       
+
         public EGameStates update()
         {
-            // Menüsteuerung
+           
+         //   if (closeMenu) //menü schließen
             
+            /*~~Menüsteuerung~~*/
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
             {
@@ -217,7 +216,7 @@ namespace IcyMazeRunner.Klassen.Menüs
 
 
 
-            //noch benötigt??
+            //noch benötigt?? ja solange menü ncihts passiert 
             Console.WriteLine(select); //Debug-Info -> kein output bei tastendruck?
             
             /* für später
@@ -236,7 +235,11 @@ namespace IcyMazeRunner.Klassen.Menüs
             // Update der Gamestates
 
             if (select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            {
                 setCloseMenu(true);
+                Console.WriteLine("enter");
+                
+            }
             if ((select == 1 || select == -3) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.mainMenu;
             if ((select == 2 || select == -2) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
