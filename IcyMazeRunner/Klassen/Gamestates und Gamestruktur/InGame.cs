@@ -16,7 +16,7 @@ namespace IcyMazeRunner.Klassen
     {
         /* ~~~~~~~~ VARIABLEN UND KONSTANTEN ~~~~~~~~*/
 
-        static int level = 0;
+        static int I_level = 0;
         GameTime gtIngame = new GameTime();
 
         Map mMap;
@@ -30,14 +30,14 @@ namespace IcyMazeRunner.Klassen
 
         InGameMenu menu;
 
-        private int typeOfDeath;
+        private int I_typeOfDeath;
         /*
          * 0 = alive
          * 1 = Death by falling
          * 2 = instant Death by trap
          * 3 = Death by damage
         */
-        public bool isDeathAnimationOver;
+        public bool B_isDeathAnimationOver;
 
 
         /*~~~~~~~~~~~~~~~~~~~Gap Collision~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -57,12 +57,12 @@ namespace IcyMazeRunner.Klassen
 
         public int getTypeOfDeath()
         {
-            return typeOfDeath;
+            return I_typeOfDeath;
         }
 
         public void setTypeOfDeath(int data)
         {
-            typeOfDeath = data;
+            I_typeOfDeath = data;
         }
 
 
@@ -87,7 +87,7 @@ namespace IcyMazeRunner.Klassen
            
 
             setTypeOfDeath(0);
-            isDeathAnimationOver=false;
+            B_isDeathAnimationOver=false;
             
           
         }
@@ -106,7 +106,7 @@ namespace IcyMazeRunner.Klassen
 
             // Levelzuweisung
 
-            switch (level)
+            switch (I_level)
             {
                 case 0:
                     /* Redundant
@@ -184,19 +184,19 @@ namespace IcyMazeRunner.Klassen
 
                 if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
                 {
-                    level--;
+                    I_level--;
                     return EGameStates.gameOver;
                 }
             }
 
-            if (level != level) // Kollision mit Treppe= true
+            if (I_level != I_level) // Kollision mit Treppe= true
             {
-                level++;
+                I_level++;
                 Program.game.handleGameState(); //wieso?
                 return EGameStates.NextLevel;
             }
 
-            if (level == 15)
+            if (I_level == 15)
             {
                 vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
                 return EGameStates.gameWon;
@@ -232,21 +232,21 @@ namespace IcyMazeRunner.Klassen
             return EGameStates.inGame;
         }
 
-        public static bool collision(Vector2f sprite1, float high1, float width1, Vector2f sprite2, float high2, float width2)
+        public static bool collision(Vector2f sprite1, float F_highA, float F_widthA, Vector2f sprite2, float F_highB, float F_widthB)
         {
-            Vector2f Mobj1 = new Vector2f(sprite1.X + width1 / 2, sprite1.Y + high1 / 2);
-            Vector2f Mobj2 = new Vector2f(sprite2.X + width2 / 2, sprite2.Y + high2 / 2);
+            Vector2f ObjectA = new Vector2f(sprite1.X + F_widthA / 2, sprite1.Y + F_highA / 2);
+            Vector2f ObjectB = new Vector2f(sprite2.X + F_widthB / 2, sprite2.Y + F_highB / 2);
 
-            float wmid1 = width1 / 2;
-            float wmid2 = width2 / 2;
+            float F_widthMidA = F_widthA / 2;
+            float F_widthMidB = F_widthB / 2;
 
-            float hmid1 = high1 / 2;
-            float hmid2 = high2 / 2;
+            float F_heightMidA = F_highA / 2;
+            float F_heightMidB = F_highB / 2;
 
-            float betrag_x = Math.Abs(Mobj1.X - Mobj2.X);
-            float betrag_y = Math.Abs(Mobj1.Y - Mobj2.Y);
+            float F_betragX = Math.Abs(ObjectA.X - ObjectB.X);
+            float F_betragY = Math.Abs(ObjectA.Y - ObjectB.Y);
 
-            if (betrag_x < wmid1 + wmid2 && betrag_y < hmid1 + hmid2)
+            if (F_betragX < F_widthMidA + F_widthMidB && F_betragY < F_heightMidA + F_heightMidB)
                 return true;
 
             else

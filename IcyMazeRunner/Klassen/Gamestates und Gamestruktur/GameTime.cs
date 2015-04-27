@@ -9,7 +9,7 @@ namespace IcyMazeRunner.Klassen
 {
     public class GameTime
     {
-
+        //GameTime sorgt für stets gleiche geschwidnigkeit - prozessoruinabhängig
         public Stopwatch Watch;
         public TimeSpan TotalTime;
         public TimeSpan ElapsedTime;

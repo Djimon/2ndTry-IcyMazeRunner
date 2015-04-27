@@ -26,19 +26,19 @@ namespace IcyMazeRunner.Klassen
         Texture txBlock;
 
         /* ~~~~ Draw ~~~~ */
-        private bool walkable;
+        private bool B_walkable;
         /* ~~~~ Blockgröße, um sie zentral ändern zu können ~~~~ */
-        private int blocksize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
+        private int I_blockSize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
 
         
         /* ~~~~ Strings, um Bitmapfarbe einem Blocktyp zuzuordnen ~~~~ */
-        public static String white = "ffffffff"; //walkable Hauptweg
-        public static String black = "ff000000"; //mauervert
-        public static String red = "ffff0000"; // Hintergrund
-        public static String green = "ff00ff00"; //später mehr mauerteile
-        public static String blue = "ff0000ff"; //später mehr Wegtypen
-        public static String grey = "ff414141"; //mauer hor
-        public static String orange = "ffff8000"; // Loch im Boden
+        public static String Swhite = "ffffffff"; //walkable Hauptweg
+        public static String Sblack = "ff000000"; //mauervert
+        public static String Sred = "ffff0000"; // Hintergrund
+        public static String Sgreen = "ff00ff00"; //später mehr mauerteile
+        public static String Sblue = "ff0000ff"; //später mehr Wegtypen
+        public static String Sgrey = "ff414141"; //mauer hor
+        public static String Sorange = "ffff8000"; // Loch im Boden
         //public static String 
         //public static String
         //public static String
@@ -57,50 +57,50 @@ namespace IcyMazeRunner.Klassen
                 {
                     txBlock = new Texture("Texturen/Map/way-clean.png");
 
-                    if (mask.GetPixel(row, col).Name == white)
+                    if (mask.GetPixel(row, col).Name == Swhite)
                     {
                         map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = true;
+                        B_walkable = true;
                     }
 
-                    if (mask.GetPixel(row, col).Name == black)
+                    if (mask.GetPixel(row, col).Name == Sblack)
                     {
                         map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = false;
+                        B_walkable = false;
                     }
 
 
                     //mauertest
-                    if (mask.GetPixel(row, col).Name == grey)
+                    if (mask.GetPixel(row, col).Name == Sgrey)
                     {
                         map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = false;
+                        B_walkable = false;
                     }
 
 
 
-                    if (mask.GetPixel(row, col).Name == red)
+                    if (mask.GetPixel(row, col).Name == Sred)
                     {
                         map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = false;
+                        B_walkable = false;
                     }
 
-                    if (mask.GetPixel(row, col).Name == green)
+                    if (mask.GetPixel(row, col).Name == Sgreen)
                     {
                         map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = true;
+                        B_walkable = true;
                     }
 
-                    if (mask.GetPixel(row, col).Name == blue)
+                    if (mask.GetPixel(row, col).Name == Sblue)
                     {
                         map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = true;
+                        B_walkable = true;
                     }
 
-                    if (mask.GetPixel(row, col).Name == orange)
+                    if (mask.GetPixel(row, col).Name == Sorange)
                     {
                         map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
-                        walkable = true;
+                        B_walkable = true;
                     }
 
 
@@ -115,14 +115,14 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Getter ~~~~ */
         public int getBlocksize()
         {
-            return blocksize;
+            return I_blockSize;
         }
 
 
         // wird Setter benötigt?
         public void setBlocksize(int size)
         {
-            blocksize=size;
+            I_blockSize=size;
         }
 
 
@@ -130,28 +130,28 @@ namespace IcyMazeRunner.Klassen
         public bool iswalkable(Sprite sprite, Vector2f vector)
         {
             // walkable wird auf Standardbool gesetzt
-            bool walkable = true;
+            bool B_walkable = true;
             // zu vergleichende Position, also wo Spieler im nächsten Schritt stehen würde
             Vector2f newPosition = new Vector2f(sprite.Position.X + vector.X, sprite.Position.Y + vector.Y);
 
 
             // Verschlankung der if-Abfrage?
             // eigentliche Kollisionsabfrage, wenn Kollision, dann kann man dort nicht laufen, falsch wird zurückgegeben
-            if (!(map[(int)(newPosition.X / blocksize), (int)(newPosition.Y / blocksize)].getWalkable()/*links oben*/
-              && map[(int)(newPosition.X / blocksize), (int)((newPosition.Y + sprite.Texture.Size.Y) / blocksize)].getWalkable()/*links unten*/
-                && map[(int)newPosition.X / blocksize, (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / blocksize)].getWalkable()/*links mitte*/
-                && map[(int)((newPosition.X + sprite.Texture.Size.X) / blocksize), (int)(newPosition.Y / blocksize)].getWalkable()/*rechts oben*/
-                && map[(int)((newPosition.X + sprite.Texture.Size.X) / blocksize), (int)((newPosition.Y + sprite.Texture.Size.Y) / blocksize)].getWalkable()/*rechts unten*/
-                && map[(int)((newPosition.X + sprite.Texture.Size.X) / blocksize), (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / blocksize)].getWalkable()/*rechts mitte*/
-                && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / blocksize), (int)(newPosition.Y) / blocksize].getWalkable()/*oben mitte*/
-                && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / blocksize), (int)(newPosition.Y + sprite.Texture.Size.Y) / blocksize].getWalkable()/*unten mitte*/
+            if (!(map[(int)(newPosition.X / I_blockSize), (int)(newPosition.Y / I_blockSize)].getWalkable()/*links oben*/
+              && map[(int)(newPosition.X / I_blockSize), (int)((newPosition.Y + sprite.Texture.Size.Y) / I_blockSize)].getWalkable()/*links unten*/
+                && map[(int)newPosition.X / I_blockSize, (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / I_blockSize)].getWalkable()/*links mitte*/
+                && map[(int)((newPosition.X + sprite.Texture.Size.X) / I_blockSize), (int)(newPosition.Y / I_blockSize)].getWalkable()/*rechts oben*/
+                && map[(int)((newPosition.X + sprite.Texture.Size.X) / I_blockSize), (int)((newPosition.Y + sprite.Texture.Size.Y) / I_blockSize)].getWalkable()/*rechts unten*/
+                && map[(int)((newPosition.X + sprite.Texture.Size.X) / I_blockSize), (int)((newPosition.Y + (sprite.Texture.Size.Y / 2)) / I_blockSize)].getWalkable()/*rechts mitte*/
+                && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / I_blockSize), (int)(newPosition.Y) / I_blockSize].getWalkable()/*oben mitte*/
+                && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / I_blockSize), (int)(newPosition.Y + sprite.Texture.Size.Y) / I_blockSize].getWalkable()/*unten mitte*/
                 ))
-                walkable = false;
+                B_walkable = false;
 
             //Kontrollangabe
-            Console.WriteLine(walkable);
+            Console.WriteLine(B_walkable);
 
-           return walkable;
+           return B_walkable;
            
         }
 

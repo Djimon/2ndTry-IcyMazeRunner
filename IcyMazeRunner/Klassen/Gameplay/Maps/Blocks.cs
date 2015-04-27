@@ -11,7 +11,7 @@ namespace IcyMazeRunner.Klassen
     class Blocks 
     {
         /* ~~~~ Kollisionsboolean ~~~~ */
-        bool walkable= true;
+        bool B_walkable= true;
 
 
         /* ~~~~ Blocksprite anlegen ~~~~ */
@@ -29,7 +29,7 @@ namespace IcyMazeRunner.Klassen
 
         public bool getWalkable()
         {
-            return this.walkable;
+            return this.B_walkable;
         }
 
 
@@ -45,7 +45,7 @@ namespace IcyMazeRunner.Klassen
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
                             this.spBlock.Position = position;
-                            this.walkable = true;
+                            this.B_walkable = true;
                             break;
                         }
 
@@ -53,14 +53,14 @@ namespace IcyMazeRunner.Klassen
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/wall-vert.png"));
                             this.spBlock.Position = position;
-                            this.walkable = false;
+                            this.B_walkable = false;
                             break;
                         }
                     case 2: //leer
                         {
                             this.spBlock = new Sprite();
                             this.spBlock.Position = position;
-                            this.walkable = false;
+                            this.B_walkable = false;
 
                             break;
                         }
@@ -68,7 +68,7 @@ namespace IcyMazeRunner.Klassen
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
                             this.spBlock.Position = position;
-                            this.walkable = true;
+                            this.B_walkable = true;
                             //insert hier spawn für Player
                             // playerposition = blocksprite.position
                             break;
@@ -77,7 +77,7 @@ namespace IcyMazeRunner.Klassen
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/exit.png"));
                             this.spBlock.Position = position;
-                            this.walkable = false;
+                            this.B_walkable = false;
                             gameState = EGameStates.inGame;
                             break;
                             // -> gameobject ziel initialisieren??
@@ -88,7 +88,7 @@ namespace IcyMazeRunner.Klassen
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/wall-hor.png"));
                             this.spBlock.Position = position;
-                            this.walkable = false;
+                            this.B_walkable = false;
                             break;
                         }
 
@@ -96,7 +96,7 @@ namespace IcyMazeRunner.Klassen
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/way-hole Platzhalter.png"));
                             this.spBlock.Position = position;
-                            this.walkable = true;
+                            this.B_walkable = true;
                             break;
                         }
 
