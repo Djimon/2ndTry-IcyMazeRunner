@@ -123,9 +123,6 @@ namespace IcyMazeRunner.Klassen.Menüs
 
         public EGameStates update()
         {
-           
-         //   if (closeMenu) //menü schließen
-            
             /*~~Menüsteuerung~~*/
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
@@ -238,7 +235,6 @@ namespace IcyMazeRunner.Klassen.Menüs
             {
                 setCloseMenu(true);
                 Console.WriteLine("enter");
-                
             }
             if ((select == 1 || select == -3) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.mainMenu;
@@ -264,50 +260,50 @@ namespace IcyMazeRunner.Klassen.Menüs
         {
             window.Draw(spMenuBackground);
             window.Draw(spMenuHeader);
-            window.Draw(spContinue);
-            window.Draw(spLoadGame);
-            window.Draw(spControls);
-            window.Draw(spGoMainMenu);
+            //window.Draw(spContinue);
+            //window.Draw(spLoadGame);
+            //window.Draw(spControls);
+            //window.Draw(spGoMainMenu);
 
-            //switch (select)
-            //{
-            //    case 0:
-            //        {
-            //            window.Draw(spContinue);
-            //            break;
-            //        }
+            switch (select)
+            {
+                case 0:
+                    {
+                        window.Draw(spContinue);
+                        break;
+                    }
 
-            //    case 1:
-            //        {
-            //            window.Draw(spGoMainMenu);
-            //            break;
-            //        }
-            //    case -3:
-            //        {
-            //            window.Draw(spGoMainMenu);
-            //            break;
-            //        }
-            //    case 2:
-            //        {
-            //            window.Draw(spControls); 
-            //            break;
-            //        }
-            //    case -2:
-            //        {
-            //            window.Draw(spControls);
-            //            break;
-            //        }
-            //    case 3:
-            //        {
-            //            window.Draw(spLoadGame);
-            //            break;
-            //        }
-            //    case -1:
-            //        {
-            //            window.Draw(spLoadGame);
-            //            break;
-            //        }
-            //}
+                case 1:
+                    {
+                        window.Draw(spGoMainMenu);
+                        break;
+                    }
+                case -3:
+                    {
+                        window.Draw(spGoMainMenu);
+                        break;
+                    }
+                case 2:
+                    {
+                        window.Draw(spControls);
+                        break;
+                    }
+                case -2:
+                    {
+                        window.Draw(spControls);
+                        break;
+                    }
+                case 3:
+                    {
+                        window.Draw(spLoadGame);
+                        break;
+                    }
+                case -1:
+                    {
+                        window.Draw(spLoadGame);
+                        break;
+                    }
+            }
             
             
             

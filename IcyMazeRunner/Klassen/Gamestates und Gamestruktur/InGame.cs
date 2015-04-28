@@ -159,8 +159,10 @@ namespace IcyMazeRunner.Klassen
                     B_isMenuOpen = false;
                     menu = null;
                 }
-
-                return menu.update();
+                if (menu != null)
+                { 
+                    return menu.update();
+                }
             }
             else
             {

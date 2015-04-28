@@ -19,7 +19,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
-            spControls = new Sprite(spControls);
+            spControls = new Sprite(txControls);
             spControls.Position = new Vector2f(0, 0);
         }
 
