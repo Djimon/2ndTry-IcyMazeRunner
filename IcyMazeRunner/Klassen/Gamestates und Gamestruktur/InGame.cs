@@ -29,6 +29,8 @@ namespace IcyMazeRunner.Klassen
         Sprite spFogOfWar;
 
         InGameMenu menu;
+
+        //wofür wird Bool benötigt?
         bool B_isMenuOpen = false;
 
         private int I_typeOfDeath;
@@ -38,6 +40,8 @@ namespace IcyMazeRunner.Klassen
          * 2 = instant Death by trap
          * 3 = Death by damage
         */
+
+        //Bool ersetzt watch-Prüfung?
         public bool B_isDeathAnimationOver;
 
 
@@ -147,8 +151,17 @@ namespace IcyMazeRunner.Klassen
         {
 
 
-            if (B_isMenuOpen)
+            if (menu != null)
+            {
+                // menu!=null in 2. if-Abfrage entfernen?
+                if (menu != null && menu.getCloseMenu())
+                {
+                    B_isMenuOpen = false;
+                    menu = null;
+                }
+
                 return menu.update();
+            }
             else
             {
 
@@ -166,11 +179,7 @@ namespace IcyMazeRunner.Klassen
                 //    return menu.update();
                 //}
 
-                if (menu != null && menu.getCloseMenu())
-                {
-                    B_isMenuOpen = false;
-                    menu = null;
-                }
+
 
                 if (get_Gap_Collision(pRunner, mMap))
                 {
@@ -188,6 +197,7 @@ namespace IcyMazeRunner.Klassen
 
                     if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
                     {
+                        // ob Level sinkt, hängt von Todesursache ab, nur bei Loch im Boden
                         I_level--;
                         return EGameStates.gameOver;
                     }

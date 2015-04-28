@@ -1,4 +1,4 @@
-﻿Version 1.2.B017
+﻿Version 1.2.B018
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,9 @@
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.2.B018 (Kilian):
+	- Fix InGamemenu
 
 Version 1.2.B017 (Chris):
 	- InGameMenü pausiert nun das Spiel, immer noch nicht benutzbar
@@ -176,7 +179,7 @@ Wichtiges/Fixes:
 	- Textdatei für einheitliche Bezeichnung wiederholender Dateien (Mapnamen, Animationen u.Ä.)
 	- Fragen klären: Map.cs(2-4), Blocks.cs(1), InGameMenu.cs(3), Player.cs(2 [Getter&Setter])
 	- Ingame-Menu
-	- vorhandenen Trap-Klassen-Code importieren
+	- vorhandenen Trap-Klassen-Code importieren (Kilian)
 
 Diskussionsthemen:
 	- Soll es möglich sein, dass man, während die Sterbeanimation noch läuft (5 Sekunden oder so), sein Leben wieder auf über 0 erhöhen kann (mit Heiltrank o.Ä.) 
