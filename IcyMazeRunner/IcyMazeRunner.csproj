@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\Kompass.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\NextLevel.cs" />
     <Compile Include="Klassen\GlobalVariables.cs" />
     <Compile Include="Klassen\Menüs\Controls.cs" />
@@ -187,6 +188,9 @@
     </Content>
     <Content Include="GameWon1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\GUI\Untitled-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Continue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
