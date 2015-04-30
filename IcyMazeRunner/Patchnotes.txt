@@ -1,4 +1,4 @@
-﻿Version 1.2.B019a
+﻿Version 1.2.B020a
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -7,8 +7,12 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
-Version 1.2.B019a (Chris):
+Version 1.2.B020a (Chris):
 	- vorbereitung GUI - Kompass-Klasse ungetestet (Wegfindung)
+
+Version 1.2.B019 (Chris):
+	- InGameMenü final gefixt. 
+	  -ToDO: MainMenü-Aufruf - View korrigieren
 
 Version 1.2.B018b (Kilian):
 	- Fix InGamemenu (switch-case in der Draw wieder eingefügt)
