@@ -261,6 +261,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             window.Draw(spMenuBackground);
             window.Draw(spMenuHeader);
             window.Draw(spSelected);
+            window.SetMouseCursorVisible(true);
             //window.Draw(spLoadGame);
             //window.Draw(spControls);
             //window.Draw(spGoMainMenu);

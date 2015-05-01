@@ -290,6 +290,7 @@ namespace IcyMazeRunner.Klassen
             mMap.draw(win);
             pRunner.draw(win);
             win.Draw(spFogOfWar);
+            win.SetMouseCursorVisible(false);
             if (menu != null)
             {
                 menu.draw(win);

@@ -175,6 +175,7 @@ namespace IcyMazeRunner.Klassen
             window.Draw(spCredits);
             window.Draw(spExit);
             window.Draw(spControls);
+            window.SetMouseCursorVisible(true);
         }
         
     }
