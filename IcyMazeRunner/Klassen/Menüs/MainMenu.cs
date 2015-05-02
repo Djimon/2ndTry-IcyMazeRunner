@@ -15,7 +15,7 @@ namespace IcyMazeRunner.Klassen
 
         int x;
         bool isPressed;
-
+        View vMenu;
 
         /* ~~~~ Texturen anlegen ~~~~*/
         Texture txCreditsNotSelected;
@@ -48,6 +48,7 @@ namespace IcyMazeRunner.Klassen
         {
             x = 0;
             isPressed = false;
+            vMenu = new View(new FloatRect(0, 0, 1062, 720));
 
             spStart = new Sprite(txStartNotSelected);
             spStart.Scale = new Vector2f(1f, 1f);
@@ -68,6 +69,8 @@ namespace IcyMazeRunner.Klassen
             spBackGround = new Sprite(txBackGround);
             spBackGround.Position = new Vector2f(0, 0);
             spBackGround.Scale = new Vector2f(1f, 1f);
+
+            
         }
 
 
@@ -84,7 +87,8 @@ namespace IcyMazeRunner.Klassen
                 txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
           
                 txBackGround = new Texture("Texturen/Menü+Anzeigen/Titel.png");
-            
+
+                
         }
 
 
@@ -92,6 +96,8 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime time)
         {
 
+
+            vMenu.Reset(new FloatRect(0, 0, 1062, 720));
             // Menüsteuerung
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
@@ -170,6 +176,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow window)
         {
+            window.SetView(vMenu);
             window.Draw(spBackGround);
             window.Draw(spStart);
             window.Draw(spCredits);
