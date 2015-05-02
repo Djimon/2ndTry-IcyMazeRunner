@@ -75,7 +75,7 @@ namespace IcyMazeRunner.Klassen.Menüs
         public InGameMenu(Player Runner)
         {
             // Initialisieren der Steuerungsvariablen
-            select = 2;
+            select = 0;
             isPressed = false;
             closeMenu = false;
 
