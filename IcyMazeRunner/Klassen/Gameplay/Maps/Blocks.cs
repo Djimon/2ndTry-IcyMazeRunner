@@ -94,7 +94,7 @@ namespace IcyMazeRunner.Klassen
 
                     case 6: //Loch im Boden
                         {
-                            this.spBlock = new Sprite(new Texture("Texturen/Map/way-hole Platzhalter.png"));
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/hole.png"));
                             this.spBlock.Position = position;
                             this.B_walkable = true;
                             break;
