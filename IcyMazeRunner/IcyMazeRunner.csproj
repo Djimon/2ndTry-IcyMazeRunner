@@ -111,6 +111,9 @@
     <Content Include="Texturen\Map\Fog_of_War.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Map\hole.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Map\Map_1.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

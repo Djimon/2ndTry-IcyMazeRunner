@@ -106,7 +106,7 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
-            bmMap = new Bitmap("Texturen/Map/Map_tutorial.bmp");
+            bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
             // mapOfBits = new Bitmap("Texturen/Map_1.bmp");
 
             // Levelzuweisung
@@ -114,10 +114,6 @@ namespace IcyMazeRunner.Klassen
             switch (I_level)
             {
                 case 0:
-                    /* Redundant
-                     mapOfBits = new Bitmap("Texturen/Map/Map_tutorial.bmp");
-                     mapOfBits = new Bitmap("Texturen/Map_1.bmp");
-                     */
                     mMap = new Map(bmMap); 
                     pRunner = new Player(new Vector2f(281,91), mMap); // 190, 100 bei Map_1 gespeichert gewesen
 
