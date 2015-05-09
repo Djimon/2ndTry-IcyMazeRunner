@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
+namespace IcyMazeRunner.Klassen
 {
-    class SaveLevel
+    static class SaveLevel
     {
         const int e = 11;
         const int n = 221;
