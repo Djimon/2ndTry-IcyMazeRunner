@@ -70,6 +70,7 @@
     <Compile Include="Klassen\Gameplay\Maps\Map.cs" />
     <Compile Include="Klassen\Gameplay\Player.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\Program.cs" />
+    <Compile Include="Klassen\Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
