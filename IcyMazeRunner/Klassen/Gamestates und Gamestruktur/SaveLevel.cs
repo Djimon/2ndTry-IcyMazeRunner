@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    static class SaveLevel
+    class SaveLevel
     {
         const int e = 11;
         const int n = 221;
