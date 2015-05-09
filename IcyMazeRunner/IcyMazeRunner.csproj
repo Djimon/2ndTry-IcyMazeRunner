@@ -55,6 +55,7 @@
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\Kompass.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\NextLevel.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\SaveLevel.cs" />
     <Compile Include="Klassen\GlobalVariables.cs" />
     <Compile Include="Klassen\Menüs\Controls.cs" />
     <Compile Include="Klassen\Menüs\Credits.cs" />

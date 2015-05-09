@@ -6,6 +6,11 @@
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.2.1.B001 (Ron)
+	- Neue Klasse unter Gamestates und Gamestruktur
+	- Save Level stellt encode(int) und decode [return int] zur Verfügung (speichert verschlüsselt in SaveData.txt)
+
 Version 1.2.1 (Chris):
 	- Verrutschter Screen gefixed 
 	- Namensvorschläge bitte in den Ideenpool (wiki)
