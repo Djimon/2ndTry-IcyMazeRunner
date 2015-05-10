@@ -70,7 +70,7 @@ namespace IcyMazeRunner.Klassen
                             this.spBlock.Position = position;
                             this.B_walkable = true;
                             //insert hier spawn für Player
-                            // playerposition = blocksprite.position
+                            // PlayerPosition = blocksprite.position
                             break;
                         }
                     case 4: //Ziel
