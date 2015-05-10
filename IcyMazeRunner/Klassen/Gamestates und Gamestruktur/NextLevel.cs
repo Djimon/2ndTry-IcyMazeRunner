@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
 {
-    class NextLevel : GameStates
+    class NextLevel : GameStates 
     {
         /* ~~~~ Screen anlegen ~~~~*/
         Texture txNextLevelScreen;
         Sprite spNextLevelScreen;
+        static int I_level = 1;
+       
+
 
 
         /* ~~~~ Screen initialisieren ~~~~*/
@@ -20,6 +23,13 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         {
             spNextLevelScreen = new Sprite(txNextLevelScreen);
             spNextLevelScreen.Position = new Vector2f(0, 0);
+
+            SaveLevel Levelspeicher = new SaveLevel(I_level);
+            I_level = Levelspeicher.decrypt() + 1;
+            Levelspeicher.encrypt(I_level);
+            Console.WriteLine(Levelspeicher.decrypt()); //debug zwecke...
+            Console.WriteLine(I_level); // SaveData.txt wird nicht geschrieben, hat aber in einem externen testrahmen geklappt
+            
         }
 
 
@@ -27,14 +37,17 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         public void loadContent()
         {
             // passende Textur einfügen
-            txNextLevelScreen = new Texture("Texturen/Menü+Anzeigen/GameWon.png");           
+            txNextLevelScreen = new Texture("Texturen/Menü+Anzeigen/GameWon.png");
+
+       
+
         }
 
 
         /* ~~~~ Screen aktualisieren ~~~~*/
         public EGameStates update(GameTime time)
         {
-
+           
             if (Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
                 return EGameStates.inGame;

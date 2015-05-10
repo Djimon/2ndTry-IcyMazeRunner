@@ -204,6 +204,7 @@ namespace IcyMazeRunner.Klassen
                 if (I_level != I_level) // Kollision mit Treppe= true
                 {
                     I_level++;
+
                     Program.game.handleGameState(); //wieso?
                     return EGameStates.NextLevel;
                 }
@@ -217,7 +218,7 @@ namespace IcyMazeRunner.Klassen
                 if (Keyboard.IsKeyPressed(Keyboard.Key.O))
                 {
                     vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
-                    return EGameStates.gameWon;
+                    return EGameStates.NextLevel;
                 }
 
                 pRunner.update(gtIngame);
