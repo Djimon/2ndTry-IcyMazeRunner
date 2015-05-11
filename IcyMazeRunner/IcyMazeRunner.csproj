@@ -33,13 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="sfmlnet-audio-2">
-      <HintPath>..\..\..\sfmlnet-audio-2.dll</HintPath>
+      <HintPath>C:\Users\Daniel\Uni\S1\Intro2d\SFML.Net-2.1\lib\sfmlnet-audio-2.dll</HintPath>
     </Reference>
     <Reference Include="sfmlnet-graphics-2">
-      <HintPath>..\..\..\sfmlnet-graphics-2.dll</HintPath>
+      <HintPath>C:\Users\Daniel\Uni\S1\Intro2d\SFML.Net-2.1\lib\sfmlnet-graphics-2.dll</HintPath>
     </Reference>
     <Reference Include="sfmlnet-window-2">
-      <HintPath>..\..\..\sfmlnet-window-2.dll</HintPath>
+      <HintPath>C:\Users\Daniel\Uni\S1\Intro2d\SFML.Net-2.1\lib\sfmlnet-window-2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,11 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Klassen\Gameplay\Moveable Wall.cs" />
+=======
+    <Compile Include="Klassen\Gameplay\Enemy.cs" />
+>>>>>>> 19665171d9cbea834eadf33604e00734615ed527
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\Kompass.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\NextLevel.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\SaveLevel.cs" />
     <Compile Include="Klassen\GlobalVariables.cs" />
     <Compile Include="Klassen\Menüs\Controls.cs" />
     <Compile Include="Klassen\Menüs\Credits.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="Klassen\Gameplay\Maps\Map.cs" />
     <Compile Include="Klassen\Gameplay\Player.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\Program.cs" />
+    <Compile Include="Klassen\Story.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

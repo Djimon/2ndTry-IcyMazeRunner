@@ -13,9 +13,9 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Variablen für Menüsteuerung ~~~~*/
 
-        int x;
-        bool isPressed;
-
+        int I_select;
+        bool B_isPressed;
+        View vMenu;
 
         /* ~~~~ Texturen anlegen ~~~~*/
         Texture txCreditsNotSelected;
@@ -46,8 +46,9 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Initialisierung und Positionsfestlegung ~~~~ */
         public void initialize()
         {
-            x = 0;
-            isPressed = false;
+            I_select = 0;
+            B_isPressed = false;
+            vMenu = new View(new FloatRect(0, 0, 1062, 720));
 
             spStart = new Sprite(txStartNotSelected);
             spStart.Scale = new Vector2f(1f, 1f);
@@ -68,6 +69,8 @@ namespace IcyMazeRunner.Klassen
             spBackGround = new Sprite(txBackGround);
             spBackGround.Position = new Vector2f(0, 0);
             spBackGround.Scale = new Vector2f(1f, 1f);
+
+            
         }
 
 
@@ -84,7 +87,8 @@ namespace IcyMazeRunner.Klassen
                 txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
           
                 txBackGround = new Texture("Texturen/Menü+Anzeigen/Titel.png");
-            
+
+                
         }
 
 
@@ -92,26 +96,28 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime time)
         {
 
+
+            vMenu.Reset(new FloatRect(0, 0, 1062, 720));
             // Menüsteuerung
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !isPressed)
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !B_isPressed)
             {
-                x = (x + 1) % 4;
-                isPressed = true;
+                I_select = (I_select + 1) % 4;
+                B_isPressed = true;
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !isPressed)
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !B_isPressed)
             {
-                x = (x - 1) % 4;
-                isPressed = true;
+                I_select = (I_select - 1) % 4;
+                B_isPressed = true;
             }
 
             if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up) )
-                isPressed = false;
+                B_isPressed = false;
 
             // Menüzustände
 
 
-            switch (x)
+            switch (I_select)
             {
                 case 0:
                     {
@@ -154,13 +160,13 @@ namespace IcyMazeRunner.Klassen
             
             // Update der Gamestates
 
-            if (x == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if (I_select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.inGame;
-            if (x == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if (I_select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.controls;
-            if (x == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if (I_select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.credits;
-            if (x == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if (I_select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.none;
 
             return EGameStates.mainMenu;
@@ -170,11 +176,13 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow window)
         {
+            window.SetView(vMenu);
             window.Draw(spBackGround);
             window.Draw(spStart);
             window.Draw(spCredits);
             window.Draw(spExit);
             window.Draw(spControls);
+            window.SetMouseCursorVisible(true);
         }
         
     }
