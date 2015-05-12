@@ -51,11 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="Klassen\Gameplay\Moveable Wall.cs" />
-=======
     <Compile Include="Klassen\Gameplay\Enemy.cs" />
->>>>>>> 19665171d9cbea834eadf33604e00734615ed527
+    <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\Kompass.cs" />
