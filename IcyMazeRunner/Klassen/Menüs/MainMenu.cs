@@ -119,7 +119,7 @@ namespace IcyMazeRunner.Klassen
 
             switch (I_select)
             {
-                case 0:
+                case 0:  //Start
                     {
                         spStart.Texture = txStartSelected;
                         spControls.Texture = txControlsNotSelected;
@@ -128,7 +128,7 @@ namespace IcyMazeRunner.Klassen
                         break;
                     }
 
-                case 1:
+                case 1:  //Controls
                     {
                         spStart.Texture = txStartNotSelected;
                         spControls.Texture = txControlsSelected;
@@ -137,7 +137,25 @@ namespace IcyMazeRunner.Klassen
                         break;
                     }
 
-                case 2:
+                case -3:
+                    {
+                        spStart.Texture = txStartNotSelected;
+                        spControls.Texture = txControlsSelected;
+                        spCredits.Texture = txCreditsNotSelected;
+                        spExit.Texture = txExitNotSelected;
+                        break;
+                    }
+
+                case 2:  // Credits
+                    {
+                        spStart.Texture = txStartNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spCredits.Texture = txCreditsSelected;
+                        spExit.Texture = txExitNotSelected;
+                        break;
+                    }
+
+                case -2:
                     {
                         spStart.Texture = txStartNotSelected;
                         spControls.Texture = txControlsNotSelected;
@@ -147,6 +165,14 @@ namespace IcyMazeRunner.Klassen
                     }
 
                 case 3:
+                    {
+                        spStart.Texture = txStartNotSelected;
+                        spControls.Texture = txControlsNotSelected;
+                        spCredits.Texture = txCreditsNotSelected;
+                        spExit.Texture = txExitSelected;
+                        break;
+                    }
+                case -1:
                     {
                         spStart.Texture = txStartNotSelected;
                         spControls.Texture = txControlsNotSelected;
