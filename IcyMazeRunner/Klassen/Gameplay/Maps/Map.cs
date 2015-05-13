@@ -28,7 +28,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         private bool B_walkable;
         /* ~~~~ Blockgröße, um sie zentral ändern zu können ~~~~ */
-        private static int I_blockSize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
+        private int I_blockSize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
 
         
         /* ~~~~ Strings, um Bitmapfarbe einem Blocktyp zuzuordnen ~~~~ */
@@ -113,7 +113,7 @@ namespace IcyMazeRunner.Klassen
 
 
         /* ~~~~ Getter ~~~~ */
-        public static int getBlocksize()
+        public int getBlocksize()
         {
             return I_blockSize;
         }

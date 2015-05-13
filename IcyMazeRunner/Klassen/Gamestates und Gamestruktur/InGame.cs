@@ -149,7 +149,7 @@ namespace IcyMazeRunner.Klassen
 
             if (menu != null)
             {
-                // menu!=null in 2. if-Abfrage entfernen?
+                
                 if (menu != null && menu.getCloseMenu())
                 {
                     B_isMenuOpen = false;
@@ -171,19 +171,35 @@ namespace IcyMazeRunner.Klassen
 
                 }
 
-                //if (menu != null)
-                //{
-
-                //    return menu.update();
-                //}
-
-
 
                 if (get_Gap_Collision(pRunner, mMap))
                 {
                     pRunner.setPlayerHealth(0);
                     setTypeOfDeath(1);
                 }
+
+                /*
+                 for(each triggerobject: objecthandler)
+                 {
+                  if(triggerObjectXY.collision(Runner) && triggerObjectXY.getB_Movable() )
+                    {
+                    triggerObjectXY.setB_Movable(true);
+                    Vector2f movableWallXY.prevPosition = movableWallXY.position;
+                    movableWallXY.I_direction ++;
+                    }
+                 if(triggerObjectXY.getB_Movable())
+                    movableWallXY.move();
+                 if (minimum Zeit vergangen) // überflüssig?????
+                    {
+                        if((movableWallXY.prevPosition.X+map.getBlocksize == movableWallXY.position.X) oder
+                           (movableWallXY.prevPosition.X-map.getBlocksize == movableWallXY.position.X) oder
+                           (movableWallXY.prevPosition.Y+map.getBlocksize == movableWallXY.position.Y) oder
+                           (movableWallXY.prevPosition.Y-map.getBlocksize == movableWallXY.position.Y)
+                          )
+                           triggerObjectXY.setB_Movable(false);
+                    }
+                }
+                 */
 
                 gtIngame.update();
 
