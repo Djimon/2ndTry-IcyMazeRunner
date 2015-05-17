@@ -47,7 +47,7 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~Gap Collision~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        public static String orange = "ffff8000"; // Loch im Boden
+        public static String orange = "ffff8800"; // Loch im Boden
 
 
 
@@ -181,7 +181,7 @@ namespace IcyMazeRunner.Klassen
                 /*
                  for(each triggerobject: objecthandler)
                  {
-                  if(triggerObjectXY.collision(Runner) && triggerObjectXY.getB_Movable() )
+                  if(triggerObjectXY.point_Collision(Runner) && triggerObjectXY.getB_Movable() )
                     {
                     triggerObjectXY.setB_Movable(true);
                     Vector2f movableWallXY.prevPosition = movableWallXY.position;
@@ -250,7 +250,7 @@ namespace IcyMazeRunner.Klassen
 
                 /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
 
-                //if (collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
+                //if (point_Collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
                 //{
                 //    Console.Write("Collision!!1elf");
                 //    view = new View(new FloatRect(0, 0, 1062, 720));
@@ -261,7 +261,7 @@ namespace IcyMazeRunner.Klassen
             return EGameStates.inGame;
         }
 
-        public static bool collision(Vector2f sprite1, float F_highA, float F_widthA, Vector2f sprite2, float F_highB, float F_widthB)
+        public static bool point_Collision(Vector2f sprite1, float F_highA, float F_widthA, Vector2f sprite2, float F_highB, float F_widthB)
         {
             Vector2f ObjectA = new Vector2f(sprite1.X + F_widthA / 2, sprite1.Y + F_highA / 2);
             Vector2f ObjectB = new Vector2f(sprite2.X + F_widthB / 2, sprite2.Y + F_highB / 2);

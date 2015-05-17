@@ -82,7 +82,7 @@ namespace IcyMazeRunner
         {
             //Festlegen der Spielerposition, wird mit neuem Level neu festgelegt
             playerPosition = Pos;
-
+            
 
             // Initialisierung der HP des Spielers, wird mit neuem Level neu festgelegt
             I_healthPoints = 100;

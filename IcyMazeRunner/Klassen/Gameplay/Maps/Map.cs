@@ -38,7 +38,7 @@ namespace IcyMazeRunner.Klassen
         public static String Sgreen = "ff00ff00"; //später mehr mauerteile
         public static String Sblue = "ff0000ff"; //später mehr Wegtypen
         public static String Sgrey = "ff414141"; //mauer hor
-        public static String Sorange = "ffff8000"; // Loch im Boden
+        public static String Sorange = "ffff8800"; // Loch im Boden
         //public static String 
         //public static String
         //public static String
@@ -99,7 +99,7 @@ namespace IcyMazeRunner.Klassen
 
                     if (mask.GetPixel(row, col).Name == Sorange)
                     {
-                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
+                        map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = true;
                     }
 
