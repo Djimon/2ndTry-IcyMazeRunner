@@ -105,14 +105,30 @@ namespace IcyMazeRunner.Klassen
                 I_select = (I_select + 1) % 4;
                 B_isPressed = true;
             }
+
+            //if (Keyboard.IsKeyPressed(Keyboard.Key.Left) && !B_isPressed)
+            //{
+            //    I_select = (I_select + 1) % 4;
+            //    B_isPressed = true;   
+            //}
+
+
             if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !B_isPressed)
             {
                 I_select = (I_select - 1) % 4;
                 B_isPressed = true;
             }
 
-            if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up) )
+            //if (Keyboard.IsKeyPressed(Keyboard.Key.Right) && !B_isPressed)
+            //{
+            //    I_select = (I_select - 1) % 4;
+            //    B_isPressed = true;
+            //}
+
+            if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up))
                 B_isPressed = false;
+            //if (!Keyboard.IsKeyPressed(Keyboard.Key.Left) && !Keyboard.IsKeyPressed(Keyboard.Key.Right))
+            //    B_isPressed = false;
 
             // Menüzustände
 

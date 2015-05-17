@@ -21,6 +21,7 @@ namespace IcyMazeRunner.Klassen
         // weiß "ffffff" = weg 
         // Texturpfad: "Texturen/Map/way-clean.png"
         // orange "FF8000" = Loch im Boden (255 Rot, 128 Grün, 0 Blau)
+       public  Vector2f vPos = new Vector2f(0,0);
 
         Blocks[,] map;
         Texture txBlock;
@@ -94,6 +95,7 @@ namespace IcyMazeRunner.Klassen
                     if (mask.GetPixel(row, col).Name == Sblue)
                     {
                         map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
+                        vPos = new Vector2f(row * 90, col * 90);
                         B_walkable = true;
                     }
 

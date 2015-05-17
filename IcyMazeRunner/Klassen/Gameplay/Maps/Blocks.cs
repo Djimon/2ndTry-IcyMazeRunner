@@ -106,6 +106,7 @@ namespace IcyMazeRunner.Klassen
                
         }
 
+   
 
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)

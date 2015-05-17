@@ -10,10 +10,17 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
 {
     class Kompass //Kompass
     {
+       
+        System.Drawing.Image needle;
+        Vector2f vCompass; //Kompassmittelpunkt
+        Vector2f vTarget; // Zielobjekt
 
-        System.Drawing.Image needle = new Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
-        Vector2f vCompass = new Vector2f(1, 1); //Kompassmittelpunkt
-        Vector2f vTarget = new Vector2f(100, 100); // Zielobjekt
+        public Kompass(Vector2f midpoint, Vector2f targetPos, Image texturPfad)
+        {
+            this.needle = texturPfad;
+            this.vCompass = midpoint;
+            this.vTarget = targetPos;
+        }
 
         public Vector2f getVector(Vector2f a, Vector2f b)
         {

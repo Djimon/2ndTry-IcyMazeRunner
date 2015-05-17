@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using IcyMazeRunner.Klassen;
 using SFML.Audio;
 using IcyMazeRunner.Klassen.Menüs;
+using IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI;
 
 namespace IcyMazeRunner.Klassen
 {
@@ -22,11 +23,21 @@ namespace IcyMazeRunner.Klassen
         Map mMap;
         View vIngame;
         Bitmap bmMap;
+        GUI Health;
+        GUI Kompass;
+        GUI Skills;
+        GUI Collected;
+        GUI SoftPopUp;
+
+        Kompass compass;
+        System.Drawing.Image bmKompass;
+        Vector2f vTarget = new Vector2f(0, 0);
 
         Player pRunner;
 
         Sprite spBackGround;
         Sprite spFogOfWar;
+        Sprite spKompass;
 
         InGameMenu menu;
 
@@ -77,6 +88,9 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Initialisierung des Spiels ~~~~ */
         public void initialize()
         {
+
+
+
            
 
             gtIngame = new GameTime();
@@ -89,6 +103,8 @@ namespace IcyMazeRunner.Klassen
 
             spFogOfWar = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
             spFogOfWar.Position = new Vector2f(-1,-1);
+
+            Kompass = new GUI();
            
 
             setTypeOfDeath(0);
@@ -107,6 +123,15 @@ namespace IcyMazeRunner.Klassen
              */
 
             bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
+
+          /****************************************
+           ************** KOMPASS *****************
+           ****************************************/
+          //  bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
+
+
+
+
             // mapOfBits = new Bitmap("Texturen/Map_1.bmp");
 
             // Levelzuweisung
@@ -133,6 +158,8 @@ namespace IcyMazeRunner.Klassen
 
             }
 
+            vTarget = mMap.vPos;
+        //    compass = new Kompass(vIngame.Center, vTarget, bmKompass);
           
             //        hier Fallen und Hindernisse laden???
             //         ziel?
@@ -238,6 +265,12 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 pRunner.update(gtIngame);
+                /****************************************
+                ************** KOMPASS *****************
+                ****************************************/
+                // compass.update();
+              
+                
                 // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
                 // später: Bewegung der Gegner, Geschosse, Anzeigen, Kollision
 
@@ -303,12 +336,13 @@ namespace IcyMazeRunner.Klassen
             mMap.draw(win);
             pRunner.draw(win);
             win.Draw(spFogOfWar);
+         //   Kompass.draw(spKompass, win, vIngame);
             win.SetMouseCursorVisible(false);
             if (menu != null)
             {
                 menu.draw(win);
             }
         }
-        
+
     }
 }
