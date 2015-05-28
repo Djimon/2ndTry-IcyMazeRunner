@@ -41,9 +41,6 @@ namespace IcyMazeRunner.Klassen
 
         InGameMenu menu;
 
-        //wofür wird Bool benötigt?
-        bool B_isMenuOpen = false;
-
         private int I_typeOfDeath;
         /*
          * 0 = alive
@@ -91,10 +88,12 @@ namespace IcyMazeRunner.Klassen
 
 
 
-           
+           // Moveable_Wall wall = new Moveable_Wall(new Vector2f(0,0), new Vector2f(0,0), 1, 1, mMap);
+            
 
             gtIngame = new GameTime();
             gtIngame.start();
+           
             // globale fensgtergrößen-vaiable?;
             vIngame = new View(new FloatRect(0, 0, 1058, 718));  // 1% kleiner, als Original, um Side-glitches zu verhindern 
 
@@ -127,7 +126,7 @@ namespace IcyMazeRunner.Klassen
           /****************************************
            ************** KOMPASS *****************
            ****************************************/
-          //  bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
+          // bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
 
 
 
@@ -159,7 +158,7 @@ namespace IcyMazeRunner.Klassen
             }
 
             vTarget = mMap.vPos;
-        //    compass = new Kompass(vIngame.Center, vTarget, bmKompass);
+          compass = new Kompass(vIngame.Center, vTarget, bmKompass);
           
             //        hier Fallen und Hindernisse laden???
             //         ziel?
@@ -179,11 +178,12 @@ namespace IcyMazeRunner.Klassen
                 
                 if (menu != null && menu.getCloseMenu())
                 {
-                    B_isMenuOpen = false;
                     menu = null;
                 }
+
+                // if-Abfrage, falls zwischen obiger if-Abfrage und update menu=null gesetzt wird
                 if (menu != null)
-                { 
+                {
                     return menu.update();
                 }
             }
@@ -193,7 +193,6 @@ namespace IcyMazeRunner.Klassen
                 if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
                 {
                     menu = new InGameMenu(pRunner);
-                    B_isMenuOpen = true;
                     pRunner.setIsPressed(true);
 
                 }
@@ -268,7 +267,7 @@ namespace IcyMazeRunner.Klassen
                 /****************************************
                 ************** KOMPASS *****************
                 ****************************************/
-                // compass.update();
+            //    compass.update();
               
                 
                 // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
@@ -336,7 +335,7 @@ namespace IcyMazeRunner.Klassen
             mMap.draw(win);
             pRunner.draw(win);
             win.Draw(spFogOfWar);
-         //   Kompass.draw(spKompass, win, vIngame);
+            //Kompass.draw(spKompass, win, vIngame);
             win.SetMouseCursorVisible(false);
             if (menu != null)
             {

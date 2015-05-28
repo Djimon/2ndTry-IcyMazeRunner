@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IcyMazeRunner.Klassen.Gameplay
+namespace IcyMazeRunner.Klassen
 {
-    class Moveable_Wall
+    public class Moveable_Wall
     {
         
         /* ~~~~ Attribute für Mauer ~~~~ */
@@ -23,7 +23,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
         */
 
         /* ~~~~ Auslöserklasse ~~~~ */
-        class WallTrigger
+        public class WallTrigger
         {
             /* ~~~~ Attribute für Auslöser ~~~~ */
             Vector2f Wall_Trigger_Position;
@@ -33,19 +33,27 @@ namespace IcyMazeRunner.Klassen.Gameplay
 
             public WallTrigger(Vector2f _WallTriggerPosition)
             {
-                //Wall_Trigger_Position = _WallTriggerPosition;
                 txWall_Trigger = new Texture("");
                 spWall_Trigger = new Sprite(txWall_Trigger);
                 spWall_Trigger.Position = _WallTriggerPosition;
 
             }
 
-            public Boolean collision(Player player)
+            public Boolean collision(Player player, Vector2f predictedPosition)
             {
+                Vector2f newPosition = new Vector2f((player.getXPosition() + predictedPosition.X + (player.getWidth()/2)), (player.getYPosition() + predictedPosition.Y + (player.getHeigth()/2)));
+                // for each wall -Schleife
+                if (
+                     (Math.Abs(newPosition.X + - spWall_Trigger.Position.X) < 45) 
+                     &&
+                     (Math.Abs(newPosition.Y + - spWall_Trigger.Position.Y) < 45)
+                   )
+                {
 
-                //Standardkollision
+                    return true;
+                }
 
-                return false;
+                return false;              
             }
 
         }

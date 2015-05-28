@@ -33,11 +33,15 @@ namespace IcyMazeRunner.Klassen.Gameplay
             position += direction / (length * 5);
         }
 
-
-        public void draw(RenderWindow win)
+        public override void update(GameTime gametime)
         {
-            sprite.Position = position;
-            win.Draw(sprite);
+            return;
         }
+
+        //public override void draw(RenderWindow win)
+        //{
+        //    sprite.Position = position;
+        //    win.Draw(sprite);
+        //}
     }
 }
