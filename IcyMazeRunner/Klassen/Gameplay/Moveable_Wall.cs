@@ -21,6 +21,7 @@ namespace IcyMazeRunner.Klassen
          0 - links rechts
          1 - oben unten
         */
+        public WallTrigger wallTrigger;
 
         /* ~~~~ Auslöserklasse ~~~~ */
         public class WallTrigger
@@ -62,7 +63,7 @@ namespace IcyMazeRunner.Klassen
         public Moveable_Wall(Vector2f WallPosition, Vector2f WallTriggerPosition, int _orientation, int _direction, Map cMap)
         {
 
-            WallTrigger wallTrigger = new WallTrigger(WallTriggerPosition);
+            wallTrigger = new WallTrigger(WallTriggerPosition);
             txWall = new Texture("");
             spWall = new Sprite(txWall);
             I_orientation = _orientation;

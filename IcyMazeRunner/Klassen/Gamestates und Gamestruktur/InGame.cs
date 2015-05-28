@@ -88,8 +88,8 @@ namespace IcyMazeRunner.Klassen
 
 
 
-           // Moveable_Wall wall = new Moveable_Wall(new Vector2f(0,0), new Vector2f(0,0), 1, 1, mMap);
-            
+            //Moveable_Wall wall = new Moveable_Wall(new Vector2f(0, 0), new Vector2f(0, 0), 1, 1, mMap);
+            //wall.wallTrigger.collision(pRunner, new Vector2f(1,1));
 
             gtIngame = new GameTime();
             gtIngame.start();
