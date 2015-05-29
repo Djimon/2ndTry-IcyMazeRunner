@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klassen\Calculator.cs" />
+    <Compile Include="Klassen\Gameplay\MovableWallHandler.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\Entity.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\EntityHandler.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />

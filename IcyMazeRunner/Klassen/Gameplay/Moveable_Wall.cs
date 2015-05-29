@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class Moveable_Wall
+    public class Moveable_Wall : Entity //Attribute anpassen
     {
         
         /* ~~~~ Attribute für Mauer ~~~~ */
@@ -22,6 +22,8 @@ namespace IcyMazeRunner.Klassen
          1 - oben unten
         */
         public WallTrigger wallTrigger;
+        Boolean B_moveable=false;
+
 
         /* ~~~~ Auslöserklasse ~~~~ */
         public class WallTrigger
@@ -43,7 +45,7 @@ namespace IcyMazeRunner.Klassen
             public Boolean collision(Player player, Vector2f predictedPosition)
             {
                 Vector2f newPosition = new Vector2f((player.getXPosition() + predictedPosition.X + (player.getWidth()/2)), (player.getYPosition() + predictedPosition.Y + (player.getHeigth()/2)));
-                // for each wall -Schleife
+                
                 if (
                      (Math.Abs(newPosition.X + - spWall_Trigger.Position.X) < 45) 
                      &&
@@ -70,11 +72,21 @@ namespace IcyMazeRunner.Klassen
             I_direction = _direction;
         }
 
+        public Boolean getB_moveable()
+        {
+            return B_moveable;
+        }
+
+        public void setB_moveable(Boolean value)
+        {
+            B_moveable = value;
+        }
+
 
         // wenn Trigger ausgelöst, wird move aufgerufen
         // in 2 Richtungen(oben-unten oder links-rechts)
         // Int%2 gibt an, in welche Richtung
-        public void move(int I_direction, Map cMap)
+        public void move(Map cMap)
         {
             // Speed an Rechnerzeit anpassen, Blocksize mit hineinnehmen und unten durch Speed ersetzen
             // links-rechts Ausrichtung

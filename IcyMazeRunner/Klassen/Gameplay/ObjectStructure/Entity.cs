@@ -8,6 +8,9 @@ namespace IcyMazeRunner.Klassen
 {
     public class Entity : GameObject
     {
-        
+        public override void update(GameTime gameTime)
+        {
+
+        }
     }
 }

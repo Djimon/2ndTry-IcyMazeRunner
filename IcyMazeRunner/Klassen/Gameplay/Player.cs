@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner
 {
-    class Player
+    public class Player
     {
 
 
@@ -135,7 +135,7 @@ namespace IcyMazeRunner
             gtDeathWatch = new GameTime();
             B_isDeathWatchOn = false;
         }
-
+        
 
         /* ~~~~~~~~~~~~~~~~~~ Getter und Setter ~~~~~~~~~~~~~~*/
 
@@ -203,7 +203,6 @@ namespace IcyMazeRunner
 
         public void update(GameTime time)
         {
-
             move(this.mAbsmap, time);
         }
 

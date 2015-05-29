@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class Map
+    public class Map
     {
         // werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
         // insert Map-Code here...es folgt eine User-friendly Zuarbeit zum einfachen Copy&Pasten :))
@@ -95,7 +95,7 @@ namespace IcyMazeRunner.Klassen
                     if (mask.GetPixel(row, col).Name == Sblue)
                     {
                         map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
-                        vPos = new Vector2f(row * 90, col * 90);
+                        vPos = new Vector2f(row * 90 + 45, col * 90 + 45);
                         B_walkable = true;
                     }
 

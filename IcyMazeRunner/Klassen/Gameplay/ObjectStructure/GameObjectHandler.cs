@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    class GameObjectHandler
+    public class GameObjectHandler
     {
         public static List<GameObject> gameObjectList { get; set; }
         public static EntityHandler entityHandler { get; set; }

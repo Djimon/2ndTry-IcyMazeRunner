@@ -32,6 +32,7 @@ namespace IcyMazeRunner.Klassen
         Kompass compass;
         System.Drawing.Image bmKompass;
         Vector2f vTarget = new Vector2f(0, 0);
+        float targetdistance;
 
         Player pRunner;
 
@@ -49,8 +50,11 @@ namespace IcyMazeRunner.Klassen
          * 3 = Death by damage
         */
 
+
         //Bool ersetzt watch-Prüfung?
         public bool B_isDeathAnimationOver;
+
+        Calculator calc;
 
 
         /*~~~~~~~~~~~~~~~~~~~Gap Collision~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -86,7 +90,7 @@ namespace IcyMazeRunner.Klassen
         public void initialize()
         {
 
-
+            calc = new Calculator();
 
             //Moveable_Wall wall = new Moveable_Wall(new Vector2f(0, 0), new Vector2f(0, 0), 1, 1, mMap);
             //wall.wallTrigger.collision(pRunner, new Vector2f(1,1));
@@ -104,12 +108,11 @@ namespace IcyMazeRunner.Klassen
             spFogOfWar.Position = new Vector2f(-1,-1);
 
             Kompass = new GUI();
-           
 
             setTypeOfDeath(0);
             B_isDeathAnimationOver=false;
             
-          
+            // Handler laden
         }
 
         /* ~~~~ Inhalte laden ~~~~ */
@@ -134,6 +137,7 @@ namespace IcyMazeRunner.Klassen
             // mapOfBits = new Bitmap("Texturen/Map_1.bmp");
 
             // Levelzuweisung
+            // Objekte in Handler laden in den jeweiligen Level 
 
             switch (I_level)
             {
@@ -194,7 +198,6 @@ namespace IcyMazeRunner.Klassen
                 {
                     menu = new InGameMenu(pRunner);
                     pRunner.setIsPressed(true);
-
                 }
 
 
@@ -203,7 +206,8 @@ namespace IcyMazeRunner.Klassen
                     pRunner.setPlayerHealth(0);
                     setTypeOfDeath(1);
                 }
-
+                
+                
                 /*
                  for(each triggerobject: objecthandler)
                  {
@@ -217,10 +221,10 @@ namespace IcyMazeRunner.Klassen
                     movableWallXY.move();
                  if (minimum Zeit vergangen) // überflüssig?????
                     {
-                        if((movableWallXY.prevPosition.X+map.getBlocksize == movableWallXY.position.X) oder
-                           (movableWallXY.prevPosition.X-map.getBlocksize == movableWallXY.position.X) oder
-                           (movableWallXY.prevPosition.Y+map.getBlocksize == movableWallXY.position.Y) oder
-                           (movableWallXY.prevPosition.Y-map.getBlocksize == movableWallXY.position.Y)
+                        if(((movableWallXY.prevPosition.X+map.getBlocksize == movableWallXY.position.X) oder
+                           (movableWallXY.prevPosition.X-map.getBlocksize == movableWallXY.position.X)) und
+                           ((movableWallXY.prevPosition.Y+map.getBlocksize == movableWallXY.position.Y) oder
+                           (movableWallXY.prevPosition.Y-map.getBlocksize == movableWallXY.position.Y))
                           )
                            triggerObjectXY.setB_Movable(false);
                     }
@@ -231,7 +235,6 @@ namespace IcyMazeRunner.Klassen
 
                 if (pRunner.getPlayerHealth() == 0)
                 {
-
                     pRunner.DeathAnimation(getTypeOfDeath());
 
 
@@ -243,11 +246,10 @@ namespace IcyMazeRunner.Klassen
                     }
                 }
 
-                if (I_level != I_level) // Kollision mit Treppe= true
+                targetdistance = calc.Vectordistance(pRunner.getplayerSprite().Position, vTarget);
+                if (targetdistance <200)
                 {
                     I_level++;
-
-                    Program.game.handleGameState(); //wieso?
                     return EGameStates.NextLevel;
                 }
 
