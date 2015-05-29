@@ -11,9 +11,9 @@ namespace IcyMazeRunner.Klassen
     public abstract class GameObject
     {
 
-        Vector2f position;
+        Vector2f Position;
         Sprite spSprite{ get; set; }
-        public Texture txCurrentTexture { get { return spSprite.Texture; } }
+        Texture txCurrentTexture { get { return spSprite.Texture; } }
         float F_scale;
         public virtual String S_type { get { return "Object"; } }
         protected bool B_IsAlive_ = true;

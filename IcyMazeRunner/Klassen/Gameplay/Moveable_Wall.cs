@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class Moveable_Wall : Entity //Attribute anpassen
+    public class Moveable_Wall : GameObject //Attribute anpassen
     {
         
         /* ~~~~ Attribute für Mauer ~~~~ */
-        Vector2f Wall_Position;
-        Sprite spWall;
-        Texture txWall;
+        Vector2f Position;
+        Vector2f prevPosition;
+        Sprite spSprite;
+        Texture txCurrentTexture;
         int I_direction;
         int I_orientation;
+        float F_runningSpeed;
         /*
          0 - links rechts
          1 - oben unten
@@ -26,19 +28,25 @@ namespace IcyMazeRunner.Klassen
 
 
         /* ~~~~ Auslöserklasse ~~~~ */
-        public class WallTrigger
+        public class WallTrigger : GameObject
         {
             /* ~~~~ Attribute für Auslöser ~~~~ */
-            Vector2f Wall_Trigger_Position;
-            Sprite spWall_Trigger;
-            Texture txWall_Trigger;
+            Vector2f Position;
+            Sprite spSprite;
+            Texture txCurrentTexture;
             
 
             public WallTrigger(Vector2f _WallTriggerPosition)
             {
-                txWall_Trigger = new Texture("");
-                spWall_Trigger = new Sprite(txWall_Trigger);
-                spWall_Trigger.Position = _WallTriggerPosition;
+                Position = _WallTriggerPosition;
+                txCurrentTexture = new Texture("");
+                spSprite = new Sprite(txCurrentTexture);
+                spSprite.Position = Position;
+
+            }
+
+            public override void update(GameTime gameTime)
+            {
 
             }
 
@@ -47,9 +55,9 @@ namespace IcyMazeRunner.Klassen
                 Vector2f newPosition = new Vector2f((player.getXPosition() + predictedPosition.X + (player.getWidth()/2)), (player.getYPosition() + predictedPosition.Y + (player.getHeigth()/2)));
                 
                 if (
-                     (Math.Abs(newPosition.X + - spWall_Trigger.Position.X) < 45) 
+                     (Math.Abs(newPosition.X + -spSprite.Position.X) < 45) 
                      &&
-                     (Math.Abs(newPosition.Y + - spWall_Trigger.Position.Y) < 45)
+                     (Math.Abs(newPosition.Y + -spSprite.Position.Y) < 45)
                    )
                 {
 
@@ -64,12 +72,15 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Konstruktur für Mauer ~~~~ */
         public Moveable_Wall(Vector2f WallPosition, Vector2f WallTriggerPosition, int _orientation, int _direction, Map cMap)
         {
-
             wallTrigger = new WallTrigger(WallTriggerPosition);
-            txWall = new Texture("");
-            spWall = new Sprite(txWall);
+            Position = WallPosition;
+            prevPosition = Position;
+            txCurrentTexture = new Texture("");
+            spSprite = new Sprite(txCurrentTexture);
+            spSprite.Position = Position;
             I_orientation = _orientation;
             I_direction = _direction;
+            F_runningSpeed = 1;
         }
 
         public Boolean getB_moveable()
@@ -82,28 +93,49 @@ namespace IcyMazeRunner.Klassen
             B_moveable = value;
         }
 
-
         // wenn Trigger ausgelöst, wird move aufgerufen
+        public void update(GameTime gameTime, Map cMap)
+        {
+            if (B_moveable) move(gameTime, cMap);
+        }
+
+        public override void update(GameTime gameTime)
+        {
+
+        }
+
+
+ 
         // in 2 Richtungen(oben-unten oder links-rechts)
         // Int%2 gibt an, in welche Richtung
-        public void move(Map cMap)
+        public void move(GameTime gameTime, Map cMap)
         {
-            // Speed an Rechnerzeit anpassen, Blocksize mit hineinnehmen und unten durch Speed ersetzen
-            // links-rechts Ausrichtung
+
+            F_runningSpeed = 0.5f * gameTime.ElapsedTime.Milliseconds;
+
             if (I_orientation==0)
             {
                 // rechts
                 if (I_direction % 2 == 0)
                 {
-                    Wall_Position.X = Wall_Position.X + cMap.getBlocksize();
+                    Position.X = Position.X + F_runningSpeed;
+
+                    if (Math.Abs(Position.X - (prevPosition.X + cMap.getBlocksize())) < 5)
+                    {
+                        Position.X = prevPosition.X + cMap.getBlocksize();
+                    }
                 }
                 // links
                 else
                 {
-                    Wall_Position.X = Wall_Position.X - cMap.getBlocksize();
+                    Position.X = Position.X - F_runningSpeed;
+
+                    if (Math.Abs(Position.X - (prevPosition.X - cMap.getBlocksize())) < 5)
+                    {
+                        Position.X = prevPosition.X - cMap.getBlocksize();
+                    }
                 }
-                // wenn aktuelle Wallposition sich nur um x Pixel von Endposition(prevPosition.X + bzw. - getBlocksize) unterscheidet, wird es
-                // Wallposition auf prevPosition.X + getBlocksize() gesetzt (um genaue Position zu erhalten und Rundungsfehler zu vermeiden)
+
             }
             // oben-unten Ausrichtung
             else
@@ -111,18 +143,36 @@ namespace IcyMazeRunner.Klassen
                 // unten
                 if (I_direction % 2 == 0)
                 {
-                    Wall_Position.Y = Wall_Position.Y + cMap.getBlocksize();
+                    Position.Y = Position.Y + F_runningSpeed;
+
+                    if (Math.Abs(Position.Y - (prevPosition.Y - cMap.getBlocksize())) < 5)
+                    {
+                        Position.Y = prevPosition.Y - cMap.getBlocksize();
+                    }
                 }
                 // oben
                 else
                 {
-                    Wall_Position.Y = Wall_Position.Y - cMap.getBlocksize();
+                    Position.Y = Position.Y - F_runningSpeed;
+
+                    if (Math.Abs(Position.Y - (prevPosition.Y - cMap.getBlocksize())) < 5)
+                    {
+                        Position.Y = prevPosition.Y - cMap.getBlocksize();
+                    }
                 }
             }
 
-            //Kollision einfügen
+            spSprite.Position = Position;
+        }
 
-        } 
-        
+        public Boolean Wall_Collision(Player player, Vector2f predictedPosition, Calculator calc)
+        {
+            if (calc.Vectordistance(new Vector2f(predictedPosition.X + player.getWidth(), predictedPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

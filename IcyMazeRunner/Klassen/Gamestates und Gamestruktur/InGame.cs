@@ -211,7 +211,7 @@ namespace IcyMazeRunner.Klassen
                 /*
                  for(each triggerobject: objecthandler)
                  {
-                  if(triggerObjectXY.point_Collision(Runner) && triggerObjectXY.getB_Movable() )
+                  if(triggerObjectXY.point_Collision(Runner) && !triggerObjectXY.getB_Movable() )
                     {
                     triggerObjectXY.setB_Movable(true);
                     Vector2f movableWallXY.prevPosition = movableWallXY.position;

@@ -11,6 +11,7 @@ namespace IcyMazeRunner.Klassen
     {
         public static List<GameObject> gameObjectList { get; set; }
         public static EntityHandler entityHandler { get; set; }
+        public static MovableWallHandler moveableWallHandler { get; set; }
 
 
         public GameObjectHandler()
@@ -67,6 +68,7 @@ namespace IcyMazeRunner.Klassen
                 gObj.kill();
             }
             EntityHandler.deleteAll();
+            MovableWallHandler.deleteAll();
         }
 
         /* ~~~~ Update ~~~~ */
@@ -90,6 +92,7 @@ namespace IcyMazeRunner.Klassen
             }
 
             entityHandler.update(gameTime);
+            moveableWallHandler.update(gameTime);
         }
 
 

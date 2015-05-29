@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class MovableWallHandler : EntityHandler
+    public class MovableWallHandler : GameObjectHandler
     {
 
         public static List<Moveable_Wall> MoveableWallList;
@@ -29,18 +29,54 @@ namespace IcyMazeRunner.Klassen
             foreach(Moveable_Wall moveableWall in added_moveableWallList)
             {
                 MoveableWallList.Add(moveableWall);
-                entityList.Add(moveableWall);
                 gameObjectList.Add(moveableWall);
             }
         
         }
 
-        public void update(GameTime gameTime, Player pRunner, Vector2f predictedPosition, Map cMap)
+        public static void deleteAll()
         {
             foreach (Moveable_Wall moveableWall in MoveableWallList)
             {
-                moveableWall.wallTrigger.collision(pRunner, predictedPosition);
-                moveableWall.move(cMap);
+                moveableWall.kill();
+            }
+        }
+
+        public static void deleteType(String _type)
+        {
+            bool B_FoundEntry = false;
+            for (int i = 0; i < MoveableWallList.Count; i++)
+            {
+                if (MoveableWallList[i].S_type.Equals(_type))
+                {
+                    MoveableWallList.RemoveAt(i);
+                    B_FoundEntry = true;
+                    i--;
+                }
+            }
+
+            if (B_FoundEntry)
+            {
+                GameObjectHandler.deleteType(_type);
+            }
+        }
+
+        public void update(GameTime gameTime, Player pRunner, Vector2f predictedPosition, Map cMap)
+        {
+
+            for (int i = 0; i < MoveableWallList.Count; i++)
+            {
+                if (!MoveableWallList[i].B_isAlive)
+                {
+                    MoveableWallList.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            foreach (Moveable_Wall moveableWall in MoveableWallList)
+            {
+                moveableWall.setB_moveable(moveableWall.wallTrigger.collision(pRunner, predictedPosition));
+                moveableWall.update(gameTime, cMap);
             }
         }
     }
