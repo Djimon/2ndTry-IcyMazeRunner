@@ -30,7 +30,6 @@ namespace IcyMazeRunner.Klassen
         GUI SoftPopUp;
 
         Kompass compass;
-        System.Drawing.Image bmKompass;
         Vector2f vTarget = new Vector2f(0, 0);
         float targetdistance;
 
@@ -129,8 +128,7 @@ namespace IcyMazeRunner.Klassen
           /****************************************
            ************** KOMPASS *****************
            ****************************************/
-          // bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
-
+           
 
 
 
@@ -162,7 +160,7 @@ namespace IcyMazeRunner.Klassen
             }
 
             vTarget = mMap.vPos;
-          compass = new Kompass(vIngame.Center, vTarget, bmKompass);
+            compass = new Kompass(vIngame.Center, vTarget,new Texture("Texturen/Menü+Anzeige/GUI/needle.png")); //WHY????
           
             //        hier Fallen und Hindernisse laden???
             //         ziel?
@@ -246,7 +244,7 @@ namespace IcyMazeRunner.Klassen
                     }
                 }
 
-                targetdistance = calc.Vectordistance(pRunner.getplayerSprite().Position, vTarget);
+                targetdistance = calc.getDistance(pRunner.getplayerSprite().Position, vTarget);
                 if (targetdistance <200)
                 {
                     I_level++;
@@ -269,7 +267,7 @@ namespace IcyMazeRunner.Klassen
                 /****************************************
                 ************** KOMPASS *****************
                 ****************************************/
-            //    compass.update();
+                compass.update();
               
                 
                 // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
@@ -337,7 +335,7 @@ namespace IcyMazeRunner.Klassen
             mMap.draw(win);
             pRunner.draw(win);
             win.Draw(spFogOfWar);
-            //Kompass.draw(spKompass, win, vIngame);
+            compass.draw(win);
             win.SetMouseCursorVisible(false);
             if (menu != null)
             {

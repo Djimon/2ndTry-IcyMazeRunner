@@ -167,7 +167,7 @@ namespace IcyMazeRunner.Klassen
 
         public Boolean Wall_Collision(Player player, Vector2f predictedPosition, Calculator calc)
         {
-            if (calc.Vectordistance(new Vector2f(predictedPosition.X + player.getWidth(), predictedPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50)
+            if (calc.getDistance(new Vector2f(predictedPosition.X + player.getWidth(), predictedPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50)
             {
                 return true;
             }

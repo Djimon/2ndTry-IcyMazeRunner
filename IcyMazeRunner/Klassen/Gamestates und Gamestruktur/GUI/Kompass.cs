@@ -29,7 +29,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
 
         public Vector2f getVector(Vector2f a, Vector2f b)
         {
-            return (b - a);
+            return (b - a);  // nicht sicher, ob der richtig berechnet wird
         }
 
         public float getWinkel(Vector2f position)

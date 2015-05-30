@@ -85,9 +85,8 @@ namespace IcyMazeRunner.Klassen
                 txStartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
                 txControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
                 txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
-          
-                txBackGround = new Texture("Texturen/Menü+Anzeigen/Titel.png");
 
+                txBackGround = new Texture("Texturen/Menü+Anzeigen/Titel.png");
                 
         }
 
