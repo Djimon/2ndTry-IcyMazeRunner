@@ -1,4 +1,4 @@
-﻿Version 1.3.B006
+﻿Version 1.3.B008
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,33 @@
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.3.B008 (Kilian):
+	- Moveable_Wall.cs: Attributsnamen an GameObject angepasst
+	- Moveable_Wall.cs: Wall_Collision eingebaut
+	- Moveable_Wall.cs: Update() eingefügt
+	- Moveable_Wall.cs: move() an Rechnergeschwindigkeit angepasst
+	- Moveable_Wall.cs: Rundungsfehler durch Festsetzen der Position am Ende der Bewegung vorgebeugt
+	- Moveable_Wall.cs und MoveableWallHandler.cs direkt von GameObject.cs und GameObjectHandler.cs ableitend --> Änderungen bei
+	  EntityHandler und GameObjectHandler
+	- MoveableWallHandler.cs: Allgemeine Methodenanpassungen und -erweiterungen
+
+Version 1.3.B008 (Kilian):
+	- Kollision mit Levelziel eingefügt
+	- Moveable_Wall und damit zusammenhängende Klassen fortgesetzt
+	- Calculator.cs eingerichtet, im Moment nur zur Berechnung des Abstands zweier Vektoren. Weitere Methoden, die von Math.* nicht
+	  abgedeckt werden, können folgen
+
+Version 1.3.B007b (Kilian):
+	- Movable Wall Konstruktur korrigiert --> den abhängigen WallTrigger als Klassenvariable angelegt
+	- Movable Wall Beispiel in Ingame.initialize als Kommentar eingefügt
+
+Version 1.3.B007 (Kilian):
+	- GameObject.cs und GameObjectHandler.cs implementiert
+	- InGame B_isMenuOpen entfernt, da überflüssig
+	- Klassen Entity, EntityHandler hinzugefügt
+	- EntityHandler.cs implementiert
+
 
 Version 1.3.B006 (Chris):
 	- Loch im Boden für Collision-test in 1. map eingebaut

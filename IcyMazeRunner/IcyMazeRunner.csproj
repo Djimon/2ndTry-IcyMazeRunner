@@ -52,6 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klassen\Calculator.cs" />
+    <Compile Include="Klassen\Gameplay\MovableWallHandler.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Entity.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\EntityHandler.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />
     <Compile Include="Klassen\Gameplay\Enemy.cs" />
     <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
@@ -64,7 +69,7 @@
     <Compile Include="Klassen\Menüs\Controls.cs" />
     <Compile Include="Klassen\Menüs\Credits.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\Game.cs" />
-    <Compile Include="Klassen\GameObject.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\GameObject.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GameOver.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GameStates.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GameTime.cs" />
