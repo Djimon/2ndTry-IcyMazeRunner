@@ -1,4 +1,4 @@
-﻿Version 1.3.B009
+﻿Version 1.3.B011
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,11 @@
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+Version 1.3.B011 (Chris):
+	- Kompass gefixed
+	- Map: getType() hinzugefügt
+	- Zielerfassung in der inGame
 
 Version 1.3.B010 (Kilian):
 	- Moveable_Wall.cs: komplett kommentiert
