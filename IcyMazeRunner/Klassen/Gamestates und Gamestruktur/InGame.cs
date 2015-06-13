@@ -30,6 +30,7 @@ namespace IcyMazeRunner.Klassen
         GUI SoftPopUp;
 
         Kompass compass;
+        System.Drawing.Image bmKompass;
         Vector2f vTarget = new Vector2f(0, 0);
         float targetdistance;
 
@@ -54,6 +55,12 @@ namespace IcyMazeRunner.Klassen
         public bool B_isDeathAnimationOver;
 
         Calculator calc;
+
+        /*~~~~~~~~~~~~~~~~~~~ Handler ~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+        GameObjectHandler GOH;
+        EntityHandler EH;
+        MoveableWallHandler MWH;
 
 
         /*~~~~~~~~~~~~~~~~~~~Gap Collision~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -111,7 +118,7 @@ namespace IcyMazeRunner.Klassen
             setTypeOfDeath(0);
             B_isDeathAnimationOver=false;
             
-            // Handler laden
+            GOH = new GameObjectHandler(calc);
         }
 
         /* ~~~~ Inhalte laden ~~~~ */
@@ -128,7 +135,8 @@ namespace IcyMazeRunner.Klassen
           /****************************************
            ************** KOMPASS *****************
            ****************************************/
-           
+          // bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
+
 
 
 
@@ -160,7 +168,7 @@ namespace IcyMazeRunner.Klassen
             }
 
             vTarget = mMap.vPos;
-            compass = new Kompass(vIngame.Center, vTarget,new Texture("Texturen/Menü+Anzeige/GUI/needle.png")); //WHY????
+          //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
           
             //        hier Fallen und Hindernisse laden???
             //         ziel?
@@ -204,30 +212,10 @@ namespace IcyMazeRunner.Klassen
                     pRunner.setPlayerHealth(0);
                     setTypeOfDeath(1);
                 }
-                
-                
-                /*
-                 for(each triggerobject: objecthandler)
-                 {
-                  if(triggerObjectXY.point_Collision(Runner) && !triggerObjectXY.getB_Movable() )
-                    {
-                    triggerObjectXY.setB_Movable(true);
-                    Vector2f movableWallXY.prevPosition = movableWallXY.position;
-                    movableWallXY.I_direction ++;
-                    }
-                 if(triggerObjectXY.getB_Movable())
-                    movableWallXY.move();
-                 if (minimum Zeit vergangen) // überflüssig?????
-                    {
-                        if(((movableWallXY.prevPosition.X+map.getBlocksize == movableWallXY.position.X) oder
-                           (movableWallXY.prevPosition.X-map.getBlocksize == movableWallXY.position.X)) und
-                           ((movableWallXY.prevPosition.Y+map.getBlocksize == movableWallXY.position.Y) oder
-                           (movableWallXY.prevPosition.Y-map.getBlocksize == movableWallXY.position.Y))
-                          )
-                           triggerObjectXY.setB_Movable(false);
-                    }
-                }
-                 */
+
+
+
+                GOH.update(gametime, pRunner, mMap);
 
                 gtIngame.update();
 
@@ -263,11 +251,11 @@ namespace IcyMazeRunner.Klassen
                     return EGameStates.NextLevel;
                 }
 
-                pRunner.update(gtIngame);
+                pRunner.update(gtIngame, GameObjectHandler.moveableWallHandler);
                 /****************************************
                 ************** KOMPASS *****************
                 ****************************************/
-                compass.update();
+            //    compass.update();
               
                 
                 // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
@@ -335,7 +323,7 @@ namespace IcyMazeRunner.Klassen
             mMap.draw(win);
             pRunner.draw(win);
             win.Draw(spFogOfWar);
-            compass.draw(win);
+            //Kompass.draw(spKompass, win, vIngame);
             win.SetMouseCursorVisible(false);
             if (menu != null)
             {

@@ -15,7 +15,6 @@ namespace IcyMazeRunner.Klassen
         public EntityHandler()
         {
             entityList = new List<Entity>();
-            MovableWallHandler movableWallHandler = new MovableWallHandler();
         }
 
         public static void add(Entity entity)
