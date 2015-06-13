@@ -7,6 +7,14 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
+Version 1.3.B010 (Kilian):
+	- Moveable_Wall.cs: komplett kommentiert
+	- Moveable_Wall.cs: Animation für Bewegung nach oben und unten fertig gestellt
+	- Moveable_Wall.cs: Wall_Collision angepasst
+	- Moveable_Wall.cs: Verbindungen mit den Handlern angepasst
+	- Calculator.cs: addX() und addY() zum Addieren/Subtrahieren von Skalaren zu einem der beiden Komponenten eines 2D-Vektors eingefügt
+	- InGame.cs: Handler integriert
+
 Version 1.3.B009 (Chris):
 	- Kompass umgeschrieben (LoadingException????)
 	- calculator erweitert um Winkel

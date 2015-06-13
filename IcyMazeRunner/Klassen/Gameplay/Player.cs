@@ -21,7 +21,7 @@ namespace IcyMazeRunner
         GameTime gtMoveTime;
 
         /* ~~~~ Wichtige Playerattribute ~~~~ */
-        Sprite spPlayer {get;set;}
+        Sprite spPlayer { get; set; }
         Vector2f playerPosition;
 
 
@@ -75,57 +75,57 @@ namespace IcyMazeRunner
         float F_runningSpeed;
         // int basicDamage
         // int basicDefence
-        
+        Vector2f PredictedPosition;
 
         /* ~~~~ Konstruktor ~~~~ */
-        public Player(Vector2f Pos, Map map) 
+        public Player(Vector2f Pos, Map map)
         {
             //Festlegen der Spielerposition, wird mit neuem Level neu festgelegt
             playerPosition = Pos;
-            
+
 
             // Initialisierung der HP des Spielers, wird mit neuem Level neu festgelegt
             I_healthPoints = 100;
-            
+
 
             //Bewegungstexturen werden geladen
-                txDown1 = new Texture("Texturen/Player/down1.png");
-                txDown2 = new Texture("Texturen/Player/down2.png");
-                txDown3 = new Texture("Texturen/Player/downidle.png");
-                txUp1 = new Texture("Texturen/Player/up1.png");
-                txUp2 = new Texture("Texturen/Player/up2.png");
-                txUp3 = new Texture("Texturen/Player/upidle.png");
-                txRight1 = new Texture("Texturen/Player/right1.png");
-                txRight2 = new Texture("Texturen/Player/right2.png");
-                txRight3 = new Texture("Texturen/Player/rightidle.png");
-                txLeft1 = new Texture("Texturen/Player/left1.png");
-                txLeft2 = new Texture("Texturen/Player/left2.png");
-                txLeft3 = new Texture("Texturen/Player/leftidle.png");
+            txDown1 = new Texture("Texturen/Player/down1.png");
+            txDown2 = new Texture("Texturen/Player/down2.png");
+            txDown3 = new Texture("Texturen/Player/downidle.png");
+            txUp1 = new Texture("Texturen/Player/up1.png");
+            txUp2 = new Texture("Texturen/Player/up2.png");
+            txUp3 = new Texture("Texturen/Player/upidle.png");
+            txRight1 = new Texture("Texturen/Player/right1.png");
+            txRight2 = new Texture("Texturen/Player/right2.png");
+            txRight3 = new Texture("Texturen/Player/rightidle.png");
+            txLeft1 = new Texture("Texturen/Player/left1.png");
+            txLeft2 = new Texture("Texturen/Player/left2.png");
+            txLeft3 = new Texture("Texturen/Player/leftidle.png");
 
 
             //Fallanimationstexturen werden geladen
-                txFall1a = new Texture("Texturen/Player/Fallanimation/fall1a Platzhalter.png");
-                txFall1b = new Texture("Texturen/Player/Fallanimation/fall1b Platzhalter.png");
-                txFall2a = new Texture("Texturen/Player/Fallanimation/fall2a Platzhalter.png");
-                txFall2b = new Texture("Texturen/Player/Fallanimation/fall2b Platzhalter.png");
-                txFall3a = new Texture("Texturen/Player/Fallanimation/fall3a Platzhalter.png");
-                txFall3b = new Texture("Texturen/Player/Fallanimation/fall3b Platzhalter.png");
-                txFall4a = new Texture("Texturen/Player/Fallanimation/fall4a Platzhalter.png");
-                txFall4b = new Texture("Texturen/Player/Fallanimation/fall4b Platzhalter.png");
-           
-           //Standardtextur wird festgelegt
+            txFall1a = new Texture("Texturen/Player/Fallanimation/fall1a Platzhalter.png");
+            txFall1b = new Texture("Texturen/Player/Fallanimation/fall1b Platzhalter.png");
+            txFall2a = new Texture("Texturen/Player/Fallanimation/fall2a Platzhalter.png");
+            txFall2b = new Texture("Texturen/Player/Fallanimation/fall2b Platzhalter.png");
+            txFall3a = new Texture("Texturen/Player/Fallanimation/fall3a Platzhalter.png");
+            txFall3b = new Texture("Texturen/Player/Fallanimation/fall3b Platzhalter.png");
+            txFall4a = new Texture("Texturen/Player/Fallanimation/fall4a Platzhalter.png");
+            txFall4b = new Texture("Texturen/Player/Fallanimation/fall4b Platzhalter.png");
+
+            //Standardtextur wird festgelegt
             spPlayer = new Sprite(txDown3);
 
 
             //Sprite wird geladen
-            spPlayer.Scale = new Vector2f(1f, 1f); 
+            spPlayer.Scale = new Vector2f(1f, 1f);
             spPlayer.Position = playerPosition;
             spPlayer = new Sprite(spPlayer);
 
 
             //Kopie der Map für move-Methode weiter unten
             mAbsmap = map;
-                   
+
 
             // Stoppuhr für Herausforderungsmodus starten
             gtMoveTime = new GameTime();
@@ -134,8 +134,11 @@ namespace IcyMazeRunner
             // Attribute und Objekte für Todesanimation initialisieren
             gtDeathWatch = new GameTime();
             B_isDeathWatchOn = false;
+
+
+            PredictedPosition = new Vector2f(0, 0);
         }
-        
+
 
         /* ~~~~~~~~~~~~~~~~~~ Getter und Setter ~~~~~~~~~~~~~~*/
 
@@ -198,17 +201,27 @@ namespace IcyMazeRunner
             B_isDeathWatchOn = value;
         }
 
+        public Vector2f getPredictedPosition()
+        {
+            return PredictedPosition;
+        }
+
+        public void setPredictedPosition(Vector2f vector)
+        {
+            PredictedPosition = vector;
+        }
+
 
         /*~~~~ Update ~~~~*/
 
-        public void update(GameTime time)
+        public void update(GameTime time, MoveableWallHandler MWH)
         {
-            move(this.mAbsmap, time);
+            move(this.mAbsmap, time, MWH);
         }
 
 
         /*~~~~ Methode für Bewegungsteuerung des Spielers ~~~~*/
-        public void move(Map map, GameTime time)
+        public void move(Map map, GameTime time, MoveableWallHandler MWH)
         {
             /*~~~~ Anpassen der Spielergeschwindigkeit an den Computer ~~~~*/
             F_runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
@@ -219,15 +232,15 @@ namespace IcyMazeRunner
 
             /*~~~~ Aktivieren und Deaktivieren des Herausforderungsmodus ~~~~*/
             if (Keyboard.IsKeyPressed(Keyboard.Key.F2))
-            B_isControlChanged = true;
+                B_isControlChanged = true;
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.F1))
-            B_isControlChanged = false;
+                B_isControlChanged = false;
 
 
             /*~~~~ Wenn Herausforderungsmodus aktiviert, wechsel in Methode zur Bewegungssteuerung im Herausforderungsmodus ~~~~*/
             if (B_isControlChanged)
-            changingmove(map, time);
+                changingmove(map, time);
 
 
             /*~~~~ Ansonsten normale Bewegungssteuerung ~~~~*/
@@ -235,63 +248,63 @@ namespace IcyMazeRunner
             {
 
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            /*~~~~ Wenn Spieler sich nicht bewegt, ist isPressed falsch, Textur anpassen ~~~~*/
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)) && MWH.isWalkable(this, new Vector2f(-F_runningSpeed, 0)))
                 {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }   
-            }
-        }
+                    playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                    if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                    else this.spPlayer.Texture = txLeft2;
+                    B_isPressed = true;
+                    I_rememberidle = 0;
+                }
 
-        /*~~~~ Spriteposition an Position des Objektes anpassen ~~~~*/
-        spPlayer.Position = playerPosition;
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)) && MWH.isWalkable(this, new Vector2f(  F_runningSpeed, 0)))
+                {
+                    playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                    if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                    else this.spPlayer.Texture = txRight2;
+                    B_isPressed = true;
+                    I_rememberidle = 1;
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)) && MWH.isWalkable(this, new Vector2f(0, -F_runningSpeed)))
+                {
+                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                    if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                    else this.spPlayer.Texture = txUp2;
+                    B_isPressed = true;
+                    I_rememberidle = 2;
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)) && MWH.isWalkable(this, new Vector2f(0, F_runningSpeed)))
+                {
+                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                    if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                    else this.spPlayer.Texture = txDown2;
+                    B_isPressed = true;
+                    I_rememberidle = 3;
+                }
+
+                /*~~~~ Wenn Spieler sich nicht bewegt, ist isPressed falsch, Textur anpassen ~~~~*/
+                if (B_isPressed == false)
+                {
+                    switch (I_rememberidle)
+                    {
+                        case 0: this.spPlayer.Texture = txLeft3;
+                            break;
+                        case 1: this.spPlayer.Texture = txRight3;
+                            break;
+                        case 2: this.spPlayer.Texture = txUp3;
+                            break;
+                        case 3: this.spPlayer.Texture = txDown3;
+                            break;
+                        default: this.spPlayer.Texture = txDown3;
+                            break;
+                    }
+                }
+            }
+
+            /*~~~~ Spriteposition an Position des Objektes anpassen ~~~~*/
+            spPlayer.Position = playerPosition;
 
 
         }
@@ -313,7 +326,7 @@ namespace IcyMazeRunner
 
             /*~~~~ Auswahl der Animation abhängig von Todesursache ~~~~*/
             switch (typeOfDeath)
-            { 
+            {
                 case 0:
                     {
                         /* Nichts, da am Leben */
@@ -325,7 +338,7 @@ namespace IcyMazeRunner
                         /* Fallanimation*/
                         if (gtDeathWatch.Watch.ElapsedMilliseconds > 0 && gtDeathWatch.Watch.ElapsedMilliseconds < 1000)
                         {
-                            if (I_fallAnimationCounter%2==0)
+                            if (I_fallAnimationCounter % 2 == 0)
                             {
                                 spPlayer.Texture = txFall1a;
                             }
@@ -383,8 +396,8 @@ namespace IcyMazeRunner
                     {
                         break;
                     }
-            
-            
+
+
             }
         }
 
@@ -394,10 +407,11 @@ namespace IcyMazeRunner
         {
             win.Draw(spPlayer); // Element anpassen
         }
-        
+
 
         // LAAAAANNNNNGGGEEEE Methode für die 24 möglichen Zuweisungen der Tastatur im Hardmode bis zum Ende der Klasse
-        public void changingmove(Map map, GameTime time) {
+        public void changingmove(Map map, GameTime time)
+        {
 
 
             /*~~~~ Neue Zuordnung der Tastatur an die Bewegungsrichtung alle 20 Sekunden ~~~~*/
@@ -409,1399 +423,1399 @@ namespace IcyMazeRunner
 
 
             /*~~~~ Alle möglichen Fälle für die Steuerung ~~~~*/
-switch (I_moveChangerState) 
-{
-    case 0:
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-
-
-    case 1:
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 2:
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-
-	    break;
-
-
-    case 3:
-
-
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 4:
-
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 5:
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-    case 6:
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 7:
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 8:
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 9:
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 10:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-    case 11:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 12:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 13:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-    case 14:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 15:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 16:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 17:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-    case 18:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-
-    case 19:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-
-    case 20:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-
-    case 21:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-
-
-    case 22:
-
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-
-
-
-    case 23:
-
- if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed,0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
-                else this.spPlayer.Texture = txLeft2;
-                B_isPressed = true;
-                I_rememberidle = 0;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
-                else this.spPlayer.Texture = txRight2;
-                B_isPressed = true;
-                I_rememberidle = 1;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
-                else this.spPlayer.Texture = txUp2;
-                B_isPressed = true;
-                I_rememberidle = 2;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed))) 
-            {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
-                if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
-                else this.spPlayer.Texture = txDown2;
-                B_isPressed = true;
-                I_rememberidle = 3;
-            }
-
-            if (B_isPressed == false)
-            {
-                switch (I_rememberidle)
-                {
-                    case 0: this.spPlayer.Texture = txLeft3;
-                        break;
-                    case 1: this.spPlayer.Texture = txRight3;
-                        break;
-                    case 2: this.spPlayer.Texture = txUp3;
-                        break;
-                    case 3: this.spPlayer.Texture = txDown3;
-                        break;
-                    default: this.spPlayer.Texture = txDown3;
-                        break;
-                }
-            }
-	    break;
-
-}
-
-
-}
+            switch (I_moveChangerState)
+            {
+                case 0:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+
+
+                case 1:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 2:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+
+                    break;
+
+
+                case 3:
+
+
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 4:
+
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 5:
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+                case 6:
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 7:
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 8:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 9:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 10:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+                case 11:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 12:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 13:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 14:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 15:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 16:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 17:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+                case 18:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+
+                case 19:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+
+                case 20:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+
+                case 21:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+
+
+                case 22:
+
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+
+
+
+                case 23:
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X - F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
+                        else this.spPlayer.Texture = txLeft2;
+                        B_isPressed = true;
+                        I_rememberidle = 0;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X + F_runningSpeed, playerPosition.Y);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
+                        else this.spPlayer.Texture = txRight2;
+                        B_isPressed = true;
+                        I_rememberidle = 1;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
+                        else this.spPlayer.Texture = txUp2;
+                        B_isPressed = true;
+                        I_rememberidle = 2;
+                    }
+
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)))
+                    {
+                        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + F_runningSpeed);
+                        if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
+                        else this.spPlayer.Texture = txDown2;
+                        B_isPressed = true;
+                        I_rememberidle = 3;
+                    }
+
+                    if (B_isPressed == false)
+                    {
+                        switch (I_rememberidle)
+                        {
+                            case 0: this.spPlayer.Texture = txLeft3;
+                                break;
+                            case 1: this.spPlayer.Texture = txRight3;
+                                break;
+                            case 2: this.spPlayer.Texture = txUp3;
+                                break;
+                            case 3: this.spPlayer.Texture = txDown3;
+                                break;
+                            default: this.spPlayer.Texture = txDown3;
+                                break;
+                        }
+                    }
+                    break;
+
+            }
+
+
+        }
     }
 }

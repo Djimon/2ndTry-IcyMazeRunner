@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class MovableWallHandler : GameObjectHandler
+    public class MoveableWallHandler : GameObjectHandler
     {
 
         public static List<Moveable_Wall> MoveableWallList;
 
-        public MovableWallHandler()
+        public MoveableWallHandler()
         {
-            List<Moveable_Wall> MoveableWallList = new List<Moveable_Wall>();
+            MoveableWallList = new List<Moveable_Wall>();
 
 
         }
@@ -61,23 +61,76 @@ namespace IcyMazeRunner.Klassen
             }
         }
 
-        public void update(GameTime gameTime, Player pRunner, Vector2f predictedPosition, Map cMap)
-        {
 
-            for (int i = 0; i < MoveableWallList.Count; i++)
+        public Boolean isWalkable(Player pPlayer, Vector2f predictedPosition)
+        {
+            try
             {
-                if (!MoveableWallList[i].B_isAlive)
+                foreach (Moveable_Wall moveableWall in MoveableWallList)
                 {
-                    MoveableWallList.RemoveAt(i);
-                    i--;
+                    if (moveableWall.Wall_Collision(pPlayer, predictedPosition, calc))
+                    {
+                        return false;
+                    }
                 }
+            } catch (NullReferenceException)
+            {
+
             }
+
+            return true;
+        }
+
+
+        public void update(GameTime gameTime, Player pRunner, Map cMap, Calculator calc)
+        {
+            try
+            {
+                for (int i = 0; i < MoveableWallList.Count; i++)
+                {
+                    if (!MoveableWallList[i].B_isAlive)
+                    {
+                        MoveableWallList.RemoveAt(i);
+                        i--;
+                    }
+                }
+           
 
             foreach (Moveable_Wall moveableWall in MoveableWallList)
             {
-                moveableWall.setB_moveable(moveableWall.wallTrigger.collision(pRunner, predictedPosition));
-                moveableWall.update(gameTime, cMap);
+                /* Auslösen der Bewegung */
+                if (!moveableWall.getB_moveable() && moveableWall.wallTrigger.collision(pRunner))
+                {
+                    moveableWall.setB_moveable(true);
+                    moveableWall.set_PrevPosition(moveableWall.get_Position());
+                    moveableWall.setI_direction(moveableWall.getI_direction()+1);
+                }  
+
+                /* Normalisieren von I_direction und I_orientation in der Moveable_Wall.update(...) */
+                moveableWall.update(gameTime);
+                
+                /* Bewegen der Mauer */
+                if (moveableWall.getB_moveable())
+                {
+                    moveableWall.move(gameTime, cMap);
+                }
+
+                /* Wenn an richtiger Position, Bool für erneutes Auslösen auf Standard setzen */
+                 if( ((calc.addX(moveableWall.get_PrevPosition(),cMap.getBlocksize()).X.Equals(moveableWall.get_Position().X)) ||
+                      (calc.addX(moveableWall.get_PrevPosition(),-cMap.getBlocksize()).X.Equals(moveableWall.get_Position().X))) 
+                     &&
+                     ((calc.addY(moveableWall.get_PrevPosition(),cMap.getBlocksize()).Y.Equals(moveableWall.get_Position().Y)) ||
+                      (calc.addY(moveableWall.get_PrevPosition(),-cMap.getBlocksize()).Y.Equals(moveableWall.get_Position().Y)))
+                   )
+                 {
+                     moveableWall.setB_moveable(false);
+                 }
             }
-        }
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("moveable wall is null");
+            }
+        }       
     }
 }

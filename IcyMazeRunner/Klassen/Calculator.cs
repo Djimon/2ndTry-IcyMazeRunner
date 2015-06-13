@@ -33,6 +33,16 @@ namespace IcyMazeRunner.Klassen
             return (float)(Math.Atan2(y, x) * 180 / Math.PI);  // drehugnswinkel (in grad *180/PI) zum zielvector(y-wert,x-wert)
         }
 
+        public Vector2f addX (Vector2f vector, float value)
+        {
+            Vector2f resultVector = new Vector2f(vector.X + value, vector.Y);
+            return resultVector;
+        }
+        public Vector2f addY(Vector2f vector, float value)
+        {
+            Vector2f resultVector = new Vector2f(vector.Y + value, vector.Y);
+            return resultVector;
+        }
 
     }
 }
