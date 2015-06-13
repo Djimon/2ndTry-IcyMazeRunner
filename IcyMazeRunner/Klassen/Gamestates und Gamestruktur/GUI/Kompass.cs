@@ -71,7 +71,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         {
             if (getWinkel(getVector(vCompass, vTarget)) != 0)
             {
-                Sprite spnew = RotateImageByAngle(spNeedle, getWinkel(getVector(vCompass, vTarget)));
+                spnew = RotateImageByAngle(spNeedle, getWinkel(getVector(vCompass, vTarget)));
             }
         }
 

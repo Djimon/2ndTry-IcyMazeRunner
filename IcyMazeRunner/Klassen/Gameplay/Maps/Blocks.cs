@@ -16,7 +16,8 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Blocksprite anlegen ~~~~ */
         Sprite spBlock {get;set;}
-        EGameStates gameState; 
+        EGameStates gameState;
+        private int blockType; 
         // Kollision ähnlich Loch im Boden --> Kollision mit Farbe --> setzt bool für Level beendet auf true --> player.update()returnt
         // nextLevel an Ingame --> InGame.update(); returnt nextLevel und dann wird Gamestate geändert
 
@@ -32,11 +33,15 @@ namespace IcyMazeRunner.Klassen
             return this.B_walkable;
         }
 
+        public int type()
+        {
+            return this.blockType;
+        }
 
         /* ~~~~ Konstruktor ~~~~ */
         public Blocks(int blockType, Vector2f position, Texture txBlock)
         {
-
+            this.blockType = blockType;
 
             /* ~~~~ Auswahl der Textur, je nachdem, welches int blockType die Map von der Bitmap mitgibt ~~~~ */
                 switch (blockType)

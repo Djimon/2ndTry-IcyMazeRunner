@@ -29,7 +29,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         private bool B_walkable;
         /* ~~~~ Blockgröße, um sie zentral ändern zu können ~~~~ */
-        private int I_blockSize=90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
+        private int I_blockSize = 90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
 
         
         /* ~~~~ Strings, um Bitmapfarbe einem Blocktyp zuzuordnen ~~~~ */
@@ -59,13 +59,13 @@ namespace IcyMazeRunner.Klassen
                     txBlock = new Texture("Texturen/Map/way-clean.png");
 
                     if (mask.GetPixel(row, col).Name == Swhite)
-                    {
+                    {   //weg
                         map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == Sblack)
-                    {
+                    {   //Mauer horizontal
                         map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = false;
                     }
@@ -73,7 +73,7 @@ namespace IcyMazeRunner.Klassen
 
                     //mauertest
                     if (mask.GetPixel(row, col).Name == Sgrey)
-                    {
+                    {   //Mauer vertikal
                         map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = false;
                     }
@@ -81,26 +81,26 @@ namespace IcyMazeRunner.Klassen
 
 
                     if (mask.GetPixel(row, col).Name == Sred)
-                    {
+                    {   //leer?
                         map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = false;
                     }
 
                     if (mask.GetPixel(row, col).Name == Sgreen)
-                    {
+                    {  // start
                         map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == Sblue)
-                    {
+                    {   //Ziel
                         map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
                         vPos = new Vector2f(row * 90 + 45, col * 90 + 45);
                         B_walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == Sorange)
-                    {
+                    {   //Loch
                         map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = true;
                     }
@@ -120,6 +120,10 @@ namespace IcyMazeRunner.Klassen
             return I_blockSize;
         }
 
+        public int getBlockType(int roww, int coll)
+        {
+            return map[roww, coll].type();
+        }
 
         // wird Setter benötigt?
         public void setBlocksize(int size)

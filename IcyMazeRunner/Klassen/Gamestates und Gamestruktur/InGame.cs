@@ -30,7 +30,7 @@ namespace IcyMazeRunner.Klassen
         GUI SoftPopUp;
 
         Kompass compass;
-        Vector2f vTarget = new Vector2f(0, 0);
+        Vector2f vTarget = new Vector2f(-500, 500);
         float targetdistance;
 
         Player pRunner;
@@ -159,8 +159,18 @@ namespace IcyMazeRunner.Klassen
 
             }
 
-            vTarget = mMap.vPos;
-            compass = new Kompass(vIngame.Center, vTarget,new Texture("Texturen/Menü+Anzeige/GUI/needle.png")); //WHY????
+            for (int row = 0; row < bmMap.Width; row++)
+            {
+                for (int col = 0; col < bmMap.Height; col++)
+                {
+                    if (mMap.getBlockType(row, col) == 4)
+                        vTarget = new Vector2f(row *90 , col *90); //globale variablen?
+                }
+            }
+
+
+
+            compass = new Kompass(vIngame.Center, vTarget,new Texture("Texturen/Menü+Anzeigen/GUI/needle.png")); //WHY????
           
             //        hier Fallen und Hindernisse laden???
             //         ziel?
