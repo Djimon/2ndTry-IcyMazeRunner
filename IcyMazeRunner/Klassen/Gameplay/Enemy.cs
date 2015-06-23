@@ -42,7 +42,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
         //}
 
 
-        public override void draw(RenderWindow win)
+        public void draw(RenderWindow win)
         {
             win.Draw(sprite);
         }

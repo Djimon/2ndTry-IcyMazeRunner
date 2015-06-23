@@ -29,10 +29,10 @@ namespace IcyMazeRunner.Klassen
 
         public abstract void update(GameTime gameTime);
 
-        public abstract void draw(RenderWindow win);  //abstract auskommentieren, wenn wieder gewünscht
-        //{
-        //    win.Draw(spSprite);
-        //}
+        public void draw(RenderWindow win)
+        {
+            win.Draw(spSprite);
+        }
 
     }
 }
