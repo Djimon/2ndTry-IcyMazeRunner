@@ -21,10 +21,12 @@ namespace IcyMazeRunner.Klassen.Gameplay
             sprite = new Sprite(txEnemy);
         }
 
-        public void move() //andere Bewegungsmuster (e.g. Pathfinder)
+        // Pathfinder
+        public void move(Vector2f PlayerPosition, Map mapInfo) //andere Bewegungsmuster (e.g. Pathfinder)
         {
-        
+            // TODO: your code here ;)
         }
+
 
         public void move(Vector2f PlayerPosition)  //direkter weg zum player
         {
@@ -33,15 +35,18 @@ namespace IcyMazeRunner.Klassen.Gameplay
             position += direction / (length * 5);
         }
 
-        public override void update(GameTime gametime)
+        //public override void update(GameTime gametime)
+        //{
+            
+        //    return;
+        //}
+
+
+        public override void draw(RenderWindow win)
         {
-            return;
+            win.Draw(sprite);
         }
 
-        //public override void draw(RenderWindow win)
-        //{
-        //    sprite.Position = position;
-        //    win.Draw(sprite);
-        //}
+        
     }
 }

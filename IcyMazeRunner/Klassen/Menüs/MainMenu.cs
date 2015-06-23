@@ -178,7 +178,7 @@ namespace IcyMazeRunner.Klassen
                         spExit.Texture = txExitNotSelected;
                         break;
                     }
-
+                        //Quit
                 case 3:
                     {
                         spStart.Texture = txStartNotSelected;
@@ -208,7 +208,10 @@ namespace IcyMazeRunner.Klassen
             if (I_select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.credits;
             if (I_select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            {
                 return EGameStates.none;
+                //Programm schließen!?
+            }
 
             return EGameStates.mainMenu;
         }

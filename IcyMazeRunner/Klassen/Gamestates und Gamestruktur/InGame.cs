@@ -10,6 +10,7 @@ using IcyMazeRunner.Klassen;
 using SFML.Audio;
 using IcyMazeRunner.Klassen.Menüs;
 using IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI;
+using IcyMazeRunner.Klassen.Gameplay;
 
 namespace IcyMazeRunner.Klassen
 {
@@ -37,6 +38,7 @@ namespace IcyMazeRunner.Klassen
         float targetdistance;
 
         Player pRunner;
+        Enemy eTest;
 
         Sprite spBackGround;
         Sprite spFogOfWar;
@@ -121,6 +123,9 @@ namespace IcyMazeRunner.Klassen
             B_isDeathAnimationOver=false;
             
             GOH = new GameObjectHandler(calc);
+
+            
+
         }
 
         /* ~~~~ Inhalte laden ~~~~ */
@@ -132,7 +137,8 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
-            bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
+          //  bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
+            bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
 
           /****************************************
            ************** KOMPASS *****************
@@ -151,12 +157,12 @@ namespace IcyMazeRunner.Klassen
             {
                 case 0:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(281,91), mMap); // 190, 100 bei Map_1 gespeichert gewesen
+                    pRunner = new Player(new Vector2f(1,1), mMap); //(281,91)
 
                     break;
 
                 case 1:
-                    bmMap = new Bitmap("Texturen/Map_1.bmp");
+                    bmMap = new Bitmap("Texturen/Map_1.bmp"); // 190, 100 bei Map_1 gespeichert gewesen
                     mMap = new Map(bmMap);
                     pRunner = new Player(new Vector2f(0, 0), mMap);
                     break;
@@ -182,6 +188,8 @@ namespace IcyMazeRunner.Klassen
                 }
             }
 
+            //Test-Enemy für KI
+            eTest = new Enemy(new Vector2f(251,251), "Texturen/Enemies/downidle.png");
 
             spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
             compass = new Kompass(vIngame.Center, vTarget,spKompass.Texture); 
@@ -253,6 +261,7 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 targetdistance = calc.getDistance(pRunner.getplayerSprite().Position, vTarget);
+                
                 if (targetdistance <200)
                 {
                     I_level++;
@@ -272,6 +281,10 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 pRunner.update(gtIngame, GameObjectHandler.moveableWallHandler);
+
+                //enemy move-update-test
+                eTest.move(new Vector2f(pRunner.getXPosition(),pRunner.getYPosition()), mMap);
+
                 /****************************************
                 ************** KOMPASS *****************
                 ****************************************/
@@ -342,6 +355,7 @@ namespace IcyMazeRunner.Klassen
             win.SetView(vIngame);
             mMap.draw(win);
             pRunner.draw(win);
+           // eTest.draw(win);  funktioniert nicht??
             win.Draw(spFogOfWar);
             Kompass.draw(win,spKompass);
             win.SetMouseCursorVisible(false);
