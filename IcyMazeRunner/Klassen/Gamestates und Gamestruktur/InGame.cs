@@ -10,6 +10,7 @@ using IcyMazeRunner.Klassen;
 using SFML.Audio;
 using IcyMazeRunner.Klassen.Menüs;
 using IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI;
+using IcyMazeRunner.Klassen.Gameplay;
 
 namespace IcyMazeRunner.Klassen
 {
@@ -37,6 +38,7 @@ namespace IcyMazeRunner.Klassen
         float targetdistance;
 
         Player pRunner;
+        Enemy eTest;
 
         Sprite spBackGround;
         Sprite spFogOfWar;
@@ -121,6 +123,9 @@ namespace IcyMazeRunner.Klassen
             B_isDeathAnimationOver=false;
             
             GOH = new GameObjectHandler(calc);
+
+            
+
         }
 
         /* ~~~~ Inhalte laden ~~~~ */
@@ -182,6 +187,8 @@ namespace IcyMazeRunner.Klassen
                 }
             }
 
+            //Test-Enemy für KI
+            eTest = new Enemy(new Vector2f(50, 50), "Texturen/Enemy/downidle.png");
 
             spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
             compass = new Kompass(vIngame.Center, vTarget,spKompass.Texture); 
@@ -253,6 +260,7 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 targetdistance = calc.getDistance(pRunner.getplayerSprite().Position, vTarget);
+                
                 if (targetdistance <200)
                 {
                     I_level++;
@@ -272,6 +280,10 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 pRunner.update(gtIngame, GameObjectHandler.moveableWallHandler);
+
+                //enemy move-update-test
+                eTest.move(new Vector2f(pRunner.getXPosition(),pRunner.getYPosition()), mMap);
+
                 /****************************************
                 ************** KOMPASS *****************
                 ****************************************/
