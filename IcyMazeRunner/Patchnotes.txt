@@ -11,6 +11,8 @@ Version 1.3.B011 (Chris):
 	- Kompass gefixed
 	- Map: getType() hinzugefügt
 	- Zielerfassung in der inGame
+	- Testenemy hinzgefügt
+	- KI-Testmap 1 hinzugefügt
 
 Version 1.3.B010 (Kilian):
 	- Moveable_Wall.cs: komplett kommentiert

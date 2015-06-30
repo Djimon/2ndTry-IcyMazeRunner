@@ -108,9 +108,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Patchnotes.txt" />
-    <Content Include="sfmlnet-audio-2.dll" />
-    <Content Include="sfmlnet-graphics-2.dll" />
-    <Content Include="sfmlnet-window-2.dll" />
+    <Content Include="Texturen\Enemies\downidle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Fehlende Texturen und Animationen.txt" />
     <Content Include="Texturen\Map\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -125,6 +125,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\hole.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Map\KI-test.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\Map_1.bmp">

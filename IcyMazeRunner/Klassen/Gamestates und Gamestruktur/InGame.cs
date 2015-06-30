@@ -137,7 +137,8 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
-            bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
+          //  bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
+            bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
 
           /****************************************
            ************** KOMPASS *****************
@@ -156,12 +157,12 @@ namespace IcyMazeRunner.Klassen
             {
                 case 0:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(281,91), mMap); // 190, 100 bei Map_1 gespeichert gewesen
+                    pRunner = new Player(new Vector2f(1,1), mMap); //(281,91)
 
                     break;
 
                 case 1:
-                    bmMap = new Bitmap("Texturen/Map_1.bmp");
+                    bmMap = new Bitmap("Texturen/Map_1.bmp"); // 190, 100 bei Map_1 gespeichert gewesen
                     mMap = new Map(bmMap);
                     pRunner = new Player(new Vector2f(0, 0), mMap);
                     break;
@@ -188,7 +189,7 @@ namespace IcyMazeRunner.Klassen
             }
 
             //Test-Enemy für KI
-            eTest = new Enemy(new Vector2f(50, 50), "Texturen/Enemy/downidle.png");
+            eTest = new Enemy(new Vector2f(251,251), "Texturen/Enemies/downidle.png");
 
             spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
             compass = new Kompass(vIngame.Center, vTarget,spKompass.Texture); 
@@ -354,6 +355,7 @@ namespace IcyMazeRunner.Klassen
             win.SetView(vIngame);
             mMap.draw(win);
             pRunner.draw(win);
+           // eTest.draw(win);  funktioniert nicht??
             win.Draw(spFogOfWar);
             Kompass.draw(win,spKompass);
             win.SetMouseCursorVisible(false);
