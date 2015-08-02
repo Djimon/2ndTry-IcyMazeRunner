@@ -105,6 +105,11 @@ namespace IcyMazeRunner.Klassen
                         B_walkable = true;
                     }
 
+                    else
+                    {
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
+                        B_walkable = false;
+                    }
 
                 }
 

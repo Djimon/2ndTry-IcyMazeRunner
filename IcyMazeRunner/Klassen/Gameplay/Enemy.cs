@@ -36,7 +36,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
         }
 
         public override void update(GameTime gametime)
-<<<<<<< HEAD
+
         {
 
             return;
@@ -44,8 +44,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
 
 
         public void draw(RenderWindow win)
-=======
->>>>>>> 77819a8234f3082509906179fca9d67ab73260e0
+
         {
             
             return;
