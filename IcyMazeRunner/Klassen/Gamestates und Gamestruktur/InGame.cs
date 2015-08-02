@@ -175,9 +175,9 @@ namespace IcyMazeRunner.Klassen
 
             }
 
-            for (int row = 0; row < bmMap.Width; row++)
+            for (int row = 1; row <= bmMap.Width; row++)
             {
-                for (int col = 0; col < bmMap.Height; col++)
+                for (int col = 1; col <= bmMap.Height; col++)
                 {
                     if (mMap.getBlockType(row, col) == 4)
                     {
