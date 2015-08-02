@@ -137,8 +137,8 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
-          //  bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
-            bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
+            bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
+          //  bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
 
           /****************************************
            ************** KOMPASS *****************
@@ -173,20 +173,28 @@ namespace IcyMazeRunner.Klassen
                     pRunner = new Player(new Vector2f(2263,3336), mMap);
                     break;
 
+                default:
+                    mMap = new Map(bmMap); 
+                    pRunner = new Player(new Vector2f(1,1), mMap); //(281,91)
+
+                    break;
+
             }
 
-            for (int row = 1; row <= bmMap.Width; row++)
-            {
-                for (int col = 1; col <= bmMap.Height; col++)
-                {
-                    if (mMap.getBlockType(row, col) == 4)
-                    {
-                        vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
-                        break;
-                    }
-                    else vTarget = new Vector2f(0, 0);
-                }
-            }
+
+            // Festlegung des Zielvekotrs für den Kompass (buggy)
+            //for (int row = 1; row <= bmMap.Width; row++)
+            //{
+            //    for (int col = 1; col <= bmMap.Height; col++)
+            //    {
+            //        if (mMap.getBlockType(row, col) == 4)
+            //        {
+            //            vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
+            //            break;
+            //        }
+            //        else vTarget = new Vector2f(0, 0);
+            //    }
+            //}
 
             //Test-Enemy für KI
             eTest = new Enemy(new Vector2f(251,251), "Texturen/Enemies/downidle.png");
