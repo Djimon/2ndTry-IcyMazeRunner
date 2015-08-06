@@ -18,8 +18,28 @@ namespace IcyMazeRunner.Klassen
     {
         /* ~~~~~~~~ VARIABLEN UND KONSTANTEN ~~~~~~~~*/
 
+        Blocks[,] map;
+        // für Bitmap-Durchlauf der gesamten Map.
+
+        /// <summary>
+        ///  Speichert, ob geheime Wege sichtbar sind, oder nicht. Nur auslösender Boolean.
+        /// </summary>
+        static Boolean B_IsVisible = false;
+
+
         static int I_level = 0;
         GameTime gtIngame = new GameTime();
+
+        /// <summary>
+        ///  Stoppuhr, um zu regeln, wie lange Geheime Wege sichtbar sind.
+        /// </summary>
+        GameTime gtWallTimer;
+
+        /// <summary>
+        ///  Liste, um zu speichern, an welcher Stelle sich geheime Wege befinden.
+        /// </summary>
+        List<Coordinates> SecretWayList;
+
 
         Map mMap;
         View vIngame;
@@ -69,7 +89,7 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~Gap Collision~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        public static String orange = "ffff8800"; // Loch im Boden
+        public static String Sorange = "ffff8800"; // Loch im Boden
 
 
 
@@ -137,6 +157,7 @@ namespace IcyMazeRunner.Klassen
             Map_2 (2263, 3336)
              */
 
+
             bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
           //  bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
 
@@ -181,6 +202,33 @@ namespace IcyMazeRunner.Klassen
 
             }
 
+            map = new Blocks[bmMap.Width, bmMap.Height];
+            SecretWayList = new List<Coordinates>();
+
+
+            //komplette Bitmap durchgehen
+            for (int row = 0; row < map.GetLength(0); row++)
+            {
+                for (int col = 0; col < map.GetLength(1); col++)
+                {
+
+                    // Wenn Geheimer Weg gefunden, dann füge Daten in Liste
+                    if ((map[row, col].type() == 7) || (map[row, col].type() == 8))
+                    {
+                        Boolean helper = false;
+
+                        // Wenn die Textur über diesem Feld zu einer Vorderansicht einer Mauer gewechselt werden muss, setze helper auf true;
+                        if ((map[row+1, col].type() !=7 ) && (map[row+1, col].type() != 8) && (map[row, col].type() != 7))
+                        {
+                            helper = true;
+                        }
+
+                        // Füge Koordinaten und Boolean in Liste ein.
+                        SecretWayList.Add(new Coordinates(row, col, helper));
+                    }
+
+                }
+            }
 
             // Festlegung des Zielvekotrs für den Kompass (buggy)
             //for (int row = 1; row <= bmMap.Width; row++)
@@ -255,7 +303,7 @@ namespace IcyMazeRunner.Klassen
 
                 gtIngame.update();
 
-                if (pRunner.getPlayerHealth() == 0)
+                if (pRunner.getPlayerHealth() <= 0)
                 {
                     pRunner.DeathAnimation(getTypeOfDeath());
 
@@ -307,6 +355,58 @@ namespace IcyMazeRunner.Klassen
                 vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
 
 
+                // Sichtbarkeit wird ausgelöst
+                if (B_IsVisible)
+                {
+                    //Timer für Sichtbarkeit wird gestartet
+                    gtWallTimer = new GameTime();
+                    gtWallTimer.Watch.Start();
+
+                    // geheime Wege werden sichtbar durch Texturwechsel
+                    foreach (Coordinates co in SecretWayList)
+                    {
+                        map[co.getI_xCoord, co.getI_yCoord].setTexture(new Texture ("Texturen/Map/wall-clean.png"));
+
+
+                        // Wenn Textur über dem Feld zu vertikaler Mauer verändert werden muss, wird sie nun gewechselt.
+                        if (co.B_UpperTexChanger)
+                        {
+                            map[co.getI_xCoord-1, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                        }
+                    }
+
+                    // Auslöser wird resettet
+                    B_IsVisible = false;
+                }
+
+
+                // Wenn Timer vorüber
+                if (gtWallTimer.Watch.ElapsedMilliseconds >= 10000)
+                {
+                    //wird der Timer gestoppt und wieder auf 0 gesetzt,
+                    gtWallTimer.Watch.Reset();
+
+                    //und die Texturen auf ihre jeweiligen Ursprungszustände zurückgesetzt bzw. das Feld darüber, wenn nötig, wieder zu der
+                    //Draufansicht einer Mauer.
+                    foreach (Coordinates co in SecretWayList)
+                    {
+                        if(map[1,2].type() == 7)
+                        {
+                            map[co.getI_xCoord, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                        }
+                        else
+                        {
+                            map[co.getI_xCoord, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                        }
+
+                        if (co.B_UpperTexChanger)
+                        {
+                            map[co.getI_xCoord - 1, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                        }
+
+                    }
+
+                }
 
 
                 /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
@@ -346,7 +446,7 @@ namespace IcyMazeRunner.Klassen
         public bool get_Gap_Collision(Player player, Map map)
         {
             // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-            if (bmMap.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1)).Name == orange)
+            if (bmMap.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1)).Name == Sorange)
             {
                 return true;
             }

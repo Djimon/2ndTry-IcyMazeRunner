@@ -28,6 +28,11 @@ namespace IcyMazeRunner.Klassen
             return this.spBlock.Texture;
         }
 
+        public void setTexture(Texture tx)
+        {
+            this.spBlock.Texture = tx;
+        }
+
         public bool getWalkable()
         {
             return this.B_walkable;
@@ -40,6 +45,7 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Konstruktor ~~~~ */
         public Blocks(int blockType, Vector2f position, Texture txBlock)
+            //txBlock benötigt als Eingabe-Parameter?
         {
             this.blockType = blockType;
 
@@ -100,6 +106,20 @@ namespace IcyMazeRunner.Klassen
                     case 6: //Loch im Boden
                         {
                             this.spBlock = new Sprite(new Texture("Texturen/Map/hole.png"));
+                            this.spBlock.Position = position;
+                            this.B_walkable = true;
+                            break;
+                        }
+                    case 7: //Vorderansicht Mauer (geheimer Weg)
+                        {
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/wall-vert.png"));
+                            this.spBlock.Position = position;
+                            this.B_walkable = true;
+                            break;
+                        }
+                    case 8: //Draufsicht Mauer (geheimer Weg)
+                        {
+                            this.spBlock = new Sprite(new Texture("Texturen/Map/wall-hor.png"));
                             this.spBlock.Position = position;
                             this.B_walkable = true;
                             break;

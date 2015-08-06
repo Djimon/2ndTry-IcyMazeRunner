@@ -59,6 +59,7 @@
     <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />
     <Compile Include="Klassen\Gameplay\Enemy.cs" />
     <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />
+    <Compile Include="Klassen\Gameplay\Walls\Coordinates.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\GUI.cs" />

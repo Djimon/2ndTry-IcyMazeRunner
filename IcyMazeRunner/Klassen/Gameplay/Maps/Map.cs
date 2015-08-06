@@ -28,6 +28,9 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Draw ~~~~ */
         private bool B_walkable;
+        // B_walkable benötigt? Boolean bezieht sich auf gesamte Map, nicht auf einzelne Blocks.
+
+
         /* ~~~~ Blockgröße, um sie zentral ändern zu können ~~~~ */
         private int I_blockSize = 90; //eventuell für Höhe und Breite der Blöcke unterscheiden, da der sichtbare Teil der Spielertextur nicht so breit wie hoch ist
 
@@ -40,8 +43,8 @@ namespace IcyMazeRunner.Klassen
         public static String Sblue = "ff0000ff"; //später mehr Wegtypen
         public static String Sgrey = "ff414141"; //mauer hor
         public static String Sorange = "ffff8800"; // Loch im Boden
-        //public static String 
-        //public static String
+        public static String Scyan = "ff008080"; // geheimer Weg Vorderansicht
+        public static String Sdarkgreen = "ff004000"; // geheimer Weg Draufsicht
         //public static String
         //public static String
         //public static String
@@ -102,6 +105,18 @@ namespace IcyMazeRunner.Klassen
                     if (mask.GetPixel(row, col).Name == Sorange)
                     {   //Loch
                         map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90), txBlock);
+                        B_walkable = true;
+                    }
+
+                    if (mask.GetPixel(row, col).Name == Scyan)
+                    {   //Vorderansicht Mauer (geheimer Weg)
+                        map[row, col] = new Blocks(7, new Vector2f(row * 90, col * 90), txBlock);
+                        B_walkable = true;
+                    }
+
+                    if (mask.GetPixel(row, col).Name == Sdarkgreen)
+                    {   //Draufsicht Mauer (geheimer Weg)
+                        map[row, col] = new Blocks(8, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = true;
                     }
 
