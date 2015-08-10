@@ -26,8 +26,14 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         static Boolean B_IsVisible = false;
 
-
+        /// <summary>
+        ///  Zeigt Level des Spiels an.
+        /// </summary>
         static int I_level = 0;
+
+        /// <summary>
+        ///  Allgemeine Spielzeituhr.
+        /// </summary>
         GameTime gtIngame = new GameTime();
 
         /// <summary>
@@ -307,11 +313,23 @@ namespace IcyMazeRunner.Klassen
                 {
                     pRunner.DeathAnimation(getTypeOfDeath());
 
+                    // ToDo: Property-Getter einfügen
+                    if (pRunner.B_IsSaved)
+                    {
+                        // Spieler hat wieder Leben
+                        // ToDo: variablen Wert eingeben
+                        pRunner.setPlayerHealth(20);
+                        pRunner.setDeathWatchIsOn(false);
+                    }
 
                     if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
                     {
                         // ob Level sinkt, hängt von Todesursache ab, nur bei Loch im Boden
-                        I_level--;
+                        if (getTypeOfDeath()==1)
+                        {
+                            I_level--;
+                        }
+                        pRunner.setDeathWatchIsOn(false);
                         return EGameStates.gameOver;
                     }
                 }
@@ -365,13 +383,13 @@ namespace IcyMazeRunner.Klassen
                     // geheime Wege werden sichtbar durch Texturwechsel
                     foreach (Coordinates co in SecretWayList)
                     {
-                        map[co.getI_xCoord, co.getI_yCoord].setTexture(new Texture ("Texturen/Map/wall-clean.png"));
+                        map[co.I_xCoord, co.I_yCoord].setTexture(new Texture ("Texturen/Map/wall-clean.png"));
 
 
                         // Wenn Textur über dem Feld zu vertikaler Mauer verändert werden muss, wird sie nun gewechselt.
                         if (co.B_UpperTexChanger)
                         {
-                            map[co.getI_xCoord-1, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                            map[co.I_xCoord-1, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
                         }
                     }
 
@@ -392,16 +410,16 @@ namespace IcyMazeRunner.Klassen
                     {
                         if(map[1,2].type() == 7)
                         {
-                            map[co.getI_xCoord, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                            map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
                         }
                         else
                         {
-                            map[co.getI_xCoord, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                            map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
                         }
 
                         if (co.B_UpperTexChanger)
                         {
-                            map[co.getI_xCoord - 1, co.getI_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                            map[co.I_xCoord - 1, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
                         }
 
                     }

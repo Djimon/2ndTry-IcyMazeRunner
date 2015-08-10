@@ -11,17 +11,17 @@ namespace IcyMazeRunner
         /// <summary>
         ///  Speichert x-Koordinate.
         /// </summary>
-        private int I_xCoord { public get; public set; }
+        public int I_xCoord { public get; protected set; }
 
         /// <summary>
         ///  Speichert y-Koordinate.
         /// </summary>
-        private int I_yCoord { public get; public set; }
+        public int I_yCoord { public get; protected set; }
 
         /// <summary>
         ///  Speichert, ob Textur in dem Feld darüber verändert werden muss.
         /// </summary>
-        private Boolean B_UpperTexChanger { public get; public set; }
+        public Boolean B_UpperTexChanger { public get; protected set; }
 
         public Coordinates(int x, int y, Boolean b)
         {

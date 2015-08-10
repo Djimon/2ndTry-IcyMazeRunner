@@ -12,21 +12,41 @@ namespace IcyMazeRunner
     public class Player
     {
 
+        /// <summary>
+        ///  Variable, um Sterbeanimation zu unterbrechen und Spiel fortzusetzen.
+        /// </summary>
+        public Boolean B_IsSaved {get; set;}
 
-        /* ~~~~ Map-Kopie, da Update() die Map nicht mitgegeben bekommt ~~~~ */
+
+        /// <summary>
+        ///  Statehandler, der Zustände des Spielers verwaltet.
+        /// </summary>
+        PlayerStateHandler SH;
+
+        /// <summary>
+        /// Eine Kopie der Map, um sie in Update() verwenden zu können, da sie nicht mitgegeben werden kann.
+        /// </summary>
         Map mAbsmap;
 
-
-        /* ~~~~ Timeobject, um Zeit für den Herausforderungsmodus zu messen ~~~~ */
+        /// <summary>
+        ///  Timeobjekt, um Zeit für den Herausforderungsmodus zu messen, sollte er aktiviert werden.
+        /// </summary>
         GameTime gtMoveTime;
 
         /* ~~~~ Wichtige Playerattribute ~~~~ */
+        /// <summary>
+        /// Sprite des Spielers.
+        /// </summary>
         Sprite spPlayer { get; set; }
+
+        /// <summary>
+        /// Speichert Spielerposition bzw. gibt diese Position an.
+        /// </summary>
         Vector2f playerPosition;
 
 
-        // benötigt?
-        EGameStates gamestate;
+        // benötigt? ?!?!?!?!?! 0 Verweise
+        EGameStates gamestate { get; set; }
 
         /* ~~~~ Texturen für Stehen und Bewegungsanimation ~~~~ */
         Texture txDown1;
@@ -72,10 +92,11 @@ namespace IcyMazeRunner
         /************ Player attributes ***********/
 
         int I_healthPoints;
+        int I_maxhealthPoints;
         float F_runningSpeed;
         // int basicDamage
         // int basicDefence
-        Vector2f PredictedPosition;
+        Vector2f PredictedPosition { get; set; }
 
         /* ~~~~ Konstruktor ~~~~ */
         public Player(Vector2f Pos, Map map)
@@ -86,6 +107,7 @@ namespace IcyMazeRunner
 
             // Initialisierung der HP des Spielers, wird mit neuem Level neu festgelegt
             I_healthPoints = 100;
+            I_maxhealthPoints = I_healthPoints;
 
 
             //Bewegungstexturen werden geladen
@@ -134,7 +156,10 @@ namespace IcyMazeRunner
             // Attribute und Objekte für Todesanimation initialisieren
             gtDeathWatch = new GameTime();
             B_isDeathWatchOn = false;
+            B_IsSaved = false;
 
+            // Initialisierung
+            SH = new PlayerStateHandler();
 
             PredictedPosition = new Vector2f(0, 0);
         }
@@ -143,110 +168,175 @@ namespace IcyMazeRunner
         /* ~~~~~~~~~~~~~~~~~~ Getter und Setter ~~~~~~~~~~~~~~*/
 
 
-        //unnötig?
+        /// <summary>
+        /// Gibt Sprite des Spielers zurück. (z.B. für Zugriff auf Position des Sprites)
+        /// </summary>
         public Sprite getplayerSprite()
         {
             return this.spPlayer;
         }
 
 
-        //unnötig?
+        // unnötig?
+        // oder für Random-Ports behalten?
         public void setSpritePos(Vector2f pos)
         {
             spPlayer.Position = pos;
         }
 
+        /// <summary>
+        /// Gibt zurück, ob eine Taste gedrückt wird.
+        /// </summary>
+        /// <returns></returns>
         public bool getIsPressed()
         {
             return B_isPressed;
         }
 
+        /// <summary>
+        /// Legt fest, ob eine Taste gedrückt wird.
+        /// </summary>
         public void setIsPressed(bool value)
         {
             B_isPressed = value;
         }
 
+        /// <summary>
+        /// Gibt x-Position des Sprites zurück.
+        /// </summary>
         public float getXPosition()
         {
             return spPlayer.Position.X;
         }
 
+        /// <summary>
+        /// Gibt y-Position des Sprites zurück.
+        /// </summary>
         public float getYPosition()
         {
             return spPlayer.Position.Y;
         }
 
+        /// <summary>
+        /// Gibt Breite der Textur des Sprites zurück.
+        /// </summary>
         public float getWidth()
         {
             return spPlayer.Texture.Size.X;
         }
 
+        /// <summary>
+        /// Gibt Höhe der Textur des Sprites zurück.
+        /// </summary>
         public float getHeigth()
         {
             return spPlayer.Texture.Size.Y;
         }
 
+        /// <summary>
+        /// Gibt HealthPoints des Spielers zurück.
+        /// </summary>
         public int getPlayerHealth()
         {
             return I_healthPoints;
         }
 
+        /// <summary>
+        /// Setzt HealthPoints auf einen bestimmten Wert.
+        /// </summary>
         public void setPlayerHealth(int data)
         {
             I_healthPoints = data;
         }
 
+        /// <summary>
+        /// Legt fest, ob Todesanimation ausgelöst wurde, oder nicht.
+        /// </summary>
         public void setDeathWatchIsOn(bool value)
         {
             B_isDeathWatchOn = value;
         }
 
-        public Vector2f getPredictedPosition()
+        /// <summary>
+        ///  Fügt einen Zustand ein, sodass andere Objekte einen Zustand erstellen können und dieser dann im StateHandler des Spielers verwaltet wird.
+        /// </summary>
+        /// <param name="state"></param>
+        public void setState (Playerstate state)
         {
-            return PredictedPosition;
+            SH.add(state);
         }
 
-        public void setPredictedPosition(Vector2f vector)
+        /// <summary>
+        /// Fügt dem Spieler Schaden zu.
+        /// </summary>
+        /// <param name="_Damage">Gibt an, wieviel Schaden bei jedem Tick verursacht werden soll. </param>
+        public void setDamage(int _Damage)
         {
-            PredictedPosition = vector;
+            I_healthPoints = I_healthPoints - _Damage;
+
+            if (I_healthPoints <0)
+            {
+                I_healthPoints = 0;
+            }
         }
 
+        /// <summary>
+        /// Heilt den Spieler.
+        /// </summary>
+        /// <param name="_Heal">Gibt an, wieviel Heilung der Spieler erhält. </param>
+        public void setHeal(int _Heal)
+        {
+            I_healthPoints = I_healthPoints + _Heal;
 
-        /*~~~~ Update ~~~~*/
+            if (I_healthPoints > I_maxhealthPoints)
+            {
+                I_healthPoints = I_maxhealthPoints;
+            }
+        }
 
+        /// <summary>
+        /// Heilt den Spieler komplett.
+        /// </summary>
+        public void setHeal()
+        {
+                I_healthPoints = I_maxhealthPoints;
+        }
+        
+        /// <summary>
+        /// StateHandler aktualisiert sich und verwaltet die Liste. Anschließend wird die move()-Methode aufgerufen.
+        /// </summary>
         public void update(GameTime time, MoveableWallHandler MWH)
         {
+            SH.update();
             move(this.mAbsmap, time, MWH);
         }
 
 
-        /*~~~~ Methode für Bewegungsteuerung des Spielers ~~~~*/
+        /// <summary>
+        /// Steuert Bewegung des Spielers.
+        /// 
+        /// Zunächst wird die Laufgeschwindigkeit des Spielers an den Computer angepasst und der Boolean _IsPressed auf Standard zurückgesetzt.
+        /// 
+        /// Dann wird kontrolliert, ob der Herausforderungsmodus aktiviert oder deaktiviert werden soll und falls er aktiviert ist, wird zur speziellen, längeren Methode für den Herausforderungsmodus gewechselt.
+        ///
+        /// Ansonsten wird dir normale WASD-Steuerung genutzt. Falls sich der Spieler nicht bewegt, wird auf die idle-Textur umgestellt und am Ende die Position des Sprites an die Position der Spielerinstanz gesetzt.
+        /// </summary>
         public void move(Map map, GameTime time, MoveableWallHandler MWH)
         {
-            /*~~~~ Anpassen der Spielergeschwindigkeit an den Computer ~~~~*/
             F_runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
-
-            /*~~~~ Bool auf Standard setzen ~~~~*/
             B_isPressed = false;
 
 
-            /*~~~~ Aktivieren und Deaktivieren des Herausforderungsmodus ~~~~*/
             if (Keyboard.IsKeyPressed(Keyboard.Key.F2))
                 B_isControlChanged = true;
-
             if (Keyboard.IsKeyPressed(Keyboard.Key.F1))
                 B_isControlChanged = false;
 
 
-            /*~~~~ Wenn Herausforderungsmodus aktiviert, wechsel in Methode zur Bewegungssteuerung im Herausforderungsmodus ~~~~*/
             if (B_isControlChanged)
                 changingmove(map, time);
-
-
-            /*~~~~ Ansonsten normale Bewegungssteuerung ~~~~*/
             else
             {
-
 
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)) && MWH.isWalkable(this, new Vector2f(-F_runningSpeed, 0)))
                 {
@@ -284,7 +374,6 @@ namespace IcyMazeRunner
                     I_rememberidle = 3;
                 }
 
-                /*~~~~ Wenn Spieler sich nicht bewegt, ist isPressed falsch, Textur anpassen ~~~~*/
                 if (B_isPressed == false)
                 {
                     switch (I_rememberidle)
@@ -303,28 +392,31 @@ namespace IcyMazeRunner
                 }
             }
 
-            /*~~~~ Spriteposition an Position des Objektes anpassen ~~~~*/
             spPlayer.Position = playerPosition;
-
 
         }
 
-        /*~~~~ Animation des Todes ~~~~*/
+
+        // ToDo: restliche Animationen, Animationen selbst in eigene Methoden auslagern.
+        /// <summary>
+        /// Animation des Todes
+        /// Bei erstem Aufruf der Methode ist B_isDeathWatchOn false, und somit wird die DeathWatch.Watch zurückgesetzt und gestartet und
+        /// der Boolean auf wahr gesetzt. Für Animationen wird der Counter hochgezählt und anschließend abhängig von der Todesursache zur 
+        /// jeweiligen Animation gesprungen und diese wird ausgeführt.
+        /// </summary>
         public void DeathAnimation(int typeOfDeath)
         {
-
-            /*~~~~ Stoppuhr starten, wenn sie noch nicht gestartet ist ~~~~*/
             if (!B_isDeathWatchOn)
             {
                 setDeathWatchIsOn(true);
+                gtDeathWatch.Watch.Reset();
                 gtDeathWatch.Watch.Start();
             }
 
-            /*~~~~ Hilfsinteger zum Texturenwechsel ~~~~*/
+
             I_fallAnimationCounter++;
 
 
-            /*~~~~ Auswahl der Animation abhängig von Todesursache ~~~~*/
             switch (typeOfDeath)
             {
                 case 0:
@@ -332,7 +424,7 @@ namespace IcyMazeRunner
                         /* Nichts, da am Leben */
                         break;
                     }
-
+                    
                 case 1:
                     {
                         /* Fallanimation*/
@@ -402,14 +494,22 @@ namespace IcyMazeRunner
         }
 
 
-        /*~~~~ Draw ~~~~*/
+        /// <summary>
+        /// Zeichnet den Spieler im Fenster.
+        /// </summary>
         public void draw(RenderWindow win)
         {
-            win.Draw(spPlayer); // Element anpassen
+            win.Draw(spPlayer);
         }
 
 
-        // LAAAAANNNNNGGGEEEE Methode für die 24 möglichen Zuweisungen der Tastatur im Hardmode bis zum Ende der Klasse
+        // ToDo: Kürzen möglich?
+        /// <summary>
+        /// Bewegungssteuerung für den Herausforderungsmodus.
+        /// 
+        /// Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden.
+        /// Ebenso wird die Textur jeweils angepasst, falls man sich nicht mehr bewegt.
+        /// </summary>
         public void changingmove(Map map, GameTime time)
         {
 
