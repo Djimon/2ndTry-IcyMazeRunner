@@ -22,8 +22,8 @@ namespace IcyMazeRunner
         Sprite spState;
 
         /// <summary>
-        ///  Gibt an, wie lange der Zustand insgesamt bereits läuft. 
-        ///  Die Stoppuhr misst die Zeit bis zum jeweiligen nächsten Schadensaufruf.
+        ///  <para>Gibt an, wie lange der Zustand insgesamt bereits läuft. </para>
+        ///  <para>Die Stoppuhr misst die Zeit bis zum jeweiligen nächsten Schadensaufruf. </para>
         /// </summary>
         GameTime gtTotalTime;
 
@@ -44,10 +44,10 @@ namespace IcyMazeRunner
         int I_intervall;
 
         /// <summary>
-        /// Gibt die Art des Zustands an:
-        /// 0 - Gift
-        /// 1 - Gift schwarzer Bildschirm
-        /// 2 - Wunde
+        /// <para>Gibt die Art des Zustands an:</para>
+        /// <para>0 - Gift</para>
+        /// <para>1 - Gift schwarzer Bildschirm</para>
+        /// <para>2 - Wunde</para>
         /// </summary>
         int I_type;
 
@@ -63,7 +63,8 @@ namespace IcyMazeRunner
 
         // ToDO: Texturen zuordnen
         /// <summary>
-        /// 
+        /// <para>Konstruktor</para>
+        /// <para>Variablen werden initialisiert, Texturen zugewiesen und der Schaden direkt zu Beginn wird dem Spieler zugefügt.</para>
         /// </summary>
         /// <param name="_runningtime">Gibt in Sekunden an, wie lange der Zustand anhalten soll.</param>
         /// <param name="_intervall">Gibt in Millisekunden an, wie lange ein Intervall des Zustands dauern soll.</param>
@@ -71,17 +72,13 @@ namespace IcyMazeRunner
         /// <param name="pPlayer">this</param>
         public Playerstate (int _runningtime, int _intervall, int _type, Player pPlayer, int _DamagePerTick)
         {
-            // Standardzuweisung
             B_IsFinished = false;
-
-            // Initialisierung
             I_runningTime = _runningtime;
             I_intervall = _intervall;
             I_type = _type;
             I_DamagePerTick = _DamagePerTick;
             thisPlayer = pPlayer;
 
-            // Texturzuweisung
             switch (I_type)
             {
                 case 0:
@@ -110,15 +107,14 @@ namespace IcyMazeRunner
             }
 
             spState = new Sprite(txState);
-            // Schaden direkt zu Beginn
             pPlayer.setDamage(I_DamagePerTick);
 
 
         }
         
         /// <summary>
-        ///  Wenn die TotalTime größer als die runningTime ist, wird der Boolean IsFinished auf true gesetzt, um dann im Händler aussortiert zu werden.
-        ///  Wenn die verstrichene Zeit der Stoppuhr größer als das Intervall ist, soll Schaden verursacht werden und der Intervalltimer von vorn beginnen. 
+        ///  <para>Wenn die TotalTime größer als die runningTime ist, wird der Boolean IsFinished auf true gesetzt, um dann im Händler aussortiert zu werden.</para>
+        ///  <para>Wenn die verstrichene Zeit der Stoppuhr größer als das Intervall ist, soll Schaden verursacht werden und der Intervalltimer von vorn beginnen.</para>
         /// </summary>
         public void update()
         {

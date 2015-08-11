@@ -15,8 +15,8 @@ namespace IcyMazeRunner
         public List<Playerstate> StateList;
 
         /// <summary>
-        ///  Konstruktor
-        ///  Er initialisiert nur die Liste.
+        ///  <para>Konstruktor</para>
+        ///  <para>Er initialisiert nur die Liste.</para>
         /// </summary>
         public PlayerStateHandler()
         {

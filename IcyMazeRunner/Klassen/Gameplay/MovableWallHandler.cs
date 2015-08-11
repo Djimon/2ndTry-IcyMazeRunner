@@ -116,11 +116,11 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 /* Wenn an richtiger Position, Bool für erneutes Auslösen auf Standard setzen */
-                 if( ((calc.addX(moveableWall.get_PrevPosition(),cMap.getBlocksize()).X.Equals(moveableWall.get_Position().X)) ||
-                      (calc.addX(moveableWall.get_PrevPosition(),-cMap.getBlocksize()).X.Equals(moveableWall.get_Position().X))) 
+                if (((calc.addX(moveableWall.get_PrevPosition(), cMap.I_blockSize).X.Equals(moveableWall.get_Position().X)) ||
+                      (calc.addX(moveableWall.get_PrevPosition(), -cMap.I_blockSize).X.Equals(moveableWall.get_Position().X))) 
                      &&
-                     ((calc.addY(moveableWall.get_PrevPosition(),cMap.getBlocksize()).Y.Equals(moveableWall.get_Position().Y)) ||
-                      (calc.addY(moveableWall.get_PrevPosition(),-cMap.getBlocksize()).Y.Equals(moveableWall.get_Position().Y)))
+                     ((calc.addY(moveableWall.get_PrevPosition(), cMap.I_blockSize).Y.Equals(moveableWall.get_Position().Y)) ||
+                      (calc.addY(moveableWall.get_PrevPosition(), -cMap.I_blockSize).Y.Equals(moveableWall.get_Position().Y)))
                    )
                  {
                      moveableWall.setB_moveable(false);

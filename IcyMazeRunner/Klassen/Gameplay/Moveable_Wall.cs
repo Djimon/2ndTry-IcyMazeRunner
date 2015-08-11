@@ -139,7 +139,9 @@ namespace IcyMazeRunner.Klassen
 
         }
 
-        /* ~~~~ Konstruktur für Mauer ~~~~ */
+        /// <summary>
+        /// Konstruktor für Mauer
+        /// </summary>
         public Moveable_Wall(Vector2f WallPosition, Vector2f WallTriggerPosition, int _orientation, int _direction, Map _cMap)
         {
             wallTrigger = new WallTrigger(WallTriggerPosition);
@@ -258,11 +260,6 @@ namespace IcyMazeRunner.Klassen
             I_direction = I_direction % 2;
         }
 
-
- 
-        // in 2 Richtungen(oben-unten oder links-rechts)
-        // Int%2 gibt an, in welche Richtung
-
         /// <summary>
         ///  <para> Move ist für die Bewegung der Mauern verantwortlich. </para>
         ///  <para> Als erstes wird die Bewegungsgeschwindigkeit an die Rechnerzeit angepasst.</para>
@@ -286,9 +283,9 @@ namespace IcyMazeRunner.Klassen
                 {
                     Position.X = Position.X + F_runningSpeed;
 
-                    if (Math.Abs(Position.X - (prevPosition.X + cMap.getBlocksize())) < 5)
+                    if (Math.Abs(Position.X - (prevPosition.X + cMap.I_blockSize)) < 5)
                     {
-                        Position.X = prevPosition.X + cMap.getBlocksize();
+                        Position.X = prevPosition.X + cMap.I_blockSize;
                     }
                 }
                 // nach links (aus den Gang)
@@ -296,9 +293,9 @@ namespace IcyMazeRunner.Klassen
                 {
                     Position.X = Position.X - F_runningSpeed;
 
-                    if (Math.Abs(Position.X - (prevPosition.X - cMap.getBlocksize())) < 5)
+                    if (Math.Abs(Position.X - (prevPosition.X - cMap.I_blockSize)) < 5)
                     {
-                        Position.X = prevPosition.X - cMap.getBlocksize();
+                        Position.X = prevPosition.X - cMap.I_blockSize;
                     }
                 }
 
@@ -311,9 +308,9 @@ namespace IcyMazeRunner.Klassen
                 {
                     Position.Y = Position.Y + F_runningSpeed;
 
-                    if (Math.Abs(Position.Y - (prevPosition.Y - cMap.getBlocksize())) < 5)
+                    if (Math.Abs(Position.Y - (prevPosition.Y - cMap.I_blockSize)) < 5)
                     {
-                        Position.Y = prevPosition.Y - cMap.getBlocksize();
+                        Position.Y = prevPosition.Y - cMap.I_blockSize;
                     }
                     // skaliert Sprite schrittweise auf 180 Pixel Höhe hinauf
                     spSprite.Scale = new Vector2f(1, 1 / F_LatestScale);
@@ -324,9 +321,9 @@ namespace IcyMazeRunner.Klassen
                 {
                     Position.Y = Position.Y - F_runningSpeed;
 
-                    if (Math.Abs(Position.Y - (prevPosition.Y - cMap.getBlocksize())) < 5)
+                    if (Math.Abs(Position.Y - (prevPosition.Y - cMap.I_blockSize)) < 5)
                     {
-                        Position.Y = prevPosition.Y - cMap.getBlocksize();
+                        Position.Y = prevPosition.Y - cMap.I_blockSize;
                     }
                     // skaliert Sprite schrittweise auf 90 Pixel Höhe herunter
                     spSprite.Scale = new Vector2f(1, 1 / F_LatestScale);
@@ -338,8 +335,8 @@ namespace IcyMazeRunner.Klassen
         }
 
         /// <summary>
-        ///  Testet die Kollision des Spielers im nächsten Schritt mit einer Beweglichen Mauer. Gibt einen Boolean zurück, der einen static Boolean aktualisiert.
-        ///  Wenn keine Kollision stattfindet, wird wahr zurückgegeben, d.h. Bewegung ist möglich.
+        ///  <para>Testet die Kollision des Spielers im nächsten Schritt mit einer Beweglichen Mauer. Gibt einen Boolean zurück, der einen static Boolean aktualisiert.</para>
+        ///  <para>Wenn keine Kollision stattfindet, wird wahr zurückgegeben, d.h. Bewegung ist möglich.</para>
         /// </summary>
         public Boolean Wall_Collision(Player player, Vector2f predictedPosition, Calculator calc)
         {

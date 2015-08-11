@@ -45,7 +45,7 @@ namespace IcyMazeRunner
         Vector2f playerPosition;
 
 
-        // benötigt? ?!?!?!?!?! 0 Verweise
+        // ToDo: benötigt? ?!?!?!?!?! 0 Verweise
         EGameStates gamestate { get; set; }
 
         /* ~~~~ Texturen für Stehen und Bewegungsanimation ~~~~ */
@@ -177,8 +177,8 @@ namespace IcyMazeRunner
         }
 
 
-        // unnötig?
-        // oder für Random-Ports behalten?
+        // ToDo: unnötig?
+        // ToDo: oder für Random-Ports behalten?
         public void setSpritePos(Vector2f pos)
         {
             spPlayer.Position = pos;
@@ -187,7 +187,6 @@ namespace IcyMazeRunner
         /// <summary>
         /// Gibt zurück, ob eine Taste gedrückt wird.
         /// </summary>
-        /// <returns></returns>
         public bool getIsPressed()
         {
             return B_isPressed;
@@ -260,7 +259,6 @@ namespace IcyMazeRunner
         /// <summary>
         ///  Fügt einen Zustand ein, sodass andere Objekte einen Zustand erstellen können und dieser dann im StateHandler des Spielers verwaltet wird.
         /// </summary>
-        /// <param name="state"></param>
         public void setState (Playerstate state)
         {
             SH.add(state);
@@ -313,13 +311,13 @@ namespace IcyMazeRunner
 
 
         /// <summary>
-        /// Steuert Bewegung des Spielers.
+        /// <para>Steuert Bewegung des Spielers.</para>
         /// 
-        /// Zunächst wird die Laufgeschwindigkeit des Spielers an den Computer angepasst und der Boolean _IsPressed auf Standard zurückgesetzt.
+        /// <para>Zunächst wird die Laufgeschwindigkeit des Spielers an den Computer angepasst und der Boolean _IsPressed auf Standard zurückgesetzt. </para>
         /// 
-        /// Dann wird kontrolliert, ob der Herausforderungsmodus aktiviert oder deaktiviert werden soll und falls er aktiviert ist, wird zur speziellen, längeren Methode für den Herausforderungsmodus gewechselt.
+        /// <para>Dann wird kontrolliert, ob der Herausforderungsmodus aktiviert oder deaktiviert werden soll und falls er aktiviert ist, wird zur speziellen, längeren Methode für den Herausforderungsmodus gewechselt. </para>
         ///
-        /// Ansonsten wird dir normale WASD-Steuerung genutzt. Falls sich der Spieler nicht bewegt, wird auf die idle-Textur umgestellt und am Ende die Position des Sprites an die Position der Spielerinstanz gesetzt.
+        /// Ansonsten wird dir normale WASD-Steuerung genutzt. Falls sich der Spieler nicht bewegt, wird auf die idle-Textur umgestellt und am Ende die Position des Sprites an die Position der Spielerinstanz gesetzt. </para>
         /// </summary>
         public void move(Map map, GameTime time, MoveableWallHandler MWH)
         {
@@ -399,10 +397,10 @@ namespace IcyMazeRunner
 
         // ToDo: restliche Animationen, Animationen selbst in eigene Methoden auslagern.
         /// <summary>
-        /// Animation des Todes
-        /// Bei erstem Aufruf der Methode ist B_isDeathWatchOn false, und somit wird die DeathWatch.Watch zurückgesetzt und gestartet und
+        /// <para>Animation des Todes</para>
+        /// <para> Bei erstem Aufruf der Methode ist B_isDeathWatchOn false, und somit wird die DeathWatch.Watch zurückgesetzt und gestartet und
         /// der Boolean auf wahr gesetzt. Für Animationen wird der Counter hochgezählt und anschließend abhängig von der Todesursache zur 
-        /// jeweiligen Animation gesprungen und diese wird ausgeführt.
+        /// jeweiligen Animation gesprungen und diese wird ausgeführt.</para>
         /// </summary>
         public void DeathAnimation(int typeOfDeath)
         {
@@ -505,10 +503,10 @@ namespace IcyMazeRunner
 
         // ToDo: Kürzen möglich?
         /// <summary>
-        /// Bewegungssteuerung für den Herausforderungsmodus.
+        /// <para>Bewegungssteuerung für den Herausforderungsmodus. </para>
         /// 
-        /// Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden.
-        /// Ebenso wird die Textur jeweils angepasst, falls man sich nicht mehr bewegt.
+        /// <para>Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden. </para>
+        /// <para>Ebenso wird die Textur jeweils angepasst, falls man sich nicht mehr bewegt. </para>
         /// </summary>
         public void changingmove(Map map, GameTime time)
         {

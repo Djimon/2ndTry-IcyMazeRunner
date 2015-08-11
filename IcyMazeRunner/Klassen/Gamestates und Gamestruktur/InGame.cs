@@ -464,7 +464,7 @@ namespace IcyMazeRunner.Klassen
         public bool get_Gap_Collision(Player player, Map map)
         {
             // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-            if (bmMap.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.getBlocksize()) + 1, ((int)((player.getYPosition() + (player.getHeigth()/2))/map.getBlocksize()) + 1)).Name == Sorange)
+            if (bmMap.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.I_blockSize) + 1, ((int)((player.getYPosition() + (player.getHeigth() / 2)) / map.I_blockSize) + 1)).Name == Sorange)
             {
                 return true;
             }
