@@ -43,10 +43,20 @@ namespace IcyMazeRunner
         /// Speichert Spielerposition bzw. gibt diese Position an.
         /// </summary>
         Vector2f playerPosition;
+        // ToDo: benötigen wir playerPosition? Kann es nicht durch Sprite.Position ersetzt werden?
 
 
-        // ToDo: benötigt? ?!?!?!?!?! 0 Verweise
+        int I_healthPoints;
+        int I_maxhealthPoints;
+        float F_runningSpeed;
+        // int basicDamage
+        // int basicDefence
+
+        Vector2f PredictedPosition { get; set; }
+        // ToDo: Predicted Position wirklich benötigt?
+
         EGameStates gamestate { get; set; }
+        // ToDo: benötigt? ?!?!?!?!?! 0 Verweise
 
         /* ~~~~ Texturen für Stehen und Bewegungsanimation ~~~~ */
         Texture txDown1;
@@ -62,19 +72,43 @@ namespace IcyMazeRunner
         Texture txLeft2;
         Texture txLeft3;
 
-        /* ~~~~ Attribute für Animation, wenn Spieler stehen bleibt ~~~~ */
+        /* ~~~~ Attribute für idle-Animation ~~~~ */
+        /// <summary>
+        /// Boolean, ob Spieler stehen bleibt.
+        /// </summary>
         bool B_isPressed = false;
+
+        /// <summary>
+        /// Gibt die Textur an, welche genutzt wird, wenn Spieler stehen bleibt.
+        /// </summary>
         int I_rememberidle = 0;
 
 
         /* ~~~~ Attribute für den Herausfoderungsmodus ~~~~ */
+        /// <summary>
+        /// Gibt an, ob Herausforderungsmodus aktiviert ist.
+        /// </summary>
         bool B_isControlChanged = false;
+
+        /// <summary>
+        /// Gibt an, welche der 24 möglichen Fälle der Bewegungssteuerung genutzt wird.
+        /// </summary>
         int I_moveChangerState = 0;
+
+        /// <summary>
+        /// Randomgenerator für I_moveChangerState.
+        /// </summary>
         Random random = new Random();
 
 
-        /* ~~~~ Attribute und Zeitobjekt für die Animation, wenn Spieler stirbt ~~~~ */
+        /* ~~~~ Spieler stirbt ~~~~ */
+        /// <summary>
+        /// Gametime, um Animation des Spielers zu steuern, wenn er stirbt.
+        /// </summary>
         public GameTime gtDeathWatch;
+        /// <summary>
+        /// Gibt an, ob Todesanimation ausgelöst wurde.
+        /// </summary>
         bool B_isDeathWatchOn;
 
 
@@ -87,16 +121,11 @@ namespace IcyMazeRunner
         Texture txFall3b;
         Texture txFall4a;
         Texture txFall4b;
+        /// <summary>
+        /// Linear steigender Int-Wert für wechselnde Texturen, d.h. Animationen mithilfe von Modulo 2.
+        /// </summary>
         int I_fallAnimationCounter = 0;
 
-        /************ Player attributes ***********/
-
-        int I_healthPoints;
-        int I_maxhealthPoints;
-        float F_runningSpeed;
-        // int basicDamage
-        // int basicDefence
-        Vector2f PredictedPosition { get; set; }
 
         /* ~~~~ Konstruktor ~~~~ */
         public Player(Vector2f Pos, Map map)
@@ -104,6 +133,9 @@ namespace IcyMazeRunner
             //Festlegen der Spielerposition, wird mit neuem Level neu festgelegt
             playerPosition = Pos;
 
+            //Initialisieren
+            SH = new PlayerStateHandler();
+            PredictedPosition = new Vector2f(0, 0);
 
             // Initialisierung der HP des Spielers, wird mit neuem Level neu festgelegt
             I_healthPoints = 100;
@@ -135,19 +167,12 @@ namespace IcyMazeRunner
             txFall4a = new Texture("Texturen/Player/Fallanimation/fall4a Platzhalter.png");
             txFall4b = new Texture("Texturen/Player/Fallanimation/fall4b Platzhalter.png");
 
-            //Standardtextur wird festgelegt
+            //Standardtextur wird festgelegt und Sprite initialisiert
             spPlayer = new Sprite(txDown3);
-
-
-            //Sprite wird geladen
             spPlayer.Scale = new Vector2f(1f, 1f);
             spPlayer.Position = playerPosition;
-            spPlayer = new Sprite(spPlayer);
 
-
-            //Kopie der Map für move-Methode weiter unten
             mAbsmap = map;
-
 
             // Stoppuhr für Herausforderungsmodus starten
             gtMoveTime = new GameTime();
@@ -157,11 +182,6 @@ namespace IcyMazeRunner
             gtDeathWatch = new GameTime();
             B_isDeathWatchOn = false;
             B_IsSaved = false;
-
-            // Initialisierung
-            SH = new PlayerStateHandler();
-
-            PredictedPosition = new Vector2f(0, 0);
         }
 
 
@@ -177,7 +197,7 @@ namespace IcyMazeRunner
         }
 
 
-        // ToDo: unnötig?
+        // ToDo: setSpritePos unnötig?
         // ToDo: oder für Random-Ports behalten?
         public void setSpritePos(Vector2f pos)
         {
@@ -510,17 +530,12 @@ namespace IcyMazeRunner
         /// </summary>
         public void changingmove(Map map, GameTime time)
         {
-
-
-            /*~~~~ Neue Zuordnung der Tastatur an die Bewegungsrichtung alle 20 Sekunden ~~~~*/
             if (gtMoveTime.Watch.ElapsedMilliseconds >= 20000)
             {
                 I_moveChangerState = random.Next(23);
                 gtMoveTime.Watch.Restart();
             }
 
-
-            /*~~~~ Alle möglichen Fälle für die Steuerung ~~~~*/
             switch (I_moveChangerState)
             {
                 case 0:
