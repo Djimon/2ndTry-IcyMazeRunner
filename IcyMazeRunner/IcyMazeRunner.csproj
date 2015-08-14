@@ -59,6 +59,9 @@
     <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />
     <Compile Include="Klassen\Gameplay\Enemy.cs" />
     <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Playerstate.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\PlayerStateHandler.cs" />
+    <Compile Include="Klassen\Gameplay\Walls\Coordinates.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\GUI.cs" />
@@ -108,6 +111,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Patchnotes.txt" />
+    <Content Include="Texturen\Enemies\downidle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Fehlende Texturen und Animationen.txt" />
     <Content Include="Texturen\Map\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -122,6 +128,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\hole.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Map\KI-test.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Map\Map_1.bmp">

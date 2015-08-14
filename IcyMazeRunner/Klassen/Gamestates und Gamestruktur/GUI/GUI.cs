@@ -13,15 +13,15 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         RenderWindow win;
         View view;
 
-        public GUI()
+        public GUI(View view)
         {
-    
+          this.view = view;
         }
 
-        public void draw(Sprite sprite, RenderWindow win, View view)
+        public void draw(RenderWindow win, Sprite sprite) //, RenderWindow win, View view
         {
             this.win = win;
-            this.view = view;
+            //this.view = view;
 
             // work on a copy, instead of the original, for the original could be reused outside this scope
             Sprite spriteCopy = new Sprite(sprite);  

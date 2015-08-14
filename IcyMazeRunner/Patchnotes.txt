@@ -1,4 +1,4 @@
-﻿Version 1.3.B009
+﻿Version 1.3.B013c
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -6,6 +6,58 @@
 y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
+
+	- beantwortete Fragen: HealSkill auf x Prozent Health, Selbstrettung sorgt für x Prozent Health, States+StateHandler auch für Gegner, Fertigkeiten
+	  sind später spezialisierbar(andere Datei dafür einrichten), Fertigkeiten/Angreifen/Blocken können während der Bewegung eingesetzt werden, 
+	  Blocken und Angreifen aber nicht gleichzeitig.
+	- ToDo: Skill für Aktivierung geheimer Wege einbauen, Skill für Selbstrettung einbauen, 
+	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
+	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Fenstergröße fixen, Ziel fixen
+
+Version 1.3.B013c (Kilian):
+	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes
+	- abgeschlossen in: Blocks, Maps, Playerstate, PlayerStateHandler, Coordinates, Moveable_Wall, Player, inGame
+
+Version 1.3.B013b (Kilian):
+	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes
+	- abgeschlossen in: Blocks, Maps, Playerstate, PlayerStateHandler, Coordinates, Moveable_Wall
+	- angefangen in: Player, inGame
+
+Version 1.3.B013 (Kilian):
+	- Timer für Sterbeanimation wird zurückgesetzt, wenn sie beendet ist
+	- Level wird nur erniedrigt, wenn Spieler durch Loch im Boden fällt
+	- Selbstrettung implementiert
+	- Kommentare eingefügt
+	- PlayerStates und PlayerStateHandler implementiert und in Player eingefügt
+	- Player.SetDamage() implementiert, um Gesundheit des Spielers Schaden zufügen zu können - wenn kleiner 0, wird es 
+	  anschließend automatisch auf 0 gesetzt
+	- Player.SetHeal() implementiert, um Spieler heilen zu können. Wenn int-Wert übergeben wird, werden die HealthPoints um diesen Wert erhöht
+	  bzw. maximal bis zu den maxHealthPoints, ohne Wert wird er auf 100% gehealt. Die sind aber noch nicht die Skills zum Healen, sondern die
+	  Methoden, auf die die Skills zugreifen.
+
+	  
+
+Version 1.3.B012 (Kilian):
+	- Coordinates.cs erstellt; speichert x und y-Koordinaten und einen Hilfs-Booleans für geheime Wege
+	- geheime Wege implementiert (Änderungen in inGame.loadContent[zum Speichern der Blöcke, die veränderbar sind],
+	  inGame.update()[am Ende der Methode; zum Wechsel der Texturen], 2 neue Strings und switch-cases in map.cs, 2 neue Blocktypen in Blocks.cs,
+	  Setter für Blocks-Texture in Blocks.cs)
+	- if-Abfrage zum Auslösen der Todesanimation von ==0 auf <=0 verändert
+
+Version 1.3.B011 (Chris):
+	- Kompass gefixed
+	- Map: getType() hinzugefügt
+	- Zielerfassung in der inGame
+	- Testenemy hinzgefügt
+	- KI-Testmap 1 hinzugefügt
+
+Version 1.3.B010 (Kilian):
+	- Moveable_Wall.cs: komplett kommentiert
+	- Moveable_Wall.cs: Animation für Bewegung nach oben und unten fertig gestellt
+	- Moveable_Wall.cs: Wall_Collision angepasst
+	- Moveable_Wall.cs: Verbindungen mit den Handlern angepasst
+	- Calculator.cs: addX() und addY() zum Addieren/Subtrahieren von Skalaren zu einem der beiden Komponenten eines 2D-Vektors eingefügt
+	- InGame.cs: Handler integriert
 
 Version 1.3.B009 (Chris):
 	- Kompass umgeschrieben (LoadingException????)

@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,21 @@ namespace IcyMazeRunner.Klassen
     {
         public static List<GameObject> gameObjectList { get; set; }
         public static EntityHandler entityHandler { get; set; }
-        public static MovableWallHandler moveableWallHandler { get; set; }
+        public static MoveableWallHandler moveableWallHandler { get; set; }
 
+        public Calculator calc = new Calculator();
 
         public GameObjectHandler()
+        {
+
+        }
+
+        public GameObjectHandler(Calculator calc)
         {
             gameObjectList = new List<GameObject>();
 
             entityHandler = new EntityHandler();
+            moveableWallHandler = new MoveableWallHandler();
         }
 
         /* ~~~~ add ~~~~ */
@@ -68,11 +76,11 @@ namespace IcyMazeRunner.Klassen
                 gObj.kill();
             }
             EntityHandler.deleteAll();
-            MovableWallHandler.deleteAll();
+            MoveableWallHandler.deleteAll();
         }
 
         /* ~~~~ Update ~~~~ */
-        public void update(GameTime gameTime)
+        public void update(GameTime gameTime, Player pRunner, Map cMap)
         {
             gameObjectList.Sort();
 
@@ -92,7 +100,7 @@ namespace IcyMazeRunner.Klassen
             }
 
             entityHandler.update(gameTime);
-            moveableWallHandler.update(gameTime);
+            moveableWallHandler.update(gameTime, pRunner, cMap, calc);
         }
 
 
