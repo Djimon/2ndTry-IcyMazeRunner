@@ -80,5 +80,10 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
              win.Draw(spnew);
         }
 
+        public Sprite newSprite() 
+        {
+            return spnew;
+        }
+
     }
 }

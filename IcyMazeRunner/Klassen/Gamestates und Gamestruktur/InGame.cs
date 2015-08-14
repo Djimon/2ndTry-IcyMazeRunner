@@ -13,11 +13,23 @@ using IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI;
 
 namespace IcyMazeRunner.Klassen
 {
-    class InGame : GameStates
+      class InGame : GameStates
     {
         /* ~~~~~~~~ VARIABLEN UND KONSTANTEN ~~~~~~~~*/
 
-        static int I_level = 0;
+        public static int I_level;
+
+        public InGame(int level)
+        {
+            I_level = level;
+        }
+
+        public int getLevel() 
+        {
+            return I_level;
+        }
+
+
         GameTime gtIngame = new GameTime();
 
         Map mMap;
@@ -30,7 +42,7 @@ namespace IcyMazeRunner.Klassen
         GUI SoftPopUp;
 
         Kompass compass;
-        Vector2f vTarget = new Vector2f(-500, 500);
+        Vector2f vTarget = new Vector2f(0, 0);
         float targetdistance;
 
         Player pRunner;
@@ -146,7 +158,7 @@ namespace IcyMazeRunner.Klassen
                     break;
 
                 case 1:
-                    bmMap = new Bitmap("Texturen/Map_1.bmp");
+                    bmMap = new Bitmap("Texturen/Map/Map_1.bmp");
                     mMap = new Map(bmMap);
                     pRunner = new Player(new Vector2f(0, 0), mMap);
                     break;
@@ -278,6 +290,7 @@ namespace IcyMazeRunner.Klassen
                 ************** KOMPASS *****************
                 ****************************************/
                 compass.update();
+                spKompass = compass.newSprite();
               
                 
                 // bewegliche Mauern (if-Abfrage), Kollision mit Schalter
@@ -345,7 +358,8 @@ namespace IcyMazeRunner.Klassen
             mMap.draw(win);
             pRunner.draw(win);
             win.Draw(spFogOfWar);
-            compass.draw(win);
+            win.Draw(spKompass);
+            //compass.draw(win);
             win.SetMouseCursorVisible(false);
             if (menu != null)
             {

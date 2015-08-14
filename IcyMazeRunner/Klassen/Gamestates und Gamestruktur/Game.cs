@@ -69,7 +69,7 @@ namespace IcyMazeRunner.Klassen
                         gameState = new MainMenu();
                         break;
                     case EGameStates.inGame:
-                        gameState = new InGame();
+                        gameState = new InGame(0);
                         break;
                     case EGameStates.credits:
                         gameState = new Credits();
@@ -79,6 +79,9 @@ namespace IcyMazeRunner.Klassen
                         break;
                     case EGameStates.controls:
                         gameState = new Controls();
+                        break;
+                    case EGameStates.NextLevel:
+                        gameState = new InGame(InGame.I_level + 1);
                         break;
                 }
 
