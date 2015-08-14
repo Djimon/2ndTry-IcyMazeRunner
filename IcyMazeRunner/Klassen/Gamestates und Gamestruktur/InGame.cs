@@ -17,6 +17,12 @@ namespace IcyMazeRunner.Klassen
     class InGame : GameStates
     {
 
+        public InGame(int level) 
+        {
+            I_level = level;
+        }
+
+
         /* ~~~~~~~~ allgemeine Spielvariablen ~~~~~~~~ */
 
         /// <summary>
@@ -30,7 +36,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         ///  Zeigt Level des Spiels an.
         /// </summary>
-        static int I_level = 0;
+        public static int I_level = 0;
 
         /// <summary>
         ///  Speichert, ob geheime Wege sichtbar sind, oder nicht. Nur auslösender Boolean.
