@@ -41,6 +41,7 @@ namespace IcyMazeRunner.Klassen
         /// Stringangabe für Kollisionskontrolle mit Loch im Boden.
         /// </summary>
         public static String Sorange = "ffff8800";
+        public static String Sblue = "ff0000ff"; //Ziel
 
 
         /* ~~~~~~~~ allgemeine Spielobjekte ~~~~~~~~ */
@@ -309,18 +310,18 @@ namespace IcyMazeRunner.Klassen
             // ToDo: Kompass laden
 
             // Festlegung des Zielvekotrs für den Kompass (buggy)
-            //for (int row = 1; row <= bmMap.Width; row++)
-            //{
-            //    for (int col = 1; col <= bmMap.Height; col++)
-            //    {
-            //        if (mMap.getBlockType(row, col) == 4)
-            //        {
-            //            vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
-            //            break;
-            //        }
-            //        else vTarget = new Vector2f(0, 0);
-            //    }
-            //}
+            for (int row = 1; row <= bmMap.Width; row++)
+            {
+                for (int col = 1; col <= bmMap.Height; col++)
+                {
+                    if ( bmMap.GetPixel(row, col).Name == Sblue)
+                    {
+                        vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
+                        break;
+                    }
+                    else vTarget = new Vector2f(0, 0);
+                }
+            }
             // ToDo: einfach vPos nutzen (vTarget = "Map-Name".vPos)
             // ToDo: vTarget bestimmen
 
