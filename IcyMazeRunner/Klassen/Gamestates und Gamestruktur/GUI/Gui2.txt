@@ -1,0 +1,36 @@
+class HUD
+    {
+        Compass Kompass;
+        Healthbar HP;
+        Skill jump,block,speed,heal;
+
+        public HUD()
+        {
+            Kompass = new Compass( /* input-parameters */ );
+            HP = new Healthbar;
+            jump = new Skill("jump");
+            block = new Skill("block");
+            speed = new Skill("speed");
+            heal = new Skill("heal");
+        }
+
+        public void update(GameTime gameTime)
+        {
+            Kompass.update();
+            HP.update();
+            jump.update();
+            block.update();
+            speed.update();
+            heal.update();
+        }
+
+        public void draw(RenderWindow window)
+        {
+            Kompass.draw(window);
+            HP.draw(window);
+            jmup.draw(window);
+            block.draw(window);
+            speed.draw(window);
+            heal.draw(window);
+        }
+    }
