@@ -15,14 +15,14 @@ Time cd = new Time(0); // ??
 public Skill(int t)
 {
   type = t;
-  case type:
-  switch 1: spSkill = new Sprite(txJump);
+  switch type:
+  case 1: spSkill = new Sprite(txJump);
             break;
-  switch 2: spSkill = new Sprite(txSpeed);
+  case 2: spSkill = new Sprite(txSpeed);
             break;
-  switch 3: spSkill = new Sprite(txBlock);
+  case 3: spSkill = new Sprite(txBlock);
             break;
-  switch 4: spSkill = new Sprite(txHeal);
+  case 4: spSkill = new Sprite(txHeal);
             break;
   default: break;
   
@@ -31,25 +31,25 @@ public Skill(int t)
 
 public Time Cooldown(type)
 {
-    case type:
-  switch 1: return 20; //sek
+  switch type:
+  case 1: return 20; //sek
             break;
-  switch 2: return 120;
+  case 2: return 120;
             break;
-  switch 3: return 30;
+  case 3: return 30;
             break;
-  switch 4: return 180;
+  case 4: return 180;
             break;
   default: return 0; break;
 }
 
 public void trigger(type)
 {
-  case type:
-  switch 1: /* jump (externe Klasse?) */ ; break;
-  switch 2: /* speed */ ; break;
-  switch 3: /* block */ ; break;
-  switch 4: /* heal */ ; break;
+  switch type:
+  case 1: /* jump (externe Klasse?) */ ; break;
+  case 2: /* speed */ ; break;
+  case 3: /* block */ ; break;
+  case 4: /* heal */ ; break;
   default: break;
 }
 
