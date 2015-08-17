@@ -1,0 +1,42 @@
+class healthbar
+{
+
+sprite spBG;
+sprite spHealth;
+sprite spFG;
+
+public healthbar()
+{
+	spBG = new Sprite("barBG.png")
+	spHealth = new Sprite("health.png")
+	spFG = new Sprite("barFG.png")
+}
+
+public Sprite scale(Sprite sprite)
+{
+	// die "-1" ist mir noch unklar, wird durch tests verstanden (hfftl.)
+	sprite.Scale = new Vector2f(-1 + (Player.CurrentHP / Player.MaxHP), 1); 
+	
+	return sprite;
+}
+
+public void setPosition()
+{
+	spHealth.Position = new Vector2f( (inGame.View.Center.X - (Game.WindowSizeX / 2) + 5), (inGame.View.Center.Y - (Game.WindowSizeY / 2) + txHP.Size.Y + 10 ));
+	spBG.Position = new Vectors2(spHealth.Position.X + spHealth.Texture.Size.X, spHealth.Position.Y);
+}
+
+public void update()
+{
+	setPosition();
+	scale();
+}
+
+public void draw(RenderWindwo win)
+{
+	window.Draw(spBG);
+	window.Draw(spHealth);
+	window.Draw(spFG);
+}
+
+} // end cl
