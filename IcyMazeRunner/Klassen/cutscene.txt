@@ -1,0 +1,47 @@
+class cutscene : EGameStates
+{
+
+enum loadingScreen{
+ Intro
+ Turm
+ Wald
+ Wüste
+ Berg
+ StoryA
+ StoryB
+ StoryC
+ StoryD
+ StoryE
+ StoryF
+}
+
+public cutscene(loadingScreen)
+{
+  switch loadingScreen:
+  case Intro: //some code (video); break;
+  case Turm: // code (bild); breaK;
+  //some more code
+}
+
+public kill()
+{
+
+}
+
+public void loadContent()
+{
+
+}
+
+public void update()
+{
+  if(inGame.loadContent.ready) cutscene.kill;
+  cutscene.draw();
+  
+}
+
+public void draw(RenderWindow win)
+{
+  win.Draw(spCutscene);
+  //win.Draw(Video);
+}
