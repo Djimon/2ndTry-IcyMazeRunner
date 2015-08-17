@@ -1,4 +1,4 @@
-﻿Version 1.3.B013c
+﻿Version 1.3.B014
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -13,6 +13,9 @@ y.00x  = komplett lauffähige Version 00x
 	- ToDo: Skill für Aktivierung geheimer Wege einbauen, Skill für Selbstrettung einbauen, 
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
 	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Fenstergröße fixen, Ziel fixen
+
+Version 1.3.B014 (Chris):
+	- einige kleine Pseudocode-/Code-Muster für GUI, Skills, Controller, Cutscenes in textform wird später in echte klassen formatiert, sobald ich an einem richtigen PC sitze
 
 Version 1.3.B013c (Kilian):
 	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes
