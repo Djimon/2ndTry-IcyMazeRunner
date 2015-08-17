@@ -1,0 +1,82 @@
+class Skill
+{
+
+Sprite spSkill;
+Sprite spCooldown = new Sprite(spCooldown);
+public int type;
+Texture txJump = new Texture("skill_jump.png");
+Texture txSpeed = new Texture("skill_speed.png");
+Texture txBlock = new Texture("skill_block.png");
+Texture txHeal = new Texture("skill_heal.png");
+Texture spCooldown = new Texture("cooldown.png");
+Time cd = new Time(0); // ??
+
+//construktor
+public Skill(int t)
+{
+  type = t;
+  case type:
+  switch 1: spSkill = new Sprite(txJump);
+            break;
+  switch 2: spSkill = new Sprite(txSpeed);
+            break;
+  switch 3: spSkill = new Sprite(txBlock);
+            break;
+  switch 4: spSkill = new Sprite(txHeal);
+            break;
+  default: break;
+  
+  // other stuff here....
+}
+
+public Time Cooldown(type)
+{
+    case type:
+  switch 1: return 20; //sek
+            break;
+  switch 2: return 120;
+            break;
+  switch 3: return 30;
+            break;
+  switch 4: return 180;
+            break;
+  default: return 0; break;
+}
+
+public void trigger(type)
+{
+  case type:
+  switch 1: /* jump */ ; break;
+  switch 2: /* speed */ ; break;
+  switch 3: /* block */ ; break;
+  switch 4: /* heal */ ; break;
+  default: break;
+}
+
+public bool isReady()
+{
+  if (cd == 0) return true;
+  else return false;
+}
+
+public void update()
+{
+    if (cd > 0)
+    {
+      cd = (Skill.Cooldown(type) - ellapsedTime);
+      spCooldown.Scale = (1, -1 *(cd / Skill.Cooldown(type)) )
+    else 
+    {
+      cd = 0;
+      spCooldown.Scale = (0,0);
+    }
+    
+    Skill.isReady;
+}
+
+public void draw(RenderWindow win)
+{
+  win.Draw(spSkill);
+  win.Draw(spCooldown);
+  
+}
