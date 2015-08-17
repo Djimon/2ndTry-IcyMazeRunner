@@ -1,0 +1,163 @@
+
+class Controller{
+
+
+//feste Controls
+public bool Esc
+{
+	if (Keyboard.IsKeyPressed(Controls.Escape) && !Esc)
+	return true;
+	else return false;
+}
+
+public bool Enter
+{
+	if (Keyboard.IsKeyPressed(Controls.Return) && !Enter)
+	return true;
+	else return false;
+}
+
+public bool Back
+{
+	if (Keyboard.IsPressed(Controls.Back) && !Back)
+	return true;
+	else return false;
+}
+
+//änderbare Controls
+public bool Left
+{
+	if(Keyboard.IsKeyPressed(Controls.Left) && !Left)
+	return true;
+	else return false;
+}
+
+public bool Right
+{
+	if(Keyboard.IsKeyPressed(Controls.Right) && !Right)
+	return true;
+	else return false;
+}
+
+public bool Up
+{
+	if(Keyboard.IsKeyPressed(Controls.Up) && !Up)
+	return true;
+	else return false;
+}
+
+public bool Down
+{
+	if(Keyboard.IsKeyPressed(Controls.Down) && !Down)
+	return true;
+	else return false;
+}
+
+public bool Use
+{
+	if(Keyboard.IsKeyPressed(Controls.Use) && !Use)
+	return true;
+	else return false;
+}
+
+public bool Inventory
+{
+	if(Keyboard.IsKeyPressed(Controls.Inventory) && !Inventory )
+	return true;
+	else return false;
+}
+
+public bool Jump
+{
+	if(Keyboard.IsKeyPressed(Controls.Jump) && !Jump)
+	return true;
+	else return false;
+}
+
+public bool Hit
+{
+	if(Keyboard.IsKeyPressed(Controls.Hit) && !Hit)
+	return true;
+	else return false;
+}
+
+public bool Skill1
+{
+	if(Keyboard.IsKeyPressed(Controls.Skill1) && !Skill1)
+	return true;
+	else return false;
+}
+
+public bool Skill2
+{
+	if(Keyboard.IsKeyPressed(Controls.Skill2) && !Skill2)
+	return true;
+	else return false;
+}
+
+public bool Skill3
+{
+	if(Keyboard.IsKeyPressed(Controls.Skill3) && !Skill3)
+	return true;
+	else return false;
+}
+
+public bool Skill4
+{
+	if(Keyboard.IsKeyPressed(Controls.Skill4) && !Skill4)
+	return true;
+	else return false;
+}
+
+
+public bool Cheat
+{
+	if(Keyboard.IsKeyPressed(Controls.Cheat) && !Cheat)
+	return true;
+	else return false;
+}
+
+} // end Class Controller
+
+---------------------------------
+
+static class Controls
+{
+
+//feste controls
+public static readonly Keyboard.Key Escape = Keyboard.Key.Escape;
+
+public static readonly Keyboard.Key Return = Keyboard.Key.Return;
+
+public static readonly Keyboard.Key Back = Keyboard.Key.Back;
+
+
+//veränderbare Controls
+
+public static Keyboard.Key Left = Keyboard.Key.A;
+
+public static Keyboard.Key Right = Keyboard.Key.D;
+
+public static keyboard.Key Up = Keyboard.Key.W;
+
+public static keyboard.Key Down = Keyboard.Key.S;
+
+public static Keyboard.Key Use = Keyboard.Key.F;
+
+public static Keyboard.Key Jump = Keyboard.Key.Space;
+
+public static Keyboard.Key Inventory = Keyboard.Key.I;
+
+public static Keyboard.Key Hit = Keyboard.Key.Shift;
+
+public static Keyboard.Key Skill1 = Keyboard.Key.1;
+
+public static Keyboard.Key Skill2 = Keyboard.Key.2;
+
+public static Keyboard.Key Skill3 = Keyboard.Key.3;
+
+public static Keyboard.Key Skill4 = Keyboard.Key.4;
+
+public static Keyboard.Key Cheat = Keyboarf.Key.#;
+
+} //end class Controls
