@@ -46,7 +46,7 @@ public Time Cooldown(type)
 public void trigger(type)
 {
   case type:
-  switch 1: /* jump */ ; break;
+  switch 1: /* jump (externe Klasse?) */ ; break;
   switch 2: /* speed */ ; break;
   switch 3: /* block */ ; break;
   switch 4: /* heal */ ; break;
