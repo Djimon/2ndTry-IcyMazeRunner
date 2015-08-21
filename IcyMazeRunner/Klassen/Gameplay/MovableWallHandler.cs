@@ -9,9 +9,14 @@ namespace IcyMazeRunner.Klassen
 {
     public class MoveableWallHandler : GameObjectHandler
     {
-
+        /// <summary>
+        /// Liste, die alle Objekte der beweglichen Mauern speichert und verwaltet.
+        /// </summary>
         public static List<Moveable_Wall> MoveableWallList;
 
+        /// <summary>
+        /// einfacher Konstruktor
+        /// </summary>
         public MoveableWallHandler()
         {
             MoveableWallList = new List<Moveable_Wall>();
@@ -19,11 +24,17 @@ namespace IcyMazeRunner.Klassen
 
         }
 
+        /// <summary>
+        /// Fügt eine Bewegliche Mauer der Liste hinzu.
+        /// </summary>
         public void add(Moveable_Wall moveableWall)
         {
             MoveableWallList.Add(moveableWall);
         }
 
+        /// <summary>
+        /// Fügt eine weitere Liste Beweglicher Mauern der Liste hinzu.
+        /// </summary>
         public void add(List<Moveable_Wall> added_moveableWallList)
         {
             foreach(Moveable_Wall moveableWall in added_moveableWallList)
@@ -34,6 +45,9 @@ namespace IcyMazeRunner.Klassen
         
         }
 
+        /// <summary>
+        /// Löscht alle beweglichen Mauern.
+        /// </summary>
         public static void deleteAll()
         {
             foreach (Moveable_Wall moveableWall in MoveableWallList)
@@ -41,6 +55,7 @@ namespace IcyMazeRunner.Klassen
                 moveableWall.kill();
             }
         }
+
 
         public static void deleteType(String _type)
         {
@@ -60,8 +75,11 @@ namespace IcyMazeRunner.Klassen
                 GameObjectHandler.deleteType(_type);
             }
         }
+        // ToDo: nicht benötigt, da nur ein Typ vorhanden, oder?
 
-
+        /// <summary>
+        /// Kontrolliert, ob Spieler mit irgendeiner beweglichen Mauer kollidieren wird.
+        /// </summary>
         public Boolean isWalkable(Player pPlayer, Vector2f predictedPosition)
         {
             try
@@ -80,8 +98,14 @@ namespace IcyMazeRunner.Klassen
 
             return true;
         }
+        // ToDo: für Enemy auch Kollision vorbereiten
 
-
+        /// <summary>
+        /// <para>Löscht zunächst alle alten, nicht mehr benötigten Einträge.<para>
+        /// 
+        /// <para>Anschließend kontrolliert er, ob der Spieler mit einer der Auslöser kollidiert, und wenn ja, wird die Bewegung ausgelöst, und 
+        /// solange bewegt, bis er die Endposition erreicht hat. Die orientation und direction der movableWall werden normalisiert.<para>
+        /// </summary>
         public void update(GameTime gameTime, Player pRunner, Map cMap, Calculator calc)
         {
             try

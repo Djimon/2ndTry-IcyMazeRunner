@@ -1,4 +1,4 @@
-﻿Version 1.3.B013c
+﻿Version 1.3.B013d
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -13,6 +13,12 @@ y.00x  = komplett lauffähige Version 00x
 	- ToDo: Skill für Aktivierung geheimer Wege einbauen, Skill für Selbstrettung einbauen, 
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
 	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Fenstergröße fixen, Ziel fixen
+	  
+Version 1.3.B013d (Kilian):
+	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes
+	- abgeschlossen in: Blocks, Maps, Playerstate, PlayerStateHandler, Coordinates, Moveable_Wall, Player, inGame, MovableWallHandler, 
+	  Enemy(keine speziellen Kommentare), GameObjectHandler, GameObject, Program
+	- angefangen in: 
 
 Version 1.3.B013c (Kilian):
 	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes

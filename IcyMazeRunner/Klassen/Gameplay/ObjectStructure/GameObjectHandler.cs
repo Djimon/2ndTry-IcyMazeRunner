@@ -10,18 +10,30 @@ namespace IcyMazeRunner.Klassen
 {
     public class GameObjectHandler
     {
+        /// <summary>
+        /// Liste an GameObjects.
+        /// </summary>
         public static List<GameObject> gameObjectList { get; set; }
+
+        /// <summary>
+        /// Unterhandler für Entities.
+        /// </summary>
         public static EntityHandler entityHandler { get; set; }
+
+        /// <summary>
+        /// Unterhandler für movable Walls.
+        /// </summary>
         public static MoveableWallHandler moveableWallHandler { get; set; }
 
+        /// <summary>
+        /// Für Zugriff auf Taschenrechner.
+        /// </summary>
         public Calculator calc = new Calculator();
 
+        /// <summary>
+        /// Konstruktor. Unterhandler werden erstellt.
+        /// </summary>
         public GameObjectHandler()
-        {
-
-        }
-
-        public GameObjectHandler(Calculator calc)
         {
             gameObjectList = new List<GameObject>();
 
@@ -29,12 +41,17 @@ namespace IcyMazeRunner.Klassen
             moveableWallHandler = new MoveableWallHandler();
         }
 
-        /* ~~~~ add ~~~~ */
+        /// <summary>
+        /// Fügt ein einzelnes GameObject hinzu.
+        /// </summary>
         public static void add(GameObject obj)
         {
             gameObjectList.Add(obj);
         }
 
+        /// <summary>
+        /// Fügt eine weitere Liste von Gameobjekten der Liste hinzu.
+        /// </summary>
         public static void add(List<GameObject> objs)
         {
             foreach (GameObject obj in objs)
@@ -44,7 +61,9 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-        /* ~~~~ delete one item, all items of a type, all items  ~~~~ */
+        /// <summary>
+        /// Löscht ein GameObejct.
+        /// </summary>
         public static void deleteOne(int index)
         {
             if (index < gameObjectList.Count)
@@ -57,6 +76,9 @@ namespace IcyMazeRunner.Klassen
             }
         }
 
+        /// <summary>
+        /// Löscht alle GameObjects eines bestimmten Typs.
+        /// </summary>
         public static void deleteType(String S_type_)
         {
             for (int i = 0; i < gameObjectList.Count; i++)
@@ -69,6 +91,9 @@ namespace IcyMazeRunner.Klassen
             }
         }
 
+        /// <summary>
+        /// Löscht alle Gameobjects.
+        /// </summary>
         public void deleteAll()
         {
             foreach (GameObject gObj in gameObjectList)
@@ -79,7 +104,11 @@ namespace IcyMazeRunner.Klassen
             MoveableWallHandler.deleteAll();
         }
 
-        /* ~~~~ Update ~~~~ */
+        /// <summary>
+        /// <para>Liste wird zunächst sortiert und dann alle nicht mehr vorhandenen Objekte gelöscht. </para>
+        /// 
+        /// <para>Dann wird der Index aktualisiert und die updates() der Unterhandler aufgerufen.</para>
+        /// </summary>
         public void update(GameTime gameTime, Player pRunner, Map cMap)
         {
             gameObjectList.Sort();
@@ -104,7 +133,9 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-        /* ~~~~ Draw ~~~~ */
+       /// <summary>
+       /// Zeichnet das GameObject.
+       /// </summary>
         public void draw(RenderWindow window)
         {
             foreach (GameObject gObj in gameObjectList)

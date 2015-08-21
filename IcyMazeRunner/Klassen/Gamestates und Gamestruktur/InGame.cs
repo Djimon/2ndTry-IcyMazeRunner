@@ -188,9 +188,21 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~ Handler-Objekte ~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+        /// <summary>
+        /// Allgemeine Gameobject-Handler.
+        /// </summary>
         GameObjectHandler GOH;
+
+        /// <summary>
+        /// Allgemeine Entity-Handler.
+        /// </summary>
         EntityHandler EH;
+
+        /// <summary>
+        /// Allgemeine MovableWall-Handler.
+        /// </summary>
         MoveableWallHandler MWH;
+        // ToDo: EntityHandler und MovableWallHandler benötigt oder Bestandteil als Klassenattribut/Objeht von GameObjectHandler?
 
 
         /* ~~~~~~~~ Spielobjekte zum Testen ~~~~~~~~ */
@@ -234,7 +246,7 @@ namespace IcyMazeRunner.Klassen
 
             /* ~~~~ Handler-Objekte ~~~~ */
             
-            GOH = new GameObjectHandler(calc);
+            GOH = new GameObjectHandler();
             EH = new EntityHandler();
             MWH = new MoveableWallHandler();
         }

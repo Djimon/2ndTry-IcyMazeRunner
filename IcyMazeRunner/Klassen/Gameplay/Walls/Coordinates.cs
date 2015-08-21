@@ -23,6 +23,9 @@ namespace IcyMazeRunner
         /// </summary>
         public Boolean B_UpperTexChanger { public get; protected set; }
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public Coordinates(int x, int y, Boolean b)
         {
             I_xCoord = x;
