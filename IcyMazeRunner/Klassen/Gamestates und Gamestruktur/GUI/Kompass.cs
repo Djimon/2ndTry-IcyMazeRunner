@@ -20,18 +20,30 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
 
 
         // Konstruktor
+        ///<summary>
+        /// sich zum Ziel drehender Kompass 
+        /// <para> midpoint - Mittelpunkt der Drehachse </para>
+        /// <para> view - InGame-View </para>
+        /// <para> target - "norden" das Ziel</para>
+        ///</summary>
         public Kompass(Vector2f midpoint, Vector2f targetPos, Texture texturPfad)
         {
             this.spNeedle = new Sprite(new Texture(texturPfad));
             this.vCompass = midpoint;
             this.vTarget = targetPos;
         }
-
+        
+        ///<summary>
+        /// Gibt Den Vektor zwischen a und B zurück.
+        ///</summary>
         public Vector2f getVector(Vector2f a, Vector2f b)
         {
             return (b - a);  // nicht sicher, ob der richtig berechnet wird
         }
-
+        
+        ///<summary>
+        ///Gibt den Winkel (Grad) zwischen X-Achse und position-Vektro zurück.
+        ///</summary>
         public float getWinkel(Vector2f position)
         {
             float x = position.X;
@@ -55,7 +67,10 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         //    graphics.DrawImage(oldBitmap, new Point(0, 0));
         //    return newBitmap;
         //}
-
+        
+        ///<summary>
+        ///dreht den Sprite spPic um angle Grad im UZS.
+        ///</summary>
         static Sprite RotateImageByAngle(Sprite spPic, float angle)
         {
             //Sprite spOldPic = spPic;
