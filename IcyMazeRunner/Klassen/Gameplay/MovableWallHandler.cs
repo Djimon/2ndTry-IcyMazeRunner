@@ -75,7 +75,9 @@ namespace IcyMazeRunner.Klassen
                 GameObjectHandler.deleteType(_type);
             }
         }
-        // ToDo: nicht benötigt, da nur ein Typ vorhanden, oder?
+        // 
+        
+        //ToDo: nicht benötigt, da nur ein Typ vorhanden, oder?
 
         /// <summary>
         /// Kontrolliert, ob Spieler mit irgendeiner beweglichen Mauer kollidieren wird.

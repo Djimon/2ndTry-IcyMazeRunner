@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace IcyMazeRunner.Klassen.Gameplay
 {
     class Enemy : GameObject
-    {
-        // ToDo: Wenn letztendlich genutzt, Summaries einfügen
+    {     
+        //ToDo: Wenn letztendlich genutzt, Summaries einfügen
 
         /// <summary>
         /// Gibt die Position des Gegners an.

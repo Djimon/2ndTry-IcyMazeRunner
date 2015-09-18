@@ -43,6 +43,8 @@ namespace IcyMazeRunner
         /// Speichert Spielerposition bzw. gibt diese Position an.
         /// </summary>
         Vector2f playerPosition;
+        // 
+        
         // ToDo: benötigen wir playerPosition? Kann es nicht durch Sprite.Position ersetzt werden?
 
 

@@ -11,7 +11,14 @@ namespace IcyMazeRunner.Klassen
 {
     public class Map
     {
-        // ToDo: werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
+        // 
+        
+        
+        
+        
+        
+        
+        // ToDo:werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
         // insert Map-Code here...es folgt eine User-friendly Zuarbeit zum einfachen Copy&Pasten :))
         // Texturpfad: "Texturen/Map/Map_tutorial.png"
         // Rot "ff0000" = leer (Hintergrund/Platzhalter, Landschaft, Atomexplosion) 
