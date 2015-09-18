@@ -17,7 +17,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
        
 
 
-
+        // ToDo: Level speichern.
         /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
@@ -47,7 +47,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         /* ~~~~ Screen aktualisieren ~~~~*/
         public EGameStates update(GameTime time)
         {
-            // warten bis Ladevorgang für nächstes level abgeschlossen (B_isready)
+            // ToDo: warten bis Ladevorgang für nächstes level abgeschlossen (B_isready)
            
             if (Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {

@@ -11,6 +11,10 @@ namespace IcyMazeRunner.Klassen.Menüs
 {
     class InGameMenu
     {
+
+
+        // ToDo: komplett durchsprechen/überarbeiten
+
         /* unnötige Variablen?? */
         View vMenuView;
         int test;

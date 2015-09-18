@@ -12,7 +12,7 @@ namespace IcyMazeRunner.Klassen
 {
     class Game : AbstractGame
     {
-
+            // ToDo: Möglichkeit probieren, ob Gamestate-übergreifendes Sprite für die verschiedenen Menüs geeignet ist statt der einzelnen Sprites...
       
 
             public static uint windowSizeX = 1062; // auf 1280 zurückanpassen (ebenso die Screens des MainMenus, ControlScreen, Creditscreen
@@ -28,7 +28,9 @@ namespace IcyMazeRunner.Klassen
 
 
 
-
+            /// <summary>
+            /// Übernimmt Konstruktor von AbstractGame.cs
+            /// </summary>
             public Game()
                 : base(windowSizeX, windowSizeY, "MazeRunner")
             {
@@ -37,6 +39,11 @@ namespace IcyMazeRunner.Klassen
 
             /* ~~~~~~~~~~~ UPDATE - METHODE ~~~~~~~~~~~~*/
 
+
+        /// <summary>
+        /// Gamestates werden aktualisiert.
+        /// </summary>
+        /// <param name="time"></param>
         public override void update(GameTime time)
         {
             if (currentGameState != prevGameState)
@@ -47,46 +54,50 @@ namespace IcyMazeRunner.Klassen
 
             /* ~~~~~~~~~~~ DRAW  ~~~~~~~~~~~~*/
 
+
+        /// <summary>
+        /// Die dem Gamestate entsprechende draw-Methode wird aufgerufen.
+        /// </summary>
+        /// <param name="win"></param>
         public override void draw(RenderWindow win)
         {
             gameState.draw(win);
         }
 
+        /// <summary>
+        /// Bei Wechsel des Gamestates wird der aktuelle Gamestate angepasst.
+        /// </summary>
+        public void handleGameState()
+        {
 
-           
 
-
-            public void handleGameState()
+            switch (currentGameState)
             {
+                case EGameStates.none:
+                    win.Close(); //Argumentendifferenz
+                    break;
+                case EGameStates.mainMenu:
+                    gameState = new MainMenu();
+                    break;
+                case EGameStates.inGame:
+                    gameState = new InGame();
+                    break;
+                case EGameStates.credits:
+                    gameState = new Credits();
+                    break;
+                case EGameStates.gameWon:
+                    gameState = new gameWon();
+                    break;
+                case EGameStates.controls:
+                    gameState = new Controls();
+                    break;
+            }
 
+            gameState.initialize(); //startwerte
 
-                switch (currentGameState)
-                {
-                    case EGameStates.none:
-                         win.Close(); //Argumentendifferenz
-                        break;
-                    case EGameStates.mainMenu:
-                        gameState = new MainMenu();
-                        break;
-                    case EGameStates.inGame:
-                        gameState = new InGame();
-                        break;
-                    case EGameStates.credits:
-                        gameState = new Credits();
-                        break;
-                    case EGameStates.gameWon:
-                        gameState = new gameWon();
-                        break;
-                    case EGameStates.controls:
-                        gameState = new Controls();
-                        break;
-                }
+            gameState.loadContent(); //grafiken/sounds laden
 
-                gameState.initialize(); //startwerte
-
-                gameState.loadContent(); //grafiken/sounds laden
-
-                prevGameState = currentGameState; 
+            prevGameState = currentGameState;
         }
 
         

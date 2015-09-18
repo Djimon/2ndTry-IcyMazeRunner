@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class Map
+    class Map
     {
         // 
         
@@ -37,7 +37,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Block-Array zum Anlegen der Map.
         /// </summary>
-        Blocks[,] map;
+        public Blocks[,] map;
 
 
         Texture txBlock { get; set; }
@@ -153,6 +153,7 @@ namespace IcyMazeRunner.Klassen
                     {
                         map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = false;
+                    
                     }
 
                 }

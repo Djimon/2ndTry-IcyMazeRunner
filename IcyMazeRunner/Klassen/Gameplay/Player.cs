@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner
 {
-    public class Player
+    class Player
     {
+
+        // ToDo: ENums für move-verwenden, Hardmode-move-Methode entsprechend abstrahieren, allgemein schreiben und Code kürzen
 
         /// <summary>
         ///  Variable, um Sterbeanimation zu unterbrechen und Spiel fortzusetzen.
@@ -354,7 +356,7 @@ namespace IcyMazeRunner
 
 
             if (B_isControlChanged)
-                changingmove(map, time);
+                Changingmove(map, time);
             else
             {
 
@@ -530,11 +532,11 @@ namespace IcyMazeRunner
         /// <para>Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden. </para>
         /// <para>Ebenso wird die Textur jeweils angepasst, falls man sich nicht mehr bewegt. </para>
         /// </summary>
-        public void changingmove(Map map, GameTime time)
+        public void Changingmove(Map map, GameTime time)
         {
             if (gtMoveTime.Watch.ElapsedMilliseconds >= 20000)
             {
-                I_moveChangerState = random.Next(23);
+                I_moveChangerState = random.Next(24);
                 gtMoveTime.Watch.Restart();
             }
 

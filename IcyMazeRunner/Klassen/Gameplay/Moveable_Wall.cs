@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class Moveable_Wall : GameObject //Attribute anpassen
+    class Moveable_Wall : GameObject //Attribute anpassen
     {
         
         /* ~~~~ Attribute für Mauer ~~~~ */
@@ -338,15 +338,15 @@ namespace IcyMazeRunner.Klassen
         ///  <para>Testet die Kollision des Spielers im nächsten Schritt mit einer Beweglichen Mauer. Gibt einen Boolean zurück, der einen static Boolean aktualisiert.</para>
         ///  <para>Wenn keine Kollision stattfindet, wird wahr zurückgegeben, d.h. Bewegung ist möglich.</para>
         /// </summary>
-        public Boolean Wall_Collision(Player player, Vector2f predictedPosition, Calculator calc)
+        public Boolean Wall_Collision(Player player, Vector2f predictedPosition)
         {
             Vector2f newPosition = new Vector2f((player.getXPosition() + predictedPosition.X + (player.getWidth() / 2)), (player.getYPosition() + predictedPosition.Y + (player.getHeigth() / 2)));
             if (I_orientation == 0)
             {
                 // 2 Blöcke stehen im Weg, deswegen einmal Kontrolle von oben und einmal von unten (Y+45 obere Mitte, Y+135 untere Mitte)
-                if (calc.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50
+                if (Calculator.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50
                     ||
-                    calc.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
+                    Calculator.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
                 {
                     return false;
                 }
@@ -354,7 +354,7 @@ namespace IcyMazeRunner.Klassen
             else 
             {
                 // 135, da nur mit dem "unteren" Block verglichen wird und nicht mit dem Block in der Mauer
-                if (calc.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
+                if (Calculator.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
                 {
                     return false;
                 }

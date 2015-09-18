@@ -19,8 +19,11 @@ namespace IcyMazeRunner.Klassen
         public RenderWindow win;
         GameTime gameTime;
         Music atmo;
-        
+        // ToDo: MusicController.cs erstellen
 
+        /// <summary>
+        /// Fenster wird geöffnet und Spielzeit initialisiert.
+        /// </summary>
         public AbstractGame(uint width, uint height, String title)
         {
             // Fensterkontrolle
@@ -32,6 +35,10 @@ namespace IcyMazeRunner.Klassen
             gameTime = new GameTime();
         }
         /* ~~~~~~~~~~~~~~~~ LAUFENDES SPIEL ~~~~~~~~~~~~~~~~*/
+
+        /// <summary>
+        /// Spiel wird gestartet. Die allgemeine Spielzeit beginnt zu laufen, die Musik beginnt und die Gameloop ausgeführt.
+        /// </summary>
         public void run()
         {
             gameTime.start();
@@ -67,6 +74,9 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~~~~~~~~ FENSTER-CHECK ~~~~~~~~~~~~*/
 
+        /// <summary>
+        /// Kontrolle, ob Fenster geschlossen werden soll.
+        /// </summary>
         public void Windowclosed(Object sender, EventArgs e)
         {
             ((RenderWindow)sender).Close();

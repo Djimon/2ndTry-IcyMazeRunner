@@ -8,6 +8,9 @@ namespace IcyMazeRunner.Klassen
 {
     public static class GlobalVariables
     {
+
+        // ToDo: Summaries
+
         public static int windowSizeX;
         public static int windowSizeY;
 

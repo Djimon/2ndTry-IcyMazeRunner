@@ -9,7 +9,7 @@ using IcyMazeRunner.Klassen;
 
 namespace IcyMazeRunner
 {
-    public class Playerstate
+    class Playerstate
     {
         /// <summary>
         ///  Textur des Zustands.

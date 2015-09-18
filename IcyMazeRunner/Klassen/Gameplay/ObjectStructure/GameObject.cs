@@ -81,7 +81,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Zeichnet GameObject.
         /// </summary>
-        public void draw(RenderWindow win)
+        public virtual void draw(RenderWindow win)
         {
             win.Draw(spSprite);
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class GameObjectHandler
+    static class GameObjectHandler
     {
         /// <summary>
         /// Liste an GameObjects.
@@ -25,28 +25,27 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public static MoveableWallHandler moveableWallHandler { get; set; }
 
-        /// <summary>
-        /// Für Zugriff auf Taschenrechner.
-        /// </summary>
-        public Calculator calc = new Calculator();
+
 
         /// <summary>
         /// Konstruktor. Unterhandler werden erstellt.
         /// </summary>
-        public GameObjectHandler()
-        {
-            gameObjectList = new List<GameObject>();
+        //public GameObjectHandler()
+        //{
+        //    gameObjectList = new List<GameObject>();
 
-            entityHandler = new EntityHandler();
-            moveableWallHandler = new MoveableWallHandler();
-        }
+        //    entityHandler = new EntityHandler();
+        //    moveableWallHandler = new MoveableWallHandler();
+        //}
+
+        // ToDo: Abstract-Methoden verwenden?
 
         /// <summary>
         /// Fügt ein einzelnes GameObject hinzu.
         /// </summary>
         public static void add(GameObject obj)
         {
-            gameObjectList.Add(obj);
+            //gameObjectList.Add(obj);
         }
 
         /// <summary>
@@ -54,10 +53,10 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public static void add(List<GameObject> objs)
         {
-            foreach (GameObject obj in objs)
-            {
-                gameObjectList.Add(obj);
-            }
+            //foreach (GameObject obj in objs)
+            //{
+            //    gameObjectList.Add(obj);
+            //}
         }
 
 
@@ -66,14 +65,14 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public static void deleteOne(int index)
         {
-            if (index < gameObjectList.Count)
-            {
-                gameObjectList.RemoveAt(index);
-            }
-            for (int i = 0; i < gameObjectList.Count; i++)
-            {
-                gameObjectList[i].I_indexObjectList = i;
-            }
+            //if (index < gameObjectList.Count)
+            //{
+            //    gameObjectList.RemoveAt(index);
+            //}
+            //for (int i = 0; i < gameObjectList.Count; i++)
+            //{
+            //    gameObjectList[i].I_indexObjectList = i;
+            //}
         }
 
         /// <summary>
@@ -81,25 +80,25 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public static void deleteType(String S_type_)
         {
-            for (int i = 0; i < gameObjectList.Count; i++)
-            {
-                if (gameObjectList[i].S_type.Equals(S_type_))
-                {
-                    gameObjectList.RemoveAt(i);
-                    i--;
-                }
-            }
+            //for (int i = 0; i < gameObjectList.Count; i++)
+            //{
+            //    if (gameObjectList[i].S_type.Equals(S_type_))
+            //    {
+            //        gameObjectList.RemoveAt(i);
+            //        i--;
+            //    }
+            //}
         }
 
         /// <summary>
         /// Löscht alle Gameobjects.
         /// </summary>
-        public void deleteAll()
+        public static void deleteAll()
         {
-            foreach (GameObject gObj in gameObjectList)
-            {
-                gObj.kill();
-            }
+            //foreach (GameObject gObj in gameObjectList)
+            //{
+            //    gObj.kill();
+            //}
             EntityHandler.deleteAll();
             MoveableWallHandler.deleteAll();
         }
@@ -109,34 +108,34 @@ namespace IcyMazeRunner.Klassen
         /// 
         /// <para>Dann wird der Index aktualisiert und die updates() der Unterhandler aufgerufen.</para>
         /// </summary>
-        public void update(GameTime gameTime, Player pRunner, Map cMap)
+        public static void update(GameTime gameTime, Player pRunner, Map cMap)
         {
-            gameObjectList.Sort();
+            //gameObjectList.Sort();
 
-            for (int i = 0; i < gameObjectList.Count; i++)
-            {
-                if (!gameObjectList[i].B_isAlive)
-                {
-                    gameObjectList.RemoveAt(i);
-                    i--;
-                }
-            }
+            //for (int i = 0; i < gameObjectList.Count; i++)
+            //{
+            //    if (!gameObjectList[i].B_isAlive)
+            //    {
+            //        gameObjectList.RemoveAt(i);
+            //        i--;
+            //    }
+            //}
 
-            for (int i = 0; i < gameObjectList.Count; i++)
-            {
-                gameObjectList[i].I_indexObjectList = i;
-                gameObjectList[i].update(gameTime);
-            }
+            //for (int i = 0; i < gameObjectList.Count; i++)
+            //{
+            //    gameObjectList[i].I_indexObjectList = i;
+            //    gameObjectList[i].update(gameTime);
+            //}
 
-            entityHandler.update(gameTime);
-            moveableWallHandler.update(gameTime, pRunner, cMap, calc);
+            //entityHandler.update(gameTime);
+            //moveableWallHandler.update(gameTime, pRunner, cMap);
         }
 
 
        /// <summary>
        /// Zeichnet das GameObject.
        /// </summary>
-        public void draw(RenderWindow window)
+        public static void draw(RenderWindow window)
         {
             foreach (GameObject gObj in gameObjectList)
             {

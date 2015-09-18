@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class MoveableWallHandler : GameObjectHandler
+    class MoveableWallHandler
     {
         /// <summary>
         /// Liste, die alle Objekte der beweglichen Mauern speichert und verwaltet.
@@ -40,7 +40,7 @@ namespace IcyMazeRunner.Klassen
             foreach(Moveable_Wall moveableWall in added_moveableWallList)
             {
                 MoveableWallList.Add(moveableWall);
-                gameObjectList.Add(moveableWall);
+                //gameObjectList.Add(moveableWall);
             }
         
         }
@@ -88,7 +88,7 @@ namespace IcyMazeRunner.Klassen
             {
                 foreach (Moveable_Wall moveableWall in MoveableWallList)
                 {
-                    if (moveableWall.Wall_Collision(pPlayer, predictedPosition, calc))
+                    if (moveableWall.Wall_Collision(pPlayer, predictedPosition))
                     {
                         return false;
                     }
@@ -142,11 +142,11 @@ namespace IcyMazeRunner.Klassen
                 }
 
                 /* Wenn an richtiger Position, Bool für erneutes Auslösen auf Standard setzen */
-                if (((calc.addX(moveableWall.get_PrevPosition(), cMap.I_blockSize).X.Equals(moveableWall.get_Position().X)) ||
-                      (calc.addX(moveableWall.get_PrevPosition(), -cMap.I_blockSize).X.Equals(moveableWall.get_Position().X))) 
+                if (((Calculator.addX(moveableWall.get_PrevPosition(), cMap.I_blockSize).X.Equals(moveableWall.get_Position().X)) ||
+                      (Calculator.addX(moveableWall.get_PrevPosition(), -cMap.I_blockSize).X.Equals(moveableWall.get_Position().X))) 
                      &&
-                     ((calc.addY(moveableWall.get_PrevPosition(), cMap.I_blockSize).Y.Equals(moveableWall.get_Position().Y)) ||
-                      (calc.addY(moveableWall.get_PrevPosition(), -cMap.I_blockSize).Y.Equals(moveableWall.get_Position().Y)))
+                     ((Calculator.addY(moveableWall.get_PrevPosition(), cMap.I_blockSize).Y.Equals(moveableWall.get_Position().Y)) ||
+                      (Calculator.addY(moveableWall.get_PrevPosition(), -cMap.I_blockSize).Y.Equals(moveableWall.get_Position().Y)))
                    )
                  {
                      moveableWall.setB_moveable(false);

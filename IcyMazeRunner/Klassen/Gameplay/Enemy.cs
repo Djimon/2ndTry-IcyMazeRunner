@@ -68,7 +68,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
         /// <summary>
         /// Zéichnet den Gegner.
         /// </summary>
-        public void draw(RenderWindow win)
+        public override void draw(RenderWindow win)
 
         {
             
