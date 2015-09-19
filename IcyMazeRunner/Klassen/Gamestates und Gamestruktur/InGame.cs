@@ -189,9 +189,21 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~ Handler-Objekte ~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        GameObjectHandler GOH;
-        EntityHandler EH;
-        MoveableWallHandler MWH;
+        ///// <summary>
+        ///// Allgemeine Gameobject-Handler.
+        ///// </summary>
+        //GameObjectHandler GOH;
+
+        ///// <summary>
+        ///// Allgemeine Entity-Handler.
+        ///// </summary>
+        //EntityHandler EH;
+
+        ///// <summary>
+        ///// Allgemeine MovableWall-Handler.
+        ///// </summary>
+        //MoveableWallHandler MWH;
+        // ToDo: EntityHandler und MovableWallHandler benötigt oder Bestandteil als Klassenattribut/Objeht von GameObjectHandler?
 
 
         /* ~~~~~~~~ Spielobjekte zum Testen ~~~~~~~~ */
@@ -224,9 +236,7 @@ namespace IcyMazeRunner.Klassen
             I_typeOfDeath=0;
             B_isDeathAnimationOver = false;
 
-            calc = new Calculator();
-
-
+            
 
             /* ~~~~ GUI-Objekte ~~~~ */
 
@@ -235,9 +245,9 @@ namespace IcyMazeRunner.Klassen
 
             /* ~~~~ Handler-Objekte ~~~~ */
             
-            GOH = new GameObjectHandler(calc);
-            EH = new EntityHandler();
-            MWH = new MoveableWallHandler();
+            //GOH = new GameObjectHandler();
+            //EH = new EntityHandler();
+            //MWH = new MoveableWallHandler();
         }
  
 
@@ -278,7 +288,7 @@ namespace IcyMazeRunner.Klassen
             // abrufen.
 
             /* ~~~~ Geheime Wege laden ~~~~ */
-            map = new Blocks[bmMap.Width, bmMap.Height];
+            map = mMap.map;
             SecretWayList = new List<Coordinates>();
             //komplette Bitmap durchgehen
             for (int row = 0; row < map.GetLength(0); row++)
@@ -310,9 +320,9 @@ namespace IcyMazeRunner.Klassen
             // ToDo: Kompass laden
 
             // Festlegung des Zielvekotrs für den Kompass (buggy)
-            for (int row = 1; row <= bmMap.Width; row++)
+            for (int row = 0; row < map.GetLength(0); row++)
             {
-                for (int col = 1; col <= bmMap.Height; col++)
+                for (int col = 0; col < map.GetLength(1); col++)
                 {
                     if ( bmMap.GetPixel(row, col).Name == Sblue)
                     {
@@ -405,7 +415,7 @@ namespace IcyMazeRunner.Klassen
 
 
                 // Wenn Timer vorüber
-                if (gtWallTimer.Watch.ElapsedMilliseconds >= 10000)
+                if (gtWallTimer != null && gtWallTimer.Watch.ElapsedMilliseconds >= 10000)
                 {
                     //wird der Timer gestoppt und wieder auf 0 gesetzt,
                     gtWallTimer.Watch.Reset();
@@ -434,7 +444,7 @@ namespace IcyMazeRunner.Klassen
                 // ToDo: in eigene Methode auslagern/kapseln
 
                 /* Handler aktualisieren*/
-                GOH.update(gametime, pRunner, mMap);
+                //GOH.update(gametime, pRunner, mMap);
 
                 //enemy move-update-test
                 eTest.move(new Vector2f(pRunner.getXPosition(), pRunner.getYPosition()), mMap);
@@ -475,7 +485,7 @@ namespace IcyMazeRunner.Klassen
 
 
                 /* Kontrolle, ob Spieler Ziel erreicht */
-                targetdistance = calc.getDistance(pRunner.getplayerSprite().Position, vTarget);
+                targetdistance = Calculator.getDistance(pRunner.getplayerSprite().Position, vTarget);
                 if (targetdistance <200)
                 {
                     I_level++;
@@ -607,6 +617,8 @@ namespace IcyMazeRunner.Klassen
 
     }
 }
+
+// ToDo: Handler überarbeiten,GameObjecthandler nur zum Aufruf der anderen Handler...
 
 
 // ToDo: Kommentarschnipsel wahrscheinlich unbrauchbar

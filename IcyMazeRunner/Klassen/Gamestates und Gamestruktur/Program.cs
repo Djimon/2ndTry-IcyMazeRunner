@@ -16,6 +16,11 @@ namespace IcyMazeRunner
         
         /* ~~~~ Einstiegspunkt ~~~~ */
         /* ~~~~ MAIN - Spielstart ~~~~ */
+
+        /// <summary>
+        /// Startet das Spiel.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             game = new Game();

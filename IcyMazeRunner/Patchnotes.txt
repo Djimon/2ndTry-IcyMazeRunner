@@ -14,6 +14,27 @@ y.00x  = komplett lauffähige Version 00x
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
 	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Fenstergröße fixen, Ziel fixen
 
+
+
+TODO::::::::::: I_level zu game.I_level machen und überlegen, wie man Rüstungs und Waffenboni in neue Level trotz Gamestate-Wechsel übernehmen kann...
+	  
+
+Version 1.3.B015 (Kilian):
+	- Calculator-Methoden static gesetzt, Instanzen des Calculators gelöscht. Methoden-Aufruf jetzt einfach über Calculator.Methode();
+	- ToDos eingefügt
+	- Null-References und StackOverflow-Exceptions behandelt
+	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes
+	- abgeschlossen in: Blocks, Maps, Playerstate, PlayerStateHandler, Coordinates, Moveable_Wall, Player, inGame, MovableWallHandler, 
+	  Enemy(keine speziellen Kommentare), GameObjectHandler, GameObject, Program, Game, AbstractGame, EntityHandler, Entity, GameTime
+	- nicht benötigt in: Controls, Credits, GameWon, GameOver, GameStates
+	- @ Chris: Summaries in Global Variables und GUI-Klassen schreiben
+
+Version 1.3.B013d (Kilian):
+	- Kommentare und Code-cleaning: Entfernen ungebrauchten Codes, Formatieren und Standardisieren des benötigten Codes
+	- abgeschlossen in: Blocks, Maps, Playerstate, PlayerStateHandler, Coordinates, Moveable_Wall, Player, inGame, MovableWallHandler, 
+	  Enemy(keine speziellen Kommentare), GameObjectHandler, GameObject, Program
+	- angefangen in: 
+
 Version 1.3.B014 (Chris):
 	- einige kleine Pseudocode-/Code-Muster für GUI, Skills, Controller, Cutscenes in textform wird später in echte klassen formatiert, sobald ich an einem richtigen PC sitze
 	- aktualisierung des Wikis und neue Seiten (level-progression, multithreading, achievements, credity, playtest)
@@ -136,7 +157,11 @@ Version 1.2.B020a (Chris):
 
 Version 1.2.B019 (Chris):
 	- InGameMenü final gefixt. 
-	  -ToDO: MainMenü-Aufruf - View korrigieren
+	  -
+	  
+	  
+	  
+	  : MainMenü-Aufruf - View korrigieren
 
 Version 1.2.B018b (Kilian):
 	- Fix InGamemenu (switch-case in der Draw wieder eingefügt)

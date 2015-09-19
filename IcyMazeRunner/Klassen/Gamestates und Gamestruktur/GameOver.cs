@@ -11,7 +11,7 @@ namespace IcyMazeRunner.Klassen
     class GameOver : GameStates
     {
 
-        //GameOver durch Fallen
+        // GameOver durch Fallen
 
         Texture txGameOver;
         Sprite spGameOver;
@@ -52,6 +52,7 @@ namespace IcyMazeRunner.Klassen
                 return EGameStates.NextLevel;
             }
        */
+            //ToDo: Wieso NextLevel????
 
             return EGameStates.gameOver;
         }

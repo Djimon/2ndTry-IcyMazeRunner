@@ -18,6 +18,8 @@ namespace IcyMazeRunner.Klassen
         View vMenu;
 
         /* ~~~~ Texturen anlegen ~~~~*/
+
+        // ToDo: Shader statt 2 Texturen benutzen (Mirko fragen)
         Texture txCreditsNotSelected;
         Texture txCreditsSelected;
 

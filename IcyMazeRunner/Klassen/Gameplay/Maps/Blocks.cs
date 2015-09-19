@@ -22,7 +22,11 @@ namespace IcyMazeRunner.Klassen
         Sprite spBlock {get;set;}
 
         EGameStates gameState { get; set; }
-        // ToDo: gameState benötigt?
+        // 
+        
+        
+        
+        //ToDo: gameState benötigt?
 
         /// <summary>
         /// <para>Gibt an, von welcher Art der Block ist.</para>

@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public class Map
+    class Map
     {
-        // ToDo: werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
+        // 
+        
+        
+        
+        
+        
+        
+        // ToDo:werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
         // insert Map-Code here...es folgt eine User-friendly Zuarbeit zum einfachen Copy&Pasten :))
         // Texturpfad: "Texturen/Map/Map_tutorial.png"
         // Rot "ff0000" = leer (Hintergrund/Platzhalter, Landschaft, Atomexplosion) 
@@ -30,7 +37,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Block-Array zum Anlegen der Map.
         /// </summary>
-        Blocks[,] map;
+        public Blocks[,] map;
 
 
         Texture txBlock { get; set; }
@@ -146,6 +153,7 @@ namespace IcyMazeRunner.Klassen
                     {
                         map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
                         B_walkable = false;
+                    
                     }
 
                 }

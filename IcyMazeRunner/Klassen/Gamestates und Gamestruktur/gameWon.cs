@@ -17,12 +17,9 @@ namespace IcyMazeRunner.Klassen
         public void initialize()
         {
 
-            // Auswahl der Textur nach Thema
-
-                spWon = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));
-            
+            spWon = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));   
             spWon.Position = new Vector2f(0,0);
-            // Bildposition fixen
+            // ToDo: Bildposition fixen
             
 
         }
