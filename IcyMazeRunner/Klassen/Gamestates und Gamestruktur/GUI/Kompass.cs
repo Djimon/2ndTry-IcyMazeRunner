@@ -15,6 +15,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         System.Drawing.Image needle;
         Sprite spNeedle;
         Sprite spnew;
+        View view;
         Vector2f vCompass; //Kompassmittelpunkt
         Vector2f vTarget; // Zielobjekt
 
@@ -26,11 +27,12 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         /// <para> view - InGame-View </para>
         /// <para> target - "norden" das Ziel</para>
         ///</summary>
-        public Kompass(Vector2f midpoint, Vector2f targetPos, Texture texturPfad)
+        public Kompass(Vector2f midpoint, View view, Vector2f target)
         {
-            this.spNeedle = new Sprite(new Texture(texturPfad));
+            this.spNeedle = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
+            this.view = view;
             this.vCompass = midpoint;
-            this.vTarget = targetPos;
+            this.vTarget = target;
         }
         
         ///<summary>
@@ -82,17 +84,30 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         }
 
 
-        public void update()
+        public void update(Vector2f target)
         {
+            vTarget = target;
             if (getWinkel(getVector(vCompass, vTarget)) != 0)
             {
                 spnew = RotateImageByAngle(spNeedle, getWinkel(getVector(vCompass, vTarget)));
             }
+            else spnew = spNeedle;
         }
 
-        public void draw(RenderWindow win) 
+
+        public void draw(RenderWindow win)
         {
-             win.Draw(spnew);
+            // work on a copy, instead of the original, for the original could be reused outside this scope
+
+
+            // modify sprite, to fit it in the gui
+            float viewScale = (float)view.Size.X / win.Size.X;
+
+            spnew.Scale *= viewScale;
+            spnew.Position = view.Center - view.Size / 2F + spnew.Position * viewScale;
+
+            // draw the sprite
+            win.Draw(spnew);
         }
 
     }
