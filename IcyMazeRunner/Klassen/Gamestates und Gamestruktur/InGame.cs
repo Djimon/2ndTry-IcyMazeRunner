@@ -112,7 +112,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Calculator calc;
 
-    
+
         /* ~~~~~~~~ Spielobjekte für GUI ~~~~~~~~ */
 
         /// <summary>
@@ -180,21 +180,11 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~ Handler-Objekte ~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        ///// <summary>
-        ///// Allgemeine Gameobject-Handler.
-        ///// </summary>
-        //GameObjectHandler GOH;
-
-        ///// <summary>
-        ///// Allgemeine Entity-Handler.
-        ///// </summary>
-        //EntityHandler EH;
-
-        ///// <summary>
-        ///// Allgemeine MovableWall-Handler.
-        ///// </summary>
-        //MoveableWallHandler MWH;
-        // ToDo: EntityHandler und MovableWallHandler benötigt oder Bestandteil als Klassenattribut/Objeht von GameObjectHandler?
+        /// <summary>
+        /// Allgemeine Gameobject-Handler.
+        /// </summary>
+        GameObjectHandler GOH;
+        //ToDo: Handler implementieren
 
 
         /* ~~~~~~~~ Spielobjekte zum Testen ~~~~~~~~ */
@@ -251,7 +241,7 @@ namespace IcyMazeRunner.Klassen
           
             bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
             //bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
-            // ToDo: Bitmaps in Switch-case laden.
+            // ToDo: Bitmaps in Switch-case laden. Level zuerst erstellen
   
 
 
@@ -306,7 +296,7 @@ namespace IcyMazeRunner.Klassen
 
             /* Kompass TEST */
 
-            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); //WHY????
+            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); 
             //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
 
             /* ~~~~ Methoden aufrufen, die die jeweiligen Handler abhängig vom Level füllen ~~~~ */
@@ -314,7 +304,6 @@ namespace IcyMazeRunner.Klassen
             /* Enemy TEST */
             eTest = new Enemy(new Vector2f(251, 251), "Texturen/Enemies/downidle.png");
         }
-        // ToDo: Wurde alles in initialize/loadContent geladen und initialisiert???
         // ToDo: Methoden für jeden Handler schreiben, die levelabhängig die jeweiligen Objekte laden.
 
         /// <summary>
@@ -433,9 +422,8 @@ namespace IcyMazeRunner.Klassen
 
                     if (pRunner.B_IsSaved)
                     {
-                        // Spieler hat wieder Leben
-                        // ToDo: variablen Wert eingeben
-                        pRunner.setPlayerHealth(20);
+                        // Spieler hat wieder 5% Leben
+                        pRunner.setPlayerHealth((int) (pRunner.getPlayerMaxHealth()*0.05));
                         pRunner.setDeathWatchIsOn(false);
                     }
 
@@ -469,8 +457,6 @@ namespace IcyMazeRunner.Klassen
                     vIngame = new View(new FloatRect(0, 0, Game.windowSizeX,Game.windowSizeY)); 
                     return EGameStates.gameWon;
                 }
-                // ToDo: if-Abfrage zwischen I_level++; und return EGameStates.NextLevel; einfügen?
-
 
                 /* Hack-Win */
                 if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) &&Keyboard.IsKeyPressed(Keyboard.Key.LShift))
@@ -497,7 +483,6 @@ namespace IcyMazeRunner.Klassen
             return EGameStates.inGame;
         }
         
-
 
         /// <summary>
         /// Mittelpunkt-Kollision zwischen 2 Objekten A,B (Sprites)
@@ -556,15 +541,17 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public void draw(RenderWindow win)
         {
-            win.Draw(spBackGround);
             win.SetView(vIngame);
+            win.Draw(spBackGround);
+            win.SetMouseCursorVisible(false);
             mMap.draw(win);
             pRunner.draw(win);
-            //eTest.draw(win);  
-            // ToDo: eTestfunktioniert nicht??
             win.Draw(spFogOfWar);
+
+
+            /*GUI ab hier */
             compass.draw(win);
-            win.SetMouseCursorVisible(false);
+
 
             if (menu != null)
             {
@@ -576,24 +563,8 @@ namespace IcyMazeRunner.Klassen
             //    inventory.draw(win);
             //}
         }
-        // ToDo: Können die beiden Sets an der jeweiligen Stelle stehen? Oder kann man sie an den Anfang oder das Ende ziehen?
-        // ToDo: Einstellen, wann der Cursor davon abweichend sichtbar ist (im InGameMenü Maussteuerung möglich? Bei Aufruf des Hauptmenüs sollte,
-        // falls dort Maussteuerung möglich ist, vor dem Wechsel auch die Maus sichtbar gesetzt werden.
+     
         // ja diesen Befehl einfach copy pasten in der draw von Hauptmenü und ingameMenü nur halt true. und bevor der est gemalt wird.
-      
 
     }
 }
-
-// ToDo: Handler überarbeiten,GameObjecthandler nur zum Aufruf der anderen Handler...
-
-
-// ToDo: Kommentarschnipsel wahrscheinlich unbrauchbar
-
-/*
-Map-Positionen:
-Map_tutorial (190,0)
-Map_2 (2263, 3336)
- */
-
-

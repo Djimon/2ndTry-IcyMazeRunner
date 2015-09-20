@@ -8,25 +8,19 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner.Klassen
 {
-    public abstract class GameObject
+    abstract class GameObject
     {
 
-        /// <summary>
-        /// Gibt die Position des GameObjects an.
-        /// </summary>
-        Vector2f Position;
-        // ToDo: benötigt? da in sprite.position schon enthalten, siehe Spieler.
 
         /// <summary>
         /// Der Sprite des GameObjects.
         /// </summary>
-        Sprite spSprite{ get; set; }
-        // ToDo: Name anpassen?
+        Sprite spGO{ get; set; }
 
         /// <summary>
         /// Aktuelle Textur des Sprites.
         /// </summary>
-        Texture txCurrentTexture { get { return spSprite.Texture; } }
+        Texture txCurrentTexture { get { return spGO.Texture; } }
 
         /// <summary>
         /// Skalierender Float.
@@ -83,7 +77,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public virtual void draw(RenderWindow win)
         {
-            win.Draw(spSprite);
+            win.Draw(spGO);
         }
 
     }

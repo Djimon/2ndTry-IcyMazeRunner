@@ -21,13 +21,6 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Sprite spBlock {get;set;}
 
-        EGameStates gameState { get; set; }
-        // 
-        
-        
-        
-        //ToDo: gameState benötigt?
-
         /// <summary>
         /// <para>Gibt an, von welcher Art der Block ist.</para>
         /// <para>0 - Weg</para>
@@ -75,7 +68,7 @@ namespace IcyMazeRunner.Klassen
         /// <para>Zunächst wird Typ des Blocks festgelegt und anhand dessen die restlichen Variablen und die Textur zugeordnet.</para>
         /// </summary>
         public Blocks(int blockType, Vector2f position)
-            //ToDo: txBlock benötigt als Eingabe-Parameter?
+            
         {
                 this.blockType = blockType;
 
@@ -109,8 +102,8 @@ namespace IcyMazeRunner.Klassen
                             this.spBlock = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
                             this.spBlock.Position = position;
                             this.B_walkable = true;
-                            //insert hier spawn für Player
-                            // PlayerPosition = blocksprite.position
+                            // insert hier spawn für Player
+                            // spPlayer.Position = blocksprite.position
                             // ToDo: in InGame implementieren
                             break;
                         }
@@ -119,7 +112,6 @@ namespace IcyMazeRunner.Klassen
                             this.spBlock = new Sprite(new Texture("Texturen/Map/exit.png"));
                             this.spBlock.Position = position;
                             this.B_walkable = false;
-                            gameState = EGameStates.inGame;
                             break;
                             // -> gameobject ziel initialisieren??
                             //insert hier Ziel: -> Gamestat/Level = +1

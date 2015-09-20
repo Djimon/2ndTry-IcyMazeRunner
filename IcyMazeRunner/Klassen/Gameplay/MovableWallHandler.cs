@@ -57,27 +57,6 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-        public static void deleteType(String _type)
-        {
-            bool B_FoundEntry = false;
-            for (int i = 0; i < MoveableWallList.Count; i++)
-            {
-                if (MoveableWallList[i].S_type.Equals(_type))
-                {
-                    MoveableWallList.RemoveAt(i);
-                    B_FoundEntry = true;
-                    i--;
-                }
-            }
-
-            if (B_FoundEntry)
-            {
-                GameObjectHandler.deleteType(_type);
-            }
-        }
-        // 
-        
-        //ToDo: nicht benötigt, da nur ein Typ vorhanden, oder?
 
         /// <summary>
         /// Kontrolliert, ob Spieler mit irgendeiner beweglichen Mauer kollidieren wird.

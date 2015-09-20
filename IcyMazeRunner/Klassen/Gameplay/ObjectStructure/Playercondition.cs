@@ -9,7 +9,7 @@ using IcyMazeRunner.Klassen;
 
 namespace IcyMazeRunner
 {
-    class Playerstate
+    class Playercondition
     {
         /// <summary>
         ///  Textur des Zustands.
@@ -70,7 +70,7 @@ namespace IcyMazeRunner
         /// <param name="_intervall">Gibt in Millisekunden an, wie lange ein Intervall des Zustands dauern soll.</param>
         /// <param name="_type">Gibt die Art des Zustands an. 0-Gift;; 1-Gift schwarzer Bildschirm;; 2-Wunde</param>
         /// <param name="pPlayer">this</param>
-        public Playerstate (int _runningtime, int _intervall, int _type, Player pPlayer, int _DamagePerTick)
+        public Playercondition (int _runningtime, int _intervall, int _type, Player pPlayer, int _DamagePerTick)
         {
             B_IsFinished = false;
             I_runningTime = _runningtime;

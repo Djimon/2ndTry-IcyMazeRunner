@@ -11,24 +11,6 @@ namespace IcyMazeRunner.Klassen
 {
     class Map
     {
-        // 
-        
-        
-        
-        
-        
-        
-        // ToDo:werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
-        // insert Map-Code here...es folgt eine User-friendly Zuarbeit zum einfachen Copy&Pasten :))
-        // Texturpfad: "Texturen/Map/Map_tutorial.png"
-        // Rot "ff0000" = leer (Hintergrund/Platzhalter, Landschaft, Atomexplosion) 
-        // Texturpfad: "Texturen/Map/BG.jpg"
-        // schwarz "000000" = Mauer
-        // Texturpfad: "Texturen/Map/wall-clean.png"
-        // weiß "ffffff" = weg 
-        // Texturpfad: "Texturen/Map/way-clean.png"
-        // orange "FF8000" = Loch im Boden (255 Rot, 128 Grün, 0 Blau)
-
         /// <summary>
         /// Gibt Position des Ziels an.
         /// </summary>
@@ -44,7 +26,6 @@ namespace IcyMazeRunner.Klassen
         /// Block-Array zum Anlegen der Map.
         /// </summary>
         public Blocks[,] map;
-
 
         /// <summary>
         /// Blockgröße, um zentral einzustellen, welchen Wert sie hat.
@@ -92,7 +73,7 @@ namespace IcyMazeRunner.Klassen
             {
                 for (int col = 0; col < map.GetLength(1); col++)
                 {
-                    
+                   
 
                     if (mask.GetPixel(row, col).Name == Swhite)
                     {   
@@ -163,7 +144,6 @@ namespace IcyMazeRunner.Klassen
 
 
         }
-        // ToDO: txBlock entfernen in Blocks und Maps, da nicht augenscheinlich nicht benötigt??
 
        /// <summary>
        /// <para>Kontrolliert, ob Kachel von Spieler betreten werden kann, oder nicht.</para>
@@ -173,7 +153,6 @@ namespace IcyMazeRunner.Klassen
        /// </summary>
         public bool iswalkable(Sprite sprite, Vector2f vector)
         {
-            bool B_walkable = true;
             Vector2f newPosition = new Vector2f(sprite.Position.X + vector.X, sprite.Position.Y + vector.Y);
 
             if (!(map[(int)(newPosition.X / I_blockSize), (int)(newPosition.Y / I_blockSize)].getWalkable()/*links oben*/
@@ -185,16 +164,13 @@ namespace IcyMazeRunner.Klassen
                 && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / I_blockSize), (int)(newPosition.Y) / I_blockSize].getWalkable()/*oben mitte*/
                 && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / I_blockSize), (int)(newPosition.Y + sprite.Texture.Size.Y) / I_blockSize].getWalkable()/*unten mitte*/
                 ))
-                B_walkable = false;
+                return false;
             // ToDo: Verschlankung der if-Abfrage?
 
-            //Kontrollangabe
-            Console.WriteLine(B_walkable);
-            // ToDo: noch benötigt?
+            // Kontrollangabe
+            // Console.WriteLine(B_walkable);
 
-           return B_walkable;
-            // ToDo: stattdessen return false; in if-Abfrage und ansonsten return true; nutzen? Spart den Boolean.
-           
+           return true;        
         }
 
 
