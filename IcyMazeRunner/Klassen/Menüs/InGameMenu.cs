@@ -243,17 +243,17 @@ namespace IcyMazeRunner.Klassen.Menüs
             }
             if ((select == 1 || select == -3) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
-                vMenuView.Reset(new FloatRect(0, 0, 1062, 720));  //globale Fenstervariable
+                vMenuView.Reset(new FloatRect(0, 0, Game.windowSizeX,Game.windowSizeY));  
                 return EGameStates.mainMenu;
             }
             if ((select == 2 || select == -2) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
-                vMenuView.Reset(new FloatRect(0, 0, 1062, 720));  //globale Fenstervariable
+                vMenuView.Reset(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));  
                 return EGameStates.controls;
             }
             if ((select == 3 || select == -1) && Keyboard.IsKeyPressed(Keyboard.Key.Return))  //Platzhalter Map auswahl
             {
-                vMenuView.Reset(new FloatRect(0, 0, 1062, 720));  //globale Fenstervariable
+                vMenuView.Reset(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));  
                 return EGameStates.mainMenu;
             }
 

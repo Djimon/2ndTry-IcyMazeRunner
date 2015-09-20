@@ -112,10 +112,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Calculator calc;
 
-        Sprite spZiel { get; set; }  // hier map/ blocktype=4 (blue= ziel) ??
-        // ToDo: benötigt? 0 Verweise...
-
-
+    
         /* ~~~~~~~~ Spielobjekte für GUI ~~~~~~~~ */
 
         /// <summary>
@@ -154,13 +151,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Vector2f vTarget;
 
-        // System.Drawing.Image bmKompass;
-        // ToDo: ???
 
-        /// <summary>
-        /// Sprite für den Kompass.
-        /// </summary>
-        Sprite spKompass;
 
 
         /* ~~~~~~~~ Spielobjekte für bewegliche Mauern ~~~~~~~~ */
@@ -224,8 +215,8 @@ namespace IcyMazeRunner.Klassen
             gtIngame = new GameTime();
             gtIngame.start();
 
-            vIngame = new View(new FloatRect(0, 0, 1058, 718));
-            // ToDo: globale Fenstergrößen-Variable? 1% kleiner, als Original, um Side-glitches zu verhindern --> fixen
+            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX -1, Game.windowSizeY -1));
+           
 
             spBackGround = new Sprite(new Texture("Texturen/Map/background.png"));
             spBackGround.Position = new Vector2f(0, 0);
@@ -269,8 +260,7 @@ namespace IcyMazeRunner.Klassen
                     //ToDo: Spielerstartposition automatisch bestimmen lassen. Eventuell das gleiche für die Map.
                 case 0:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
-                    // toDO: pRunner = new Player(new Vector2f(mMap.vStart), mMap)
+                    //pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
 
                     break;
 
@@ -278,15 +268,14 @@ namespace IcyMazeRunner.Klassen
 
                 default:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
+                    //pRunner = new Player(new Vector2f(mMap.vStart.X,mMap.vStart.Y), mMap); //(281,91)
 
                     break;
 
             }
 
-            // ToDo: Player erst hier nach dem Switch-case laden: pRunner = new Player(Startvektor, mMap);
-            // ToDo: Startvektor vorher initialisieren/bestimmen (in der Map-Klasse Vektor direkt als eigenes Attribut bestimmen und dann hier
-            // abrufen.
+            pRunner = new Player(mMap.vStart, mMap);  //new Vector2f(mMap.vStart.X, mMap.vStart.Y)
+
 
             /* ~~~~ Geheime Wege laden ~~~~ */
             map = mMap.map;
@@ -316,30 +305,6 @@ namespace IcyMazeRunner.Klassen
             }
 
             /* Kompass TEST */
-
-            // bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
-            // ToDo: Kompass laden
-
-            // Festlegung des Zielvekotrs für den Kompass (buggy)
-            //for (int row = 0; row < map.GetLength(0); row++)
-            //{
-            //    for (int col = 0; col < map.GetLength(1); col++)
-            //    {
-            //        if ( bmMap.GetPixel(row, col).Name == Sblue)
-            //        {
-            //            vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
-            //            break;
-            //        }
-            //        else vTarget = new Vector2f(0, 0);
-            //    }
-            //}
-
-            // ToDo: einfach vZiel nutzen (vTarget = "Map-Name".vZiel)
-            // ToDo: vTarget bestimmen
-
-            spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
-
-
 
             compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); //WHY????
             //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
@@ -372,7 +337,7 @@ namespace IcyMazeRunner.Klassen
                 {
                     return menu.update();
                 }
-                // ToDo: Ingame-Menu-Update-Methode schreiben (Auslagern/kapseln)
+                
             }
             else
             {
@@ -427,20 +392,20 @@ namespace IcyMazeRunner.Klassen
 
                     //und die Texturen auf ihre jeweiligen Ursprungszustände zurückgesetzt bzw. das Feld darüber, wenn nötig, wieder zu der
                     //Draufansicht einer Mauer.
-                    foreach (Coordinates co in SecretWayList)
+                    foreach (Coordinates coordz in SecretWayList)
                     {
                         if (map[1, 2].type() == 7)
                         {
-                            map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                            map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
                         }
                         else
                         {
-                            map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                            map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
                         }
 
-                        if (co.B_UpperTexChanger)
+                        if (coordz.B_UpperTexChanger)
                         {
-                            map[co.I_xCoord - 1, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                            map[coordz.I_xCoord - 1, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
                         }
 
                     }
@@ -500,16 +465,16 @@ namespace IcyMazeRunner.Klassen
                 /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
                 if (I_level == 31)
                 {
-                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX,Game.windowSizeY)); 
                     return EGameStates.gameWon;
                 }
                 // ToDo: if-Abfrage zwischen I_level++; und return EGameStates.NextLevel; einfügen?
 
 
                 /* Hack-Win */
-                if (Keyboard.IsKeyPressed(Keyboard.Key.O))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LShift))
                 {
-                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY)); 
                     return EGameStates.NextLevel;
                 }
                 // ToDo: noch benötigt?
@@ -518,8 +483,8 @@ namespace IcyMazeRunner.Klassen
                 /* GUI aktualisieren */
 
                 vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
-                spBackGround.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
-                spFogOfWar.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+                spBackGround.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2)); 
+                spFogOfWar.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));  
 
                 /****************************************
                  ************** KOMPASS *****************
@@ -545,23 +510,24 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sprite1"></param>
-        /// <param name="F_highA"></param>
+        /// <param name="sprite1">ObjektA</param>
+        /// <param name="F_highA">Höhe</param>
         /// <param name="F_widthA"></param>
         /// <param name="sprite2"></param>
         /// <param name="F_highB"></param>
         /// <param name="F_widthB"></param>
         /// <returns></returns>
-        public static bool point_Collision(Vector2f sprite1, float F_highA, float F_widthA, Vector2f sprite2, float F_highB, float F_widthB)
+        public static bool point_Collision(Sprite spriteA, Sprite spriteB)
         {
-            Vector2f ObjectA = new Vector2f(sprite1.X + F_widthA / 2, sprite1.Y + F_highA / 2);
-            Vector2f ObjectB = new Vector2f(sprite2.X + F_widthB / 2, sprite2.Y + F_highB / 2);
+            // nicht ganz sicher ob die vektoren korrekt berechnet wurden
+            Vector2f ObjectA = new Vector2f(spriteA.Position.X + spriteA.Texture.Size.X/ 2, spriteA.Position.Y + spriteA.Texture.Size.Y / 2);
+            Vector2f ObjectB = new Vector2f(spriteB.Position.X + spriteB.Texture.Size.X / 2, spriteB.Position.Y + spriteB.Texture.Size.Y / 2);
 
-            float F_widthMidA = F_widthA / 2;
-            float F_widthMidB = F_widthB / 2;
+            float F_widthMidA = spriteA.Texture.Size.X / 2;
+            float F_widthMidB = spriteB.Texture.Size.X / 2;
 
-            float F_heightMidA = F_highA / 2;
-            float F_heightMidB = F_highB / 2;
+            float F_heightMidA = spriteA.Texture.Size.Y / 2;
+            float F_heightMidB = spriteB.Texture.Size.Y / 2;
 
             float F_betragX = Math.Abs(ObjectA.X - ObjectB.X);
             float F_betragY = Math.Abs(ObjectA.Y - ObjectB.Y);
@@ -572,6 +538,7 @@ namespace IcyMazeRunner.Klassen
             else
                 return false;
         }
+        // ich erinnere mich, das ist Punktkollision, also wenn die Mittelpunkte sich treffen. hatte ich mal überlegt für Pfeile o.ä.
         // ToDo: benötigt? Soll damit Kollision ersetzt werden???
         // ToDo: Falls Methode behalten wird, Summary schreiben.
 
@@ -608,7 +575,7 @@ namespace IcyMazeRunner.Klassen
             //eTest.draw(win);  
             // ToDo: eTestfunktioniert nicht??
             win.Draw(spFogOfWar);
-            Kompass.draw(win,spKompass);
+            compass.draw(win);
             win.SetMouseCursorVisible(false);
             if (menu != null)
             {
@@ -618,6 +585,7 @@ namespace IcyMazeRunner.Klassen
         // ToDo: Können die beiden Sets an der jeweiligen Stelle stehen? Oder kann man sie an den Anfang oder das Ende ziehen?
         // ToDo: Einstellen, wann der Cursor davon abweichend sichtbar ist (im InGameMenü Maussteuerung möglich? Bei Aufruf des Hauptmenüs sollte,
         // falls dort Maussteuerung möglich ist, vor dem Wechsel auch die Maus sichtbar gesetzt werden.
+        // ja diesen Befehl einfach copy pasten in der draw von Hauptmenü und ingameMenü nur halt true. und bevor der est gemalt wird.
       
 
     }
@@ -634,16 +602,4 @@ Map_tutorial (190,0)
 Map_2 (2263, 3336)
  */
 
-/*
- *                 case 1:
-                    bmMap = new Bitmap("Texturen/Map_1.bmp"); // 190, 100 bei Map_1 gespeichert gewesen
-                    mMap = new Map(bmMap);
-                    pRunner = new Player(new Vector2f(0, 0), mMap);
-                    break;
-                    
-                case 2:
-                   // mapOfBits = new Bitmap("Texturen/Map_2.bmp"); alt
-                    mMap = new Map(bmMap);
-                    pRunner = new Player(new Vector2f(2263,3336), mMap);
-                    break;
- * */
+

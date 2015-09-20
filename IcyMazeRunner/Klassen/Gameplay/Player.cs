@@ -135,7 +135,7 @@ namespace IcyMazeRunner
         public Player(Vector2f Pos, Map map)
         {
             //Festlegen der Spielerposition, wird mit neuem Level neu festgelegt
-            playerPosition = Pos;
+            
 
             //Initialisieren
             SH = new PlayerStateHandler();
@@ -174,7 +174,9 @@ namespace IcyMazeRunner
             //Standardtextur wird festgelegt und Sprite initialisiert
             spPlayer = new Sprite(txDown3);
             spPlayer.Scale = new Vector2f(1f, 1f);
-            spPlayer.Position = playerPosition;
+            //spPlayer.Position = playerPosition;
+
+            spPlayer.Position = Pos;
 
             mAbsmap = map;
 
