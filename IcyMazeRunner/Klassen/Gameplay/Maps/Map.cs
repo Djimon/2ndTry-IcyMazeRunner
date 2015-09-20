@@ -32,19 +32,19 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Gibt Position des Ziels an.
         /// </summary>
-        Vector2f vPos { get; set; }
+        public Vector2f vZiel { get; set; }
+
+
+        /// <summary>
+        /// Gibt Startposition des players an.
+        /// </summary>
+        public Vector2f vStart { get; private set; }
 
         /// <summary>
         /// Block-Array zum Anlegen der Map.
         /// </summary>
         public Blocks[,] map;
 
-
-        Texture txBlock { get; set; }
-        // ToDo: txBlock entfernen in Blocks und Maps, da nicht augenscheinlich nicht benötigt??
-
-        private bool B_walkable;
-        // ToDo: B_walkable benötigt? Boolean bezieht sich auf gesamte Map, nicht auf einzelne Blocks.
 
         /// <summary>
         /// Blockgröße, um zentral einzustellen, welchen Wert sie hat.
@@ -84,7 +84,7 @@ namespace IcyMazeRunner.Klassen
         public Map(Bitmap mask)
         {
             I_blockSize = 90;
-            vPos = new Vector2f(0, 0);
+            vZiel = new Vector2f(0, 0);
 
             map = new Blocks[mask.Width, mask.Height];
 
@@ -92,67 +92,67 @@ namespace IcyMazeRunner.Klassen
             {
                 for (int col = 0; col < map.GetLength(1); col++)
                 {
-                    txBlock = new Texture("Texturen/Map/way-clean.png");
+                    
 
                     if (mask.GetPixel(row, col).Name == Swhite)
                     {   
-                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90));
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Sblack)
                     {   
-                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90));
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Sgrey)
                     {   
-                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90));
+                       
                     }
 
                     if (mask.GetPixel(row, col).Name == Sred)
                     {   
-                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90));
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Sgreen)
                     {  
-                        map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90));
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Sblue)
                     {   
-                        map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
-                        vPos = new Vector2f(row * 90 + 45, col * 90 + 45);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90));
+                        vZiel = new Vector2f(row * 90 + 45, col * 90 + 45);
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Sorange)
                     {   
-                        map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90));
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Scyan)
                     {   
-                        map[row, col] = new Blocks(7, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(7, new Vector2f(row * 90, col * 90));
+                        
                     }
 
                     if (mask.GetPixel(row, col).Name == Sdarkgreen)
                     {   
-                        map[row, col] = new Blocks(8, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(8, new Vector2f(row * 90, col * 90));
+                 
                     }
 
                     else
                     {
-                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90));
+                        
                     
                     }
 

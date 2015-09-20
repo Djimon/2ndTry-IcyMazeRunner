@@ -51,7 +51,7 @@ namespace IcyMazeRunner
 
 
         int I_healthPoints;
-        int I_maxhealthPoints;
+        int I_maxHealth;
         float F_runningSpeed;
         // int basicDamage
         // int basicDefence
@@ -143,7 +143,7 @@ namespace IcyMazeRunner
 
             // Initialisierung der HP des Spielers, wird mit neuem Level neu festgelegt
             I_healthPoints = 100;
-            I_maxhealthPoints = I_healthPoints;
+            I_maxHealth = I_healthPoints;
 
 
             //Bewegungstexturen werden geladen
@@ -272,6 +272,16 @@ namespace IcyMazeRunner
             I_healthPoints = data;
         }
 
+        public int getPlayerMaxHealth()
+        {
+            return I_maxHealth;
+        }
+
+        public void setPlayerMaxHealth(int mhp)
+        {
+            I_maxHealth = mhp;
+        }
+
         /// <summary>
         /// Legt fest, ob Todesanimation ausgelöst wurde, oder nicht.
         /// </summary>
@@ -310,9 +320,9 @@ namespace IcyMazeRunner
         {
             I_healthPoints = I_healthPoints + _Heal;
 
-            if (I_healthPoints > I_maxhealthPoints)
+            if (I_healthPoints > I_maxHealth)
             {
-                I_healthPoints = I_maxhealthPoints;
+                I_healthPoints = I_maxHealth;
             }
         }
 
@@ -321,7 +331,7 @@ namespace IcyMazeRunner
         /// </summary>
         public void setHeal()
         {
-                I_healthPoints = I_maxhealthPoints;
+                I_healthPoints = I_maxHealth;
         }
         
         /// <summary>

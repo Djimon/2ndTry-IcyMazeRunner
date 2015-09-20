@@ -269,7 +269,8 @@ namespace IcyMazeRunner.Klassen
                     //ToDo: Spielerstartposition automatisch bestimmen lassen. Eventuell das gleiche für die Map.
                 case 0:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(1,1), mMap); //(281,91)
+                    pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
+                    // toDO: pRunner = new Player(new Vector2f(mMap.vStart), mMap)
 
                     break;
 
@@ -277,7 +278,7 @@ namespace IcyMazeRunner.Klassen
 
                 default:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(1,1), mMap); //(281,91)
+                    pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
 
                     break;
 
@@ -320,23 +321,27 @@ namespace IcyMazeRunner.Klassen
             // ToDo: Kompass laden
 
             // Festlegung des Zielvekotrs für den Kompass (buggy)
-            for (int row = 0; row < map.GetLength(0); row++)
-            {
-                for (int col = 0; col < map.GetLength(1); col++)
-                {
-                    if ( bmMap.GetPixel(row, col).Name == Sblue)
-                    {
-                        vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
-                        break;
-                    }
-                    else vTarget = new Vector2f(0, 0);
-                }
-            }
-            // ToDo: einfach vPos nutzen (vTarget = "Map-Name".vPos)
+            //for (int row = 0; row < map.GetLength(0); row++)
+            //{
+            //    for (int col = 0; col < map.GetLength(1); col++)
+            //    {
+            //        if ( bmMap.GetPixel(row, col).Name == Sblue)
+            //        {
+            //            vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
+            //            break;
+            //        }
+            //        else vTarget = new Vector2f(0, 0);
+            //    }
+            //}
+
+            // ToDo: einfach vZiel nutzen (vTarget = "Map-Name".vZiel)
             // ToDo: vTarget bestimmen
 
             spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
-            compass = new Kompass(vIngame.Center, vTarget,spKompass.Texture);   
+
+
+
+            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); //WHY????
             //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
 
             /* ~~~~ Methoden aufrufen, die die jeweiligen Handler abhängig vom Level füllen ~~~~ */
@@ -519,7 +524,7 @@ namespace IcyMazeRunner.Klassen
                 /****************************************
                  ************** KOMPASS *****************
                  ****************************************/
-                compass.update();
+                compass.update(vTarget);
                    
                 /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
 

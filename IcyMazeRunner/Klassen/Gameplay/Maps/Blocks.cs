@@ -74,7 +74,7 @@ namespace IcyMazeRunner.Klassen
         /// <para>Konstruktor</para>
         /// <para>Zunächst wird Typ des Blocks festgelegt und anhand dessen die restlichen Variablen und die Textur zugeordnet.</para>
         /// </summary>
-        public Blocks(int blockType, Vector2f position, Texture txBlock)
+        public Blocks(int blockType, Vector2f position)
             //ToDo: txBlock benötigt als Eingabe-Parameter?
         {
                 this.blockType = blockType;
