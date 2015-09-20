@@ -329,6 +329,8 @@ namespace IcyMazeRunner.Klassen
                     spSprite.Scale = new Vector2f(1, 1 / F_LatestScale);
                     spSprite.Scale = new Vector2f(1, ((180 - Math.Abs(prevPosition.Y - Position.Y)) / 180));
                 }
+
+                F_LatestScale = (180 - Math.Abs(prevPosition.Y - Position.Y)) / 180;
             }
 
             spSprite.Position = Position;

@@ -151,9 +151,6 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Vector2f vTarget;
 
-        // System.Drawing.Image bmKompass;
-        // ToDo: ???
-
         /// <summary>
         /// Sprite für den Kompass.
         /// </summary>
@@ -186,21 +183,11 @@ namespace IcyMazeRunner.Klassen
 
         /*~~~~~~~~~~~~~~~~~~~ Handler-Objekte ~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        ///// <summary>
-        ///// Allgemeine Gameobject-Handler.
-        ///// </summary>
-        //GameObjectHandler GOH;
-
-        ///// <summary>
-        ///// Allgemeine Entity-Handler.
-        ///// </summary>
-        //EntityHandler EH;
-
-        ///// <summary>
-        ///// Allgemeine MovableWall-Handler.
-        ///// </summary>
-        //MoveableWallHandler MWH;
-        // ToDo: EntityHandler und MovableWallHandler benötigt oder Bestandteil als Klassenattribut/Objeht von GameObjectHandler?
+        /// <summary>
+        /// Allgemeine Gameobject-Handler.
+        /// </summary>
+        GameObjectHandler GOH;
+        //ToDo: Handler implementieren
 
 
         /* ~~~~~~~~ Spielobjekte zum Testen ~~~~~~~~ */
@@ -221,8 +208,7 @@ namespace IcyMazeRunner.Klassen
             gtIngame = new GameTime();
             gtIngame.start();
 
-            vIngame = new View(new FloatRect(0, 0, 1058, 718));
-            // ToDo: globale Fenstergrößen-Variable? 1% kleiner, als Original, um Side-glitches zu verhindern --> fixen
+            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
 
             spBackGround = new Sprite(new Texture("Texturen/Map/background.png"));
             spBackGround.Position = new Vector2f(0, 0);
@@ -257,7 +243,7 @@ namespace IcyMazeRunner.Klassen
           
             bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
             //bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
-            // ToDo: Bitmaps in Switch-case laden.
+            // ToDo: Bitmaps in Switch-case laden. Level zuerst erstellen
   
 
 
@@ -317,28 +303,11 @@ namespace IcyMazeRunner.Klassen
             // bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
             // ToDo: Kompass laden
 
-            // Festlegung des Zielvekotrs für den Kompass (buggy)
-            //for (int row = 0; row < map.GetLength(0); row++)
-            //{
-            //    for (int col = 0; col < map.GetLength(1); col++)
-            //    {
-            //        if ( bmMap.GetPixel(row, col).Name == Sblue)
-            //        {
-            //            vTarget = new Vector2f(row * 90, col * 90); //globale variablen?
-            //            break;
-            //        }
-            //        else vTarget = new Vector2f(0, 0);
-            //    }
-            //}
-
-            // ToDo: einfach vZiel nutzen (vTarget = "Map-Name".vZiel)
-            // ToDo: vTarget bestimmen
-
             spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
 
 
 
-            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); //WHY????
+            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); 
             //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
 
             /* ~~~~ Methoden aufrufen, die die jeweiligen Handler abhängig vom Level füllen ~~~~ */
@@ -346,7 +315,6 @@ namespace IcyMazeRunner.Klassen
             /* Enemy TEST */
             eTest = new Enemy(new Vector2f(251, 251), "Texturen/Enemies/downidle.png");
         }
-        // ToDo: Wurde alles in initialize/loadContent geladen und initialisiert???
         // ToDo: Methoden für jeden Handler schreiben, die levelabhängig die jeweiligen Objekte laden.
 
         /// <summary>
@@ -369,7 +337,6 @@ namespace IcyMazeRunner.Klassen
                 {
                     return menu.update();
                 }
-                // ToDo: Ingame-Menu-Update-Methode schreiben (Auslagern/kapseln)
             }
             else
             {
@@ -465,9 +432,8 @@ namespace IcyMazeRunner.Klassen
 
                     if (pRunner.B_IsSaved)
                     {
-                        // Spieler hat wieder Leben
-                        // ToDo: variablen Wert eingeben
-                        pRunner.setPlayerHealth(20);
+                        // Spieler hat wieder 5% Leben
+                        pRunner.setPlayerHealth((int) (pRunner.getPlayerMaxHealth()*0.05));
                         pRunner.setDeathWatchIsOn(false);
                     }
 
@@ -497,11 +463,9 @@ namespace IcyMazeRunner.Klassen
                 /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
                 if (I_level == 31)
                 {
-                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-variable?;
                     return EGameStates.gameWon;
                 }
-                // ToDo: if-Abfrage zwischen I_level++; und return EGameStates.NextLevel; einfügen?
-
 
                 /* Hack-Win */
                 if (Keyboard.IsKeyPressed(Keyboard.Key.O))
@@ -509,7 +473,6 @@ namespace IcyMazeRunner.Klassen
                     vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
                     return EGameStates.NextLevel;
                 }
-                // ToDo: noch benötigt?
 
 
                 /* GUI aktualisieren */
@@ -522,22 +485,9 @@ namespace IcyMazeRunner.Klassen
                  ************** KOMPASS *****************
                  ****************************************/
                 compass.update(vTarget);
-                   
-                /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
-
-                //if (point_Collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
-                //{
-                //    Console.Write("Collision!!1elf");
-                //    view = new View(new FloatRect(0, 0, 1062, 720));
-                //    return EGameStates.gameWon;
-                //}
-                // ToDo: Wofür ist das????
-
             }
             return EGameStates.inGame;
         }
-        // ToDo: Kontrollieren, ob alles, was aktualisiert werden muss, aktualisiert wird.
-
 
         /// <summary>
         /// 
@@ -569,8 +519,6 @@ namespace IcyMazeRunner.Klassen
             else
                 return false;
         }
-        // ToDo: benötigt? Soll damit Kollision ersetzt werden???
-        // ToDo: Falls Methode behalten wird, Summary schreiben.
 
         /// <summary>
         /// Prüft, ob Spieler mit einem Loch im Boden kollidiert.
@@ -598,49 +546,22 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public void draw(RenderWindow win)
         {
-            win.Draw(spBackGround);
             win.SetView(vIngame);
+            win.Draw(spBackGround);
+            win.SetMouseCursorVisible(false);
             mMap.draw(win);
             pRunner.draw(win);
-            //eTest.draw(win);  
-            // ToDo: eTestfunktioniert nicht??
             win.Draw(spFogOfWar);
+
+            /*GUI ab hier */
             Kompass.draw(win,spKompass);
-            win.SetMouseCursorVisible(false);
+
             if (menu != null)
             {
                 menu.draw(win);
             }
         }
-        // ToDo: Können die beiden Sets an der jeweiligen Stelle stehen? Oder kann man sie an den Anfang oder das Ende ziehen?
-        // ToDo: Einstellen, wann der Cursor davon abweichend sichtbar ist (im InGameMenü Maussteuerung möglich? Bei Aufruf des Hauptmenüs sollte,
-        // falls dort Maussteuerung möglich ist, vor dem Wechsel auch die Maus sichtbar gesetzt werden.
-      
+     
 
     }
 }
-
-// ToDo: Handler überarbeiten,GameObjecthandler nur zum Aufruf der anderen Handler...
-
-
-// ToDo: Kommentarschnipsel wahrscheinlich unbrauchbar
-
-/*
-Map-Positionen:
-Map_tutorial (190,0)
-Map_2 (2263, 3336)
- */
-
-/*
- *                 case 1:
-                    bmMap = new Bitmap("Texturen/Map_1.bmp"); // 190, 100 bei Map_1 gespeichert gewesen
-                    mMap = new Map(bmMap);
-                    pRunner = new Player(new Vector2f(0, 0), mMap);
-                    break;
-                    
-                case 2:
-                   // mapOfBits = new Bitmap("Texturen/Map_2.bmp"); alt
-                    mMap = new Map(bmMap);
-                    pRunner = new Player(new Vector2f(2263,3336), mMap);
-                    break;
- * */

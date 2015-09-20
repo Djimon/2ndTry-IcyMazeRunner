@@ -32,7 +32,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
         /// <summary>
         /// Findet einen Pfad zum Spieler und lässt Gegner entlang diesen bewegen.
         /// </summary>
-        public void move(Vector2f spPlayer.Position, Map mapInfo) //andere Bewegungsmuster (e.g. Pathfinder)
+        public void move(Vector2f Playerposition, Map mapInfo) //andere Bewegungsmuster (e.g. Pathfinder)
         {
             // TODO: your code here ;)
         }
@@ -40,9 +40,9 @@ namespace IcyMazeRunner.Klassen.Gameplay
         /// <summary>
         /// Gegner bewegt sich direkt in Richtung des Spielers.
         /// </summary>
-        public void move(Vector2f spPlayer.Position) 
+        public void move(Vector2f Playerposition) 
         {
-            Vector2f direction = spPlayer.Position - position;
+            Vector2f direction = Playerposition - sp_Enemy.Position;
             float length = (float)Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
             sp_Enemy.Position += direction / (length * 5);
         }
@@ -59,7 +59,7 @@ namespace IcyMazeRunner.Klassen.Gameplay
         // ToDo: Update
 
         /// <summary>
-        /// Zéichnet den Gegner.
+        /// Zeichnet den Gegner.
         /// </summary>
         public override void draw(RenderWindow win)
 
