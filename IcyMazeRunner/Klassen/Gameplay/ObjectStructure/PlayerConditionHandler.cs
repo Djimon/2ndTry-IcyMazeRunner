@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace IcyMazeRunner
 {
-    class PlayerStateHandler
+    class PlayerConditionHandler
     {
 
         /// <summary>
         ///  Liste an Zustanden, die vom PlayerStateHandler verwaltet werden.
         /// </summary>
-        public List<Playerstate> StateList;
+        public List<Playercondition> StateList;
 
         /// <summary>
         ///  <para>Konstruktor</para>
         ///  <para>Er initialisiert nur die Liste.</para>
         /// </summary>
-        public PlayerStateHandler()
+        public PlayerConditionHandler()
         {
-             StateList = new List<Playerstate>();
+            StateList = new List<Playercondition>();
         }
 
         /// <summary>
         ///  Fügt der Liste einen Zustand hinzu.
         /// </summary>
-        public void add(Playerstate state)
+        public void add(Playercondition state)
         {
             StateList.Add(state);
         }
@@ -34,9 +34,9 @@ namespace IcyMazeRunner
         /// <summary>
         ///  Fügt der Liste eine weitere Liste an Zuständen hinzu.
         /// </summary>
-        public void add(List<Playerstate> added_stateList)
+        public void add(List<Playercondition> added_stateList)
         {
-            foreach (Playerstate state in added_stateList)
+            foreach (Playercondition state in added_stateList)
             {
                 StateList.Add(state);
             }
@@ -48,7 +48,7 @@ namespace IcyMazeRunner
         /// </summary>
         public void deleteAll()
         {
-            foreach (Playerstate state in StateList)
+            foreach (Playercondition state in StateList)
             {
                 state.B_IsFinished = true;
             }
@@ -71,7 +71,7 @@ namespace IcyMazeRunner
                 }
             }
 
-            foreach (Playerstate state in StateList)
+            foreach (Playercondition state in StateList)
             {
                 state.update();
             }

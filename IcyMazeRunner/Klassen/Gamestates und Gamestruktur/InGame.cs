@@ -112,9 +112,6 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Calculator calc;
 
-        Sprite spZiel { get; set; }  // hier map/ blocktype=4 (blue= ziel) ??
-        // ToDo: benötigt? 0 Verweise...
-
 
         /* ~~~~~~~~ Spielobjekte für GUI ~~~~~~~~ */
 

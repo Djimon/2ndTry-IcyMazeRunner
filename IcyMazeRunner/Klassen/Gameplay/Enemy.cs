@@ -12,34 +12,27 @@ namespace IcyMazeRunner.Klassen.Gameplay
     {     
         //ToDo: Wenn letztendlich genutzt, Summaries einfügen
 
-        /// <summary>
-        /// Gibt die Position des Gegners an.
-        /// </summary>
-        Vector2f position;
-        // ToDo: position benötigt oder über Sprite.Position regeln? siehe player.Position
-
+       
         /// <summary>
         /// Der Sprite des Gegners.
         /// </summary>
-        Sprite sprite;
-        // ToDo: Name anpassen?
+        Sprite sp_Enemy;
 
         /// <summary>
         /// Konstruktor
         /// </summary>
         public Enemy(Vector2f _position, string texturePath)
         {
-            position = _position;
-
             Texture txEnemy = new Texture(texturePath);
-            sprite = new Sprite(txEnemy);
+            sp_Enemy = new Sprite(txEnemy);
+            sp_Enemy.Position = _position;
         }
 
         // Pathfinder
         /// <summary>
         /// Findet einen Pfad zum Spieler und lässt Gegner entlang diesen bewegen.
         /// </summary>
-        public void move(Vector2f PlayerPosition, Map mapInfo) //andere Bewegungsmuster (e.g. Pathfinder)
+        public void move(Vector2f spPlayer.Position, Map mapInfo) //andere Bewegungsmuster (e.g. Pathfinder)
         {
             // TODO: your code here ;)
         }
@@ -47,11 +40,11 @@ namespace IcyMazeRunner.Klassen.Gameplay
         /// <summary>
         /// Gegner bewegt sich direkt in Richtung des Spielers.
         /// </summary>
-        public void move(Vector2f PlayerPosition) 
+        public void move(Vector2f spPlayer.Position) 
         {
-            Vector2f direction = PlayerPosition - position;
+            Vector2f direction = spPlayer.Position - position;
             float length = (float)Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
-            position += direction / (length * 5);
+            sp_Enemy.Position += direction / (length * 5);
         }
 
         /// <summary>

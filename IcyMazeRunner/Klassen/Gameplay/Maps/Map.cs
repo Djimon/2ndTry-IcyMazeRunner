@@ -11,24 +11,6 @@ namespace IcyMazeRunner.Klassen
 {
     class Map
     {
-        // 
-        
-        
-        
-        
-        
-        
-        // ToDo:werden diese Kommentare noch benötigt? Eventuell ansonsten neu ordnen
-        // insert Map-Code here...es folgt eine User-friendly Zuarbeit zum einfachen Copy&Pasten :))
-        // Texturpfad: "Texturen/Map/Map_tutorial.png"
-        // Rot "ff0000" = leer (Hintergrund/Platzhalter, Landschaft, Atomexplosion) 
-        // Texturpfad: "Texturen/Map/BG.jpg"
-        // schwarz "000000" = Mauer
-        // Texturpfad: "Texturen/Map/wall-clean.png"
-        // weiß "ffffff" = weg 
-        // Texturpfad: "Texturen/Map/way-clean.png"
-        // orange "FF8000" = Loch im Boden (255 Rot, 128 Grün, 0 Blau)
-
         /// <summary>
         /// Gibt Position des Ziels an.
         /// </summary>
@@ -38,13 +20,6 @@ namespace IcyMazeRunner.Klassen
         /// Block-Array zum Anlegen der Map.
         /// </summary>
         public Blocks[,] map;
-
-
-        Texture txBlock { get; set; }
-        // ToDo: txBlock entfernen in Blocks und Maps, da nicht augenscheinlich nicht benötigt??
-
-        private bool B_walkable;
-        // ToDo: B_walkable benötigt? Boolean bezieht sich auf gesamte Map, nicht auf einzelne Blocks.
 
         /// <summary>
         /// Blockgröße, um zentral einzustellen, welchen Wert sie hat.
@@ -92,68 +67,57 @@ namespace IcyMazeRunner.Klassen
             {
                 for (int col = 0; col < map.GetLength(1); col++)
                 {
-                    txBlock = new Texture("Texturen/Map/way-clean.png");
+                   
 
                     if (mask.GetPixel(row, col).Name == Swhite)
                     {   
-                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(0, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Sblack)
                     {   
-                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(5, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Sgrey)
                     {   
-                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(1, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Sred)
                     {   
-                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Sgreen)
                     {  
-                        map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Sblue)
                     {   
-                        map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90), txBlock);
+                        map[row, col] = new Blocks(4, new Vector2f(row * 90, col * 90));
                         vPos = new Vector2f(row * 90 + 45, col * 90 + 45);
-                        B_walkable = true;
                     }
 
                     if (mask.GetPixel(row, col).Name == Sorange)
                     {   
-                        map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(6, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Scyan)
                     {   
-                        map[row, col] = new Blocks(7, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(7, new Vector2f(row * 90, col * 90));
                     }
 
                     if (mask.GetPixel(row, col).Name == Sdarkgreen)
                     {   
-                        map[row, col] = new Blocks(8, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = true;
+                        map[row, col] = new Blocks(8, new Vector2f(row * 90, col * 90));
                     }
 
                     else
                     {
-                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90), txBlock);
-                        B_walkable = false;
-                    
+                        map[row, col] = new Blocks(2, new Vector2f(row * 90, col * 90));
                     }
 
                 }
@@ -162,7 +126,6 @@ namespace IcyMazeRunner.Klassen
 
 
         }
-        // ToDO: txBlock entfernen in Blocks und Maps, da nicht augenscheinlich nicht benötigt??
 
        /// <summary>
        /// <para>Kontrolliert, ob Kachel von Spieler betreten werden kann, oder nicht.</para>
@@ -172,7 +135,6 @@ namespace IcyMazeRunner.Klassen
        /// </summary>
         public bool iswalkable(Sprite sprite, Vector2f vector)
         {
-            bool B_walkable = true;
             Vector2f newPosition = new Vector2f(sprite.Position.X + vector.X, sprite.Position.Y + vector.Y);
 
             if (!(map[(int)(newPosition.X / I_blockSize), (int)(newPosition.Y / I_blockSize)].getWalkable()/*links oben*/
@@ -184,16 +146,13 @@ namespace IcyMazeRunner.Klassen
                 && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / I_blockSize), (int)(newPosition.Y) / I_blockSize].getWalkable()/*oben mitte*/
                 && map[(int)((newPosition.X + (sprite.Texture.Size.X / 2)) / I_blockSize), (int)(newPosition.Y + sprite.Texture.Size.Y) / I_blockSize].getWalkable()/*unten mitte*/
                 ))
-                B_walkable = false;
+                return false;
             // ToDo: Verschlankung der if-Abfrage?
 
-            //Kontrollangabe
-            Console.WriteLine(B_walkable);
-            // ToDo: noch benötigt?
+            // Kontrollangabe
+            // Console.WriteLine(B_walkable);
 
-           return B_walkable;
-            // ToDo: stattdessen return false; in if-Abfrage und ansonsten return true; nutzen? Spart den Boolean.
-           
+           return true;        
         }
 
 

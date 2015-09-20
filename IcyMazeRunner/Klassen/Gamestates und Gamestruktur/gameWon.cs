@@ -19,7 +19,7 @@ namespace IcyMazeRunner.Klassen
 
             spWon = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));   
             spWon.Position = new Vector2f(0,0);
-            // ToDo: Bildposition fixen
+            // ToDo: testen, ob gefixed
             
 
         }

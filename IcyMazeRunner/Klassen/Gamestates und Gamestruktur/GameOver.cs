@@ -46,14 +46,6 @@ namespace IcyMazeRunner.Klassen
                 return EGameStates.mainMenu;
             }
 
-      /*    grafik updaten mit "Next-Level"
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Return))
-            {
-                return EGameStates.NextLevel;
-            }
-       */
-            //ToDo: Wieso NextLevel????
-
             return EGameStates.gameOver;
         }
 
