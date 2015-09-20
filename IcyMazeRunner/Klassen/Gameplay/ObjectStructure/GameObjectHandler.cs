@@ -15,11 +15,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public static List<GameObject> gameObjectList { get; set; }
 
-        /// <summary>
-        /// Unterhandler für Entities.
-        /// </summary>
-        public static EntityHandler entityHandler { get; set; }
-
+      
         /// <summary>
         /// Unterhandler für movable Walls.
         /// </summary>
@@ -99,7 +95,7 @@ namespace IcyMazeRunner.Klassen
             //{
             //    gObj.kill();
             //}
-            EntityHandler.deleteAll();
+           
             MoveableWallHandler.deleteAll();
         }
 

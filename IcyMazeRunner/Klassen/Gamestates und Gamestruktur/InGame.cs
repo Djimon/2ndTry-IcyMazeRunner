@@ -183,7 +183,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Allgemeine Gameobject-Handler.
         /// </summary>
-        GameObjectHandler GOH;
+      //  GameObjectHandler GOH;
         //ToDo: Handler implementieren
 
 
