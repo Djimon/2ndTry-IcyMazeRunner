@@ -459,6 +459,7 @@ namespace IcyMazeRunner.Klassen
                 if (targetdistance <200)
                 {
                     I_level++;
+                    if (I_level >= 30) { return EGameStates.gameWon; }
                     return EGameStates.NextLevel;
                 }
 
@@ -472,12 +473,12 @@ namespace IcyMazeRunner.Klassen
 
 
                 /* Hack-Win */
-                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) &&Keyboard.IsKeyPressed(Keyboard.Key.LShift))
                 {
                     vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY)); 
                     return EGameStates.NextLevel;
                 }
-                // ToDo: noch benötigt?
+                
 
 
                 /* GUI aktualisieren */
@@ -491,32 +492,20 @@ namespace IcyMazeRunner.Klassen
                  ****************************************/
                 compass.update(vTarget);
                    
-                /*~~~~~~~Collision mit Ziel, SPrite ziel muss noch übergebenw erden aus (Map/Blocks?)~~~~*/
-
-                //if (point_Collision(Runner.getplayerSprite, (float)Runner.getWidth(), (float)Runner.getHeigth(), ziel.getPosition(), (float)ziel.getWidth(), (float)ziel.getHeight()))
-                //{
-                //    Console.Write("Collision!!1elf");
-                //    view = new View(new FloatRect(0, 0, 1062, 720));
-                //    return EGameStates.gameWon;
-                //}
-                // ToDo: Wofür ist das????
 
             }
             return EGameStates.inGame;
         }
-        // ToDo: Kontrollieren, ob alles, was aktualisiert werden muss, aktualisiert wird.
+        
 
 
         /// <summary>
-        /// 
+        /// Mittelpunkt-Kollision zwischen 2 Objekten A,B (Sprites)
         /// </summary>
         /// <param name="sprite1">ObjektA</param>
-        /// <param name="F_highA">Höhe</param>
-        /// <param name="F_widthA"></param>
-        /// <param name="sprite2"></param>
-        /// <param name="F_highB"></param>
-        /// <param name="F_widthB"></param>
+        /// <param name="sprite2">ObjektB</param>
         /// <returns></returns>
+        /// 
         public static bool point_Collision(Sprite spriteA, Sprite spriteB)
         {
             // nicht ganz sicher ob die vektoren korrekt berechnet wurden
@@ -539,8 +528,7 @@ namespace IcyMazeRunner.Klassen
                 return false;
         }
         // ich erinnere mich, das ist Punktkollision, also wenn die Mittelpunkte sich treffen. hatte ich mal überlegt für Pfeile o.ä.
-        // ToDo: benötigt? Soll damit Kollision ersetzt werden???
-        // ToDo: Falls Methode behalten wird, Summary schreiben.
+       
 
         /// <summary>
         /// Prüft, ob Spieler mit einem Loch im Boden kollidiert.
@@ -577,10 +565,16 @@ namespace IcyMazeRunner.Klassen
             win.Draw(spFogOfWar);
             compass.draw(win);
             win.SetMouseCursorVisible(false);
+
             if (menu != null)
             {
                 menu.draw(win);
             }
+
+            //if (inventory != null)
+            //{
+            //    inventory.draw(win);
+            //}
         }
         // ToDo: Können die beiden Sets an der jeweiligen Stelle stehen? Oder kann man sie an den Anfang oder das Ende ziehen?
         // ToDo: Einstellen, wann der Cursor davon abweichend sichtbar ist (im InGameMenü Maussteuerung möglich? Bei Aufruf des Hauptmenüs sollte,
