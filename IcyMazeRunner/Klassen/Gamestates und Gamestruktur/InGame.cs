@@ -151,10 +151,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Vector2f vTarget;
 
-        /// <summary>
-        /// Sprite für den Kompass.
-        /// </summary>
-        Sprite spKompass;
+
 
 
         /* ~~~~~~~~ Spielobjekte für bewegliche Mauern ~~~~~~~~ */
@@ -186,7 +183,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Allgemeine Gameobject-Handler.
         /// </summary>
-        GameObjectHandler GOH;
+      //  GameObjectHandler GOH;
         //ToDo: Handler implementieren
 
 
@@ -208,7 +205,8 @@ namespace IcyMazeRunner.Klassen
             gtIngame = new GameTime();
             gtIngame.start();
 
-            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
+            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX -1, Game.windowSizeY -1));
+           
 
             spBackGround = new Sprite(new Texture("Texturen/Map/background.png"));
             spBackGround.Position = new Vector2f(0, 0);
@@ -252,8 +250,7 @@ namespace IcyMazeRunner.Klassen
                     //ToDo: Spielerstartposition automatisch bestimmen lassen. Eventuell das gleiche für die Map.
                 case 0:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
-                    // toDO: pRunner = new Player(new Vector2f(mMap.vStart), mMap)
+                    //pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
 
                     break;
 
@@ -261,15 +258,14 @@ namespace IcyMazeRunner.Klassen
 
                 default:
                     mMap = new Map(bmMap); 
-                    pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
+                    //pRunner = new Player(new Vector2f(mMap.vStart.X,mMap.vStart.Y), mMap); //(281,91)
 
                     break;
 
             }
 
-            // ToDo: Player erst hier nach dem Switch-case laden: pRunner = new Player(Startvektor, mMap);
-            // ToDo: Startvektor vorher initialisieren/bestimmen (in der Map-Klasse Vektor direkt als eigenes Attribut bestimmen und dann hier
-            // abrufen.
+            pRunner = new Player(mMap.vStart, mMap);  //new Vector2f(mMap.vStart.X, mMap.vStart.Y)
+
 
             /* ~~~~ Geheime Wege laden ~~~~ */
             map = mMap.map;
@@ -299,13 +295,6 @@ namespace IcyMazeRunner.Klassen
             }
 
             /* Kompass TEST */
-
-            // bmKompass = new System.Drawing.Bitmap("Texturen/Menü+Anzeige/GUI/Untitled-1.png");
-            // ToDo: Kompass laden
-
-            spKompass = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
-
-
 
             compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); 
             //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
@@ -337,6 +326,7 @@ namespace IcyMazeRunner.Klassen
                 {
                     return menu.update();
                 }
+                
             }
             else
             {
@@ -391,20 +381,20 @@ namespace IcyMazeRunner.Klassen
 
                     //und die Texturen auf ihre jeweiligen Ursprungszustände zurückgesetzt bzw. das Feld darüber, wenn nötig, wieder zu der
                     //Draufansicht einer Mauer.
-                    foreach (Coordinates co in SecretWayList)
+                    foreach (Coordinates coordz in SecretWayList)
                     {
                         if (map[1, 2].type() == 7)
                         {
-                            map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                            map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
                         }
                         else
                         {
-                            map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                            map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
                         }
 
-                        if (co.B_UpperTexChanger)
+                        if (coordz.B_UpperTexChanger)
                         {
-                            map[co.I_xCoord - 1, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                            map[coordz.I_xCoord - 1, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
                         }
 
                     }
@@ -457,58 +447,61 @@ namespace IcyMazeRunner.Klassen
                 if (targetdistance <200)
                 {
                     I_level++;
+                    if (I_level >= 30) { return EGameStates.gameWon; }
                     return EGameStates.NextLevel;
                 }
 
                 /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
                 if (I_level == 31)
                 {
-                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-variable?;
+                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX,Game.windowSizeY)); 
                     return EGameStates.gameWon;
                 }
 
                 /* Hack-Win */
-                if (Keyboard.IsKeyPressed(Keyboard.Key.O))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) &&Keyboard.IsKeyPressed(Keyboard.Key.LShift))
                 {
-                    vIngame = new View(new FloatRect(0, 0, 1062, 720)); // globale fensgtergrößen-vaiable?;
+                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY)); 
                     return EGameStates.NextLevel;
                 }
+                
 
 
                 /* GUI aktualisieren */
 
                 vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
-                spBackGround.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
-                spFogOfWar.Position = new Vector2f(vIngame.Center.X - 531, vIngame.Center.Y - 360);  // globale fensgtergrößen-vaiable?;
+                spBackGround.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2)); 
+                spFogOfWar.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));  
 
                 /****************************************
                  ************** KOMPASS *****************
                  ****************************************/
                 compass.update(vTarget);
+                   
+
             }
             return EGameStates.inGame;
         }
+        
 
         /// <summary>
-        /// 
+        /// Mittelpunkt-Kollision zwischen 2 Objekten A,B (Sprites)
         /// </summary>
-        /// <param name="sprite1"></param>
-        /// <param name="F_highA"></param>
-        /// <param name="F_widthA"></param>
-        /// <param name="sprite2"></param>
-        /// <param name="F_highB"></param>
-        /// <param name="F_widthB"></param>
+        /// <param name="sprite1">ObjektA</param>
+        /// <param name="sprite2">ObjektB</param>
         /// <returns></returns>
-        public static bool point_Collision(Vector2f sprite1, float F_highA, float F_widthA, Vector2f sprite2, float F_highB, float F_widthB)
+        /// 
+        public static bool point_Collision(Sprite spriteA, Sprite spriteB)
         {
-            Vector2f ObjectA = new Vector2f(sprite1.X + F_widthA / 2, sprite1.Y + F_highA / 2);
-            Vector2f ObjectB = new Vector2f(sprite2.X + F_widthB / 2, sprite2.Y + F_highB / 2);
+            // nicht ganz sicher ob die vektoren korrekt berechnet wurden
+            Vector2f ObjectA = new Vector2f(spriteA.Position.X + spriteA.Texture.Size.X/ 2, spriteA.Position.Y + spriteA.Texture.Size.Y / 2);
+            Vector2f ObjectB = new Vector2f(spriteB.Position.X + spriteB.Texture.Size.X / 2, spriteB.Position.Y + spriteB.Texture.Size.Y / 2);
 
-            float F_widthMidA = F_widthA / 2;
-            float F_widthMidB = F_widthB / 2;
+            float F_widthMidA = spriteA.Texture.Size.X / 2;
+            float F_widthMidB = spriteB.Texture.Size.X / 2;
 
-            float F_heightMidA = F_highA / 2;
-            float F_heightMidB = F_highB / 2;
+            float F_heightMidA = spriteA.Texture.Size.Y / 2;
+            float F_heightMidB = spriteB.Texture.Size.Y / 2;
 
             float F_betragX = Math.Abs(ObjectA.X - ObjectB.X);
             float F_betragY = Math.Abs(ObjectA.Y - ObjectB.Y);
@@ -519,6 +512,8 @@ namespace IcyMazeRunner.Klassen
             else
                 return false;
         }
+        // ich erinnere mich, das ist Punktkollision, also wenn die Mittelpunkte sich treffen. hatte ich mal überlegt für Pfeile o.ä.
+       
 
         /// <summary>
         /// Prüft, ob Spieler mit einem Loch im Boden kollidiert.
@@ -553,15 +548,23 @@ namespace IcyMazeRunner.Klassen
             pRunner.draw(win);
             win.Draw(spFogOfWar);
 
+
             /*GUI ab hier */
-            Kompass.draw(win,spKompass);
+            compass.draw(win);
+
 
             if (menu != null)
             {
                 menu.draw(win);
             }
+
+            //if (inventory != null)
+            //{
+            //    inventory.draw(win);
+            //}
         }
      
+        // ja diesen Befehl einfach copy pasten in der draw von Hauptmenü und ingameMenü nur halt true. und bevor der est gemalt wird.
 
     }
 }

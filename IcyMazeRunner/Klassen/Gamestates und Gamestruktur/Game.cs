@@ -15,11 +15,10 @@ namespace IcyMazeRunner.Klassen
             // ToDo: Möglichkeit probieren, ob Gamestate-übergreifendes Sprite für die verschiedenen Menüs geeignet ist statt der einzelnen Sprites...
       
 
-            public static uint windowSizeX = 1062; // auf 1280 zurückanpassen (ebenso die Screens des MainMenus, ControlScreen, Creditscreen
+            public static uint windowSizeX = 1280; // auf 1280 zurückanpassen (ebenso die Screens des MainMenus, ControlScreen, Creditscreen
             public static uint windowSizeY = 720;
 
-        //  GlobalVariables.windowSizeX.SetX(1062);
-        //  GlobalVariables.windowSizeY.SetY(720);
+       
 
             EGameStates currentGameState = EGameStates.mainMenu;
             EGameStates prevGameState;

@@ -21,13 +21,14 @@ namespace IcyMazeRunner.Klassen
         {
             spControls = new Sprite(txControls);
             spControls.Position = new Vector2f(0, 0);
+            spControls.Scale = new Vector2f(0.83f, 1f);
         }
 
         /* ~~~~ Screen laden ~~~~*/
         public void loadContent()
         {
             
-                txControls = new Texture("Texturen/Menü+Anzeigen/controllscreen.png");
+                txControls = new Texture("Texturen/Menü+Anzeigen/ControlsBG.png");
             
         }
 

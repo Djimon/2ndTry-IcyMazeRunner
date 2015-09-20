@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="Klassen\Calculator.cs" />
     <Compile Include="Klassen\Gameplay\MovableWallHandler.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\EntityHandler.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />
     <Compile Include="Klassen\Gameplay\Enemy.cs" />
     <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />
@@ -196,6 +195,9 @@
     <Content Include="Texturen\Menü+Anzeigen\controls.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Menü+Anzeigen\ControlsBG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Menü+Anzeigen\controls_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -209,6 +211,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\credits_s.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\exit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\GameOver-PLATZHALTER.png">
@@ -225,6 +230,9 @@
     </Content>
     <Content Include="GameWon1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\GUI-FG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\GUI\needle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -276,6 +284,15 @@
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Übersicht.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\MainMenu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\options.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menü+Anzeigen\playBG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menü+Anzeigen\quit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

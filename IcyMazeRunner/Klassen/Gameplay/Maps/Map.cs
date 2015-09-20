@@ -102,6 +102,7 @@ namespace IcyMazeRunner.Klassen
                     if (mask.GetPixel(row, col).Name == Sgreen)
                     {  
                         map[row, col] = new Blocks(3, new Vector2f(row * 90, col * 90));
+                        vStart = new Vector2f(row * 90+1, col * 90 + 1);
                         
                     }
 

@@ -28,7 +28,7 @@ namespace IcyMazeRunner.Klassen
         {
             // Fensterkontrolle
 
-            win = new RenderWindow(new VideoMode(width, height), title);
+            win = new RenderWindow(new VideoMode(width, height), title); //,Styles.Fullscreen
 
             win.Closed += Windowclosed;
 

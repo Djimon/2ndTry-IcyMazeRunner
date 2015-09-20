@@ -87,11 +87,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             spMenuBackground = new Sprite(txMenuBackground);
             spMenuHeader = new Sprite(txMenuHeader);
             spSelected = new Sprite(txContinueSelected);
-            //spGoMainMenu = new Sprite(txGoMainMenuNotSelected);
-            //spControls = new Sprite(txControlsNotSelected);
-            //spLoadGame = new Sprite(txLoadGameNotSelected);
-            //SaveGameSprite = new Sprite(txSaveGameNotSelected);
-
+    
 
             float scaleX = 0.9f;
             float scaleY = 0.9f;
@@ -108,20 +104,7 @@ namespace IcyMazeRunner.Klassen.Menüs
             spSelected.Position = new Vector2f(xCoord, yCoord);
             spSelected.Scale = new Vector2f(scaleX, scaleY);
 
-            //spGoMainMenu.Position = new Vector2f(xCoord, yCoord); 
-            //spGoMainMenu.Scale = new Vector2f(scaleX, scaleY);
 
-            //spControls.Position = new Vector2f(xCoord, yCoord);
-            //spControls.Scale = new Vector2f(scaleX, scaleY);
-
-            ////Beinhaltet momentan "worldmap" was load-funktion beinhalten könnte
-            //spLoadGame.Position = new Vector2f(xCoord, yCoord); 
-            //spLoadGame.Scale = new Vector2f(scaleX, scaleY);
-
-            /* für später
-            SaveGameSprite.Position = new Vector2f(xCoord, yCoord); 
-            SaveGameSprite.Scale = new Vector2f(scaleX, scaleY);           
-            */
         }
 
 
@@ -151,64 +134,36 @@ namespace IcyMazeRunner.Klassen.Menüs
                 case 0: //continue
                     {
                         spSelected.Texture = txContinueSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuNotSelected;
-                        //spControls.Texture = txControlsNotSelected;
-                        //spLoadGame.Texture = txLoadGameNotSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case 1: //main menü
                     {
                         spSelected.Texture = txGoMainMenuSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuSelected;
-                        //spControls.Texture = txControlsNotSelected;
-                        //spLoadGame.Texture = txLoadGameNotSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case -3:
                     {
                         spSelected.Texture = txGoMainMenuSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuSelected;
-                        //spControls.Texture = txControlsNotSelected;
-                        //spLoadGame.Texture = txLoadGameNotSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case 2: //controls
                     {
                         spSelected.Texture = txControlsSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuNotSelected;
-                        //spControls.Texture = txControlsSelected;
-                        //spLoadGame.Texture = txLoadGameNotSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case -2:
                     {
                         spSelected.Texture = txControlsSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuNotSelected;
-                        //spControls.Texture = txControlsSelected;
-                        //spLoadGame.Texture = txLoadGameNotSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case 3: //Map (load)
                     {
                         spSelected.Texture = txLoadGameSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuNotSelected;
-                        //spControls.Texture = txControlsNotSelected;
-                        //spLoadGame.Texture = txLoadGameSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
                 case -1:
                     {
                         spSelected.Texture = txLoadGameSelected;
-                        //spGoMainMenu.Texture = txGoMainMenuNotSelected;
-                        //spControls.Texture = txControlsNotSelected;
-                        //spLoadGame.Texture = txLoadGameSelected;
-                        // SaveGameSprite.Texture = SaveGameNotSelectedTexture;
                         break;
                     }
             }
@@ -218,17 +173,13 @@ namespace IcyMazeRunner.Klassen.Menüs
 
 
 
-            //noch benötigt?? ja solange menü ncihts passiert 
-            Console.WriteLine(select); //Debug-Info -> kein output bei tastendruck?
+            
+            //Console.WriteLine(select); //Debug-Info -> kein output bei tastendruck?
 
             /* für später
             if (select == 4)
             {
-                ContinueSprite.Texture = ContinueNotSelectedTexture;
-                GoMainMenuSprite.Texture = GoMainMenuNotSelectedTexture;
-                ControlsSprite.Texture = ControlsNotSelectedTexture;
                 SaveGameSprite.Texture = SaveGameSelectedTexture;
-                LoadGameSprite.Texture = LoadGameNotSelectedTexture;
             }
             */
 
@@ -243,17 +194,17 @@ namespace IcyMazeRunner.Klassen.Menüs
             }
             if ((select == 1 || select == -3) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
-                vMenuView.Reset(new FloatRect(0, 0, 1062, 720));  //globale Fenstervariable
+                vMenuView.Reset(new FloatRect(0, 0, Game.windowSizeX,Game.windowSizeY));  
                 return EGameStates.mainMenu;
             }
             if ((select == 2 || select == -2) && Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
-                vMenuView.Reset(new FloatRect(0, 0, 1062, 720));  //globale Fenstervariable
+                vMenuView.Reset(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));  
                 return EGameStates.controls;
             }
             if ((select == 3 || select == -1) && Keyboard.IsKeyPressed(Keyboard.Key.Return))  //Platzhalter Map auswahl
             {
-                vMenuView.Reset(new FloatRect(0, 0, 1062, 720));  //globale Fenstervariable
+                vMenuView.Reset(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));  
                 return EGameStates.mainMenu;
             }
 

@@ -19,57 +19,75 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Texturen anlegen ~~~~*/
 
-        Texture txCreditsNotSelected;
-        Texture txCreditsSelected;
-
-        Texture txExitNotSelected;
+        Texture txOptionsSelected;
         Texture txExitSelected;
-
-        Texture txStartNotSelected;
         Texture txStartSelected;
-
-        Texture txControlsNotSelected;
         Texture txControlsSelected;
+        Texture txBG;
+        Texture txFG;
+        Texture txMain;
 
         /* ~~~~ Sprites anlegen ~~~~*/
 
-        Sprite spStart;
-        Sprite spCredits;
-        Sprite spExit;
-        Sprite spControls;
-
-        /* ~~~~ Hintergrund anlegen ~~~~*/
-
-        Texture txBackGround;
+        Sprite spSelect;
         Sprite spBackGround;
+        Sprite spForeGround;
+        Sprite spMain;
+
 
 
         /* ~~~~ Initialisierung und Positionsfestlegung ~~~~ */
         public void initialize()
         {
+           
+
             I_select = 0;
             B_isPressed = false;
-            vMenu = new View(new FloatRect(0, 0, 1062, 720));
+            vMenu = new View(new FloatRect(0, 0, 1280, 720));
 
-            spStart = new Sprite(txStartNotSelected);
-            spStart.Scale = new Vector2f(1f, 1f);
-            spStart.Position = new Vector2f(0, 0);
+            txBG = new Texture("Texturen/Map/background.png");
 
-            spCredits = new Sprite(txCreditsNotSelected);
-            spCredits.Position = new Vector2f(0, 0);
-            spCredits.Scale = new Vector2f(1f, 1f);
+            txMain = new Texture("Texturen/Menü+Anzeigen/MainMenu.png");
 
-            spExit = new Sprite(txExitNotSelected);
-            spExit.Position = new Vector2f(0, 0);
-            spExit.Scale = new Vector2f(1f, 1f);
+            txOptionsSelected = new Texture("Texturen/Menü+Anzeigen/options.png");
 
-            spControls = new Sprite(txControlsNotSelected);
-            spControls.Position = new Vector2f(0, 0);
-            spControls.Scale = new Vector2f(1f, 1f);
+            txExitSelected = new Texture("Texturen/Menü+Anzeigen/exit.png");
 
-            spBackGround = new Sprite(txBackGround);
+            txStartSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
+
+            txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
+
+            txFG = new Texture("Texturen/Menü+Anzeigen/GUI-FG.png");
+            
+            
+            Vector2f viewScale = new Vector2f((float)vMenu.Size.X / (float)Game.windowSizeX, (float)vMenu.Size.Y / (float)Game.windowSizeY);
+
+
+            spBackGround = new Sprite(txBG);
             spBackGround.Position = new Vector2f(0, 0);
-            spBackGround.Scale = new Vector2f(1f, 1f);
+            
+            
+
+            spSelect = new Sprite(txStartSelected);
+            spSelect.Position = new Vector2f(0, 0);
+            spSelect.Scale = new Vector2f(0.83f, 1f);
+           // spSelect.Scale = viewScale;
+            
+
+            spMain = new Sprite(txMain);
+            spMain.Position = new Vector2f(0, 0);
+            spMain.Scale = new Vector2f(0.83f, 1f);
+          //  spMain.Scale = viewScale;
+
+
+            spForeGround = new Sprite(txFG);
+            spForeGround.Position = new Vector2f(0, 0);
+            spForeGround.Scale = new Vector2f(0.83f, 1f);
+
+
+            // modify sprite, to fit it in the gui
+          
+            
 
             
         }
@@ -77,17 +95,8 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Laden des Inhalts ~~~~ */
         public void loadContent()
-        {                        
-                txCreditsNotSelected = new Texture("Texturen/Menü+Anzeigen/credits.png");
-                txCreditsSelected = new Texture("Texturen/Menü+Anzeigen/credits_s.png");
-                txExitNotSelected = new Texture("Texturen/Menü+Anzeigen/quit.png");
-                txExitSelected = new Texture("Texturen/Menü+Anzeigen/quit_s.png");
-                txStartNotSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
-                txStartSelected = new Texture("Texturen/Menü+Anzeigen/start_s.png");
-                txControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
-                txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls_s.png");
+        {
 
-                txBackGround = new Texture("Texturen/Menü+Anzeigen/Titel.png");
                 
         }
 
@@ -137,68 +146,47 @@ namespace IcyMazeRunner.Klassen
             {
                 case 0:  //Start
                     {
-                        spStart.Texture = txStartSelected;
-                        spControls.Texture = txControlsNotSelected;
-                        spCredits.Texture = txCreditsNotSelected;
-                        spExit.Texture = txExitNotSelected;
+                        spSelect.Texture = txStartSelected;
                         break;
                     }
 
                 case 1:  //Controls
                     {
-                        spStart.Texture = txStartNotSelected;
-                        spControls.Texture = txControlsSelected;
-                        spCredits.Texture = txCreditsNotSelected;
-                        spExit.Texture = txExitNotSelected;
+                        spSelect.Texture = txControlsSelected;
                         break;
                     }
 
                 case -3:
                     {
-                        spStart.Texture = txStartNotSelected;
-                        spControls.Texture = txControlsSelected;
-                        spCredits.Texture = txCreditsNotSelected;
-                        spExit.Texture = txExitNotSelected;
+                        spSelect.Texture = txControlsSelected;
                         break;
                     }
 
                 case 2:  // Credits
                     {
-                        spStart.Texture = txStartNotSelected;
-                        spControls.Texture = txControlsNotSelected;
-                        spCredits.Texture = txCreditsSelected;
-                        spExit.Texture = txExitNotSelected;
+                        spSelect.Texture = txOptionsSelected;
                         break;
                     }
 
                 case -2:
                     {
-                        spStart.Texture = txStartNotSelected;
-                        spControls.Texture = txControlsNotSelected;
-                        spCredits.Texture = txCreditsSelected;
-                        spExit.Texture = txExitNotSelected;
+                        spSelect.Texture = txOptionsSelected;
                         break;
                     }
                         //Quit
                 case 3:
                     {
-                        spStart.Texture = txStartNotSelected;
-                        spControls.Texture = txControlsNotSelected;
-                        spCredits.Texture = txCreditsNotSelected;
-                        spExit.Texture = txExitSelected;
+                        spSelect.Texture = txExitSelected;
                         break;
                     }
                 case -1:
                     {
-                        spStart.Texture = txStartNotSelected;
-                        spControls.Texture = txControlsNotSelected;
-                        spCredits.Texture = txCreditsNotSelected;
-                        spExit.Texture = txExitSelected;
+                        spSelect.Texture = txExitSelected;
                         break;
                     }
             }
 
-            spBackGround.Texture = txBackGround;
+            spBackGround.Texture = txBG;
             
             // Update der Gamestates
 
@@ -222,11 +210,15 @@ namespace IcyMazeRunner.Klassen
         public void draw(RenderWindow window)
         {
             window.SetView(vMenu);
+
+
+            // draw the sprite
+            window.SetView(vMenu);
             window.Draw(spBackGround);
-            window.Draw(spStart);
-            window.Draw(spCredits);
-            window.Draw(spExit);
-            window.Draw(spControls);
+            window.Draw(spMain);
+            window.Draw(spForeGround);
+            window.Draw(spSelect);
+            
             window.SetMouseCursorVisible(true);
         }
         
