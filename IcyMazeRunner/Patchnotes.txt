@@ -12,7 +12,7 @@ y.00x  = komplett lauffähige Version 00x
 	  Blocken und Angreifen aber nicht gleichzeitig.
 	- ToDo: Skill für Aktivierung geheimer Wege einbauen, Skill für Selbstrettung einbauen, 
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
-	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Fenstergröße fixen, Ziel fixen
+	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Levelübergang fixen
 
 
 

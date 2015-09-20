@@ -26,7 +26,27 @@ namespace IcyMazeRunner.Klassen
 
             GameStates gameState;
 
+            /// <summary>
+            /// Gibt das aktuelle Level an.
+            /// </summary>
+            static int I_level = 1;
 
+            static int I_maxhealth = 10;
+
+            /// <summary>
+            /// Gibt den levelunabhängigen Bonus auf Verteidigung an.
+            /// </summary>
+            static int I_BonusDefense = 0;
+
+            /// <summary>
+            /// Gibt den levelunabhängigen Bonus auf Angriffe an.
+            /// </summary>
+            static int I_BonusAttack = 0;
+
+            /// <summary>
+            /// Gibt an, ob ein gespeichertes Spiel geladen wird oder ein neues Spiel gestartet wird.
+            /// </summary>
+            static Boolean B_isLoadedGame = false;
 
             /// <summary>
             /// Übernimmt Konstruktor von AbstractGame.cs

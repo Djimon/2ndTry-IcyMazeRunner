@@ -1,0 +1,2 @@
+﻿1.		in Game.cs: I_maxhealth benötigt? d.h. wird die maximale Gesundheit nur durch das Level festgelegt oder kann sie auch 
+		anderweitig erhöht werden?
