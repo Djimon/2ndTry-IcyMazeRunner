@@ -88,7 +88,7 @@ namespace IcyMazeRunner.Klassen
             ///  Sprite des Auslösers
             /// </summary>
             Sprite spSprite;
-
+            
             /// <summary>
             ///  Textur des Auslösers
             /// </summary>
@@ -118,10 +118,10 @@ namespace IcyMazeRunner.Klassen
             ///  <para>Methode, um zu überprüfen, ob die aktuell nächste Position des Spielers mit der Mauer kollidieren würde, oder nicht.</para>
             ///  <para>Gibt einen Boolean zurück. Bekommt Spieler und Vektor der zukünftigen Position als Parameter mit.</para>
             /// </summary>
-            public Boolean collision(Player player)
+            public Boolean collision(Sprite sprite)
             {
                 /* Mittlere Position des Spielers im nächsten Schritt */
-                Vector2f newPosition = new Vector2f((player.getXPosition() + (player.getWidth()/2)), (player.getYPosition() + (player.getHeigth()/2)));
+                Vector2f newPosition = new Vector2f((sprite.Position.X + (sprite.Texture.Size.X/2)), (sprite.Position.Y + (sprite.Texture.Size.Y/2)));
                 
                 /* Kollisionstest: Wenn wahr, wird wahr zurückgegeben, ansonsten Standardwert falsch. */
                 if (
@@ -133,7 +133,7 @@ namespace IcyMazeRunner.Klassen
 
                     return true;
                 }
-
+                
                 return false;              
             }
 
@@ -182,9 +182,6 @@ namespace IcyMazeRunner.Klassen
         {
             B_moveable = value;
         }
-
-       
-
 
         /// <summary>
         ///  Gibt Wert des Vektors der aktuellen Position zurück.
@@ -340,15 +337,15 @@ namespace IcyMazeRunner.Klassen
         ///  <para>Testet die Kollision des Spielers im nächsten Schritt mit einer Beweglichen Mauer. Gibt einen Boolean zurück, der einen static Boolean aktualisiert.</para>
         ///  <para>Wenn keine Kollision stattfindet, wird wahr zurückgegeben, d.h. Bewegung ist möglich.</para>
         /// </summary>
-        public Boolean Wall_Collision(Player player, Vector2f predictedPosition)
+        public Boolean Wall_Collision(Sprite sprite, Vector2f predictedPosition)
         {
-            Vector2f newPosition = new Vector2f((player.getXPosition() + predictedPosition.X + (player.getWidth() / 2)), (player.getYPosition() + predictedPosition.Y + (player.getHeigth() / 2)));
+            Vector2f newPosition = new Vector2f((sprite.Position.X + predictedPosition.X + (sprite.Texture.Size.X / 2)), (sprite.Position.Y + predictedPosition.Y + (sprite.Texture.Size.Y / 2)));
             if (I_orientation == 0)
             {
                 // 2 Blöcke stehen im Weg, deswegen einmal Kontrolle von oben und einmal von unten (Y+45 obere Mitte, Y+135 untere Mitte)
-                if (Calculator.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50
+                if (Calculator.getDistance(new Vector2f(newPosition.X + sprite.Texture.Size.X, newPosition.Y + sprite.Texture.Size.Y), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 45)) < 50
                     ||
-                    Calculator.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
+                    Calculator.getDistance(new Vector2f(newPosition.X + sprite.Texture.Size.X, newPosition.Y + sprite.Texture.Size.Y), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
                 {
                     return false;
                 }
@@ -356,7 +353,7 @@ namespace IcyMazeRunner.Klassen
             else 
             {
                 // 135, da nur mit dem "unteren" Block verglichen wird und nicht mit dem Block in der Mauer
-                if (Calculator.getDistance(new Vector2f(newPosition.X + player.getWidth(), newPosition.Y + player.getHeigth()), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
+                if (Calculator.getDistance(new Vector2f(newPosition.X + sprite.Texture.Size.X, newPosition.Y + sprite.Texture.Size.Y), new Vector2f(spSprite.Position.X + 45, spSprite.Position.Y + 135)) < 50)
                 {
                     return false;
                 }

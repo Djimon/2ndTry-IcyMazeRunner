@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SFML.Graphics;
+using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,7 @@ namespace IcyMazeRunner
         /// <summary>
         ///  Liste an Zustanden, die vom PlayerStateHandler verwaltet werden.
         /// </summary>
-        public List<Playercondition> StateList;
+        public List<Playercondition> ConditionList;
 
         /// <summary>
         ///  <para>Konstruktor</para>
@@ -20,25 +22,25 @@ namespace IcyMazeRunner
         /// </summary>
         public PlayerConditionHandler()
         {
-            StateList = new List<Playercondition>();
+            ConditionList = new List<Playercondition>();
         }
 
         /// <summary>
         ///  Fügt der Liste einen Zustand hinzu.
         /// </summary>
-        public void add(Playercondition state)
+        public void add(Playercondition condition)
         {
-            StateList.Add(state);
+            ConditionList.Add(condition);
         }
 
         /// <summary>
         ///  Fügt der Liste eine weitere Liste an Zuständen hinzu.
         /// </summary>
-        public void add(List<Playercondition> added_stateList)
+        public void add(List<Playercondition> added_conditionList)
         {
-            foreach (Playercondition state in added_stateList)
+            foreach (Playercondition condition in added_conditionList)
             {
-                StateList.Add(state);
+                ConditionList.Add(condition);
             }
 
         }
@@ -48,9 +50,9 @@ namespace IcyMazeRunner
         /// </summary>
         public void deleteAll()
         {
-            foreach (Playercondition state in StateList)
+            foreach (Playercondition condition in ConditionList)
             {
-                state.B_IsFinished = true;
+                condition.B_IsFinished = true;
             }
         }
 
@@ -60,22 +62,48 @@ namespace IcyMazeRunner
         public void update()
         {
 
-            StateList.Sort();
+            ConditionList.Sort();
 
-            for (int i = 0; i < StateList.Count; i++)
+            for (int i = 0; i < ConditionList.Count; i++)
             {
-                if (StateList[i].B_IsFinished)
+                if (ConditionList[i].B_IsFinished)
                 {
-                    StateList.RemoveAt(i);
+                    ConditionList.RemoveAt(i);
                     i--;
                 }
             }
 
-            foreach (Playercondition state in StateList)
+            foreach (Playercondition condition in ConditionList)
             {
-                state.update();
+                condition.update();
             }
 
+        }
+
+        public void draw (RenderWindow win)
+        {
+            int I_PositionCounter = 0;
+            // ToDo: 1. Position anpassen
+            Vector2f Position = new Vector2f(30, 30);
+
+            foreach(Playercondition plc in ConditionList)
+            {
+                // Ordnet Effekt-Icons nebeneinander an
+                // ToDo: Entfernung anpassen
+                Position.X = Position.X + (I_PositionCounter * (plc.spCondition.Texture.Size.X + 20));
+
+                // Wenn zu weit nach rechts im Bild, neue Reihe anfangen.
+                // ToDo: Entfernung anpassen
+                if (Position.X >= 300)
+                {
+                    Position.Y = Position.Y + plc.spCondition.Texture.Size.Y + 20;
+                    I_PositionCounter = 0;
+                    Position.X = 30;
+                }
+
+                plc.draw(win, Position);
+                I_PositionCounter++;
+            }
         }
     }
 }

@@ -14,12 +14,12 @@ namespace IcyMazeRunner
         /// <summary>
         ///  Textur des Zustands.
         /// </summary>
-        Texture txState;
+        Texture txCondition;
 
         /// <summary>
         ///  Sprite des Zustands.
         /// </summary>
-        Sprite spState;
+        public Sprite spCondition { get; private set; }
 
         /// <summary>
         ///  <para>Gibt an, wie lange der Zustand insgesamt bereits läuft. </para>
@@ -27,11 +27,10 @@ namespace IcyMazeRunner
         /// </summary>
         GameTime gtTotalTime;
 
-        // ToDo: Getter/Setter als Property einfügen, im State Handler anschließend anpassen und public entfernen.
         /// <summary>
         ///  Gibt an, ob Zustand beendet ist.
         /// </summary>
-        public Boolean B_IsFinished;
+        public Boolean B_IsFinished { get; private set; }
 
         /// <summary>
         ///  Gibt in Sekunden an, wie lange der Zustand insgesamt anhalten soll.
@@ -83,30 +82,30 @@ namespace IcyMazeRunner
             {
                 case 0:
                     {
-                        txState = new Texture("");
+                        txCondition = new Texture("");
                         break;
                     }
                 
                 case 1:
                     {
-                        txState = new Texture("");
+                        txCondition = new Texture("");
                         break;
                     }
 
                 case 2:
                     {
-                        txState = new Texture("");
+                        txCondition = new Texture("");
                         break;
                     }
 
                 default:
                     {
-                        txState = new Texture("");
+                        txCondition = new Texture("");
                         break;
                     }
             }
 
-            spState = new Sprite(txState);
+            spCondition = new Sprite(txCondition);
             pPlayer.setDamage(I_DamagePerTick);
 
 
@@ -135,8 +134,8 @@ namespace IcyMazeRunner
         /// </summary>
         public void draw(RenderWindow Win, Vector2f position)
         {
-            spState.Position = position;
-            Win.Draw(spState);
+            spCondition.Position = position;
+            Win.Draw(spCondition);
         }
 
     }

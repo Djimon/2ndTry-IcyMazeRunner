@@ -7,7 +7,7 @@ y.B00x = Beta Build 00x
 y.00x  = komplett lauffähige Version 00x
 */
 
-	- beantwortete Fragen: HealSkill auf x Prozent Health, Selbstrettung sorgt für x Prozent Health, States+StateHandler auch für Gegner, Fertigkeiten
+	- beantwortete Fragen: HealSkill auf x Prozent Health, Selbstrettung sorgt für 5 Prozent Health, States+StateHandler auch für Gegner, Fertigkeiten
 	  sind später spezialisierbar(andere Datei dafür einrichten), Fertigkeiten/Angreifen/Blocken können während der Bewegung eingesetzt werden, 
 	  Blocken und Angreifen aber nicht gleichzeitig
 	- ToDo: Skill für Aktivierung geheimer Wege einbauen, Skill für Selbstrettung einbauen, 
@@ -18,6 +18,17 @@ y.00x  = komplett lauffähige Version 00x
 
 TODO::::::::::: I_level zu game.I_level machen und überlegen, wie man Rüstungs und Waffenboni in neue Level trotz Gamestate-Wechsel übernehmen kann...
 	  
+Version 1.3.B017 (Kilian):
+	- static Variablen in Game.cs eingefügt für levelübergreifende Spielerinformationen und Implementierung in den benötigten Klassen ausgeführt/vorbereitet.
+	- static Boolean in Game.cs eingefügt, um zu überprüfen, ob neues Spiel gestartet wird oder Spiel geladen wird
+	- Kollisionen der Moveable_Wall.cs nutzen nun Sprite-Angaben statt Spieler, um auch für Gegner und Geschosse verfügbar zu sein
+	- Ebenso die Update-Methode und isWalkable des MoveableWallHandler.cs
+	- Fragen und Diskussion.txt erstellt, wo offene Fragen mit Verweis, zu welcher Stelle sie gehört, gelistet sind, um sie leichter klären zu können. 
+	  Antworten mit Namen kenntlich machen und direkt unter die jeweilige Frage schreiben
+	- Variablennamen in PlayerCondition.cs und PlayerConditionHandler.cs angepasst
+	- PlayerConditionHandler.draw() geschrieben
+	- PlayerCondition.B_IsFinished in Property umgewandelt
+
 Version 1.3.B016 (Kilian,Chris):
 	- Neues Main-Menü
 	- Verfeinerung des Codes

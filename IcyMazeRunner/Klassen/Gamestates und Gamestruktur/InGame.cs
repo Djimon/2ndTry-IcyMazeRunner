@@ -237,6 +237,14 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public void loadContent(){
 
+            if (!Game.B_isLoadedGame)
+            {
+                I_level = Game.I_level;
+            }
+            else 
+            {
+            // ToDo: Aus Speicherdatei auslesen.
+            }
             /* ~~~~ Level laden ~~~~ */
           
             bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
@@ -264,7 +272,7 @@ namespace IcyMazeRunner.Klassen
 
             }
 
-            pRunner = new Player(mMap.vStart, mMap);  //new Vector2f(mMap.vStart.X, mMap.vStart.Y)
+            pRunner = new Player(mMap.vStart, mMap); 
 
 
             /* ~~~~ Geheime Wege laden ~~~~ */
@@ -447,16 +455,15 @@ namespace IcyMazeRunner.Klassen
                 if (targetdistance <200)
                 {
                     I_level++;
-                    if (I_level >= 30) { return EGameStates.gameWon; }
+                    if (I_level >= 31) {
+                        /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
+                        vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
+                        return EGameStates.gameWon;
+                    }
                     return EGameStates.NextLevel;
                 }
 
-                /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
-                if (I_level == 31)
-                {
-                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX,Game.windowSizeY)); 
-                    return EGameStates.gameWon;
-                }
+
 
                 /* Hack-Win */
                 if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) &&Keyboard.IsKeyPressed(Keyboard.Key.LShift))

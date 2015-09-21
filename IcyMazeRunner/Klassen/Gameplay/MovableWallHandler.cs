@@ -1,4 +1,5 @@
-﻿using SFML.Window;
+﻿using SFML.Graphics;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,17 +58,24 @@ namespace IcyMazeRunner.Klassen
         }
 
 
-
+        // ToDo: EnemyHandler übergeben und nicht nur für Spieler-Sprite, sondern auch jeden Gegner mit jeder Mauer kontrollieren
+        // also 
+        // foreach(Wall){
+        //      foreach(Enemy)
+        //          {}
+        //      Player.Sprite
+        //          {}
+        // }
         /// <summary>
-        /// Kontrolliert, ob Spieler mit irgendeiner beweglichen Mauer kollidieren wird.
+        /// Kontrolliert, ob Sprite eines Spielers, einer Falle oder eines Gegners mit irgendeiner beweglichen Mauer kollidieren wird.
         /// </summary>
-        public Boolean isWalkable(Player pPlayer, Vector2f predictedPosition)
+        public Boolean isWalkable(Sprite sprite, Vector2f predictedPosition)
         {
             try
             {
                 foreach (Moveable_Wall moveableWall in MoveableWallList)
                 {
-                    if (moveableWall.Wall_Collision(pPlayer, predictedPosition))
+                    if (moveableWall.Wall_Collision(sprite, predictedPosition))
                     {
                         return false;
                     }
@@ -79,15 +87,15 @@ namespace IcyMazeRunner.Klassen
 
             return true;
         }
-        // ToDo: für Enemy auch Kollision vorbereiten
 
+        // ToDo: Verweis fehlt
         /// <summary>
         /// <para>Löscht zunächst alle alten, nicht mehr benötigten Einträge.<para>
         /// 
         /// <para>Anschließend kontrolliert er, ob der Spieler mit einer der Auslöser kollidiert, und wenn ja, wird die Bewegung ausgelöst, und 
         /// solange bewegt, bis er die Endposition erreicht hat. Die orientation und direction der movableWall werden normalisiert.<para>
         /// </summary>
-        public void update(GameTime gameTime, Player pRunner, Map cMap, Calculator calc)
+        public void update(GameTime gameTime, Sprite sprite, Map cMap)
         {
             try
             {
@@ -104,7 +112,7 @@ namespace IcyMazeRunner.Klassen
             foreach (Moveable_Wall moveableWall in MoveableWallList)
             {
                 /* Auslösen der Bewegung */
-                if (!moveableWall.getB_moveable() && moveableWall.wallTrigger.collision(pRunner))
+                if (!moveableWall.getB_moveable() && moveableWall.wallTrigger.collision(sprite))
                 {
                     moveableWall.setB_moveable(true);
                     moveableWall.set_PrevPosition(moveableWall.get_Position());

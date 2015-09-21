@@ -44,8 +44,8 @@ namespace IcyMazeRunner
         int I_healthPoints;
         int I_maxHealth;
         float F_runningSpeed;
-        // int basicDamage
-        // int basicDefence
+        // int I_basicDamage
+        // int I_basicDefense
 
 
         /* ~~~~ Texturen für Stehen und Bewegungsanimation ~~~~ */
@@ -129,6 +129,16 @@ namespace IcyMazeRunner
             // Initialisierung der HP des Spielers, wird mit neuem Level neu festgelegt
             I_healthPoints = 100;
             I_maxHealth = I_healthPoints;
+
+            if (!Game.B_isLoadedGame)
+            {
+                // Verteidigung = levelabhängige Verteidigung + Game.I_BonusDefense; (I_basicDamage)
+                // Angriff = levelabhängiger Angriff + Game.I_BonusAttack;  (I_basicDefense)
+            }
+            else
+            {
+                // ToDo: Aus Speicherdatei auslesen.
+            }
 
 
             //Bewegungstexturen werden geladen
@@ -355,7 +365,7 @@ namespace IcyMazeRunner
             else
             {
 
-                if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)) && MWH.isWalkable(this, new Vector2f(-F_runningSpeed, 0)))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)) && MWH.isWalkable(this.spPlayer, new Vector2f(-F_runningSpeed, 0)))
                 {
                     spPlayer.Position = new Vector2f(spPlayer.Position.X - F_runningSpeed, spPlayer.Position.Y);
                     if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txLeft1;
@@ -364,7 +374,7 @@ namespace IcyMazeRunner
                     I_rememberidle = 0;
                 }
 
-                if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)) && MWH.isWalkable(this, new Vector2f(  F_runningSpeed, 0)))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)) && MWH.isWalkable(this.spPlayer, new Vector2f(F_runningSpeed, 0)))
                 {
                     spPlayer.Position = new Vector2f(spPlayer.Position.X + F_runningSpeed, spPlayer.Position.Y);
                     if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txRight1;
@@ -373,7 +383,7 @@ namespace IcyMazeRunner
                     I_rememberidle = 1;
                 }
 
-                if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)) && MWH.isWalkable(this, new Vector2f(0, -F_runningSpeed)))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)) && MWH.isWalkable(this.spPlayer, new Vector2f(0, -F_runningSpeed)))
                 {
                     spPlayer.Position = new Vector2f(spPlayer.Position.X, spPlayer.Position.Y - F_runningSpeed);
                     if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txUp1;
@@ -382,7 +392,7 @@ namespace IcyMazeRunner
                     I_rememberidle = 2;
                 }
 
-                if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)) && MWH.isWalkable(this, new Vector2f(0, F_runningSpeed)))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)) && MWH.isWalkable(this.spPlayer, new Vector2f(0, F_runningSpeed)))
                 {
                     spPlayer.Position = new Vector2f(spPlayer.Position.X, spPlayer.Position.Y + F_runningSpeed);
                     if (time.TotalTime.Milliseconds % 500 < 250) this.spPlayer.Texture = txDown1;
@@ -521,6 +531,8 @@ namespace IcyMazeRunner
 
 
         // ToDo: Kürzen möglich?
+        // ToDo: MoveableWallHandler.isWalkable() überall in die if-Abfragen
+        // ToDo: ENums verwenden
         /// <summary>
         /// <para>Bewegungssteuerung für den Herausforderungsmodus. </para>
         /// 
