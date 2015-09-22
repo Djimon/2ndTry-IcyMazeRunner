@@ -26,11 +26,12 @@ namespace IcyMazeRunner
         ///  <para>Die Stoppuhr misst die Zeit bis zum jeweiligen nächsten Schadensaufruf. </para>
         /// </summary>
         GameTime gtTotalTime;
+        // ToDo: wird nie etwas zugewiesen, immer Standardwert null
 
         /// <summary>
         ///  Gibt an, ob Zustand beendet ist.
         /// </summary>
-        public Boolean B_IsFinished { get; private set; }
+        public Boolean B_IsFinished { get; set; }
 
         /// <summary>
         ///  Gibt in Sekunden an, wie lange der Zustand insgesamt anhalten soll.

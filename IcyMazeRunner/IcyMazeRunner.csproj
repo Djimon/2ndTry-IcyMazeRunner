@@ -69,7 +69,6 @@
   <ItemGroup>
     <Compile Include="Klassen\Calculator.cs" />
     <Compile Include="Klassen\Gameplay\MovableWallHandler.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\EntityHandler.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />
     <Compile Include="Klassen\Gameplay\Enemy.cs" />
     <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />

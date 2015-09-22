@@ -191,8 +191,10 @@ namespace IcyMazeRunner.Klassen
             // Update der Gamestates
 
             if (I_select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            {
                 Game.B_isLoadedGame = false;
                 return EGameStates.inGame;
+            }
             if (I_select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
                 return EGameStates.controls;
             if (I_select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))

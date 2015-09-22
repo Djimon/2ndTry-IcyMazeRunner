@@ -11,7 +11,7 @@ namespace IcyMazeRunner.Klassen
     //interface für verschiedene Zustände des Spiels
         public enum EGameStates
         {
-            none=-1,
+            none,
             mainMenu,
             credits,
             controls,
@@ -19,7 +19,6 @@ namespace IcyMazeRunner.Klassen
             gameWon,
             gameOver,
             NextLevel,
-            Count,
         }
 
         public enum Emovestates

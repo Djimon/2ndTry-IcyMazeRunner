@@ -116,11 +116,6 @@ namespace IcyMazeRunner
         bool B_isControlNormalized = true;
 
         /// <summary>
-        /// Gibt an, welche der 24 möglichen Fälle der Bewegungssteuerung genutzt wird.
-        /// </summary>
-        int I_moveChangerState = 0;
-
-        /// <summary>
         /// Randomgenerator für I_moveChangerState.
         /// </summary>
         Random random = new Random();

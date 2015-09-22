@@ -13,11 +13,9 @@ namespace IcyMazeRunner.Klassen.Menüs
     {
 
 
-        // ToDo: komplett durchsprechen/überarbeiten
-
-        /* unnötige Variablen?? */
+        // ToDo: unnötige Variablen?? 
         View vMenuView;
-        int test;
+        int test; // nie verwendet
 
 
         /* ~~~~ Menühintergrundtexturen anlegen ~~~~ */
@@ -51,10 +49,12 @@ namespace IcyMazeRunner.Klassen.Menüs
         Sprite spMenuBackground;
         Sprite spMenuHeader;
         Sprite spSelected;
-        Sprite spGoMainMenu;
-        Sprite spControls; // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        Sprite SaveGameSprite; // für später
-        Sprite spLoadGame; // für später
+
+        // ToDo: werden nie verwendet:
+        //Sprite spGoMainMenu;
+        //Sprite spControls; // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        //Sprite SaveGameSprite; // für später
+        //Sprite spLoadGame; // für später
 
         /* ~~~~ Variablen für Menüsteuerung ~~~~*/
         int select;

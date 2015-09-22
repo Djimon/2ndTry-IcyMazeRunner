@@ -107,11 +107,6 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         Bitmap bmMap;
 
-        /// <summary>
-        /// Rechner für allgemeine Berechnungen.
-        /// </summary>
-        Calculator calc;
-
 
         /* ~~~~~~~~ Spielobjekte für GUI ~~~~~~~~ */
 
@@ -150,7 +145,7 @@ namespace IcyMazeRunner.Klassen
         /// Gibt Vektor an, wo sich Ziel befindet. Orientierungsvektor für den Kompass.
         /// </summary>
         Vector2f vTarget;
-
+        // ToDo: wird nie etwas zugewiesen und immer Standardwert null.
 
 
 
