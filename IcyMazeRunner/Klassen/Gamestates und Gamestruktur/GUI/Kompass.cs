@@ -12,7 +12,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
     class Kompass //Kompass
     {
        
-        System.Drawing.Image needle;
+        System.Drawing.Image needle; //wird nie verwendet
         Sprite spNeedle;
         Sprite spnew;
         View view;
@@ -29,7 +29,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         ///</summary>
         public Kompass(Vector2f midpoint, View view, Vector2f target)
         {
-            this.spNeedle = new Sprite(new Texture("Texturen/Menü+Anzeigen/GUI/needle.png"));
+            this.spNeedle = new Sprite(new Texture("Texturen/Menu+Anzeigen/GUI/needle.png"));
             this.view = view;
             this.vCompass = midpoint;
             this.vTarget = target;

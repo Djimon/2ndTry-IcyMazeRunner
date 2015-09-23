@@ -12,23 +12,22 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
     {
         /* ~~~~ Screen anlegen ~~~~*/
         Texture txNextLevelScreen;
-        Sprite spNextLevelScreen;
-        static int I_level = 1;
-       
-
 
         // ToDo: Level speichern.
         /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
-            spNextLevelScreen = new Sprite(txNextLevelScreen);
-            spNextLevelScreen.Position = new Vector2f(0, 0);
+            Game.spBackGround.Texture = txNextLevelScreen;
+            Game.spBackGround.Position = new Vector2f(0, 0);
 
-            SaveLevel Levelspeicher = new SaveLevel(I_level);
-            I_level = Levelspeicher.decrypt() + 1;
-            Levelspeicher.encrypt(I_level);
+
+            // ToDo: ohne decrypt aus Game.I_level abrufen und erhöhen, nur fürs speichern encrypten
+            // ToDo: außerdem Game.I_BonusDefense und Game.I_BonusAttack abspeichern
+            SaveLevel Levelspeicher = new SaveLevel(Game.I_level);
+            Game.I_level = Levelspeicher.decrypt() + 1;
+            Levelspeicher.encrypt(Game.I_level);
             Console.WriteLine(Levelspeicher.decrypt()); //debug zwecke...
-            Console.WriteLine(I_level); // SaveData.txt wird nicht geschrieben, hat aber in einem externen testrahmen geklappt
+            Console.WriteLine(Game.I_level); // SaveData.txt wird nicht geschrieben, hat aber in einem externen testrahmen geklappt
             
         }
 
@@ -37,7 +36,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         public void loadContent()
         {
             // passende Textur einfügen
-            txNextLevelScreen = new Texture("Texturen/Menü+Anzeigen/GameWon.png");
+            txNextLevelScreen = new Texture("Texturen/Menu+Anzeigen/GameWon.png");
 
        
 
@@ -60,7 +59,7 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
-            win.Draw(spNextLevelScreen);
+            win.Draw(Game.spBackGround);
         }
     }
 }

@@ -141,12 +141,6 @@ namespace IcyMazeRunner.Klassen
         Kompass compass;
         // ToDo: Summaries beschreiben.
 
-        /// <summary>
-        /// Gibt Vektor an, wo sich Ziel befindet. Orientierungsvektor für den Kompass.
-        /// </summary>
-        Vector2f vTarget;
-        // ToDo: wird nie etwas zugewiesen und immer Standardwert null.
-
 
 
         /* ~~~~~~~~ Spielobjekte für bewegliche Mauern ~~~~~~~~ */
@@ -164,7 +158,7 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         List<Coordinates> SecretWayList;
 
-        
+
         /* ~~~~~~~~ Spielobjekte für Gegner ~~~~~~~~ */
 
 
@@ -178,7 +172,7 @@ namespace IcyMazeRunner.Klassen
         /// <summary>
         /// Allgemeine Gameobject-Handler.
         /// </summary>
-      //  GameObjectHandler GOH;
+        //  GameObjectHandler GOH;
         //ToDo: Handler implementieren
 
 
@@ -200,8 +194,8 @@ namespace IcyMazeRunner.Klassen
             gtIngame = new GameTime();
             gtIngame.start();
 
-            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX -1, Game.windowSizeY -1));
-           
+            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX - 1, Game.windowSizeY - 1));
+
 
             spBackGround = new Sprite(new Texture("Texturen/Map/background.png"));
             spBackGround.Position = new Vector2f(0, 0);
@@ -209,10 +203,10 @@ namespace IcyMazeRunner.Klassen
             spFogOfWar = new Sprite(new Texture("Texturen/Map/Fog_of_War.png"));
             spFogOfWar.Position = new Vector2f(-1, -1);
 
-            I_typeOfDeath=0;
+            I_typeOfDeath = 0;
             B_isDeathAnimationOver = false;
 
-            
+
 
             /* ~~~~ GUI-Objekte ~~~~ */
 
@@ -220,39 +214,40 @@ namespace IcyMazeRunner.Klassen
 
 
             /* ~~~~ Handler-Objekte ~~~~ */
-            
+
             //GOH = new GameObjectHandler();
             //EH = new EntityHandler();
             //MWH = new MoveableWallHandler();
         }
- 
+
 
         /// <summary>
         /// Texturen, Karten, Listen und GUI werden geladen.
         /// </summary>
-        public void loadContent(){
+        public void loadContent()
+        {
 
             if (!Game.B_isLoadedGame)
             {
                 I_level = Game.I_level;
             }
-            else 
+            else
             {
-            // ToDo: Aus Speicherdatei auslesen.
+                // ToDo: Aus Speicherdatei auslesen.
             }
             /* ~~~~ Level laden ~~~~ */
-          
+
             bmMap = new Bitmap("Texturen/Map/Map_test.bmp");
             //bmMap = new Bitmap("Texturen/Map/KI-test.bmp");
             // ToDo: Bitmaps in Switch-case laden. Level zuerst erstellen
-  
+
 
 
             switch (I_level)
             {
-                    //ToDo: Spielerstartposition automatisch bestimmen lassen. Eventuell das gleiche für die Map.
+                //ToDo: Spielerstartposition automatisch bestimmen lassen. Eventuell das gleiche für die Map.
                 case 0:
-                    mMap = new Map(bmMap); 
+                    mMap = new Map(bmMap);
                     //pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
 
                     break;
@@ -260,46 +255,24 @@ namespace IcyMazeRunner.Klassen
 
 
                 default:
-                    mMap = new Map(bmMap); 
+                    mMap = new Map(bmMap);
                     //pRunner = new Player(new Vector2f(mMap.vStart.X,mMap.vStart.Y), mMap); //(281,91)
 
                     break;
 
             }
 
-            pRunner = new Player(mMap.vStart, mMap); 
+            pRunner = new Player(mMap.vStart, mMap);
 
 
             /* ~~~~ Geheime Wege laden ~~~~ */
-            map = mMap.map;
-            SecretWayList = new List<Coordinates>();
-            //komplette Bitmap durchgehen
-            for (int row = 0; row < map.GetLength(0); row++)
-            {
-                for (int col = 0; col < map.GetLength(1); col++)
-                {
 
-                    // Wenn Geheimer Weg gefunden, dann füge Daten in Liste
-                    if ((map[row, col].type() == 7) || (map[row, col].type() == 8))
-                    {
-                        Boolean helper = false;
+            loadSecretWays();
 
-                        // Wenn die Textur über diesem Feld zu einer Vorderansicht einer Mauer gewechselt werden muss, setze helper auf true;
-                        if ((map[row+1, col].type() !=7 ) && (map[row+1, col].type() != 8) && (map[row, col].type() != 7))
-                        {
-                            helper = true;
-                        }
-
-                        // Füge Koordinaten und Boolean in Liste ein.
-                        SecretWayList.Add(new Coordinates(row, col, helper));
-                    }
-
-                }
-            }
 
             /* Kompass TEST */
 
-            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel); 
+            compass = new Kompass(vIngame.Center, vIngame, mMap.vZiel);
             //compass = new Kompass(vIngame.Center, vTarget, bmKompass);
 
             /* ~~~~ Methoden aufrufen, die die jeweiligen Handler abhängig vom Level füllen ~~~~ */
@@ -318,7 +291,7 @@ namespace IcyMazeRunner.Klassen
 
             if (menu != null)
             {
-                
+
                 if (menu != null && menu.getCloseMenu())
                 {
                     menu = null;
@@ -329,7 +302,7 @@ namespace IcyMazeRunner.Klassen
                 {
                     return menu.update();
                 }
-                
+
             }
             else
             {
@@ -349,61 +322,24 @@ namespace IcyMazeRunner.Klassen
                    Features aktualisieren (ohne Handler) 
                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-                /* Geheime Mauer aktualisieren */
 
+                /* Geheime Mauer aktualisieren */
                 // Sichtbarkeit wird ausgelöst
                 if (B_IsVisible)
                 {
-                    //Timer für Sichtbarkeit wird gestartet
-                    gtWallTimer = new GameTime();
-                    gtWallTimer.Watch.Start();
-
-                    // geheime Wege werden sichtbar durch Texturwechsel
-                    foreach (Coordinates co in SecretWayList)
-                    {
-                        map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-clean.png"));
-
-
-                        // Wenn Textur über dem Feld zu vertikaler Mauer verändert werden muss, wird sie nun gewechselt.
-                        if (co.B_UpperTexChanger)
-                        {
-                            map[co.I_xCoord - 1, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
-                        }
-                    }
-
-                    // Auslöser wird resettet
-                    B_IsVisible = false;
+                    makeSecretWaysVisible();
                 }
-
-
                 // Wenn Timer vorüber
                 if (gtWallTimer != null && gtWallTimer.Watch.ElapsedMilliseconds >= 10000)
                 {
-                    //wird der Timer gestoppt und wieder auf 0 gesetzt,
-                    gtWallTimer.Watch.Reset();
-
-                    //und die Texturen auf ihre jeweiligen Ursprungszustände zurückgesetzt bzw. das Feld darüber, wenn nötig, wieder zu der
-                    //Draufansicht einer Mauer.
-                    foreach (Coordinates coordz in SecretWayList)
-                    {
-                        if (map[1, 2].type() == 7)
-                        {
-                            map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
-                        }
-                        else
-                        {
-                            map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
-                        }
-
-                        if (coordz.B_UpperTexChanger)
-                        {
-                            map[coordz.I_xCoord - 1, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
-                        }
-
-                    }
-
+                    makeSecretWaysInvisible();
                 }
-                // ToDo: in eigene Methode auslagern/kapseln
+
+
+
+
+
+
 
                 /* Handler aktualisieren*/
                 //GOH.update(gametime, pRunner, mMap);
@@ -413,7 +349,7 @@ namespace IcyMazeRunner.Klassen
 
 
                 /* Aktualisierung, ob Spieler stirbt und Sterbeanimation */
-                if (get_Gap_Collision(pRunner, mMap))
+                if (get_Gap_Collision(pRunner.spPlayer, mMap))
                 {
                     pRunner.setPlayerHealth(0);
                     I_typeOfDeath = 1;
@@ -426,14 +362,14 @@ namespace IcyMazeRunner.Klassen
                     if (pRunner.B_IsSaved)
                     {
                         // Spieler hat wieder 5% Leben
-                        pRunner.setPlayerHealth((int) (pRunner.getPlayerMaxHealth()*0.05));
+                        pRunner.setPlayerHealth((int)(pRunner.getPlayerMaxHealth() * 0.05));
                         pRunner.setDeathWatchIsOn(false);
                     }
 
                     if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
                     {
                         // ob Level sinkt, hängt von Todesursache ab, nur bei Loch im Boden
-                        if (I_typeOfDeath==1)
+                        if (I_typeOfDeath == 1)
                         {
                             I_level--;
                         }
@@ -446,11 +382,12 @@ namespace IcyMazeRunner.Klassen
 
 
                 /* Kontrolle, ob Spieler Ziel erreicht */
-                targetdistance = Calculator.getDistance(pRunner.getplayerSprite().Position, vTarget);
-                if (targetdistance <200)
+                targetdistance = Calculator.getDistance(pRunner.spPlayer.Position, mMap.vZiel);
+                if (targetdistance < 200)
                 {
                     I_level++;
-                    if (I_level >= 31) {
+                    if (I_level >= 31)
+                    {
                         /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
                         vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
                         return EGameStates.gameWon;
@@ -461,30 +398,30 @@ namespace IcyMazeRunner.Klassen
 
 
                 /* Hack-Win */
-                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) &&Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) && Keyboard.IsKeyPressed(Keyboard.Key.LShift))
                 {
-                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY)); 
+                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
                     return EGameStates.NextLevel;
                 }
-                
+
 
 
                 /* GUI aktualisieren */
 
                 vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
-                spBackGround.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2)); 
-                spFogOfWar.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));  
+                spBackGround.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));
+                spFogOfWar.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));
 
                 /****************************************
                  ************** KOMPASS *****************
                  ****************************************/
-                compass.update(vTarget);
-                   
+                compass.update(mMap.vZiel);
+
 
             }
             return EGameStates.inGame;
         }
-        
+
 
         /// <summary>
         /// Mittelpunkt-Kollision zwischen 2 Objekten A,B (Sprites)
@@ -496,7 +433,7 @@ namespace IcyMazeRunner.Klassen
         public static bool point_Collision(Sprite spriteA, Sprite spriteB)
         {
             // nicht ganz sicher ob die vektoren korrekt berechnet wurden
-            Vector2f ObjectA = new Vector2f(spriteA.Position.X + spriteA.Texture.Size.X/ 2, spriteA.Position.Y + spriteA.Texture.Size.Y / 2);
+            Vector2f ObjectA = new Vector2f(spriteA.Position.X + spriteA.Texture.Size.X / 2, spriteA.Position.Y + spriteA.Texture.Size.Y / 2);
             Vector2f ObjectB = new Vector2f(spriteB.Position.X + spriteB.Texture.Size.X / 2, spriteB.Position.Y + spriteB.Texture.Size.Y / 2);
 
             float F_widthMidA = spriteA.Texture.Size.X / 2;
@@ -515,15 +452,15 @@ namespace IcyMazeRunner.Klassen
                 return false;
         }
         // ich erinnere mich, das ist Punktkollision, also wenn die Mittelpunkte sich treffen. hatte ich mal überlegt für Pfeile o.ä.
-       
+
 
         /// <summary>
         /// Prüft, ob Spieler mit einem Loch im Boden kollidiert.
         /// </summary>
-        public bool get_Gap_Collision(Player player, Map map)
+        public bool get_Gap_Collision(Sprite sprite, Map map)
         {
             // Kachel an Spielerposition mit Farbe der Bitmap und damit Kachelfarbe des Lochblocks vergleichen
-            if (bmMap.GetPixel((int)((player.getXPosition() + (player.getWidth() / 2)) / map.I_blockSize) + 1, ((int)((player.getYPosition() + (player.getHeigth() / 2)) / map.I_blockSize) + 1)).Name == Sorange)
+            if (bmMap.GetPixel((int)((sprite.Position.X + (sprite.Texture.Size.X / 2)) / map.I_blockSize) + 1, ((int)((sprite.Position.Y + (sprite.Texture.Size.Y / 2)) / map.I_blockSize) + 1)).Name == Sorange)
             {
                 return true;
             }
@@ -532,8 +469,8 @@ namespace IcyMazeRunner.Klassen
                 return false;
             }
         }
-        // ToDo: Gleiche Methode im Enemy-Handler??
-      
+        // ToDo: Methode in EnemyHandler.uodate() aufrufen
+
 
         /// <summary>
         /// <para> Um das gesamte Spiel zu zeichnen, ruft sie die jeweiligen Draw-Methoden von hinten nach vorn auf. </para>
@@ -565,8 +502,102 @@ namespace IcyMazeRunner.Klassen
             //    inventory.draw(win);
             //}
         }
-     
+
         // ja diesen Befehl einfach copy pasten in der draw von Hauptmenü und ingameMenü nur halt true. und bevor der est gemalt wird.
+
+
+
+
+
+        /* Methoden für Geheime Wege */
+        /// <summary>
+        /// Lädt die Positionen, wo sich eine Geheime Mauer befindet in eine Liste.
+        /// </summary>
+        void loadSecretWays()
+        {
+            map = mMap.map;
+            SecretWayList = new List<Coordinates>();
+            //komplette Bitmap durchgehen
+            for (int row = 0; row < map.GetLength(0); row++)
+            {
+                for (int col = 0; col < map.GetLength(1); col++)
+                {
+
+                    // Wenn Geheimer Weg gefunden, dann füge Daten in Liste
+                    if ((map[row, col].type() == 7) || (map[row, col].type() == 8))
+                    {
+                        Boolean helper = false;
+
+                        // Wenn die Textur über diesem Feld zu einer Vorderansicht einer Mauer gewechselt werden muss, setze helper auf true;
+                        if ((map[row + 1, col].type() != 7) && (map[row + 1, col].type() != 8) && (map[row, col].type() != 7))
+                        {
+                            helper = true;
+                        }
+
+                        // Füge Koordinaten und Boolean in Liste ein.
+                        SecretWayList.Add(new Coordinates(row, col, helper));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Wenn B_isVisible durch Spieleraktion auf true gesetzt wird, wird eine Uhr gestartet und die Texturen der Mauern so geändert,
+        /// dass man nun erkennen kann, dass es sich um Wege handelt.
+        /// </summary>
+        void makeSecretWaysVisible()
+        {
+                    //Timer für Sichtbarkeit wird gestartet
+                    gtWallTimer = new GameTime();
+                    gtWallTimer.Watch.Start();
+
+                    // geheime Wege werden sichtbar durch Texturwechsel
+                    foreach (Coordinates co in SecretWayList)
+                    {
+                        map[co.I_xCoord, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-clean.png"));
+
+
+                        // Wenn Textur über dem Feld zu vertikaler Mauer verändert werden muss, wird sie nun gewechselt.
+                        if (co.B_UpperTexChanger)
+                        {
+                            map[co.I_xCoord - 1, co.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                        }
+                    }
+
+                    // Auslöser wird resettet
+                    B_IsVisible = false;
+        }
+
+        /// <summary>
+        /// Stellt den Ursprungszustand der Geheimen Mauern nach Ablauf der Zeit wieder her.
+        /// </summary>
+        void makeSecretWaysInvisible()
+        {
+            //wird der Timer gestoppt und wieder auf 0 gesetzt,
+            gtWallTimer.Watch.Reset();
+
+            //und die Texturen auf ihre jeweiligen Ursprungszustände zurückgesetzt bzw. das Feld darüber, wenn nötig, wieder zu der
+            //Draufansicht einer Mauer.
+            foreach (Coordinates coordz in SecretWayList)
+            {
+                if (map[1, 2].type() == 7)
+                {
+                    map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-vert.png"));
+                }
+                else
+                {
+                    map[coordz.I_xCoord, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                }
+
+                if (coordz.B_UpperTexChanger)
+                {
+                    map[coordz.I_xCoord - 1, coordz.I_yCoord].setTexture(new Texture("Texturen/Map/wall-hor.png"));
+                }
+
+            }
+            gtWallTimer = null;
+        }
+
 
     }
 }

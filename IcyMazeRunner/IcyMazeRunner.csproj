@@ -187,112 +187,112 @@
     <Content Include="Texturen\Map\way-vert.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\controllscreen-summer-PLATZHALTER.png">
+    <Content Include="Texturen\Menu+Anzeigen\controllscreen-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\controllscreen.png">
+    <Content Include="Texturen\Menu+Anzeigen\controllscreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\controls.png">
+    <Content Include="Texturen\Menu+Anzeigen\controls.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\controls_s.png">
+    <Content Include="Texturen\Menu+Anzeigen\controls_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\credits.png">
+    <Content Include="Texturen\Menu+Anzeigen\credits.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\creditscreen-summer-PLATZHALTER.png">
+    <Content Include="Texturen\Menu+Anzeigen\creditscreen-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\creditscreen.png">
+    <Content Include="Texturen\Menu+Anzeigen\creditscreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\credits_s.png">
+    <Content Include="Texturen\Menu+Anzeigen\credits_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GameOver-PLATZHALTER.png">
+    <Content Include="Texturen\Menu+Anzeigen\GameOver-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GameOver-summer-PLATZHALTER.png">
+    <Content Include="Texturen\Menu+Anzeigen\GameOver-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GameWon.png">
+    <Content Include="Texturen\Menu+Anzeigen\GameWon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GameWon1-summer-PLATZHALTER.png">
+    <Content Include="Texturen\Menu+Anzeigen\GameWon1-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GameWon1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GUI\needle.png">
+    <Content Include="Texturen\Menu+Anzeigen\GUI\needle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\GUI\Untitled-1.png">
+    <Content Include="Texturen\Menu+Anzeigen\GUI\Untitled-1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Continue.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Continue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\controls.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\controls.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Gamemenu.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Gamemenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Hauptmenü Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Hauptmenü Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Mainmenu.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Mainmenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\MenuBG.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\MenuBG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Menü Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Menü Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Menüfenster Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Menüfenster Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\null.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\null.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Spiel fortsetzen Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Spiel fortsetzen Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Spiel laden Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Spiel laden Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Spiel speichern Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Spiel speichern Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Steuerung Platzhalter.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Steuerung Platzhalter.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\worldmap.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\worldmap.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\InGame Menü\Übersicht.png">
+    <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Übersicht.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\quit.png">
+    <Content Include="Texturen\Menu+Anzeigen\quit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\quit_s.png">
+    <Content Include="Texturen\Menu+Anzeigen\quit_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\start.png">
+    <Content Include="Texturen\Menu+Anzeigen\start.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\start_s.png">
+    <Content Include="Texturen\Menu+Anzeigen\start_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\Titel-summer-PLATZHALTER.png">
+    <Content Include="Texturen\Menu+Anzeigen\Titel-summer-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texturen\Menü+Anzeigen\Titel.png">
+    <Content Include="Texturen\Menu+Anzeigen\Titel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Player\down1-summer-PLATZHALTER.png">

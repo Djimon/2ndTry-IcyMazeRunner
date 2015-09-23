@@ -39,7 +39,7 @@ namespace IcyMazeRunner
         /// <summary>
         /// Sprite des Spielers.
         /// </summary>
-        Sprite spPlayer { get; set; }
+        public Sprite spPlayer { get; private set; }
 
         int I_healthPoints;
         int I_maxHealth;
@@ -222,16 +222,6 @@ namespace IcyMazeRunner
 
 
         /* ~~~~~~~~~~~~~~~~~~ Getter und Setter ~~~~~~~~~~~~~~*/
-
-
-        /// <summary>
-        /// Gibt Sprite des Spielers zurück. (z.B. für Zugriff auf Position des Sprites)
-        /// </summary>
-        public Sprite getplayerSprite()
-        {
-            return this.spPlayer;
-        }
-
 
         public void setSpritePos(Vector2f pos)
         {

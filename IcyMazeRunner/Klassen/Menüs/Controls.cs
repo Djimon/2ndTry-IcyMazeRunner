@@ -13,22 +13,20 @@ namespace IcyMazeRunner.Klassen
 
         /* ~~~~ Screen anlegen ~~~~*/
         Texture txControls;
-        Sprite spControls;
-
 
         /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
-            spControls = new Sprite(txControls);
-            spControls.Position = new Vector2f(0, 0);
-            spControls.Scale = new Vector2f(0.83f, 1f);
+            Game.spBackGround.Texture = txControls;
+            Game.spBackGround.Position = new Vector2f(0, 0);
+            Game.spBackGround.Scale = new Vector2f(0.83f, 1f);
         }
 
         /* ~~~~ Screen laden ~~~~*/
         public void loadContent()
         {
             
-                txControls = new Texture("Texturen/Menü+Anzeigen/ControlsBG.png");
+                txControls = new Texture("Texturen/Menu+Anzeigen/ControlsBG.png");
             
         }
 
@@ -37,8 +35,8 @@ namespace IcyMazeRunner.Klassen
         public EGameStates update(GameTime time)
         {
 
-          
-            spControls.Texture = txControls;
+            // ToDo: Wieso Texture aktualisieren?
+            Game.spBackGround.Texture = txControls;
 
 
             // Update der Gamestates
@@ -55,7 +53,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow win)
         {
-            win.Draw(spControls);
+            win.Draw(Game.spBackGround);
         }
     }
 }

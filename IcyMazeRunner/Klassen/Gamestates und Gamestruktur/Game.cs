@@ -21,7 +21,7 @@ namespace IcyMazeRunner.Klassen
        
 
             EGameStates currentGameState = EGameStates.mainMenu;
-            EGameStates prevGameState;
+            EGameStates prevGameState = EGameStates.none;
 
             GameStates gameState;
 
@@ -47,12 +47,15 @@ namespace IcyMazeRunner.Klassen
             /// </summary>
             public static Boolean B_isLoadedGame = false;
 
+            public static Sprite spBackGround;
+
             /// <summary>
             /// Übernimmt Konstruktor von AbstractGame.cs
             /// </summary>
             public Game()
                 : base(windowSizeX, windowSizeY, "MazeRunner")
             {
+                spBackGround = new Sprite(new Texture("Texturen/Map/background.png"));
             }
 
 
@@ -67,6 +70,8 @@ namespace IcyMazeRunner.Klassen
         {
             if (currentGameState != prevGameState)
                 handleGameState();
+
+            
 
             currentGameState = gameState.update(time);
         }

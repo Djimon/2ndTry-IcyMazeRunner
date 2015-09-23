@@ -11,6 +11,9 @@ namespace IcyMazeRunner.Klassen
     class MainMenu : GameStates
     {
 
+
+        // ToDo: Game.spBackGround nutzen
+
         /* ~~~~ Variablen für Menüsteuerung ~~~~*/
 
         int I_select;
@@ -47,17 +50,17 @@ namespace IcyMazeRunner.Klassen
 
             txBG = new Texture("Texturen/Map/background.png");
 
-            txMain = new Texture("Texturen/Menü+Anzeigen/MainMenu.png");
+            txMain = new Texture("Texturen/Menu+Anzeigen/MainMenu.png");
 
-            txOptionsSelected = new Texture("Texturen/Menü+Anzeigen/options.png");
+            txOptionsSelected = new Texture("Texturen/Menu+Anzeigen/options.png");
 
-            txExitSelected = new Texture("Texturen/Menü+Anzeigen/exit.png");
+            txExitSelected = new Texture("Texturen/Menu+Anzeigen/exit.png");
 
-            txStartSelected = new Texture("Texturen/Menü+Anzeigen/start.png");
+            txStartSelected = new Texture("Texturen/Menu+Anzeigen/start.png");
 
-            txControlsSelected = new Texture("Texturen/Menü+Anzeigen/controls.png");
+            txControlsSelected = new Texture("Texturen/Menu+Anzeigen/controls.png");
 
-            txFG = new Texture("Texturen/Menü+Anzeigen/GUI-FG.png");
+            txFG = new Texture("Texturen/Menu+Anzeigen/GUI-FG.png");
             
             
             Vector2f viewScale = new Vector2f((float)vMenu.Size.X / (float)Game.windowSizeX, (float)vMenu.Size.Y / (float)Game.windowSizeY);

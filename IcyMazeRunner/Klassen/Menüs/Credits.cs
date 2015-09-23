@@ -13,15 +13,12 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Screen anlegen ~~~~*/
     {
         Texture txCredits;
-        Sprite spCredits;
-
-
 
         /* ~~~~ Screen initialisieren ~~~~*/
         public void initialize()
         {
-            spCredits = new Sprite(txCredits);
-            spCredits.Position = new Vector2f(0, 0);
+            Game.spBackGround.Texture = txCredits;
+            Game.spBackGround.Position = new Vector2f(0, 0);
         }
 
 
@@ -29,7 +26,7 @@ namespace IcyMazeRunner.Klassen
         public void loadContent()
         {
             
-                txCredits = new Texture("Texturen/Menü+Anzeigen/creditscreen.png");
+                txCredits = new Texture("Texturen/Menu+Anzeigen/creditscreen.png");
             
         }
 
@@ -37,7 +34,8 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Screen aktualisieren ~~~~*/
         public EGameStates update(GameTime time)
         {
-            spCredits.Texture = txCredits;
+            // ToDo: Wieso Texture aktualisieren?
+            Game.spBackGround.Texture = txCredits;
 
             // Update der Gamestates
 
@@ -57,7 +55,7 @@ namespace IcyMazeRunner.Klassen
 
         public void draw(RenderWindow win)
         {
-            win.Draw(spCredits);
+            win.Draw(Game.spBackGround);
         }
     }
 }

@@ -16,15 +16,15 @@ namespace IcyMazeRunner.Klassen.Gamestates_und_Gamestruktur.GUI
         Sprite spFG;
         Player tobi;
         View view;
-        Texture txHP = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Steuerung Platzhalter.png");
+        Texture txHP = new Texture("Texturen/Menu+Anzeigen/InGame Menü/Steuerung Platzhalter.png");
 
         public Healthbar(Player player, View view)
         {
             this.view = view;
             this.tobi = player;
-            spBG = new Sprite(new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png"));
+            spBG = new Sprite(new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png"));
             spHealth = new Sprite(txHP);
-            spFG = new Sprite(new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png"));
+            spFG = new Sprite(new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png"));
 
             //// ??
             //spHealth.Position = new Vector2f((view.Center.X - (Game.windowSizeX / 2) + 5), (view.Center.Y - (Game.windowSizeY / 2) + txHP.Size.Y + 10));

@@ -15,35 +15,33 @@ namespace IcyMazeRunner.Klassen.Menüs
 
         // ToDo: unnötige Variablen?? 
         View vMenuView;
-        int test; // nie verwendet
-
 
         /* ~~~~ Menühintergrundtexturen anlegen ~~~~ */
-        Texture txMenuBackground = new Texture("Texturen/Menü+Anzeigen/InGame Menü/MenuBG.png");
-        Texture txMenuHeader = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Gamemenu.png");
+        Texture txMenuBackground = new Texture("Texturen/Menu+Anzeigen/InGame Menü/MenuBG.png");
+        Texture txMenuHeader = new Texture("Texturen/Menu+Anzeigen/InGame Menü/Gamemenu.png");
 
         /* ~~~~ Auswahltexturen anlegen ~~~~ */
 
-        Texture txContinueSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Continue.png");
-        Texture txGoMainMenuSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Mainmenu.png");
-        Texture txControlsSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/controls.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        Texture txContinueSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/Continue.png");
+        Texture txGoMainMenuSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/Mainmenu.png");
+        Texture txControlsSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/controls.png"); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
 
         // Ich nutze die Loadtexture vor erst mal als Map-Texture: via Map sind vergangene Level auswählbar/ erneut spielbar? 
         //-> GameState: Map(Übersichtskarte) (auch aus dem MainMenü anwählbar?)
         // Ansonsten gäbs halt später noch nen extra MapSprite --> extra machen; weitere Variable benötigt, die speichert, zu welchem Level 
         // man maximal springen kann, sonst wird int level einfach überschrieben und man kommt nicht mehr einfach zu dem Level, wo man war
 
-        Texture txLoadGameSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/worldmap.png");
-        Texture txSaveGameSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
+        Texture txLoadGameSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/worldmap.png");
+        Texture txSaveGameSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/Spiel speichern Platzhalter.png"); // für später
 
         /* ~~~~ Deselect-Texturen anlegen ~~~~ */
 
 
-        //Texture txContinueNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png");
-        //Texture txGoMainMenuNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png.");
-        //Texture txControlsNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
-        //Texture txSaveGameNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
-        //Texture txLoadGameNotSelected = new Texture("Texturen/Menü+Anzeigen/InGame Menü/null.png."); // für später
+        //Texture txContinueNotSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png");
+        //Texture txGoMainMenuNotSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png.");
+        //Texture txControlsNotSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png."); // Controls.cs unterscheiden lassen, von wo Controls aufgerufen wurde
+        //Texture txSaveGameNotSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png."); // für später
+        //Texture txLoadGameNotSelected = new Texture("Texturen/Menu+Anzeigen/InGame Menü/null.png."); // für später
 
         /* ~~~~ Sprites anlegen ~~~~ */
         Sprite spMenuBackground;

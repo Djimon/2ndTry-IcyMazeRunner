@@ -11,14 +11,11 @@ namespace IcyMazeRunner.Klassen
     class gameWon : GameStates
     {
 
-        Sprite spWon;
-
-
         public void initialize()
         {
 
-            spWon = new Sprite(new Texture("Texturen/Menü+Anzeigen/GameWon.png"));   
-            spWon.Position = new Vector2f(0,0);
+            Game.spBackGround.Texture = new Texture("Texturen/Menu+Anzeigen/GameWon.png");
+            Game.spBackGround.Position = new Vector2f(0, 0);
             // ToDo: testen, ob gefixed
             
 
@@ -41,7 +38,7 @@ namespace IcyMazeRunner.Klassen
         public void draw(RenderWindow win)
         {
             //win.Draw(backGround);
-            win.Draw(spWon);
+            win.Draw(Game.spBackGround);
         }
     }
 }

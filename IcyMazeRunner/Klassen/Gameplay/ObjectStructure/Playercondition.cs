@@ -26,7 +26,6 @@ namespace IcyMazeRunner
         ///  <para>Die Stoppuhr misst die Zeit bis zum jeweiligen nächsten Schadensaufruf. </para>
         /// </summary>
         GameTime gtTotalTime;
-        // ToDo: wird nie etwas zugewiesen, immer Standardwert null
 
         /// <summary>
         ///  Gibt an, ob Zustand beendet ist.
@@ -78,6 +77,8 @@ namespace IcyMazeRunner
             I_type = _type;
             I_DamagePerTick = _DamagePerTick;
             thisPlayer = pPlayer;
+            gtTotalTime = new GameTime();
+            gtTotalTime.start();
 
             switch (I_type)
             {
