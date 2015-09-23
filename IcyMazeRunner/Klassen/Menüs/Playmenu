@@ -1,4 +1,17 @@
-class Playmenu.cs
+using SFML.Graphics;
+using SFML.Window;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using IcyMazeRunner.Klassen;
+
+namespace IcyMazeRunner.Klassen.Menüs
+{
+
+class Playmenu
+{
 
 Sprite spBG;
 Sprite spMain;
@@ -50,7 +63,7 @@ public Playmenu()
 
 EGameStates update()
 {
-[...]
+
 
 if (!saved) 
 {
@@ -111,7 +124,9 @@ else
 
 
 }
-[...]
+
 
 return EGameStates.MainMenu;
+}
+}
 }
