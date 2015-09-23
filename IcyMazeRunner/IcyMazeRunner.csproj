@@ -97,6 +97,7 @@
     <Compile Include="Klassen\Gameplay\Maps\Map.cs" />
     <Compile Include="Klassen\Gameplay\Player.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\Program.cs" />
+    <Compile Include="Klassen\Traps\AbstractTrap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -397,7 +398,9 @@
     <Content Include="Vorbereitung von Änderungen, Klassen, Attributen und Methoden\Löcher im Boden.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Klassen\Traps\" />
+    <Folder Include="Klassen\Gameplay\ObjectStructure\Handler\" />
+    <Folder Include="Klassen\Gameplay\ObjectStructure\Objects\" />
+    <Folder Include="Klassen\Gamestates und Gamestruktur\Backend\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

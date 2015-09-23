@@ -60,7 +60,9 @@ namespace IcyMazeRunner
         /// </summary>
         Player thisPlayer;
 
-        // ToDO: Texturen zuordnen
+
+        // ToDo: Boolean für isBlinded
+        // ToDo: Texturen zuordnen
         /// <summary>
         /// <para>Konstruktor</para>
         /// <para>Variablen werden initialisiert, Texturen zugewiesen und der Schaden direkt zu Beginn wird dem Spieler zugefügt.</para>
