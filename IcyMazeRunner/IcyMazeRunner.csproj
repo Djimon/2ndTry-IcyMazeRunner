@@ -69,13 +69,13 @@
   <ItemGroup>
     <Compile Include="Klassen\Calculator.cs" />
     <Compile Include="Klassen\Gameplay\MovableWallHandler.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\GameObjectHandler.cs" />
-    <Compile Include="Klassen\Gameplay\Enemy.cs" />
-    <Compile Include="Klassen\Gameplay\Moveable_Wall.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\Playercondition.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\PlayerConditionHandler.cs" />
-    <Compile Include="Klassen\Gameplay\Walls\Coordinates.cs" />
-    <Compile Include="Klassen\Gamestates und Gamestruktur\AbstractGame.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\GameObjectHandler.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Objects\Enemy.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Objects\Moveable_Wall.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\Playercondition.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\PlayerConditionHandler.cs" />
+    <Compile Include="Klassen\Gameplay\Maps\Walls\Coordinates.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\Backend\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\GUI.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\Healthbar.cs" />
@@ -85,18 +85,18 @@
     <Compile Include="Klassen\GlobalVariables.cs" />
     <Compile Include="Klassen\Menüs\Controls.cs" />
     <Compile Include="Klassen\Menüs\Credits.cs" />
-    <Compile Include="Klassen\Gamestates und Gamestruktur\Game.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\GameObject.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\Backend\Game.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Objects\GameObject.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GameOver.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GameStates.cs" />
-    <Compile Include="Klassen\Gamestates und Gamestruktur\GameTime.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\Backend\GameTime.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\gameWon.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\InGame.cs" />
     <Compile Include="Klassen\Menüs\InGameMenu.cs" />
     <Compile Include="Klassen\Menüs\MainMenu.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Map.cs" />
     <Compile Include="Klassen\Gameplay\Player.cs" />
-    <Compile Include="Klassen\Gamestates und Gamestruktur\Program.cs" />
+    <Compile Include="Klassen\Gamestates und Gamestruktur\Backend\Program.cs" />
     <Compile Include="Klassen\Traps\AbstractTrap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -397,11 +397,7 @@
     </Content>
     <Content Include="Vorbereitung von Änderungen, Klassen, Attributen und Methoden\Löcher im Boden.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Klassen\Gameplay\ObjectStructure\Handler\" />
-    <Folder Include="Klassen\Gameplay\ObjectStructure\Objects\" />
-    <Folder Include="Klassen\Gamestates und Gamestruktur\Backend\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
