@@ -13,6 +13,7 @@ namespace IcyMazeRunner.Klassen
         {
             none = -1,
             mainMenu,
+            playGame,
             credits,
             controls,
             inGame,

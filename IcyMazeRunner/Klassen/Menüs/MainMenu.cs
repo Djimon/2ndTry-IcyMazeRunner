@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using IcyMazeRunner.Klassen.Menüs;
+using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace IcyMazeRunner.Klassen
         int I_select;
         bool B_isPressed;
         View vMenu;
+        Playmenu play;
 
         /* ~~~~ Texturen anlegen ~~~~*/
 
@@ -107,107 +109,125 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Update der GameStates bei Änderung der Auswahl ~~~~ */
         public EGameStates update(GameTime time)
         {
-
-
-            vMenu.Reset(new FloatRect(0, 0, 1062, 720));
-            // Menüsteuerung
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !B_isPressed)
+            if (play != null)
             {
-                I_select = (I_select + 1) % 4;
-                B_isPressed = true;
+
+                if (play != null && play.getClosePlay())
+                {
+                    play = null;
+                }
+
+                // if-Abfrage, falls zwischen obiger if-Abfrage und update menu=null gesetzt wird
+                if (play != null)
+                {
+                    return play.update();
+                }
             }
-
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.Left) && !B_isPressed)
-            //{
-            //    I_select = (I_select + 1) % 4;
-            //    B_isPressed = true;   
-            //}
-
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !B_isPressed)
+            else
             {
-                I_select = (I_select - 1) % 4;
-                B_isPressed = true;
+
+                vMenu.Reset(new FloatRect(0, 0, 1062, 720));
+                // Menüsteuerung
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !B_isPressed)
+                {
+                    I_select = (I_select + 1) % 4;
+                    B_isPressed = true;
+                }
+
+                //if (Keyboard.IsKeyPressed(Keyboard.Key.Left) && !B_isPressed)
+                //{
+                //    I_select = (I_select + 1) % 4;
+                //    B_isPressed = true;   
+                //}
+
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Down) && !B_isPressed)
+                {
+                    I_select = (I_select - 1) % 4;
+                    B_isPressed = true;
+                }
+
+                //if (Keyboard.IsKeyPressed(Keyboard.Key.Right) && !B_isPressed)
+                //{
+                //    I_select = (I_select - 1) % 4;
+                //    B_isPressed = true;
+                //}
+
+                if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up))
+                    B_isPressed = false;
+                //if (!Keyboard.IsKeyPressed(Keyboard.Key.Left) && !Keyboard.IsKeyPressed(Keyboard.Key.Right))
+                //    B_isPressed = false;
+
+                // Menüzustände
+
+
+                switch (I_select)
+                {
+                    case 0:  //Start
+                        {
+                            spSelect.Texture = txStartSelected;
+                            break;
+                        }
+
+                    case 1:  //Controls
+                        {
+                            spSelect.Texture = txControlsSelected;
+                            break;
+                        }
+
+                    case -3:
+                        {
+                            spSelect.Texture = txControlsSelected;
+                            break;
+                        }
+
+                    case 2:  // Credits
+                        {
+                            spSelect.Texture = txOptionsSelected;
+                            break;
+                        }
+
+                    case -2:
+                        {
+                            spSelect.Texture = txOptionsSelected;
+                            break;
+                        }
+                    //Quit
+                    case 3:
+                        {
+                            spSelect.Texture = txExitSelected;
+                            break;
+                        }
+                    case -1:
+                        {
+                            spSelect.Texture = txExitSelected;
+                            break;
+                        }
+                }
+
+                spBackGround.Texture = txBG;
+
+                // Update der Gamestates
+
+                if (I_select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                {
+                    //Game.B_isLoadedGame = false;
+                    play = new Playmenu();
+                     //playGame
+                }
+                if (I_select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                    return EGameStates.controls;
+                if (I_select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                    return EGameStates.credits;
+                if (I_select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
+                {
+                    return EGameStates.none;
+                    //Programm schließen!?
+                }
+
+               
             }
-
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.Right) && !B_isPressed)
-            //{
-            //    I_select = (I_select - 1) % 4;
-            //    B_isPressed = true;
-            //}
-
-            if (!Keyboard.IsKeyPressed(Keyboard.Key.Down) && !Keyboard.IsKeyPressed(Keyboard.Key.Up))
-                B_isPressed = false;
-            //if (!Keyboard.IsKeyPressed(Keyboard.Key.Left) && !Keyboard.IsKeyPressed(Keyboard.Key.Right))
-            //    B_isPressed = false;
-
-            // Menüzustände
-
-
-            switch (I_select)
-            {
-                case 0:  //Start
-                    {
-                        spSelect.Texture = txStartSelected;
-                        break;
-                    }
-
-                case 1:  //Controls
-                    {
-                        spSelect.Texture = txControlsSelected;
-                        break;
-                    }
-
-                case -3:
-                    {
-                        spSelect.Texture = txControlsSelected;
-                        break;
-                    }
-
-                case 2:  // Credits
-                    {
-                        spSelect.Texture = txOptionsSelected;
-                        break;
-                    }
-
-                case -2:
-                    {
-                        spSelect.Texture = txOptionsSelected;
-                        break;
-                    }
-                        //Quit
-                case 3:
-                    {
-                        spSelect.Texture = txExitSelected;
-                        break;
-                    }
-                case -1:
-                    {
-                        spSelect.Texture = txExitSelected;
-                        break;
-                    }
-            }
-
-            spBackGround.Texture = txBG;
-            
-            // Update der Gamestates
-
-            if (I_select == 0 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
-            {
-                Game.B_isLoadedGame = false;
-                return EGameStates.inGame;
-            }
-            if (I_select == 1 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
-                return EGameStates.controls;
-            if (I_select == 2 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
-                return EGameStates.credits;
-            if (I_select == 3 && Keyboard.IsKeyPressed(Keyboard.Key.Return))
-            {
-                return EGameStates.none;
-                //Programm schließen!?
-            }
-
             return EGameStates.mainMenu;
         }
 
@@ -226,6 +246,11 @@ namespace IcyMazeRunner.Klassen
             window.Draw(spSelect);
             
             window.SetMouseCursorVisible(true);
+            if (play != null)
+            {
+                play.draw(window);
+            }
+
         }
         
     }
