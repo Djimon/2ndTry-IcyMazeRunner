@@ -97,6 +97,7 @@
     <Compile Include="Klassen\Gameplay\Maps\Map.cs" />
     <Compile Include="Klassen\Gameplay\Player.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\Program.cs" />
+    <Compile Include="Klassen\Menüs\Playmenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +197,9 @@
     <Content Include="Texturen\Menu+Anzeigen\controls.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Menu+Anzeigen\ControlsBG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Menu+Anzeigen\controls_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -211,6 +215,9 @@
     <Content Include="Texturen\Menu+Anzeigen\credits_s.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Texturen\Menu+Anzeigen\exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texturen\Menu+Anzeigen\GameOver-PLATZHALTER.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -224,6 +231,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GameWon1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menu+Anzeigen\GUI-FG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menu+Anzeigen\GUI\needle.png">
@@ -275,6 +285,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menu+Anzeigen\InGame Menü\Übersicht.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menu+Anzeigen\MainMen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menu+Anzeigen\MainMenu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menu+Anzeigen\options.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Texturen\Menu+Anzeigen\playBG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Texturen\Menu+Anzeigen\quit.png">
