@@ -262,7 +262,7 @@ namespace IcyMazeRunner.Klassen
 
             }
 
-            pRunner = new Player(mMap.vStart, mMap);
+            pRunner = new Player(mMap.vStart, mMap, vIngame);
 
 
             /* ~~~~ Geheime Wege laden ~~~~ */
@@ -325,7 +325,7 @@ namespace IcyMazeRunner.Klassen
 
                 /* Geheime Mauer aktualisieren */
                 // Sichtbarkeit wird ausgelöst
-                if (B_IsVisible)
+                if (pRunner.B_WayIsVisible)
                 {
                     makeSecretWaysVisible();
                 }
@@ -565,7 +565,7 @@ namespace IcyMazeRunner.Klassen
                     }
 
                     // Auslöser wird resettet
-                    B_IsVisible = false;
+                    pRunner.B_WayIsVisible = false;
         }
 
         /// <summary>

@@ -12,6 +12,7 @@ namespace IcyMazeRunner.Klassen
         public Stopwatch Watch;
         public TimeSpan TotalTime;
         public TimeSpan ElapsedTime;
+        public List<Stopwatch> WatchList;
 
         /// <summary>
         /// GameTime sorgt für stets gleiche geschwidnigkeit - prozessorunabhängig
@@ -19,6 +20,7 @@ namespace IcyMazeRunner.Klassen
         public GameTime()
         {
             Watch = new Stopwatch();
+            List<Stopwatch> WatchList = new List<Stopwatch> { };
             TotalTime = TimeSpan.FromSeconds(0);
             ElapsedTime = TimeSpan.FromSeconds(0);
         }

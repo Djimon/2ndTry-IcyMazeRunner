@@ -68,13 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Klassen\Calculator.cs" />
-    <Compile Include="Klassen\Gameplay\MovableWallHandler.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\MovableWallHandler.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\GameObjectHandler.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\Objects\Enemy.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\Objects\Moveable_Wall.cs" />
-    <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\Playercondition.cs" />
+    <Compile Include="Klassen\Gameplay\ObjectStructure\Objects\Playercondition.cs" />
     <Compile Include="Klassen\Gameplay\ObjectStructure\Handler\PlayerConditionHandler.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Walls\Coordinates.cs" />
+    <Compile Include="Klassen\Gameplay\SkillController.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\Backend\AbstractGame.cs" />
     <Compile Include="Klassen\Gameplay\Maps\Blocks.cs" />
     <Compile Include="Klassen\Gamestates und Gamestruktur\GUI\GUI.cs" />

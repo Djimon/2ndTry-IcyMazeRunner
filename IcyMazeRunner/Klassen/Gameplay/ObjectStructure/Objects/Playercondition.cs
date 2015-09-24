@@ -33,6 +33,11 @@ namespace IcyMazeRunner
         public Boolean B_IsFinished { get; set; }
 
         /// <summary>
+        ///  Gibt an, ob Spieler geblendet wird. Wenn falsch, ist es eine Condition, die Schaden verursacht.
+        /// </summary>
+        public Boolean B_isBlinded { get; private set; }
+
+        /// <summary>
         ///  Gibt in Sekunden an, wie lange der Zustand insgesamt anhalten soll.
         /// </summary>
         int I_runningTime;
@@ -61,7 +66,6 @@ namespace IcyMazeRunner
         Player thisPlayer;
 
 
-        // ToDo: Boolean für isBlinded
         // ToDo: Texturen zuordnen
         /// <summary>
         /// <para>Konstruktor</para>
@@ -73,6 +77,7 @@ namespace IcyMazeRunner
         /// <param name="pPlayer">this</param>
         public Playercondition (int _runningtime, int _intervall, int _type, Player pPlayer, int _DamagePerTick)
         {
+            B_isBlinded = false;
             B_IsFinished = false;
             I_runningTime = _runningtime;
             I_intervall = _intervall;
@@ -114,6 +119,23 @@ namespace IcyMazeRunner
 
 
         }
+
+        /// <summary>
+        /// Zustand wirkt keinen Schaden, sondern lässt Spieler für bestimmte Zeit erblinden.
+        /// </summary>
+        /// <param name="_runningtime"></param>
+        /// <param name="pPlayer"></param>
+        public Playercondition(int _runningtime, Player pPlayer)
+        {
+            B_IsFinished = false;
+            I_runningTime = _runningtime;
+            thisPlayer = pPlayer;
+            gtTotalTime = new GameTime();
+            gtTotalTime.start();
+            txCondition = new Texture("");
+            spCondition = new Sprite(txCondition);
+            B_isBlinded = true;
+        }
         
         /// <summary>
         ///  <para>Wenn die TotalTime größer als die runningTime ist, wird der Boolean IsFinished auf true gesetzt, um dann im Händler aussortiert zu werden.</para>
@@ -121,14 +143,21 @@ namespace IcyMazeRunner
         /// </summary>
         public void update()
         {
-            if (gtTotalTime.TotalTime.Seconds >= I_runningTime)
+            if (!B_isBlinded)
             {
-                B_IsFinished = true;
+                if (gtTotalTime.TotalTime.Seconds >= I_runningTime)
+                {
+                    B_IsFinished = true;
+                }
+                if (gtTotalTime.Watch.ElapsedMilliseconds >= I_intervall)
+                {
+                    thisPlayer.setDamage(I_DamagePerTick);
+                    gtTotalTime.Watch.Restart();
+                }
             }
-            if (gtTotalTime.Watch.ElapsedMilliseconds >= I_intervall)
+            else
             {
-                thisPlayer.setDamage(I_DamagePerTick);
-                gtTotalTime.Watch.Restart();
+                //ToDo: schwarze Textur soll eingefügt werden, solange wie Runningtime nicht vorbei ist.
             }
 
         }

@@ -11,9 +11,6 @@ namespace IcyMazeRunner
 {
     class Player
     {
-
-        // ToDo: ENums für move-verwenden, Hardmode-move-Methode entsprechend abstrahieren, allgemein schreiben und Code kürzen
-
         /// <summary>
         ///  Variable, um Sterbeanimation zu unterbrechen und Spiel fortzusetzen.
         /// </summary>
@@ -108,17 +105,19 @@ namespace IcyMazeRunner
         /// <summary>
         /// Gibt an, ob Herausforderungsmodus aktiviert ist.
         /// </summary>
-        bool B_isControlChanged = false;
+        public bool B_isControlChanged { get; private set; }
 
         /// <summary>
         /// Gibt an, ob Standardzuordnung der Tasten bereits wiederhergestellt wurde.
         /// </summary>
-        bool B_isControlNormalized = true;
+        public bool B_isControlNormalized { get; private set; }
 
         /// <summary>
         /// Randomgenerator für I_moveChangerState.
         /// </summary>
         Random random = new Random();
+
+        public Boolean B_HardmodeActivated { get; private set; }
 
 
         /* ~~~~ Spieler stirbt ~~~~ */
@@ -146,11 +145,18 @@ namespace IcyMazeRunner
         /// </summary>
         int I_fallAnimationCounter = 0;
 
+        /* ~~~~ Attribute für den SkillController ~~~~ */
 
+        SkillController SkCtrl;
+        public float Speedbonus { get; set; }
+
+        public Boolean B_WayIsVisible { get; set; }
+
+        public Boolean B_IsInvincible { get; set; }
 
 
         /* ~~~~ Konstruktor ~~~~ */
-        public Player(Vector2f Pos, Map map)
+        public Player(Vector2f Pos, Map map, View view)
         {
             //Festlegen der Spielerposition, wird mit neuem Level neu festgelegt
             
@@ -210,14 +216,21 @@ namespace IcyMazeRunner
             normalizeMovement();
             latest_Movement = new Vector2f(0, 0);
 
-            // Stoppuhr für Herausforderungsmodus starten
-            gtMoveTime = new GameTime();
-            gtMoveTime.Watch.Start();
+            // Booleans für Herausforderungsmodus initialisieren
+            B_isControlChanged = false;
+            B_isControlNormalized = true;
+            B_HardmodeActivated = false;
 
             // Attribute und Objekte für Todesanimation initialisieren
             gtDeathWatch = new GameTime();
             B_isDeathWatchOn = false;
             B_IsSaved = false;
+
+            // Skillcontroller initialisieren
+            SkCtrl = new SkillController(view);
+            Speedbonus = 1f;
+            B_WayIsVisible = false;
+            B_IsInvincible = false;
         }
 
 
@@ -318,27 +331,46 @@ namespace IcyMazeRunner
             SH.add(state);
         }
 
+
+        // ToDo: SetDamage Methode bei Fallen, da sie Blocken umgehen(Invincible jedoch nicht), oder Boolean einbauen
         /// <summary>
         /// Fügt dem Spieler Schaden zu.
         /// </summary>
         /// <param name="_Damage">Gibt an, wieviel Schaden bei jedem Tick verursacht werden soll. </param>
         public void setDamage(int _Damage)
         {
-            I_healthPoints = I_healthPoints - _Damage;
-
-            if (I_healthPoints <0)
+            if (!SkCtrl.B_isBlocking && !B_IsInvincible)
             {
-                I_healthPoints = 0;
+                I_healthPoints = I_healthPoints - _Damage;
+
+                if (I_healthPoints < 0)
+                {
+                    I_healthPoints = 0;
+                }
             }
         }
 
         /// <summary>
         /// Heilt den Spieler.
         /// </summary>
-        /// <param name="_Heal">Gibt an, wieviel Heilung der Spieler erhält. </param>
+        /// <param name="_Heal">Gibt an, wieviel Heilung in absoluten Werten der Spieler erhält. </param>
         public void setHeal(int _Heal)
         {
             I_healthPoints = I_healthPoints + _Heal;
+
+            if (I_healthPoints > I_maxHealth)
+            {
+                I_healthPoints = I_maxHealth;
+            }
+        }
+
+        /// <summary>
+        /// Heilt den Spieler.
+        /// </summary>
+        /// <param name="_Heal">Gibt an, wieviel Heilung in Prozent der Spieler erhält. </param>
+        public void setHeal(float _Heal)
+        {
+            I_healthPoints = I_healthPoints + (int)(_Heal*(float)I_maxHealth);
 
             if (I_healthPoints > I_maxHealth)
             {
@@ -373,6 +405,7 @@ namespace IcyMazeRunner
         {
             SH.update();
             move(this.mAbsmap, time, MWH);
+            SkCtrl.update(this);
         }
 
 
@@ -387,15 +420,22 @@ namespace IcyMazeRunner
         /// </summary>
         public void move(Map map, GameTime time, MoveableWallHandler MWH)
         {
-            F_runningSpeed = 0.5f * time.ElapsedTime.Milliseconds;
+            F_runningSpeed = 0.5f * time.ElapsedTime.Milliseconds*Speedbonus;
             B_isPressed = false;
 
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.F2))
+            //ToDo: Kontrolle einbauen, dass ein Tastendruck HM nicht gleich wieder deaktiviert
+            if (!B_HardmodeActivated && Keyboard.IsKeyPressed(Keyboard.Key.F1))
+            {
+                Changingmove(map, time);
                 B_isControlChanged = true;
-            if (Keyboard.IsKeyPressed(Keyboard.Key.F1))
+                gtMoveTime = new GameTime();
+                gtMoveTime.Watch.Start();
+            }
+            if (B_HardmodeActivated && Keyboard.IsKeyPressed(Keyboard.Key.F1))
+            {
                 B_isControlChanged = false;
-
+                gtMoveTime = null;
+            }
 
             if (B_isControlChanged)
             {
