@@ -89,11 +89,11 @@ namespace IcyMazeRunner
             foreach(Playercondition plc in ConditionList)
             {
                 // Ordnet Effekt-Icons nebeneinander an
-                // ToDo: Entfernung anpassen
+                // ToDo: Abstand anpassen
                 Position.X = Position.X + (I_PositionCounter * (plc.spCondition.Texture.Size.X + 20));
 
                 // Wenn zu weit nach rechts im Bild, neue Reihe anfangen.
-                // ToDo: Entfernung anpassen
+                // ToDo: Abstand anpassen
                 if (Position.X >= 300)
                 {
                     Position.Y = Position.Y + plc.spCondition.Texture.Size.Y + 20;

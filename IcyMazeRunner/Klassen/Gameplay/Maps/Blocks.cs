@@ -102,9 +102,6 @@ namespace IcyMazeRunner.Klassen
                             this.spBlock = new Sprite(new Texture("Texturen/Map/wall-clean.png"));
                             this.spBlock.Position = position;
                             this.B_walkable = true;
-                            // insert hier spawn für Player
-                            // spPlayer.Position = blocksprite.position
-                            // ToDo: in InGame implementieren
                             break;
                         }
                     case 4:
@@ -113,10 +110,6 @@ namespace IcyMazeRunner.Klassen
                             this.spBlock.Position = position;
                             this.B_walkable = false;
                             break;
-                            // -> gameobject ziel initialisieren??
-                            //insert hier Ziel: -> Gamestat/Level = +1
-                            //Antwort: siehe oben
-                            // ToDo: in InGame implementieren
                         }
                     case 5: 
                         {

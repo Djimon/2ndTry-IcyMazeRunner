@@ -66,6 +66,11 @@ namespace IcyMazeRunner
         bool B_isPressed = false;
 
         /// <summary>
+        /// Boolean für Aktivierung des Hardmodes, sodass Tastendruck HM nicht sofort wieder deaktiviert/aktiviert.
+        /// </summary>
+        Boolean B_HMisPressed;
+
+        /// <summary>
         /// Gibt die Textur an, welche genutzt wird, wenn Spieler stehen bleibt.
         /// </summary>
         int I_rememberidle = 0;
@@ -217,6 +222,7 @@ namespace IcyMazeRunner
             latest_Movement = new Vector2f(0, 0);
 
             // Booleans für Herausforderungsmodus initialisieren
+            B_HMisPressed = false;
             B_isControlChanged = false;
             B_isControlNormalized = true;
             B_HardmodeActivated = false;
@@ -332,21 +338,33 @@ namespace IcyMazeRunner
         }
 
 
-        // ToDo: SetDamage Methode bei Fallen, da sie Blocken umgehen(Invincible jedoch nicht), oder Boolean einbauen
         /// <summary>
         /// Fügt dem Spieler Schaden zu.
         /// </summary>
         /// <param name="_Damage">Gibt an, wieviel Schaden bei jedem Tick verursacht werden soll. </param>
-        public void setDamage(int _Damage)
+        /// <param name="enemydamage">Wenn true, stammt der Schaden von einem Feind. Wenn false, stammt der Schaden von einer Falle
+        ///  oder einer Condition.</param>
+        public void setDamage(int _Damage, Boolean enemydamage)
         {
-            if (!SkCtrl.B_isBlocking && !B_IsInvincible)
-            {
-                I_healthPoints = I_healthPoints - _Damage;
 
-                if (I_healthPoints < 0)
+            if (!B_IsInvincible)
+            {
+                if (!enemydamage)
                 {
-                    I_healthPoints = 0;
+                    I_healthPoints = I_healthPoints - _Damage;
                 }
+                else
+                {
+                    if (!SkCtrl.B_isBlocking)
+                    {
+                        I_healthPoints = I_healthPoints - _Damage;
+                    }
+                }
+            }
+
+            if (I_healthPoints < 0)
+            {
+                I_healthPoints = 0;
             }
         }
 
@@ -423,17 +441,22 @@ namespace IcyMazeRunner
             F_runningSpeed = 0.5f * time.ElapsedTime.Milliseconds*Speedbonus;
             B_isPressed = false;
 
+            if (!Keyboard.IsKeyPressed(Keyboard.Key.F1))
+                B_HMisPressed = false;
+
             //ToDo: Kontrolle einbauen, dass ein Tastendruck HM nicht gleich wieder deaktiviert
-            if (!B_HardmodeActivated && Keyboard.IsKeyPressed(Keyboard.Key.F1))
+            if (!B_HardmodeActivated && !B_HMisPressed && Keyboard.IsKeyPressed(Keyboard.Key.F1))
             {
                 Changingmove(map, time);
                 B_isControlChanged = true;
+                B_HMisPressed = true;
                 gtMoveTime = new GameTime();
                 gtMoveTime.Watch.Start();
             }
-            if (B_HardmodeActivated && Keyboard.IsKeyPressed(Keyboard.Key.F1))
+            if (B_HardmodeActivated && !B_HMisPressed && Keyboard.IsKeyPressed(Keyboard.Key.F1))
             {
                 B_isControlChanged = false;
+                B_HMisPressed = true;
                 gtMoveTime = null;
             }
 

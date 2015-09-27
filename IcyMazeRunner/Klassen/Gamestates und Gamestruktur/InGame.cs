@@ -245,7 +245,7 @@ namespace IcyMazeRunner.Klassen
 
             switch (I_level)
             {
-                //ToDo: Spielerstartposition automatisch bestimmen lassen. Eventuell das gleiche für die Map.
+                
                 case 0:
                     mMap = new Map(bmMap);
                     //pRunner = new Player(new Vector2f(281,91), mMap); //(281,91)
@@ -330,7 +330,7 @@ namespace IcyMazeRunner.Klassen
                     makeSecretWaysVisible();
                 }
                 // Wenn Timer vorüber
-                if (gtWallTimer != null && gtWallTimer.Watch.ElapsedMilliseconds >= 10000)
+                if (gtWallTimer != null && gtWallTimer.Watch.ElapsedMilliseconds >= 7000)
                 {
                     makeSecretWaysInvisible();
                 }

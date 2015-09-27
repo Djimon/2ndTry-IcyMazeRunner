@@ -1,4 +1,4 @@
-﻿Version 1.3.B021
+﻿Version 1.3.B022
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -13,6 +13,14 @@ y.00x  = komplett lauffähige Version 00x
 	- ToDo: Skill für Selbstrettung einbauen, 
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
 	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Levelübergang fixen, GameTimes zusammenfassen
+
+Version 1.3.B022 (Kilian):
+	- Cooldown und Dauer der Skills angepasst
+	- Player.SetDamage() abgeändert, sodass zwischen Schaden von Feinden, der geblockt werden kann, und Schaden von Fallen und 
+	  Effekten, der nicht geblockt werden kann, unterschieden wird
+	- Player-Hardmode-Aktivierung angepasst, sodass ein Tastendruck nicht in 2 Durchläufen erkannt wird und nach Aktivierung den Hardmode direkt 
+	  wieder deaktiviert
+	- Skillcontroller.cs: Cooldown-Reset und Start eingefügt, Aktivierungsabfrage angepasst
 
 Version 1.3.B021 (Kilian):
 	- Playercondition.cs in den Ordner Objects verschoben

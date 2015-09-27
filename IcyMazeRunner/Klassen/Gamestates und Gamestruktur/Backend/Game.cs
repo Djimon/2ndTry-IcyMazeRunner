@@ -12,9 +12,6 @@ namespace IcyMazeRunner.Klassen
 {
     class Game : AbstractGame
     {
-            // ToDo: Möglichkeit probieren, ob Gamestate-übergreifendes Sprite für die verschiedenen Menüs geeignet ist statt der einzelnen Sprites...
-      
-
             public static uint windowSizeX = 1280; // auf 1280 zurückanpassen (ebenso die Screens des MainMenus, ControlScreen, Creditscreen
             public static uint windowSizeY = 720;
 
