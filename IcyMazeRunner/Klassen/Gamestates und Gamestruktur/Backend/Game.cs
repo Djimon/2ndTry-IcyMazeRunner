@@ -23,6 +23,11 @@ namespace IcyMazeRunner.Klassen
             GameStates gameState;
 
             /// <summary>
+            /// Randomgenerator.
+            /// </summary>
+            public static Random random = new Random();
+
+            /// <summary>
             /// Gibt das aktuelle Level an.
             /// </summary>
             public static int I_level = 1;

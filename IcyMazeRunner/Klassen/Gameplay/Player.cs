@@ -117,11 +117,6 @@ namespace IcyMazeRunner
         /// </summary>
         public bool B_isControlNormalized { get; private set; }
 
-        /// <summary>
-        /// Randomgenerator für I_moveChangerState.
-        /// </summary>
-        Random random = new Random();
-
         public Boolean B_HardmodeActivated { get; private set; }
 
 
@@ -441,40 +436,7 @@ namespace IcyMazeRunner
             F_runningSpeed = 0.5f * time.ElapsedTime.Milliseconds*Speedbonus;
             B_isPressed = false;
 
-            if (!Keyboard.IsKeyPressed(Keyboard.Key.F1))
-                B_HMisPressed = false;
-
-            //ToDo: Kontrolle einbauen, dass ein Tastendruck HM nicht gleich wieder deaktiviert
-            if (!B_HardmodeActivated && !B_HMisPressed && Keyboard.IsKeyPressed(Keyboard.Key.F1))
-            {
-                Changingmove(map, time);
-                B_isControlChanged = true;
-                B_HMisPressed = true;
-                gtMoveTime = new GameTime();
-                gtMoveTime.Watch.Start();
-            }
-            if (B_HardmodeActivated && !B_HMisPressed && Keyboard.IsKeyPressed(Keyboard.Key.F1))
-            {
-                B_isControlChanged = false;
-                B_HMisPressed = true;
-                gtMoveTime = null;
-            }
-
-            if (B_isControlChanged)
-            {
-                if (gtMoveTime.Watch.ElapsedMilliseconds >= 20000)
-                {
-                    gtMoveTime.Watch.Restart();
-                    Changingmove(map, time);
-                }
-            }
-            else
-            {
-                if (!B_isControlNormalized)
-                {
-                    normalizeMovement();
-                }               
-            }
+            HardmodeUpdate(map, time);
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)) && MWH.isWalkable(this.spPlayer, new Vector2f(-F_runningSpeed, 0)))
             {
@@ -541,68 +503,23 @@ namespace IcyMazeRunner
                 case 1:
                     {
                         /* Fallanimation*/
-                        if (gtDeathWatch.Watch.ElapsedMilliseconds > 0 && gtDeathWatch.Watch.ElapsedMilliseconds < 1000)
-                        {
-                            if (I_fallAnimationCounter % 2 == 0)
-                            {
-                                spPlayer.Texture = txFall1a;
-                            }
-                            else
-                            {
-                                spPlayer.Texture = txFall1b;
-                            }
-                        }
-
-                        if (gtDeathWatch.Watch.ElapsedMilliseconds > 1000 && gtDeathWatch.Watch.ElapsedMilliseconds < 2000)
-                        {
-                            if (I_fallAnimationCounter % 2 == 0)
-                            {
-                                spPlayer.Texture = txFall2a;
-                            }
-                            else
-                            {
-                                spPlayer.Texture = txFall2b;
-                            }
-                        }
-
-                        if (gtDeathWatch.Watch.ElapsedMilliseconds > 2000 && gtDeathWatch.Watch.ElapsedMilliseconds < 3000)
-                        {
-                            if (I_fallAnimationCounter % 2 == 0)
-                            {
-                                spPlayer.Texture = txFall3a;
-                            }
-                            else
-                            {
-                                spPlayer.Texture = txFall3b;
-                            }
-                        }
-
-                        if (gtDeathWatch.Watch.ElapsedMilliseconds > 3000 && gtDeathWatch.Watch.ElapsedMilliseconds < 4000)
-                        {
-                            if (I_fallAnimationCounter % 2 == 0)
-                            {
-                                spPlayer.Texture = txFall4a;
-                            }
-                            else
-                            {
-                                spPlayer.Texture = txFall4b;
-                            }
-                        }
+                        fallAnimation();
+                       
 
                         break;
                     }
 
                 case 2:
                     {
+                        normalDeathAnimation();
                         break;
                     }
 
-                case 3:
+                default:
                     {
+                        /* Nichts */
                         break;
                     }
-
-
             }
         }
 
@@ -615,6 +532,46 @@ namespace IcyMazeRunner
             win.Draw(spPlayer);
         }
 
+        /// <summary>
+        /// Kontrolliert, ob Hardmode aktiviert oder deaktiviert (wurde), und löst aus, welche weiteren Schritte jeweils nötig sind.
+        /// </summary>
+        void HardmodeUpdate(Map map, GameTime time)
+        {
+            if (!Keyboard.IsKeyPressed(Keyboard.Key.F1))
+                B_HMisPressed = false;
+
+
+            if (!B_HardmodeActivated && !B_HMisPressed && Keyboard.IsKeyPressed(Keyboard.Key.F1))
+            {
+                Changingmove(map, time);
+                B_isControlChanged = true;
+                B_HMisPressed = true;
+                gtMoveTime = new GameTime();
+                gtMoveTime.Watch.Start();
+            }
+            if (B_HardmodeActivated && !B_HMisPressed && Keyboard.IsKeyPressed(Keyboard.Key.F1))
+            {
+                B_isControlChanged = false;
+                B_HMisPressed = true;
+                gtMoveTime = null;
+            }
+
+            if (B_isControlChanged)
+            {
+                if (gtMoveTime.Watch.ElapsedMilliseconds >= 20000)
+                {
+                    gtMoveTime.Watch.Restart();
+                    Changingmove(map, time);
+                }
+            }
+            else
+            {
+                if (!B_isControlNormalized)
+                {
+                    normalizeMovement();
+                }
+            }
+        }
 
         /// <summary>
         /// Steuert die Animation des Spielers in der Bewegung mithilfe des mitgegebenen Vektors.
@@ -671,18 +628,80 @@ namespace IcyMazeRunner
         /// 
         /// <para>Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden. </para>
         /// </summary>
-        public void Changingmove(Map map, GameTime time)
+        void Changingmove(Map map, GameTime time)
         {
             List<Vector2f> directionlist = new List<Vector2f> { up, down, left, right };
 
             for (int i = 0; i < direction.Length; ++i)
             {
-                int index = random.Next(directionlist.Count);
+                int index = Game.random.Next(directionlist.Count);
                 direction[i] = directionlist[index];
                 directionlist.RemoveAt(index);
             }
 
             B_isControlNormalized = false;
+        }
+
+        /// <summary>
+        /// Animiert das Fallen, wenn Spieler durch Loch im Boden stirbt.
+        /// </summary>
+        void fallAnimation()
+        {
+            if (gtDeathWatch.Watch.ElapsedMilliseconds > 0 && gtDeathWatch.Watch.ElapsedMilliseconds < 1000)
+            {
+                if (I_fallAnimationCounter % 2 == 0)
+                {
+                    spPlayer.Texture = txFall1a;
+                }
+                else
+                {
+                    spPlayer.Texture = txFall1b;
+                }
+            }
+
+            if (gtDeathWatch.Watch.ElapsedMilliseconds > 1000 && gtDeathWatch.Watch.ElapsedMilliseconds < 2000)
+            {
+                if (I_fallAnimationCounter % 2 == 0)
+                {
+                    spPlayer.Texture = txFall2a;
+                }
+                else
+                {
+                    spPlayer.Texture = txFall2b;
+                }
+            }
+
+            if (gtDeathWatch.Watch.ElapsedMilliseconds > 2000 && gtDeathWatch.Watch.ElapsedMilliseconds < 3000)
+            {
+                if (I_fallAnimationCounter % 2 == 0)
+                {
+                    spPlayer.Texture = txFall3a;
+                }
+                else
+                {
+                    spPlayer.Texture = txFall3b;
+                }
+            }
+
+            if (gtDeathWatch.Watch.ElapsedMilliseconds > 3000 && gtDeathWatch.Watch.ElapsedMilliseconds < 4000)
+            {
+                if (I_fallAnimationCounter % 2 == 0)
+                {
+                    spPlayer.Texture = txFall4a;
+                }
+                else
+                {
+                    spPlayer.Texture = txFall4b;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Animiert den normalen Tod des Spielers durch Schaden.
+        /// </summary>
+        void normalDeathAnimation()
+        {
+            // ToDo: Animation
         }
     }
 }

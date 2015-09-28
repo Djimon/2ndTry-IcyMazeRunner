@@ -1,4 +1,4 @@
-﻿Version 1.3.B022
+﻿Version 1.3.B023
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -13,6 +13,12 @@ y.00x  = komplett lauffähige Version 00x
 	- ToDo: Skill für Selbstrettung einbauen, 
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
 	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Levelübergang fixen, GameTimes zusammenfassen
+
+Version 1.3.B023 (Kilian):
+	- SetDamage() und I_Healthpoints in Enemy.cs eingefügt und automatische Ausweichchance eingebaut
+	- static Random-Objekt in Game eingefügt, Player.cs nutzt jetzt diese. Kann für jede Zufallszahl verwendet werden
+	- DeathAnimation in eigene Methoden ausgelagert
+	- Kontrolle und Aktualisierung des Hardmodes in eigene Methode ausgelagert
 
 Version 1.3.B022 (Kilian):
 	- Cooldown und Dauer der Skills angepasst

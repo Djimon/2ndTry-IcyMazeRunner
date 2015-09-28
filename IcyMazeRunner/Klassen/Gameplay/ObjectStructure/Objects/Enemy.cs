@@ -18,6 +18,9 @@ namespace IcyMazeRunner.Klassen.Gameplay
         /// </summary>
         Sprite sp_Enemy;
 
+        public int I_HealthPoints { get; private set; }
+
+        float evadeChance { get; set; }
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -26,7 +29,26 @@ namespace IcyMazeRunner.Klassen.Gameplay
             Texture txEnemy = new Texture(texturePath);
             sp_Enemy = new Sprite(txEnemy);
             sp_Enemy.Position = _position;
+            I_HealthPoints = Game.I_level * 25; // für die verschiedenen Gegnertypen anpassen, Wert nur genommen, um int zu 
+            // initialisieren, um Methode SetDamage zu schreiben.
         }
+
+        /// <summary>
+        /// Fügt dem Gegner Schaden zu. Er hat eine 20%-ige Chance, dem Angriff auszuweichen. 
+        /// Wenn evadeChance <=0,2f ist, passiert nichts.
+        /// </summary>
+        public void SetDamage(int _damage)
+        {
+            evadeChance = (float)Game.random.NextDouble();
+            if (evadeChance > 0.2f)
+            {
+                I_HealthPoints -= _damage;
+
+                if (I_HealthPoints <= 0) B_isAlive = false;
+                // ToDo: wenn nicht alive, muss Enemy im Enemyhandler aus Liste entfernt werden.
+            }
+        }
+
 
         // Pathfinder
         /// <summary>
