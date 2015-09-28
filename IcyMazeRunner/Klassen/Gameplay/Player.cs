@@ -481,45 +481,55 @@ namespace IcyMazeRunner
         /// </summary>
         public void DeathAnimation(int typeOfDeath)
         {
-            if (!B_isDeathWatchOn)
+            if (typeOfDeath != 1 && InGame.B_LastChanceAvailable)
             {
-                setDeathWatchIsOn(true);
-                gtDeathWatch.Watch.Reset();
-                gtDeathWatch.Watch.Start();
+                InGame.B_DeathAnimationIsPaused = true;
+                InGame.B_LastChanceAvailable = false;
             }
 
-
-            I_fallAnimationCounter++;
-
-
-            switch (typeOfDeath)
+            else
             {
-                case 0:
-                    {
-                        /* Nichts, da am Leben */
-                        break;
-                    }
-                    
-                case 1:
-                    {
-                        /* Fallanimation*/
-                        fallAnimation();
-                       
+                if (!B_isDeathWatchOn)
+                {
+                    setDeathWatchIsOn(true);
+                    gtDeathWatch.Watch.Reset();
+                    gtDeathWatch.Watch.Start();
+                }
 
-                        break;
-                    }
 
-                case 2:
-                    {
-                        normalDeathAnimation();
-                        break;
-                    }
+                I_fallAnimationCounter++;
 
-                default:
-                    {
-                        /* Nichts */
-                        break;
-                    }
+
+                switch (typeOfDeath)
+                {
+                    case 0:
+                        {
+                            /* Nichts, da am Leben */
+                            break;
+                        }
+
+                    case 1:
+                        {
+                            /* Fallanimation */
+                            fallAnimation();
+
+
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            /* Tod durch Feind, Falle oder Zustände */
+                            normalDeathAnimation();
+                            break;
+                        }
+
+                    default:
+                        {
+                            /* Nichts */
+                            break;
+                        }
+                }
             }
         }
 

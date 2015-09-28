@@ -1,4 +1,4 @@
-﻿Version 1.3.B023
+﻿Version 1.3.B024
 °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				Versionsänderungen:
 /*
@@ -13,6 +13,10 @@ y.00x  = komplett lauffähige Version 00x
 	- ToDo: Skill für Selbstrettung einbauen, 
 	  Wenn Todesanimation einmal gestartet ist, muss Heil-Skill deaktiviert werden und nur noch Selbstrettung möglich sein (viele Booleans oder 
 	  bzw. alle Skills gesperrt sein außer diesem, 1 Boolean), Loch im Boden fixen, Levelübergang fixen, GameTimes zusammenfassen
+
+Version 1.3.B024 (Kilian):
+	- Unbesiegbar ist jetzt je Level nur einmal verfügbar und nicht alle 2 Minuten
+	- Selbstrettung in DeathAnimation und update eingebunden, Implementierung der Rettung selbst fehlt allerdings noch
 
 Version 1.3.B023 (Kilian):
 	- SetDamage() und I_Healthpoints in Enemy.cs eingefügt und automatische Ausweichchance eingebaut

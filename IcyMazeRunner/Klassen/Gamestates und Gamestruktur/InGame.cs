@@ -82,6 +82,16 @@ namespace IcyMazeRunner.Klassen
         InGameMenu menu;
 
         /// <summary>
+        /// Gibt an, ob Selbstrettung noch möglich ist, oder nicht mehr.
+        /// </summary>
+        public static Boolean B_LastChanceAvailable { get; set; }
+
+        /// <summary>
+        /// Gibt an, ob Todesanimation pausiert wird, um Zeit für die Letzte Chance zu bieten.
+        /// </summary>
+        public static Boolean B_DeathAnimationIsPaused{get; set;}
+
+        /// <summary>
         /// <para>Gibt an, auf welche Art Spieler zu Tode kommt.</para>
         /// <para>0 = alive</para>
         /// <para>1 = Death by falling</para>
@@ -263,6 +273,8 @@ namespace IcyMazeRunner.Klassen
             }
 
             pRunner = new Player(mMap.vStart, mMap, vIngame);
+            B_LastChanceAvailable = true;
+            B_DeathAnimationIsPaused = false;
 
 
             /* ~~~~ Geheime Wege laden ~~~~ */
@@ -306,118 +318,121 @@ namespace IcyMazeRunner.Klassen
             }
             else
             {
-                /* InGame-Menü wird aufgerufen */
-                if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+
+                if (B_DeathAnimationIsPaused)
                 {
-                    menu = new InGameMenu(pRunner);
-                    pRunner.setIsPressed(true);
+                    selfprotection();
                 }
-
-
-                /* allgemeine Spiel aktualisieren */
-                gtIngame.update();
-                pRunner.update(gtIngame, GameObjectHandler.moveableWallHandler);
-
-                /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                   Features aktualisieren (ohne Handler) 
-                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-
-                /* Geheime Mauer aktualisieren */
-                // Sichtbarkeit wird ausgelöst
-                if (pRunner.B_WayIsVisible)
+                else
                 {
-                    makeSecretWaysVisible();
-                }
-                // Wenn Timer vorüber
-                if (gtWallTimer != null && gtWallTimer.Watch.ElapsedMilliseconds >= 7000)
-                {
-                    makeSecretWaysInvisible();
-                }
-
-
-
-
-
-
-
-                /* Handler aktualisieren*/
-                //GOH.update(gametime, pRunner, mMap);
-
-                //enemy move-update-test
-                eTest.move(new Vector2f(pRunner.getXPosition(), pRunner.getYPosition()), mMap);
-
-
-                /* Aktualisierung, ob Spieler stirbt und Sterbeanimation */
-                if (get_Gap_Collision(pRunner.spPlayer, mMap))
-                {
-                    pRunner.setPlayerHealth(0);
-                    I_typeOfDeath = 1;
-                }
-
-                if (pRunner.getPlayerHealth() <= 0)
-                {
-                    pRunner.DeathAnimation(I_typeOfDeath);
-
-                    if (pRunner.B_IsSaved)
+                    /* InGame-Menü wird aufgerufen */
+                    if (!pRunner.getIsPressed() && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
                     {
-                        // Spieler hat wieder 5% Leben
-                        pRunner.setPlayerHealth((int)(pRunner.getPlayerMaxHealth() * 0.05));
-                        pRunner.setDeathWatchIsOn(false);
+                        menu = new InGameMenu(pRunner);
+                        pRunner.setIsPressed(true);
                     }
 
-                    if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
+
+                    /* allgemeine Spiel aktualisieren */
+                    gtIngame.update();
+                    pRunner.update(gtIngame, GameObjectHandler.moveableWallHandler);
+
+                    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                       Features aktualisieren (ohne Handler) 
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+                    /* Geheime Mauer aktualisieren */
+                    // Sichtbarkeit wird ausgelöst
+                    if (pRunner.B_WayIsVisible)
                     {
-                        // ob Level sinkt, hängt von Todesursache ab, nur bei Loch im Boden
-                        if (I_typeOfDeath == 1)
+                        makeSecretWaysVisible();
+                    }
+                    // Wenn Timer vorüber
+                    if (gtWallTimer != null && gtWallTimer.Watch.ElapsedMilliseconds >= 7000)
+                    {
+                        makeSecretWaysInvisible();
+                    }
+
+                    /* Handler aktualisieren*/
+                    //GOH.update(gametime, pRunner, mMap);
+
+                    //enemy move-update-test
+                    eTest.move(new Vector2f(pRunner.getXPosition(), pRunner.getYPosition()), mMap);
+
+
+                    /* Aktualisierung, ob Spieler stirbt und Sterbeanimation */
+                    if (get_Gap_Collision(pRunner.spPlayer, mMap))
+                    {
+                        pRunner.setPlayerHealth(0);
+                        I_typeOfDeath = 1;
+                    }
+
+                    if (pRunner.getPlayerHealth() <= 0)
+                    {
+                        pRunner.DeathAnimation(I_typeOfDeath);
+
+                        if (pRunner.B_IsSaved)
                         {
-                            I_level--;
+                            // Spieler hat wieder 5% Leben
+                            pRunner.setPlayerHealth((int)(pRunner.getPlayerMaxHealth() * 0.05));
+                            pRunner.setDeathWatchIsOn(false);
                         }
-                        pRunner.setDeathWatchIsOn(false);
-                        return EGameStates.gameOver;
+
+                        if (pRunner.gtDeathWatch.Watch.ElapsedMilliseconds > 4000)
+                        {
+                            // ob Level sinkt, hängt von Todesursache ab, nur bei Loch im Boden
+                            if (I_typeOfDeath == 1)
+                            {
+                                I_level--;
+                            }
+                            pRunner.setDeathWatchIsOn(false);
+                            return EGameStates.gameOver;
+                        }
                     }
-                }
-                // ToDo: Todesabfragen und Animationen auslagern/kapseln
-                // ToDo: jede Methode, die Schaden zufügt, muss TypeOfDeath entsprechend anpassen
+                    // ToDo: Todesabfragen und Animationen auslagern/kapseln
+                    // ToDo: jede Methode, die Schaden zufügt, muss TypeOfDeath entsprechend anpassen
+                    // ToDo: bei Abbruch der Todesanimation müssen auch Watches resettet werden
 
 
-                /* Kontrolle, ob Spieler Ziel erreicht */
-                targetdistance = Calculator.getDistance(pRunner.spPlayer.Position, mMap.vZiel);
-                if (targetdistance < 200)
-                {
-                    I_level++;
-                    if (I_level >= 31)
+                    /* Kontrolle, ob Spieler Ziel erreicht */
+                    targetdistance = Calculator.getDistance(pRunner.spPlayer.Position, mMap.vZiel);
+                    if (targetdistance < 200)
                     {
-                        /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
-                        vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
-                        return EGameStates.gameWon;
+                        I_level++;
+                        if (I_level >= 31)
+                        {
+                            /*Kontrolle, ob Spieler gesamte Spiel gewonnen hat */
+                            vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
+                            return EGameStates.gameWon;
+                        }
+                        return EGameStates.NextLevel;
                     }
-                    return EGameStates.NextLevel;
+
+
+
+                    /* Hack-Win */
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) && Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+                    {
+                        vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
+                        return EGameStates.NextLevel;
+                    }
+
+
+
+                    /* GUI aktualisieren */
+
+                    vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
+                    spBackGround.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));
+                    spFogOfWar.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));
+
+                    /****************************************
+                     ************** KOMPASS *****************
+                     ****************************************/
+                    compass.update(mMap.vZiel);
+
+
                 }
-
-
-
-                /* Hack-Win */
-                if (Keyboard.IsKeyPressed(Keyboard.Key.O) && Keyboard.IsKeyPressed(Keyboard.Key.LControl) && Keyboard.IsKeyPressed(Keyboard.Key.LShift))
-                {
-                    vIngame = new View(new FloatRect(0, 0, Game.windowSizeX, Game.windowSizeY));
-                    return EGameStates.NextLevel;
-                }
-
-
-
-                /* GUI aktualisieren */
-
-                vIngame.Move(new Vector2f((pRunner.getXPosition() + (pRunner.getWidth() / 2)), (pRunner.getYPosition() + (pRunner.getHeigth() / 2))) - vIngame.Center);
-                spBackGround.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));
-                spFogOfWar.Position = new Vector2f(vIngame.Center.X - (int)(Game.windowSizeX / 2), vIngame.Center.Y - (int)(Game.windowSizeY / 2));
-
-                /****************************************
-                 ************** KOMPASS *****************
-                 ****************************************/
-                compass.update(mMap.vZiel);
-
-
             }
             return EGameStates.inGame;
         }
@@ -506,6 +521,22 @@ namespace IcyMazeRunner.Klassen
         // ja diesen Befehl einfach copy pasten in der draw von Hauptmenü und ingameMenü nur halt true. und bevor der est gemalt wird.
 
 
+
+        /* Methode für Selbstrettung */
+        /// <summary>
+        /// Kontrolliert die Selbstrettung und ob sie scheitert oder funktioniert.
+        /// </summary>
+        void selfprotection()
+        {
+            // x-Sekunden ablaufen
+            // wenn watch<x und e gedrückt wird, B_DeathAnimationIsPaused = false;
+            // wenn watch>=x und weniger als x+reaktionszeit und e gedrückt wird, Boolean für 2. Stufe der Rettung auf true setzen
+            // Taste festlegen lassen
+            // kontrollieren, ob Taste innerhalb der Zeit gedrückt wird
+            // wenn ja, isSaved = true und DeathAnimationIsPaused = false;
+            // ansonsten, wenn Zeit für Reaktion abgelaufen DeathAnimationIsPaused = false;
+            // wenn andere (falsche) Taste zu irgendeinem Zeitpunkt der Selbstrettung gedrückt wird, DeathAnimationIsPaused =false;
+        }
 
 
 

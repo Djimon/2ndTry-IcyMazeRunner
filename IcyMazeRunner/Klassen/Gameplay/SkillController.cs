@@ -36,9 +36,8 @@ namespace IcyMazeRunner.Klassen
         /// <para>0 - Blocking</para>
         /// <para>1 - Heal</para>
         /// <para>2 - Speed</para>
-        /// <para>3 - Invincible</para>
-        /// <para>4 - Visible</para>
-        /// <para>5 - AoE</para>
+        /// <para>3 - Visible</para>
+        /// <para>4 - AoE</para>
         /// </summary>
         GameTime CD;
 
@@ -168,7 +167,7 @@ namespace IcyMazeRunner.Klassen
                 B_isPressed = true;
                 B_VisibleAvailable = false;
                 player.B_WayIsVisible = true;
-                CD.WatchList[4].Start();
+                CD.WatchList[3].Start();
             }
 
             /* AoE */
@@ -177,7 +176,7 @@ namespace IcyMazeRunner.Klassen
                 B_isPressed = true;
                 B_AoEAvailable = false;
                 ////Angriffsmethode aufrufen
-                CD.WatchList[5].Start();
+                CD.WatchList[4].Start();
             }
 
             /* Invincible */
@@ -186,7 +185,6 @@ namespace IcyMazeRunner.Klassen
                 B_isPressed = true;
                 B_InvincibleAvailable = false;
                 player.B_IsInvincible = true;
-                CD.WatchList[3].Start();
             }
 
         }
@@ -214,22 +212,16 @@ namespace IcyMazeRunner.Klassen
                 CD.WatchList[2].Reset();
             }
 
-            if (CD.WatchList[3].ElapsedMilliseconds > 120000) 
+            if (CD.WatchList[3].ElapsedMilliseconds > 25000) 
             {
-                B_InvincibleAvailable = true;
+                B_VisibleAvailable = true;
                 CD.WatchList[3].Reset();
             }
 
-            if (CD.WatchList[4].ElapsedMilliseconds > 25000) 
-            {
-                B_VisibleAvailable = true;
-                CD.WatchList[4].Reset();
-            }
-
-            if (CD.WatchList[5].ElapsedMilliseconds > 30000) 
+            if (CD.WatchList[4].ElapsedMilliseconds > 30000) 
             {
                 B_AoEAvailable = true;
-                CD.WatchList[5].Reset();
+                CD.WatchList[4].Reset();
             }
         }
     }

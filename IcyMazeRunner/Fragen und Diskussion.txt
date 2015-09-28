@@ -1,2 +1,4 @@
 ﻿1.		in Game.cs: I_maxhealth benötigt? d.h. wird die maximale Gesundheit nur durch das Level festgelegt oder kann sie auch 
 		anderweitig erhöht werden?
+2.		Selbstrettung Leben nur auf 5%? Wahrscheinlich könnte ein normaler Schlag den Spieler dann sofort wieder töten, was die Selbst-
+		rettung obsolet machen würde.
