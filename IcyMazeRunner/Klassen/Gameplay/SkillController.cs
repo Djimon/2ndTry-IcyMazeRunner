@@ -11,10 +11,6 @@ namespace IcyMazeRunner.Klassen
 {
     class SkillController
     {
-
-        // ToDo: Jump mit SkillController oder direkt im Player in der Move?
-        // ToDo: Skills aktivierbar, wenn sich Spieler bewegt? (Könnte schwer zu animieren sein)
-
         GUI HealSkillGUI;
         GUI InvincibleGUI;
         GUI SpeedSkillGUI;
@@ -29,6 +25,8 @@ namespace IcyMazeRunner.Klassen
         Boolean B_SpeedAvailable;
         Boolean B_AoEAvailable;
         Boolean B_VisibleAvailable;
+
+        public Boolean B_isUsingSkill { get; private set; }
 
         /// <summary>
         /// <para>GameTime für die Cooldowns der verschiedenen Fähigkeiten.</para>
@@ -86,6 +84,8 @@ namespace IcyMazeRunner.Klassen
             B_AoEAvailable = true;
             B_VisibleAvailable = true;
 
+            B_isUsingSkill = false;
+
             Healpercentage = 0.5f;
             Speedpercentage = 1.25f;
         }
@@ -95,6 +95,10 @@ namespace IcyMazeRunner.Klassen
             /* ~~~~ Zurücksetzen des Booleans und aktualisieren der Skillzustände, wenn Cooldown abgelaufen ~~~~ */
 
             B_isPressed = false;
+            B_isUsingSkill = false;
+
+            /* kein Sofortskill */
+            if (B_isBlocking) B_isUsingSkill = true;
 
             Cooldownupdate();
 
@@ -127,6 +131,7 @@ namespace IcyMazeRunner.Klassen
             {
                 B_isPressed = true;
                 ////Angriffsmethode aufrufen
+                B_isUsingSkill = true;
             }
 
             /* Blocking */
@@ -137,6 +142,7 @@ namespace IcyMazeRunner.Klassen
                 B_BlockAvailable = false;
                 Duration.WatchList[0].Start();
                 CD.WatchList[0].Reset();
+                B_isUsingSkill = true;
             }
 
             // ToDo: mit if-Abfragen (Game.I-Level) die Skills sperren
@@ -150,6 +156,7 @@ namespace IcyMazeRunner.Klassen
                 B_HealAvailable = false;
                 player.setHeal(Healpercentage);
                 CD.WatchList[1].Start();
+                B_isUsingSkill = true;
             }
 
             /* Speed */
@@ -159,6 +166,7 @@ namespace IcyMazeRunner.Klassen
                 B_SpeedAvailable = false;
                 player.Speedbonus = Speedpercentage;
                 CD.WatchList[2].Start();
+                B_isUsingSkill = true;
             }
 
             /* Visible */
@@ -168,6 +176,7 @@ namespace IcyMazeRunner.Klassen
                 B_VisibleAvailable = false;
                 player.B_WayIsVisible = true;
                 CD.WatchList[3].Start();
+                B_isUsingSkill = true;
             }
 
             /* AoE */
@@ -177,6 +186,7 @@ namespace IcyMazeRunner.Klassen
                 B_AoEAvailable = false;
                 ////Angriffsmethode aufrufen
                 CD.WatchList[4].Start();
+                B_isUsingSkill = true;
             }
 
             /* Invincible */
@@ -185,6 +195,7 @@ namespace IcyMazeRunner.Klassen
                 B_isPressed = true;
                 B_InvincibleAvailable = false;
                 player.B_IsInvincible = true;
+                B_isUsingSkill = true;
             }
 
         }

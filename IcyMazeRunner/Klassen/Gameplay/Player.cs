@@ -105,6 +105,12 @@ namespace IcyMazeRunner
         /// </summary>
         Vector2f latest_Movement;
 
+        Boolean B_isJumping { get; set; }
+
+        int I_Jumpdirection { get; set; }
+
+        Vector2f Jumpstartposition { get; set; }
+
 
         /* ~~~~ Attribute für den Herausfoderungsmodus ~~~~ */
         /// <summary>
@@ -347,12 +353,14 @@ namespace IcyMazeRunner
                 if (!enemydamage)
                 {
                     I_healthPoints = I_healthPoints - _Damage;
+                    InGame.I_typeOfDeath = 2;
                 }
                 else
                 {
                     if (!SkCtrl.B_isBlocking)
                     {
                         I_healthPoints = I_healthPoints - _Damage;
+                        InGame.I_typeOfDeath = 2;
                     }
                 }
             }
@@ -438,36 +446,17 @@ namespace IcyMazeRunner
 
             HardmodeUpdate(map, time);
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), new Vector2f(-F_runningSpeed, 0)) && MWH.isWalkable(this.spPlayer, new Vector2f(-F_runningSpeed, 0)))
+            jumptrigger(map, MWH);
+
+            if (B_isJumping)
             {
-                spPlayer.Position += direction[(int)Emovestates.left] * F_runningSpeed;
-                latest_Movement = direction[(int)Emovestates.left];
-                B_isPressed = true;      
+                jump();
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), new Vector2f(F_runningSpeed, 0)) && MWH.isWalkable(this.spPlayer, new Vector2f(F_runningSpeed, 0)))
+            if (!B_isJumping && !SkCtrl.B_isUsingSkill)
             {
-                spPlayer.Position += direction[(int)Emovestates.right] * F_runningSpeed;
-                latest_Movement = direction[(int)Emovestates.right];
-                B_isPressed = true;               
+                move_(map, MWH, time);
             }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), new Vector2f(0, -F_runningSpeed)) && MWH.isWalkable(this.spPlayer, new Vector2f(0, -F_runningSpeed)))
-            {
-                spPlayer.Position += direction[(int)Emovestates.up] * F_runningSpeed;
-                latest_Movement = direction[(int)Emovestates.up];
-                B_isPressed = true;
-            }
-
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), new Vector2f(0, F_runningSpeed)) && MWH.isWalkable(this.spPlayer, new Vector2f(0, F_runningSpeed)))
-            {
-                spPlayer.Position += direction[(int)Emovestates.down] * F_runningSpeed;
-                latest_Movement = direction[(int)Emovestates.down];
-                B_isPressed = true;
-            }
-
-
-            move_Animation(latest_Movement, time);
         }
 
 
@@ -534,7 +523,6 @@ namespace IcyMazeRunner
             }
         }
 
-
         /// <summary>
         /// Zeichnet den Spieler im Fenster.
         /// </summary>
@@ -585,6 +573,204 @@ namespace IcyMazeRunner
         }
 
         /// <summary>
+        /// <para>Bewegungssteuerung für den Herausforderungsmodus. </para>
+        /// 
+        /// <para>Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden. </para>
+        /// </summary>
+        void Changingmove(Map map, GameTime time)
+        {
+            List<Vector2f> directionlist = new List<Vector2f> { up, down, left, right };
+
+            for (int i = 0; i < direction.Length; ++i)
+            {
+                int index = Game.random.Next(directionlist.Count);
+                direction[i] = directionlist[index];
+                directionlist.RemoveAt(index);
+            }
+
+            B_isControlNormalized = false;
+        }
+
+
+        // ToDo: Texturen einfügen
+        /// <summary>
+        /// Testet, ob benötigte Tasten gedrückt wurden und am Sprungziel keine Mauer ist und kein Skill in diesem Moment aktiv ist.
+        /// Wenn alles in Ordnung ist, löst er den Sprung aus und speichert die Richtung ab.
+        /// </summary>
+        void jumptrigger(Map map, MoveableWallHandler MWH)
+        {
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && Keyboard.IsKeyPressed(Keyboard.Key.Space) && map.iswalkable((spPlayer), direction[(int)Emovestates.left] * 200) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.left] * 200) && !SkCtrl.B_isUsingSkill)
+            {
+                I_Jumpdirection = (int) jumpdirection.left;
+                B_isJumping = true;
+                Jumpstartposition = spPlayer.Position;
+                spPlayer.Texture = new Texture("");
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && Keyboard.IsKeyPressed(Keyboard.Key.Space) && map.iswalkable((spPlayer), direction[(int)Emovestates.left] * 200) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.left] * 200) && !SkCtrl.B_isUsingSkill)
+            {
+                I_Jumpdirection = (int)jumpdirection.right;
+                B_isJumping = true;
+                Jumpstartposition = spPlayer.Position;
+                spPlayer.Texture = new Texture("");
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && Keyboard.IsKeyPressed(Keyboard.Key.Space) && map.iswalkable((spPlayer), direction[(int)Emovestates.left] * 200) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.left] * 200) && !SkCtrl.B_isUsingSkill)
+            {
+                I_Jumpdirection = (int)jumpdirection.up;
+                B_isJumping = true;
+                Jumpstartposition = spPlayer.Position;
+                spPlayer.Texture = new Texture("");
+            }
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && Keyboard.IsKeyPressed(Keyboard.Key.Space) && map.iswalkable((spPlayer), direction[(int)Emovestates.left] * 200) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.left] * 200) && !SkCtrl.B_isUsingSkill)
+            {
+                I_Jumpdirection = (int)jumpdirection.down;
+                B_isJumping = true;
+                Jumpstartposition = spPlayer.Position;
+                spPlayer.Texture = new Texture("");
+            }
+        }
+
+        void jump()
+        {
+            // Aktualisierung der Texturposition
+            // 8 Pixel nach links/rechts, 3 Pixel nach oben/unten im Durchschnitt, eventuell später Flugkurve genauer anpassen (Formel)
+            // Sprung nach unten: erste Hälfte Y ändert sich nur um 5, 2. Hälfte ändert sich Y um 11, Sprung nach oben umgekehrt
+            if (Calculator.getDistance(spPlayer.Position, Jumpstartposition) < 107)
+            {
+                switch (I_Jumpdirection)
+                {
+                    case (int)jumpdirection.left:
+                        {
+                            
+                            break;
+                        }
+
+                    case (int)jumpdirection.right:
+                        {
+                            break;
+                        }
+
+                    case (int)jumpdirection.up:
+                        {
+                            break;
+                        }
+
+                    case (int)jumpdirection.down:
+                        {
+                            break;
+                        }
+
+                    default: { break; }
+                }
+            }
+
+
+            else
+            {
+
+                switch (I_Jumpdirection)
+                {
+                    case (int)jumpdirection.left:
+                        {
+                            break;
+                        }
+
+                    case (int)jumpdirection.right:
+                        {
+                            break;
+                        }
+
+                    case (int)jumpdirection.up:
+                        {
+                            break;
+                        }
+
+                    case (int)jumpdirection.down:
+                        {
+                            break;
+                        }
+
+                    default: { break; }
+                }
+
+            }
+
+            // ToDo: nur Sprite.Position nutzen
+            // ToDo: GapCollision-Abfrage um !B_isJumping erweitern
+            // Aktualisierung der Sprite-Position
+            switch (I_Jumpdirection)
+            {
+                case (int) jumpdirection.left:
+                    {
+                        spPlayer.Position += direction[(int)Emovestates.left] * F_runningSpeed;
+                        break;
+                    }
+
+                case (int)jumpdirection.right:
+                    {
+                        spPlayer.Position += direction[(int)Emovestates.right] * F_runningSpeed;
+                        break;
+                    }
+
+                case (int)jumpdirection.up:
+                    {
+                        spPlayer.Position += direction[(int)Emovestates.up] * F_runningSpeed;
+                        break;
+                    }
+
+                case (int)jumpdirection.down:
+                    {
+                        spPlayer.Position += direction[(int)Emovestates.down] * F_runningSpeed;
+                        break;
+                    }
+
+                default: { break; }
+            }
+
+            // ToDo: Beenden des Sprungs --> B_isJumping = false; wenn getDistance >=200 ist und Positionen so anpassen, dass sich nur X
+            // oder nur Y um 200 geändert hat
+        }
+
+        /// <summary>
+        /// Die eigentliche move-Methode
+        /// </summary>
+        void move_(Map map, MoveableWallHandler MWH, GameTime time)
+        {
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && map.iswalkable((spPlayer), direction[(int)Emovestates.left] * F_runningSpeed) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.left] * F_runningSpeed))
+                {
+                    spPlayer.Position += direction[(int)Emovestates.left] * F_runningSpeed;
+                    latest_Movement = direction[(int)Emovestates.left];
+                    B_isPressed = true;
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D) && map.iswalkable((spPlayer), direction[(int)Emovestates.right] * F_runningSpeed) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.right] * F_runningSpeed))
+                {
+                    spPlayer.Position += direction[(int)Emovestates.right] * F_runningSpeed;
+                    latest_Movement = direction[(int)Emovestates.right];
+                    B_isPressed = true;
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W) && map.iswalkable((spPlayer), direction[(int)Emovestates.up] * F_runningSpeed) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.up] * F_runningSpeed))
+                {
+                    spPlayer.Position += direction[(int)Emovestates.up] * F_runningSpeed;
+                    latest_Movement = direction[(int)Emovestates.up];
+                    B_isPressed = true;
+                }
+
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S) && map.iswalkable((spPlayer), direction[(int)Emovestates.down] * F_runningSpeed) && MWH.isWalkable(this.spPlayer, direction[(int)Emovestates.down] * F_runningSpeed))
+                {
+                    spPlayer.Position += direction[(int)Emovestates.down] * F_runningSpeed;
+                    latest_Movement = direction[(int)Emovestates.down];
+                    B_isPressed = true;
+                }
+
+
+                move_Animation(latest_Movement, time);
+        }
+
+        /// <summary>
         /// Steuert die Animation des Spielers in der Bewegung mithilfe des mitgegebenen Vektors.
         /// </summary>
         /// <param name="movedirection">Vektor, der eine Kopie des aktuellen Richtungsvektors der Spielerposition ist.</param>
@@ -632,25 +818,6 @@ namespace IcyMazeRunner
                 }
             }
 
-        }
-
-        /// <summary>
-        /// <para>Bewegungssteuerung für den Herausforderungsmodus. </para>
-        /// 
-        /// <para>Alle 20 Sekunden (nach Ablauf der 20 Sekunden startet die Stoppuhr von vorn) wird mithilfe eines Random-Wertes die Zuordnung der Tastatur für die Bewegungsrichtungen neu zugeordnet, wobei alle 24 Fälle abgedeckt werden. </para>
-        /// </summary>
-        void Changingmove(Map map, GameTime time)
-        {
-            List<Vector2f> directionlist = new List<Vector2f> { up, down, left, right };
-
-            for (int i = 0; i < direction.Length; ++i)
-            {
-                int index = Game.random.Next(directionlist.Count);
-                direction[i] = directionlist[index];
-                directionlist.RemoveAt(index);
-            }
-
-            B_isControlNormalized = false;
         }
 
         /// <summary>
@@ -713,6 +880,19 @@ namespace IcyMazeRunner
         void normalDeathAnimation()
         {
             // ToDo: Animation
+        }
+
+        /// <summary>
+        /// Enum zum Speichern der Sprungrichtung, um die Aktualisierung der Sprite.Position zu ermöglichen.
+        /// </summary>
+        enum jumpdirection
+        {
+            none = -1,
+            left,
+            right,
+            up,
+            down,
+            jumpdirectionCount
         }
     }
 }

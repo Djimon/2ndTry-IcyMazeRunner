@@ -111,7 +111,7 @@ namespace IcyMazeRunner.Klassen
         /// <para>1 = Death by falling</para>
         /// <para>2 = instant Death by trap/Death by damage</para>
         /// </summary>
-        private int I_typeOfDeath { get; set; }
+        public static int I_typeOfDeath { get; set; }
 
         /// <summary>
         /// Gibt an, ob Todesanimation beendet ist.
@@ -607,6 +607,7 @@ namespace IcyMazeRunner.Klassen
                     }
 
                     spLastChanceKey.Texture = txLastChanceKey;
+                    spLastChanceKey.Position = new Vector2f((Game.windowSizeX - txLastChanceKey.Size.X) / 2, (Game.windowSizeY - txLastChanceKey.Size.Y) / 2);
                     Game.gameTime.WatchList[0].Restart();
 
                          
