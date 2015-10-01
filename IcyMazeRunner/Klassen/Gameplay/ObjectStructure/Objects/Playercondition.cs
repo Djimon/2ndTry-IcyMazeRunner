@@ -115,7 +115,7 @@ namespace IcyMazeRunner
             }
 
             spCondition = new Sprite(txCondition);
-            pPlayer.setDamage(I_DamagePerTick);
+            pPlayer.setDamage(I_DamagePerTick, false);
 
 
         }
@@ -151,7 +151,7 @@ namespace IcyMazeRunner
                 }
                 if (gtTotalTime.Watch.ElapsedMilliseconds >= I_intervall)
                 {
-                    thisPlayer.setDamage(I_DamagePerTick);
+                    thisPlayer.setDamage(I_DamagePerTick, false);
                     gtTotalTime.Watch.Restart();
                 }
             }

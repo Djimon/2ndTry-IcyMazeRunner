@@ -55,5 +55,26 @@ namespace IcyMazeRunner.Klassen
         {
             win.Draw(Game.spBackGround);
         }
+
+
+        public static Boolean IsAnyKeyPressed()
+        {
+            for (int i = 0; i < (int)Keyboard.Key.KeyCount; i++ )
+            {
+                if (Keyboard.IsKeyPressed((Keyboard.Key)i))
+                return true; 
+            }
+                return false;
+        }
+
+        public static int WhichKeyIsPressed()
+        {
+            for (int i = 0; i < (int)Keyboard.Key.KeyCount; i++)
+            {
+                if (Keyboard.IsKeyPressed((Keyboard.Key)i))
+                    return i;
+            }
+            return -1;
+        }
     }
 }

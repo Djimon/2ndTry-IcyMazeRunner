@@ -485,6 +485,7 @@ namespace IcyMazeRunner
             {
                 InGame.B_DeathAnimationIsPaused = true;
                 InGame.B_LastChanceAvailable = false;
+                Game.gameTime.WatchList[0].Start();
             }
 
             else

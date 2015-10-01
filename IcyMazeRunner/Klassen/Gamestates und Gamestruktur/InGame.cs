@@ -91,12 +91,25 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         public static Boolean B_DeathAnimationIsPaused{get; set;}
 
+        Boolean B_selfprotectionFirstHalf = true;
+
+        Boolean B_selfprotectionSecondHalf = false;
+
+        Boolean B_selfprotectionSecondKeyCanBePressed = false;
+
+        int I_Randomkey;
+
+        int I_EnumKeyIndex;
+
+        Sprite spLastChanceKey;
+
+        Texture txLastChanceKey;
+
         /// <summary>
         /// <para>Gibt an, auf welche Art Spieler zu Tode kommt.</para>
         /// <para>0 = alive</para>
         /// <para>1 = Death by falling</para>
-        /// <para>2 = instant Death by trap</para>
-        /// <para>3 = Death by damage</para>
+        /// <para>2 = instant Death by trap/Death by damage</para>
         /// </summary>
         private int I_typeOfDeath { get; set; }
 
@@ -276,6 +289,10 @@ namespace IcyMazeRunner.Klassen
             B_LastChanceAvailable = true;
             B_DeathAnimationIsPaused = false;
 
+            /* ~~~~ Watch für LastChance ~~~~ */
+
+            Game.gameTime.WatchList.Add(new System.Diagnostics.Stopwatch());
+
 
             /* ~~~~ Geheime Wege laden ~~~~ */
 
@@ -321,7 +338,7 @@ namespace IcyMazeRunner.Klassen
 
                 if (B_DeathAnimationIsPaused)
                 {
-                    selfprotection();
+                   selfprotection();
                 }
                 else
                 {
@@ -512,6 +529,11 @@ namespace IcyMazeRunner.Klassen
                 menu.draw(win);
             }
 
+            if (B_selfprotectionSecondHalf)
+            {
+                win.Draw(spLastChanceKey);
+            }
+
             //if (inventory != null)
             //{
             //    inventory.draw(win);
@@ -528,14 +550,95 @@ namespace IcyMazeRunner.Klassen
         /// </summary>
         void selfprotection()
         {
-            // x-Sekunden ablaufen
-            // wenn watch<x und e gedrückt wird, B_DeathAnimationIsPaused = false;
-            // wenn watch>=x und weniger als x+reaktionszeit und e gedrückt wird, Boolean für 2. Stufe der Rettung auf true setzen
-            // Taste festlegen lassen
-            // kontrollieren, ob Taste innerhalb der Zeit gedrückt wird
-            // wenn ja, isSaved = true und DeathAnimationIsPaused = false;
-            // ansonsten, wenn Zeit für Reaktion abgelaufen DeathAnimationIsPaused = false;
-            // wenn andere (falsche) Taste zu irgendeinem Zeitpunkt der Selbstrettung gedrückt wird, DeathAnimationIsPaused =false;
+            if (B_selfprotectionFirstHalf)
+            {
+                // Zu wenig Zeit vergangen, als Spieler eine Taste gedrückt hat
+                if (Game.gameTime.WatchList[0].ElapsedMilliseconds < 4000 && Controls.IsAnyKeyPressed())
+                {
+                    B_DeathAnimationIsPaused = false;
+                }
+
+                // Zu viel Zeit vergangen, bevor Spieler geblockt hat
+                if (Game.gameTime.WatchList[0].ElapsedMilliseconds > 6000)
+                {
+                    B_DeathAnimationIsPaused = false;
+                }
+
+                // Richtige Reaktion
+                if (Game.gameTime.WatchList[0].ElapsedMilliseconds >= 4000 && Game.gameTime.WatchList[0].ElapsedMilliseconds <= 6000 && Keyboard.IsKeyPressed(Keyboard.Key.E))
+                {
+                    B_selfprotectionFirstHalf = false;
+                    B_selfprotectionSecondHalf = true;
+                    I_Randomkey = Game.random.Next(4);
+
+                    switch (I_Randomkey)
+                    {
+                        case 0:
+                            {
+                                // E
+                                I_EnumKeyIndex = 4;
+                                txLastChanceKey = new Texture("");
+                                break;
+                            }
+
+                        case 1:
+                            {
+                                // F
+                                I_EnumKeyIndex = 5;
+                                txLastChanceKey = new Texture("");
+                                break;
+                            }
+
+                        case 2:
+                            {
+                                // Q
+                                I_EnumKeyIndex = 16;
+                                txLastChanceKey = new Texture("");
+                                break;
+                            }
+
+                        case 3:
+                            {
+                                // Leertaste
+                                I_EnumKeyIndex = 57;
+                                txLastChanceKey = new Texture("");
+                                break;
+                            }
+                    }
+
+                    spLastChanceKey.Texture = txLastChanceKey;
+                    Game.gameTime.WatchList[0].Restart();
+
+                         
+                }
+
+                // Richtige Zeit, falsche Taste
+                if (Game.gameTime.WatchList[0].ElapsedMilliseconds >= 4000 && Game.gameTime.WatchList[0].ElapsedMilliseconds <= 6000 && Controls.IsAnyKeyPressed() && !Keyboard.IsKeyPressed(Keyboard.Key.E))
+                {
+                    B_DeathAnimationIsPaused = false;
+                }
+            }
+
+            if (B_selfprotectionSecondHalf)
+            {
+                // Tastatur muss einmal losgelassen werden
+                if (!Controls.IsAnyKeyPressed())
+                {
+                    B_selfprotectionSecondKeyCanBePressed = true;
+                }
+
+                if (B_selfprotectionSecondKeyCanBePressed && Game.gameTime.WatchList[0].ElapsedMilliseconds <= 2000 && (int)Controls.WhichKeyIsPressed() == I_EnumKeyIndex)
+                {
+                    pRunner.B_IsSaved = true;
+                    B_DeathAnimationIsPaused = false;
+                }
+
+                // Wenn Zeit überschritten wurde oder falsche Taste gedrückt wurde, ist die Selbstrettung gescheitert
+                if (Game.gameTime.WatchList[0].ElapsedMilliseconds > 2000 || (B_selfprotectionSecondKeyCanBePressed && Controls.IsAnyKeyPressed() && (int)Controls.WhichKeyIsPressed() != I_EnumKeyIndex))
+                {
+                    B_DeathAnimationIsPaused = false;
+                }
+            }        
         }
 
 

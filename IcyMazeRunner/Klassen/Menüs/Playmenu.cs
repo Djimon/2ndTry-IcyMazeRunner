@@ -84,8 +84,8 @@ namespace IcyMazeRunner.Klassen.Menüs
             {
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Return) && !isPressed)
                 {
-                    return EGameStates.inGame; //(new Game)
                     isPressed = true;
+                    return EGameStates.inGame; //(new Game)
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Escape) && !isPressed)
                 {

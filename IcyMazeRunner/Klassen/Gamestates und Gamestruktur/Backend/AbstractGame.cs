@@ -17,7 +17,19 @@ namespace IcyMazeRunner.Klassen
     public abstract class AbstractGame
     {
         public RenderWindow win;
-        GameTime gameTime;
+
+        // ToDo: Reihenfolge der Aufrufe beachten
+        /// <summary>
+        /// GameTime der Spielprozesse.
+        /// <para>0 - LastChance</para>
+        /// <para></para>
+        /// <para></para>
+        /// <para></para>
+        /// <para></para>
+        /// <para></para>
+        /// </summary>
+        public static GameTime gameTime;
+
         Music atmo;
         // ToDo: MusicController.cs erstellen
 
