@@ -1,5 +1,6 @@
 ﻿using IcyMazeRunner.Klassen.Menüs;
 using SFML.Graphics;
+using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -206,7 +207,7 @@ namespace IcyMazeRunner.Klassen
                         }
                 }
 
-                spBackGround.Texture = txBG;
+                //spBackGround.Texture = txBG;
 
                 // Update der Gamestates
 
@@ -235,6 +236,7 @@ namespace IcyMazeRunner.Klassen
         /* ~~~~ Draw ~~~~ */
         public void draw(RenderWindow window)
         {
+            window.Clear();
             window.SetView(vMenu);
 
 

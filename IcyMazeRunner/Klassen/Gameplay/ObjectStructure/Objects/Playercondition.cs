@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IcyMazeRunner.Klassen;
+using SFML.System;
 
 namespace IcyMazeRunner
 {

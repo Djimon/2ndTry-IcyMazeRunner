@@ -59,7 +59,7 @@ namespace IcyMazeRunner.Klassen
             atmo.Volume = 100;
             atmo.Loop = true;
 
-            while (win.IsOpen())
+            while (win.IsOpen)
             {
                 win.Clear();
                 win.DispatchEvents();
